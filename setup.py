@@ -102,6 +102,7 @@ setup(
                      'transitions',
                      'mock == 1.0.1',
                      'six',
+                     'pygraphviz',
                     ],
     tests_require=['janitoo_nosetests'],
     dependency_links = [
