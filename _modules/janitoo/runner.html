@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>janitoo.runner &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../tools/index.html">Tools</a></li>
+                <li><a href="../../api/index.html">Reference</a></li>
+                <li><a href="../../extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for janitoo.runner</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;The runner</span>
+
+<span class="sd">Start a worker or a broker as a daemon.</span>
+
+<span class="sd">Must be updated to work with multiple workers.</span>
+
+<span class="sd">What do we need :</span>
+
+<span class="sd">* the user ou userid</span>
+<span class="sd">* the log file</span>
+<span class="sd">* the error output</span>
+<span class="sd">* the standard output</span>
+<span class="sd">* the pid file</span>
+<span class="sd">* the working directory</span>
+
+<span class="sd">Based on the runner of python-daemon :</span>
+
+<span class="sd">* Copyright © 2009–2010 Ben Finney &lt;ben+python@benfinney.id.au&gt;</span>
+<span class="sd">* Copyright © 2007–2008 Robert Niederreiter, Jens Klein</span>
+<span class="sd">* Copyright © 2003 Clark Evans</span>
+<span class="sd">* Copyright © 2002 Noah Spurrier</span>
+<span class="sd">* Copyright © 2001 Jürgen Hermann</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    This file is part of Janitoo.</span>
+
+<span class="s">    Janitoo is free software: you can redistribute it and/or modify</span>
+<span class="s">    it under the terms of the GNU General Public License as published by</span>
+<span class="s">    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="s">    (at your option) any later version.</span>
+
+<span class="s">    Janitoo is distributed in the hope that it will be useful,</span>
+<span class="s">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="s">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="s">    GNU General Public License for more details.</span>
+
+<span class="s">    You should have received a copy of the GNU General Public License</span>
+<span class="s">    along with Janitoo. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2012-2013-2014-2015 Sébastien GALLET aka bibi21000&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Sébastien GALLET aka bibi21000&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s">&#39;bibi21000@gmail.com&#39;</span>
+
+<span class="c"># Set default logging handler to avoid &quot;No handler found&quot; warnings.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">daemon.pidfile</span> <span class="kn">import</span> <span class="n">TimeoutPIDLockFile</span>
+<span class="kn">from</span> <span class="nn">daemon</span> <span class="kn">import</span> <span class="n">DaemonContext</span>
+<span class="kn">import</span> <span class="nn">pwd</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="c">#We must NOT subsitute % in value for alembic (database section)</span>
+<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">RawConfigParser</span> <span class="k">as</span> <span class="n">ConfigParser</span>
+
+<div class="viewcode-block" id="RunnerError"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.RunnerError">[docs]</a><span class="k">class</span> <span class="nc">RunnerError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Abstract base class for errors. &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="RunnerInvalidActionError"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.RunnerInvalidActionError">[docs]</a><span class="k">class</span> <span class="nc">RunnerInvalidActionError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">RunnerError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Raised when specified action is invalid. &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="RunnerStartFailureError"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.RunnerStartFailureError">[docs]</a><span class="k">class</span> <span class="nc">RunnerStartFailureError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">RunnerError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Raised when failure starting. &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="RunnerStopFailureError"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.RunnerStopFailureError">[docs]</a><span class="k">class</span> <span class="nc">RunnerStopFailureError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="n">RunnerError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Raised when failure stopping. &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="Runner"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner">[docs]</a><span class="k">class</span> <span class="nc">Runner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Controller for a callable running in a separate background process.</span>
+
+<span class="sd">    The first command-line argument is the action to take:</span>
+
+<span class="sd">    * &#39;start&#39;: Become a daemon and call `app.run()`.</span>
+<span class="sd">    * &#39;stop&#39;: Exit the daemon process specified in the PID file.</span>
+<span class="sd">    * &#39;restart&#39;: Stop, then start.</span>
+<span class="sd">    * &#39;status&#39;: Show the status of the process.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">start_message</span> <span class="o">=</span> <span class="s">&quot;started with pid </span><span class="si">%d</span><span class="s">&quot;</span>
+    <span class="n">status_message_running</span> <span class="o">=</span> <span class="s">&quot;process is running (</span><span class="si">%d</span><span class="s">)&quot;</span>
+    <span class="n">status_message_not_running</span> <span class="o">=</span> <span class="s">&quot;process is not running&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set up the parameters of a new runner.</span>
+
+<span class="sd">            The `app` argument must have the following attributes:</span>
+
+<span class="sd">            * `stdin_path`, `stdout_path`, `stderr_path`: Filesystem</span>
+<span class="sd">              paths to open and replace the existing `sys.stdin`,</span>
+<span class="sd">              `sys.stdout`, `sys.stderr`.</span>
+
+<span class="sd">            * `pidfile_path`: Absolute filesystem path to a file that</span>
+<span class="sd">              will be used as the PID file for the daemon. If</span>
+<span class="sd">              ``None``, no PID file will be used.</span>
+
+<span class="sd">            * `pidfile_timeout`: Used as the default acquisition</span>
+<span class="sd">              timeout value supplied to the runner&#39;s PID lock file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_timeout</span> <span class="o">=</span> <span class="mf">6.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout_path</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr_path</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;pid_dir&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;service&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;.pid&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span> <span class="o">=</span> <span class="n">make_pidlockfile</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">)</span> \
+          <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s">&#39;start&#39;</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Process already running. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">()</span> <span class="ow">or</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">))</span> \
+          <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s">&#39;stop&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s">&#39;kill&#39;</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Process not running. Exiting.&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Runner.app_run"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.app_run">[docs]</a>    <span class="k">def</span> <span class="nf">app_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The running process of the application</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">RunnerInvalidActionError</span><span class="p">(</span><span class="s">&quot;Action: </span><span class="si">%(action)r</span><span class="s"> is not implemented&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Runner.app_shutdown"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.app_shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">app_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The shutdown process of the application</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">RunnerInvalidActionError</span><span class="p">(</span><span class="s">&quot;Action: </span><span class="si">%(action)r</span><span class="s"> is not implemented&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">_usage_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Emit a usage message, then exit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">usage_exit_code</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;usage: use --help to get help&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">()</span>
+        <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">usage_exit_code</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Runner.parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.parse_args">[docs]</a>    <span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Parse command-line arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">jnt_parse_args</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;log_dir&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;service&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;_out.log&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;log_dir&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;service&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;_err.log&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;pid_dir&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;service&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;.pid&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwnam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">pw_uid</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">userid</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">():</span>
+                <span class="c">#print self.userid</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">setuid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">userid</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;pid_dir&#39;</span><span class="p">])</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;home_dir&#39;</span><span class="p">])</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;conf_dir&#39;</span><span class="p">])</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;log_dir&#39;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span> <span class="c"># Python &gt;2.5</span>
+            <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EEXIST</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span> <span class="k">raise</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_funcs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_usage_exit</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Open the daemon context and run the application.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span> <span class="o">=</span> <span class="n">DaemonContext</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">pidfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span>
+        <span class="c">#self.daemon_context.stdin = open(stdin_path, &#39;r&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout_path</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stderr_path</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">break_lock</span><span class="p">()</span>
+        <span class="c">#print &quot;Here&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">TimeoutPIDLockFile</span><span class="o">.</span><span class="n">AlreadyLocked</span><span class="p">:</span>
+            <span class="n">pidfile_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">path</span>
+            <span class="k">raise</span> <span class="n">RunnerStartFailureError</span><span class="p">(</span>
+                <span class="s">&quot;PID file </span><span class="si">%(pidfile_path)r</span><span class="s"> already locked&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+        <span class="c">#print &quot;Here 2&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_message</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app_run</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Open the daemon context and run the application.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">break_lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_message</span> <span class="o">%</span>  <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+        <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app_run</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">__exit__</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app_shutdown</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_terminate_daemon_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Terminate the daemon process specified in the current PID file.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RunnerStopFailureError</span><span class="p">(</span>
+                <span class="s">&quot;Failed to terminate </span><span class="si">%(pid)d</span><span class="s">: </span><span class="si">%(exc)s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_kill_daemon_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Terminate the daemon process specified in the current PID file.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RunnerStopFailureError</span><span class="p">(</span>
+                <span class="s">&quot;Failed to kill </span><span class="si">%(pid)d</span><span class="s">: </span><span class="si">%(exc)s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Exit the daemon process specified in the current PID file.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">break_lock</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_terminate_daemon_process</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_kill</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Kill the daemon process specified in the current PID file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">():</span>
+            <span class="n">pidfile_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">path</span>
+            <span class="k">raise</span> <span class="n">RunnerStopFailureError</span><span class="p">(</span>
+                <span class="s">&quot;PID file </span><span class="si">%(pidfile_path)r</span><span class="s"> not locked&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">break_lock</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_kill_daemon_process</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show the status of the process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">()</span> <span class="ow">or</span> <span class="n">is_pidfile_stale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="p">):</span>
+            <span class="n">emit_message</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_message_not_running</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">emit_message</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">status_message_running</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_restart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop, then start.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pidfile_timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_reload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reload application configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGHUP</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RunnerStopFailureError</span><span class="p">(</span>
+                <span class="s">&quot;Failed to reload </span><span class="si">%(pid)d</span><span class="s">: </span><span class="si">%(exc)s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Flush data to disk via SIGUSR1 signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGUSR1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RunnerStopFailureError</span><span class="p">(</span>
+                <span class="s">&quot;Failed to flush </span><span class="si">%(pid)d</span><span class="s">: </span><span class="si">%(exc)s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+
+    <span class="n">action_funcs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;start&#39;</span><span class="p">:</span> <span class="n">_start</span><span class="p">,</span>
+        <span class="s">&#39;stop&#39;</span><span class="p">:</span> <span class="n">_stop</span><span class="p">,</span>
+        <span class="s">&#39;restart&#39;</span><span class="p">:</span> <span class="n">_restart</span><span class="p">,</span>
+        <span class="s">&#39;reload&#39;</span><span class="p">:</span> <span class="n">_reload</span><span class="p">,</span>
+        <span class="s">&#39;kill&#39;</span><span class="p">:</span> <span class="n">_kill</span><span class="p">,</span>
+        <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="n">_status</span><span class="p">,</span>
+        <span class="s">&#39;flush&#39;</span><span class="p">:</span> <span class="n">_flush</span><span class="p">,</span>
+        <span class="s">&#39;front&#39;</span><span class="p">:</span> <span class="n">_front</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_get_action_func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function for the specified action.</span>
+
+<span class="sd">        Raises ``RunnerInvalidActionError`` if the action is</span>
+<span class="sd">        unknown.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_funcs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RunnerInvalidActionError</span><span class="p">(</span>
+                <span class="s">&quot;Unknown action: </span><span class="si">%(action)r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">func</span>
+
+<div class="viewcode-block" id="Runner.do_action"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.do_action">[docs]</a>    <span class="k">def</span> <span class="nf">do_action</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform the requested action.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_action_func</span><span class="p">()</span>
+        <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="emit_message"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.emit_message">[docs]</a><span class="k">def</span> <span class="nf">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Emit a message to the specified stream (default `sys.stderr`).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%(message)s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="make_pidlockfile"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.make_pidlockfile">[docs]</a><span class="k">def</span> <span class="nf">make_pidlockfile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">acquire_timeout</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make a PIDLockFile instance with the given filesystem path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Not a filesystem path: </span><span class="si">%(path)r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="n">error</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Not an absolute path: </span><span class="si">%(path)r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="n">error</span>
+    <span class="n">lockfile</span> <span class="o">=</span> <span class="n">TimeoutPIDLockFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">acquire_timeout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lockfile</span>
+</div>
+<div class="viewcode-block" id="is_pidfile_stale"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.is_pidfile_stale">[docs]</a><span class="k">def</span> <span class="nf">is_pidfile_stale</span><span class="p">(</span><span class="n">pidfile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determine whether a PID file is stale.</span>
+
+<span class="sd">    Return ``True`` (“stale”) if the contents of the PID file are</span>
+<span class="sd">    valid but do not match the PID of a currently-running process;</span>
+<span class="sd">    otherwise return ``False``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">pidfile_pid</span> <span class="o">=</span> <span class="n">pidfile</span><span class="o">.</span><span class="n">read_pid</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">pidfile_pid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pidfile_pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIG_DFL</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ESRCH</span><span class="p">:</span>
+                <span class="c"># The specified PID does not exist</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="jnt_parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.jnt_parse_args">[docs]</a><span class="k">def</span> <span class="nf">jnt_parse_args</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Default argument parser</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conf_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="c"># Turn off help, so we print all options in response to -h</span>
+            <span class="n">add_help</span><span class="o">=</span><span class="bp">False</span>
+            <span class="p">)</span>
+    <span class="n">conf_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;-c&quot;</span><span class="p">,</span> <span class="s">&quot;--conf_file&quot;</span><span class="p">,</span>
+                             <span class="n">help</span><span class="o">=</span><span class="s">&quot;The configuration file&quot;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&quot;FILE&quot;</span><span class="p">)</span>
+    <span class="n">args</span><span class="p">,</span> <span class="n">remaining_argv</span> <span class="o">=</span> <span class="n">conf_parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;hostname&quot;</span> <span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span>
+        <span class="s">&quot;service&quot;</span> <span class="p">:</span> <span class="s">&quot;jnt_generic&quot;</span><span class="p">,</span>
+        <span class="s">&quot;user&quot;</span> <span class="p">:</span> <span class="s">&quot;janitoo&quot;</span><span class="p">,</span>
+        <span class="s">&quot;log_dir&quot;</span> <span class="p">:</span> <span class="s">&quot;/tmp/jnt_logs&quot;</span><span class="p">,</span>
+        <span class="s">&quot;home_dir&quot;</span> <span class="p">:</span> <span class="s">&quot;/tmp/jnt_home&quot;</span><span class="p">,</span>
+        <span class="s">&quot;cache_dir&quot;</span> <span class="p">:</span> <span class="s">&quot;/tmp/jnt_cache&quot;</span><span class="p">,</span>
+        <span class="s">&quot;pid_dir&quot;</span> <span class="p">:</span> <span class="s">&quot;/tmp/jnt_run&quot;</span><span class="p">,</span>
+        <span class="s">&quot;conf_dir&quot;</span> <span class="p">:</span> <span class="s">&quot;/tmp/jnt_conf&quot;</span><span class="p">,</span>
+        <span class="s">&quot;broker_ip&quot;</span> <span class="p">:</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+        <span class="s">&quot;broker_port&quot;</span> <span class="p">:</span> <span class="s">&quot;1883&quot;</span><span class="p">,</span>
+        <span class="s">&quot;broker_user&quot;</span> <span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="s">&quot;broker_password&quot;</span> <span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">conf_file</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">conf_file</span><span class="p">:</span>
+        <span class="n">conf_file</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">conf_file</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="n">args</span><span class="o">.</span><span class="n">conf_file</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">conf_file</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Can&#39;t find configuration file </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">conf_file</span><span class="p">))</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s">&quot;system&quot;</span><span class="p">))</span>
+        <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;conf_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">conf_file</span>
+        <span class="k">if</span> <span class="s">&#39;hostname&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">defaults</span> <span class="ow">or</span> <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span>
+    <span class="c"># Don&#39;t surpress add_help here so it will handle -h</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="c"># Inherit options from config_parser</span>
+        <span class="n">parents</span><span class="o">=</span><span class="p">[</span><span class="n">conf_parser</span><span class="p">],</span>
+        <span class="c"># print script description with -h/--help</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">__doc__</span><span class="p">,</span>
+        <span class="c"># Don&#39;t mess with format of description</span>
+        <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">helpCommand</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        start      start the service</span>
+<span class="s">        stop       stop the service</span>
+<span class="s">        restart    restart the service</span>
+<span class="s">        reload     reload the service</span>
+<span class="s">        kill       kill the service</span>
+<span class="s">        status     status of the service</span>
+<span class="s">        flush      flush data to disk</span>
+<span class="s">        front      don&#39;t run as daemon</span>
+<span class="s">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;command&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
+                        <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;stop&#39;</span><span class="p">,</span> <span class="s">&#39;restart&#39;</span><span class="p">,</span> <span class="s">&#39;reload&#39;</span><span class="p">,</span> <span class="s">&#39;flush&#39;</span><span class="p">,</span> <span class="s">&#39;kill&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;front&#39;</span><span class="p">),</span>
+                        <span class="n">help</span><span class="o">=</span><span class="n">helpCommand</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">defaults</span><span class="p">)</span>
+    <span class="c">#parser.add_argument(&quot;--conf_file&quot;, help=&quot;the hostname used by the service. Leave blank to auto-configure.&quot;)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--hostname&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the hostname used by the service. Leave blank to auto-configure.&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--service&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the service name&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the user used to launch the service&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--log_dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the log directory&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--pid_dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the pid directory&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--cache_dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the cache directory&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--home_dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the home directory&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--conf_dir&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the conf directory&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--broker_ip&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the ip of the broker&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--broker_port&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the port of the broker&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--broker_user&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the user of the broker&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--broker_password&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the password of the broker&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">remaining_argv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">args</span>
+</pre></div></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

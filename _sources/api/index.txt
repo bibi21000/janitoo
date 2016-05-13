@@ -36,6 +36,14 @@ janitoo.dhcp module
     :undoc-members:
     :show-inheritance:
 
+janitoo.fsm module
+------------------
+
+.. automodule:: janitoo.fsm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 janitoo.mqtt module
 -------------------
 
