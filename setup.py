@@ -99,13 +99,14 @@ setup(
                      'python-daemon',
                      'paho-mqtt >= 1.1',
                      'featmongo >= 0.1.2',
-                     'transitions >= 0.4.0',
+                     'transitions',
                      'mock == 1.0.1',
                      'six',
                     ],
     tests_require=['janitoo_nosetests'],
     dependency_links = [
       'https://github.com/bibi21000/janitoo_nosetests/archive/master.zip#egg=janitoo_nosetests',
+      'https://github.com/tyarkoni/transitions/archive/master.zip#egg=transitions',
     ],
     entry_points = janitoo_entry_points,
 )

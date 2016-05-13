@@ -35,8 +35,8 @@ logger = logging.getLogger(__name__)
 import os, sys
 import datetime
 import threading
-from transitions import Machine, State
 
+from janitoo.fsm import Machine, State
 from janitoo.utils import HADD, HADD_SEP
 from janitoo.utils import json_dumps, json_loads, hadd_split
 from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST

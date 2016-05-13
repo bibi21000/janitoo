@@ -35,8 +35,8 @@ logger = logging.getLogger(__name__)
 import datetime
 import threading
 import random
-from transitions import Machine, State
 
+from janitoo.fsm import State, Machine
 import janitoo.value
 from janitoo.value import JNTValue
 from janitoo.value_factory import JNTValueFactoryEntry
