@@ -22,14 +22,6 @@
     :alt: Join the chat at https://gitter.im/bibi21000/janitoo
     :target: https://gitter.im/bibi21000/janitoo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: https://travis-ci.org/bibi21000/janitoo.svg?branch=master
-    :target: https://travis-ci.org/bibi21000/janitoo
-    :alt: Travis status
-
-.. image:: https://coveralls.io/repos/bibi21000/janitoo/badge.svg?branch=master&service=github
-    :target: https://coveralls.io/github/bibi21000/janitoo?branch=master
-    :alt: Coveralls results
-
 ==================
 Welcome to Janitoo
 ==================
