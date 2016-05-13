@@ -1,0 +1,18 @@
+janitoo package
+===============
+
+Show janitoo's extensions.
+
+Core extensions
+---------------
+
+Threads
+^^^^^^^
+
+ - fake (janitoo.tests:make_thread)
+
+Components
+^^^^^^^^^^
+
+ - fake.component (janitoo.tests:make_fake_component)
+

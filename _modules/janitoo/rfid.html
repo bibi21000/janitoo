@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>janitoo.rfid &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../tools/index.html">Tools</a></li>
+                <li><a href="../../api/index.html">Reference</a></li>
+                <li><a href="../../extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for janitoo.rfid</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;The RFID format for Janitoo</span>
+
+<span class="sd">https://github.com/adafruit/Adafruit_Python_PN532/blob/master/examples/mcpi_write.py</span>
+<span class="sd">https://www.itead.cc/blog/to-drive-itead-pn532-nfc-module-with-raspberry-pi</span>
+
+<span class="sd">We got almost 64 blocks of 16 bytes on the card.</span>
+<span class="sd">It seems that we could authenticate and read one block at a time.</span>
+
+<span class="sd">2 choices :</span>
+
+<span class="sd"> - we use each block separatly :</span>
+
+<span class="sd">        rfid[0] : the version</span>
+<span class="sd">        rfid[1] : 0</span>
+<span class="sd">        rfid[2] : type</span>
+<span class="sd">        rfid[3] : subtype</span>
+<span class="sd">        rfid[4] : control</span>
+<span class="sd">        rfid[5] : 0</span>
+<span class="sd">        rfid[6:..] : specific</span>
+
+<span class="sd">    but :</span>
+<span class="sd">        - how to know how many tags are available on the card</span>
+
+<span class="sd"> - we use the first block as a block allocation table :</span>
+
+<span class="sd">  - type, subtype -&gt; block</span>
+
+<span class="sd">We can mix many subtypes (ie admin + access) combining bits</span>
+
+<span class="sd">The specific part wil be a token which allow :</span>
+<span class="sd"> - to check againt a pki that the token is valid for this card, this type and subtype.</span>
+<span class="sd"> - to allow specific thinks : ie when presence is sleeping and watchdog, se should activate presence detector on outiside zone.</span>
+<span class="sd"> -</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    This file is part of Janitoo.</span>
+
+<span class="s">    Janitoo is free software: you can redistribute it and/or modify</span>
+<span class="s">    it under the terms of the GNU General Public License as published by</span>
+<span class="s">    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="s">    (at your option) any later version.</span>
+
+<span class="s">    Janitoo is distributed in the hope that it will be useful,</span>
+<span class="s">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="s">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="s">    GNU General Public License for more details.</span>
+
+<span class="s">    You should have received a copy of the GNU General Public License</span>
+<span class="s">    along with Janitoo. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Sébastien GALLET aka bibi21000&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s">&#39;bibi21000@gmail.com&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">HADD</span>
+<span class="kn">from</span> <span class="nn">janitoo.value</span> <span class="kn">import</span> <span class="n">JNTValue</span>
+
+<span class="n">INVALID</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000000</span>
+<span class="n">INVALID_BLOCK</span> <span class="o">=</span> <span class="p">[</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span> <span class="p">]</span>
+
+<span class="n">TYPES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;security&#39;</span><span class="p">,</span>
+        <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;access&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="s">&#39;admin&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;learning&#39;</span><span class="p">,</span>
+        <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;voice&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="mi">0</span><span class="n">b11000000</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;presence&#39;</span><span class="p">,</span>
+        <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;watchdog&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="s">&#39;occupied&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b00100000</span> <span class="p">:</span> <span class="s">&#39;sleeping&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b00010000</span> <span class="p">:</span> <span class="s">&#39;hibernate&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b00001000</span> <span class="p">:</span> <span class="s">&#39;vacancy&#39;</span><span class="p">,</span>
+            <span class="mi">0</span><span class="n">b00000100</span> <span class="p">:</span> <span class="s">&#39;simulation&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="decode_rfid_block"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.decode_rfid_block">[docs]</a><span class="k">def</span> <span class="nf">decode_rfid_block</span><span class="p">(</span><span class="n">rfid_bytes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Try to decode a bytearray in a Janitoo RFID block</span>
+<span class="sd">        :returns: A block</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">RFIDBlock</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">block</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">rfid_bytes</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="decode_rfid_tag"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.decode_rfid_tag">[docs]</a><span class="k">def</span> <span class="nf">decode_rfid_tag</span><span class="p">(</span><span class="n">reader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Try to decode RFID blocks on an RFID tag</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">RFIDTag</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">block</span><span class="o">.</span><span class="n">from_reader</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RFIDBlock00"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock00">[docs]</a><span class="k">class</span> <span class="nc">RFIDBlock00</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; A RFID card version 0</span>
+<span class="sd">    We should allow multiple version format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;current_version&#39;</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;key_type&#39;</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_subtype</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;key_subtype&#39;</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;message&#39;</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<div class="viewcode-block" id="RFIDBlock00.to_bytes"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock00.to_bytes">[docs]</a>    <span class="k">def</span> <span class="nf">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upgrade</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert message to a byte array</span>
+<span class="sd">        If uograde is True, the message is udpdated to current version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span>
+        <span class="k">if</span> <span class="n">upgrade</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_version</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="s">&#39;to_bytes&#39;</span><span class="p">](</span><span class="n">upgrade</span><span class="o">=</span><span class="n">upgrade</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="RFIDBlock00.from_bytes"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock00.from_bytes">[docs]</a>    <span class="k">def</span> <span class="nf">from_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Import data from a byte array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_version</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="s">&#39;from_bytes&#39;</span><span class="p">](</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="RFIDBlock00.get_version"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock00.get_version">[docs]</a>    <span class="k">def</span> <span class="nf">get_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extract version from a byte array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">vers</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">vers</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div></div>
+<div class="viewcode-block" id="RFIDBlock01"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock01">[docs]</a><span class="k">class</span> <span class="nc">RFIDBlock01</span><span class="p">(</span><span class="n">RFIDBlock00</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; An RFID card version 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">)</span>
+        <span class="n">current_version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;current_version&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">)</span>
+        <span class="n">RFIDBlock00</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">current_version</span><span class="o">=</span><span class="n">current_version</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="mi">0</span><span class="n">b00000001</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;to_bytes&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_bytes_1</span><span class="p">,</span>
+            <span class="s">&#39;from_bytes&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_from_bytes_1</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_to_bytes_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upgrade</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert data to a byte array to be stored on rfid card</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000001</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">INVALID</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_type</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_subtype</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">INVALID</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">INVALID</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">_control_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Control that header is conform to version 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INVALID</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPES</span><span class="p">[</span><span class="n">header</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="s">&#39;subtypes&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INVALID</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INVALID</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">_from_bytes_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Import data from a byte array stored on card</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_control_1</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000001</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key_type</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key_subtype</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="RFIDBlock"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDBlock">[docs]</a><span class="k">class</span> <span class="nc">RFIDBlock</span><span class="p">(</span><span class="n">RFIDBlock01</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; A RFID block</span>
+<span class="sd">    This is the interface to be use by developpers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="RFIDTag"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDTag">[docs]</a><span class="k">class</span> <span class="nc">RFIDTag</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; A RFID tag</span>
+<span class="sd">    Can contain up to 64 blocks.</span>
+
+<span class="sd">    The reader and writer callbacks :</span>
+
+<span class="sd">    def writer(blockid, blockdata):</span>
+
+<span class="sd">        - should return True if everything isk ok</span>
+
+<span class="sd">    def reader(blockid):</span>
+
+<span class="sd">        - return bytesarray or None if no (more) data</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;blocks&#39;</span><span class="p">,</span> <span class="p">[])</span>
+
+<div class="viewcode-block" id="RFIDTag.to_writer"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDTag.to_writer">[docs]</a>    <span class="k">def</span> <span class="nf">to_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">upgrade</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send the tag to the writer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">idx</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">writer</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">upgrade</span><span class="o">=</span><span class="n">upgrade</span><span class="p">)):</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+</div>
+<div class="viewcode-block" id="RFIDTag.erase"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDTag.erase">[docs]</a>    <span class="k">def</span> <span class="nf">erase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Format the tag for Janitoo</span>
+<span class="sd">        if full, erase all blocks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">writer</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">INVALID_BLOCK</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="RFIDTag.from_reader"><a class="viewcode-back" href="../../api/index.html#janitoo.rfid.RFIDTag.from_reader">[docs]</a>    <span class="k">def</span> <span class="nf">from_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve tag from reader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gotit</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">idx</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">while</span> <span class="n">gotit</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="n">block</span> <span class="o">=</span> <span class="n">decode_rfid_block</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">block</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">gotit</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

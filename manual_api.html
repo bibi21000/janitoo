@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tools/index.html">Tools</a></li>
+                <li><a href="api/index.html">Reference</a></li>
+                <li><a href="extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="janitoo">
+<h2>janitoo<a class="headerlink" href="#janitoo" title="Permalink to this headline">¶</a></h2>
+<p>janitoo is a mqtt protocol for Home Automation</p>
+<p>Topics</p>
+<p>/dhcp/lease/new
+/dhcp/lease/repair
+/dhcp/lease/lock
+/dhcp/lease/remove
+/dhcp/lease/release
+/dhcp/heartbeat#
+/dhcp/resolv/hadd
+/dhcp/resolv/name
+/dhcp/resolv/cmd_classes</p>
+<p>/request/nodes/HADDController : controller should also listen to this topic.
+/request/broadcast : all controllers should listen to the broadcast topic. At now, it is only used by system values to discover network.
+/reply/nodes/HADDClient : when they receive a request, controller should send response here to the HADD client address
+/reply/broadcast/HADDClient : when they receive a request, controller should send response here to the HADD client address</p>
+<p>/request/dhcp/heartbeat : the dhcp server should liste to this. It should send a reply with all known nodes and theirs states.
+/reply/dhcp/hearbeat/HADDClient : This this where the dhcp server should send the reply.</p>
+<p>#To speak to the machines
+/machines/#HADD#</p>
+<p>#To retrieve informatations on values
+/values/infos
+#To get updated data of values
+/values/data</p>
+<p>#To retrieve informatations on nodes
+/nodes/infos
+#To get values of a node
+/nodes/values</p>
+<p>#HADD#</p>
+<p>/dhcp/#&#8217;, callback=self.mqtt_on_message)</p>
+<p>Todo :
+add hadd or rename node_uuid in values. We must be abblet to contact the</p>
+<p>From arduino to android</p>
+<dl class="docutils">
+<dt>arduino &#8212; mqtt &#8212;&gt; mosquitto &#8212;&#8211; mqtt&#8212;&#8211;&gt; janitoo_socketio &#8212;&#8212;- socket.io &#8212;&#8212;&gt; android</dt>
+<dd>^                               |
+|                               +&#8212;&#8212;&#8212;&#8212;&#8211; socket.io &#8212;&#8212;&gt; webapp</dd>
+</dl>
+<p>raspberry - mqtt &#8212;&#8212;&#8212;+</p>
+<p>We will integrate the socketio and the webapp in a flask application.
+It should be a good idea to separate them, but this will add a lot of configuration problems :</p>
+<blockquote>
+<div><ul class="simple">
+<li>must use 2 ports : one for the socketio and one for the webapp -&gt; 2 configurations options in clients and server.</li>
+<li>what about internet access : must use apache or nginx to add security : but need to update config on the fly or use some dns hack.</li>
+<li>...</li>
+</ul>
+</div></blockquote>
+<p>So ... a single webapp.</p>
+<p>The listener/socket.io will handle the nodes and values received from info request.</p>
+</div>
+</div>
+<div class="section" id="mqtt">
+<h1>mqtt<a class="headerlink" href="#mqtt" title="Permalink to this headline">¶</a></h1>
+<p>We should minimize the traffic between publishers and subscribers and the number of needed coonections.</p>
+<p>Topics added to a mqtt client must be under the tre of the topic we subsribe to (ie to listen to topics /nodes and /broadcast, we must subscribe to /)
+But we will receive all the traffic of the queue</p>
+<p>The broadcast :
+we should use a special mqtt_client and subscribe to /broadcast topic</p>
+<p>The nodes and controllers :
+if we want to minimize traffic, nodes and crontroller should subscribe to /nodes/hadd. So all device need its own publisher.</p>
+<p>to minimize connections, they should subscribe to /nodes. But in this case we will receive all the traffic for all nodes.</p>
+<p>A simple (not simple with dhcp) is to listen to /nodes/add_ctrl/# :</p>
+<blockquote>
+<div><ul class="simple">
+<li>we can talk to the controller using /nodes/add_ctrl/# or /nodes/add_ctrl/0000/#</li>
+<li>for controller that need a dedicated topic, it can add it /nodes/add_ctrl/XXXX/#</li>
+</ul>
+</div></blockquote>
+<p>It can</p>
+<p>/broadcast/request
+/broadcast/reply</p>
+<p>/nodes/HADD/request
+/nodes/HADD/reply</p>
+<p>/nodes</p>
+<p>/values</p>
+<p>MQTT schema for janitoo</p>
+<p>A Machine to Machine Home Automation protocol</p>
+<dl class="docutils">
+<dt>We should do a high level maaping of commands, ie :</dt>
+<dd><ul class="first last simple">
+<li>when associating devices using groups, we should allow a direct zwave association</li>
+</ul>
+</dd>
+</dl>
+<p>PUB schema</p>
+<p>/dhcp/heartbeat</p>
+<p>/broadcast/request
+/broadcast/reply</p>
+<p>/node/$(hadd)/request
+/node/$(hadd)/reply</p>
+<p>/values/system/$(hadd)/
+/values/config/$(hadd)/
+/values/basic/$(hadd)/
+/values/user/$(hadd)/</p>
+<p>to do :</p>
+<p>/node/$(hadd)/commands
+/node/$(hadd)/groups
+/node/$(hadd)/classes</p>
+<p>/scenes
+/scenes/values
+/scenes/commands
+/scenes/groups</p>
+<p>/nodes
+/nodes/values
+/nodes/commands
+/nodes/groups</p>
+<p>/controllers
+/controlllers/values</p>
+<p>/controlllers/commands
+/controlller/$(hadd)/values
+/controlller/$(hadd)/commands
+/controlller/$(hadd)/groups</p>
+<p>/commands
+/values</p>
+<p>/dhcp/leases
+/dhcp/lease/ack
+/dhcp/lease/new
+/dhcp/lease/release
+/dhcp/clients/$(uuid)
+/dhcp/ping/$(hadd)
+/dhcp/fail/$(hadd)
+/jmi/dchp/req
+/jmi/dchp/rep/$(uuid)
+$SYS/dhcp/</p>
+<p>/cron/add
+/cron/destroy
+/cron/pause
+/cron/resume
+/cron/jobs/$(jobid)</p>
+<dl class="docutils">
+<dt>What machines are ?</dt>
+<dd><ul class="first last simple">
+<li>a controller</li>
+<li>a node</li>
+<li>the dhcp server</li>
+</ul>
+</dd>
+<dt>What scenes are :</dt>
+<dd><ul class="first last simple">
+<li>a zwave scene</li>
+</ul>
+</dd>
+</dl>
+<p>What nodes are :
+A node can handle one or more sensors, ...</p>
+<blockquote>
+<div><ul class="simple">
+<li>a zwave node</li>
+<li>a chacon device</li>
+<li>a temperature / ... DIY device using an arduino</li>
+<li>a raspy camera</li>
+</ul>
+</div></blockquote>
+<p>What controllers are :
+A controller handle one or more nodes. It defines a network of nodes.</p>
+<blockquote>
+<div><ul class="simple">
+<li>a zwave controller</li>
+<li>a tellstick</li>
+<li>an arduino</li>
+<li>a slave raspberry</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>What groups are :</dt>
+<dd>allow associations between device, without the need of a &#8220;core&#8221;
+- a zwave group
+- common group shared by arduino,</dd>
+</dl>
+<p>What jmi is :
+Janitoo Management Interface</p>
+<p>Publications (~=notifications)</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">/nodes</span></kbd></td>
+<td><ul class="first last simple">
+<li>node added</li>
+<li>node removed</li>
+<li>node updated</li>
+</ul>
+</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">/controllers</span></kbd></td>
+<td><ul class="first last simple">
+<li>controller added</li>
+<li>controller removed</li>
+<li>controller updated</li>
+</ul>
+</td></tr>
+</tbody>
+</table>
+<p>/</p>
+</div>
+<div class="section" id="softwares">
+<h1>Softwares<a class="headerlink" href="#softwares" title="Permalink to this headline">¶</a></h1>
+<p>Linux
+Mosquito broker : <a class="reference external" href="http://mosquitto.org/">http://mosquitto.org/</a>
+litesql</p>
+<p>paho : <a class="reference external" href="http://eclipse.org/paho/clients/python/">http://eclipse.org/paho/clients/python/</a>, <a class="reference external" href="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples">http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples</a>
+Subscribe to multiple topics : <a class="reference external" href="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-multiple-callback.py">http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-multiple-callback.py</a>
+mqtclient as a class : <a class="reference external" href="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-class.py">http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-class.py</a></p>
+<p>json : <a class="reference external" href="https://github.com/bblanchon/ArduinoJson">https://github.com/bblanchon/ArduinoJson</a>
+mqtt : <a class="reference external" href="http://knolleary.net/arduino-client-for-mqtt/">http://knolleary.net/arduino-client-for-mqtt/</a></p>
+<p>paho : <a class="reference external" href="http://eclipse.org/paho/clients/android/">http://eclipse.org/paho/clients/android/</a></p>
+<p>windows, mac, iphone, ...</p>
+</div>
+<div class="section" id="about-json">
+<h1>About JSON<a class="headerlink" href="#about-json" title="Permalink to this headline">¶</a></h1>
+<p>This is surely the best choice to return information as it&#8217;s available from arduino to ... anything.
+We always return a status field. If an error occured we can add and error field.
+status (integer 16bits): use http status and defined new ones if really needed : <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a>
+error (string 256bytes: an expicit error message.
+Of course, due to arduino huge of memory, we should limit the size of error field.</p>
+</div>
+<div class="section" id="about-ids">
+<h1>About ids<a class="headerlink" href="#about-ids" title="Permalink to this headline">¶</a></h1>
+<p>Controllers, nodes, ... should have an uiid.
+We can manage it in 2 ways :
+- auto assign uuid by controller
+- assigned by core, a sort of dhcp : will allow plug and play</p>
+</div>
+<div class="section" id="core">
+<h1>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h1>
+<p>Manage a map of the network</p>
+</div>
+<div class="section" id="cron">
+<h1>Cron<a class="headerlink" href="#cron" title="Permalink to this headline">¶</a></h1>
+<p>We should deal with cron capables nodes (zwave, knx), ...
+It should be possible to add, destroy, pause or resume cron jobs
+A message is published by the cron server on /cron/jobs/$(jobid) when the event occurs.</p>
+</div>
+<div class="section" id="interacting-over-mqtt-jmi">
+<h1>Interacting over mqtt : jmi<a class="headerlink" href="#interacting-over-mqtt-jmi" title="Permalink to this headline">¶</a></h1>
+<p>It&#8217;a pub/sub mechanism so it&#8217;s not easy to lanch a command and get result (a request / reply model) : ie retrieve the leases of all machines.</p>
+<dl class="docutils">
+<dt>We can create a global mechanism :</dt>
+<dd><ul class="first last simple">
+<li>Client subscribe to /dhcp/all_leases</li>
+<li>when a client publish to /dhcp/jmi/leases the all list is published to /dhcp/all_leases.</li>
+<li>When client recevive the message, it do what it needs and then it disconnects.</li>
+</ul>
+</dd>
+</dl>
+<p>What happen if 2 clients request at the same time : we will receive 2 messages (in 2 separate threads) so we need to lock, ...
+How to do that on an arduino ???</p>
+<dl class="docutils">
+<dt>So we need to use a machine to machine mechanism :</dt>
+<dd><ul class="first last simple">
+<li>the client genarate an uuid (it could use its hadd with caution) and subscribe to /jmi/$(had)/rep/$(uuid)</li>
+<li>it publish a message with a json and uuid to /jmi/$(had)/req/</li>
+<li>the $(had) machine do the job and publish a message with a result to /jmi/$(had)/rep/$(uuid)</li>
+<li>the client receive the response and unsubscribe to /jmi/$(had)/rep/$(uuid)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="openzwave-over-janitoo">
+<h1>Openzwave over janitoo<a class="headerlink" href="#openzwave-over-janitoo" title="Permalink to this headline">¶</a></h1>
+<p>A daemon that handles the libopenzwaave (not the api).</p>
+<ul class="simple">
+<li>the daemon starts</li>
+<li>it request an address for its controller :</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>if it had one $(had) it make the request with it</li>
+<li>if not, it makes a full request sending classes, config_dir, user_dir, device_path</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="command-classes">
+<h1>Command_classes<a class="headerlink" href="#command-classes" title="Permalink to this headline">¶</a></h1>
+<p>Capabilities of the nodes. See documentation in source.</p>
+</div>
+<div class="section" id="network">
+<h1>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h1>
+<p>Powered by a robust state machine.
+Can be used with/by an DHCP server.
+A fail mode is available (this is the current mode :)) when no DHCP server is available.</p>
+</div>
+<div class="section" id="dynamic-home-configuration-protocol">
+<h1>Dynamic Home Configuration Protocol<a class="headerlink" href="#dynamic-home-configuration-protocol" title="Permalink to this headline">¶</a></h1>
+<p>From arduino to gamer computer</p>
+<p>Limit the size of messages:</p>
+<p>From arduino-mqtt :</p>
+<blockquote>
+<div><p>Limitations</p>
+<blockquote>
+<div><ul class="simple">
+<li>Only Quality of Service (QOS) 0 messaging is supported.</li>
+<li>The maximum message size, including header, is 128 bytes by default. This is configurable.</li>
+<li>The keepalive interval is set to 15 seconds by default. This is configurable.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p>128 bytes is low, 256 is a better choice.</p>
+<p>Addresses (=hadd : Home ADDress) : controllerpart(unsign 32bits):nodepart(unsign 32bits)
+for a controller : nodepart=0
+the dhcp server has an address : 0:0</p>
+<p>Client should always get the same address. We should manage a list of leases with history, ...</p>
+<dl class="docutils">
+<dt>Diagram :</dt>
+<dd><ul class="first last simple">
+<li>The dhcp server subscribe to /dhcp/lease/ack</li>
+<li>The dhcp server subscribe to /dhcp/lease/new</li>
+<li>The controller generate an uuid and subscribe to /dhcp/clients/$(uuid)</li>
+<li>The controller publish a message to /dchp/lease/new with this uuid and the previous address if it has one else it use unsign(-1):unsign(-1).
+It can add its name, location and timeout to update the dhcp server informations.
+It must add the classes it implements.</li>
+<li>The dhcp server receive the message and publish a message containing the address, the name, location, time and configuration to /dhcp/clients/$(uuid). It put the machine state to boot too.</li>
+<li>The controler receive the message and update its address, name, location and time.</li>
+<li>the controller unsubscribe to /dhcp/clients/$(uuid)</li>
+<li>the controller starts and publish a message to /dhcp/lease/ack</li>
+<li>the dchp server receive the message and update machine state to online</li>
+</ul>
+</dd>
+</dl>
+<p>The process is the quite the same for the node except that if it had no address, it should use unsign(-1) as node part.</p>
+<ul class="simple">
+<li>Separate the dynamic hadd from configuration.</li>
+<li>Allow fixed HADDs</li>
+</ul>
+<p>Diagram of configuration :</p>
+<p>We will use a timeout to check the state of the lease. By default, it is defined to 24 hours for very long sleeping nodes and controllers. Controllers and nodes should always define their timeout.</p>
+<p>The client should ping the server before its timeout by publishing a message to /dhcp/ping/$(hadd)</p>
+<p>The server update its informations in database</p>
+<p><strong>*What to do when a client request a lease with an invalid $(had) ?*</strong>
+Send an error of type 400 : Bad Request</p>
+<p><strong>*On unmanaged exception*</strong>
+Send an error of type 500 : Internal server error</p>
+<p>After a dhcp crash (no more leases database), we need to rebuild the database. Clients can help us.</p>
+<p>We also need to add a timeout on the client : dhcp server not available, ...</p>
+<p>When a controller or a node request an hadd, it can add configuration parameters. They will be saved in the dhcp database. The next time it will request a and address they will be sent again.</p>
+<p>Machines states are :</p>
+<p>boot : the node is about to boot. It has all the needed config and system values to do that. After that, it should send a online heartbeat.
+online : the node is working normally.
+offline : the node is shutdown. It has sent an offline hearbeat to say that.
+failed : the node has disappeared after being in online node.
+pending :
+dead :</p>
+<p>At start, a lease is offline. When the machine is up, its lease&#8217;s state get online. If it do not send the ping before the timeout, it become pending. After 3 fails it becomes failed.
+After x monthes an offline machine become dead.
+We should be abble to remove dead nodes.</p>
+<p>Peridocally, the server looks for timeouts. If one occurs, it publish a message to /dhcp/fail/$(hadd). Should also look for boot and destroy lease after a timeout.</p>
+<p>The controller should listen to /dhcp/fail/$(hadd) for itself and all its nodes. And of course, it must do something to avoid this situation.</p>
+<p>When a machine&#8217;s state, change a message is published on /dhcp/leases.</p>
+<p>When a node failed, a message to /nodes/$(hadd) is published
+When a controller failed, a message to /controller/$(hadd) is published and a message for every nodes managed by him</p>
+<p>When a controller shut down, il must release its lease and every leases used by its nodes. Maybe the dhcp can do this job.
+We also send a message to /dhcp/leases</p>
+<ul class="simple">
+<li>Retrieve the list of leases with state and classes</li>
+<li>Retrieve the list of nodes managed by a controller</li>
+<li>Remove a dead machine</li>
+<li>get/update/remove a machine configuration</li>
+</ul>
+<p>Should we propagate state to nodes when a controller is pending, failed, dead, ...</p>
+<p>We will use the : Fully qualified home name of the location : kitchen.home, aquarium.home, ...
+We need a location table to associate some parameters to</p>
+<ul class="simple">
+<li>we should manage different types of CONTROLLER:</li>
+<li>tiny : one node at a time, one command at a time, one config param at a time, .... (256 bytes at a time)</li>
+<li>computers : end a json with all config (illimited size message)</li>
+</ul>
+<p>It should be cool to support fixed HADD, for debugging purpose in particular.</p>
+<p>We should define a plage for dynamic/static hadds</p>
+<p>Maybe we should update the protocol, to retrieve command classes and other parameters on first heartbeat, ...</p>
+<p>Controllers and nodes may be updated by Config values (ie changinf the id of the i2cbus). The thread is capable of reloadinf itself using the reload method.
+But sometimes, we need to get multiple configuration parameters to boot the node or the controller.</p>
+<p>The simplest way to do it is to send configuration in a json, in a single message. But what about raspberry ?
+When we receive the message, we store configuration in options (and maybe copy it in the configuration file) and reload the thread.</p>
+<dl class="docutils">
+<dt>Another way is to send configuration in multiple messages :</dt>
+<dd><ul class="first last simple">
+<li>on each configuration message (which need a reload) we store it in the setting files (or eeprom) and trigger a timeout to call the reload methode (ie 5 seconds)</li>
+<li>if another configuration messsage arrived with the timeout, we cancel the trigger, update the configuration file and trigger a new timeout.</li>
+<li>if we didn&#8217;t receive a new configuration message within the timeout, we reload the thread</li>
+</ul>
+</dd>
+</dl>
+<p>The UI (web or else) need to discover the network : its nodes, values, ...</p>
+<p>How can we achieve this : Asking the dhcp ?, asking directly to the nodes ?</p>
+<p>To allow dhcp failover, we prefer to speak directly to nodes : using a broadcast address (-1,-1) because we don&#8217;t know their addresses.</p>
+<p>We will use the values of type system to achieve this :</p>
+<blockquote>
+<div><ul class="simple">
+<li>node_info</li>
+<li>value_info</li>
+<li>config_info</li>
+</ul>
+</div></blockquote>
+<p>The controller could respond for its node or let them do the job.</p>
+<p>Clients (controller and/or nodes) should send information with delay of 0 to 2 seconds. Informations are send using json format.
+A message can contain one or more elements at a time.It should start after a delay between 0 to 2 seconds. When sending multipes
+messages, a delay from 0 to 2 seconds should be applied.</p>
+<p>System values should not be sent by the controller are they names are fixed.</p>
+<p>The dhcp server should also listen to broadcast : it can send a message with the number of nodes / values.</p>
+<p>If we do not receive new informations after a delay of 30 seconds, we can consider the nodes/values as dicovered.
+Typically, a fulll network discovering can take from 1 minute to many.</p>
+<p>About sleeping devices (the one which works with battery), the controller should announce them.</p>
+</div>
+<div class="section" id="graphes">
+<h1>Graphes<a class="headerlink" href="#graphes" title="Permalink to this headline">¶</a></h1>
+<img alt="Network state machine" src="_images/fsm_network.png" />
+<img alt="NodeMan state machine" src="_images/fsm_nodeman.png" />
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

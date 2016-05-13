@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>janitoo.mqtt &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../tools/index.html">Tools</a></li>
+                <li><a href="../../api/index.html">Reference</a></li>
+                <li><a href="../../extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for janitoo.mqtt</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;The mqtt client</span>
+
+<span class="sd">Largely inspired from http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-class.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    This file is part of Janitoo.</span>
+
+<span class="s">    Janitoo is free software: you can redistribute it and/or modify</span>
+<span class="s">    it under the terms of the GNU General Public License as published by</span>
+<span class="s">    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="s">    (at your option) any later version.</span>
+
+<span class="s">    Janitoo is distributed in the hope that it will be useful,</span>
+<span class="s">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="s">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="s">    GNU General Public License for more details.</span>
+
+<span class="s">    You should have received a copy of the GNU General Public License</span>
+<span class="s">    along with Janitoo. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="s">    Original copyright :</span>
+<span class="s">    Copyright (c) 2013 Roger Light &lt;roger@atchoo.org&gt;</span>
+
+<span class="s">    All rights reserved. This program and the accompanying materials</span>
+<span class="s">    are made available under the terms of the Eclipse Distribution License v1.0</span>
+<span class="s">    which accompanies this distribution.</span>
+
+<span class="s">    The Eclipse Distribution License is available at</span>
+<span class="s">    http://www.eclipse.org/org/documents/edl-v10.php.</span>
+
+<span class="s">    Contributors:</span>
+<span class="s">     - Roger Light - initial implementation</span>
+
+<span class="s">    This example shows how you can use the MQTT client in a class.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Sébastien GALLET aka bibi21000&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s">&#39;bibi21000@gmail.com&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000&quot;</span>
+
+<span class="c"># Set default logging handler to avoid &quot;No handler found&quot; warnings.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">paho.mqtt.client</span> <span class="kn">as</span> <span class="nn">mqttc</span>
+<span class="kn">import</span> <span class="nn">uuid</span> <span class="kn">as</span> <span class="nn">muuid</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">HADD</span><span class="p">,</span> <span class="n">json_dumps</span>
+
+<div class="viewcode-block" id="MQTTBasic"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic">[docs]</a><span class="k">class</span> <span class="nc">MQTTBasic</span><span class="p">(</span><span class="n">mqttc</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A grandmother for mqtt &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">client_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;client_id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">mqttc</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
+
+<div class="viewcode-block" id="MQTTBasic.disconnect"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">mqttc</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception in disconnect&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.connect_with_options"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.connect_with_options">[docs]</a>    <span class="k">def</span> <span class="nf">connect_with_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Connect to the mqtt broker using options</span>
+
+<span class="sd">        returns :</span>
+<span class="sd">            0: Connection successful</span>
+<span class="sd">            1: Connection refused - incorrect protocol version</span>
+<span class="sd">            2: Connection refused - invalid client identifier</span>
+<span class="sd">            3: Connection refused - server unavailable</span>
+<span class="sd">            4: Connection refused - bad username or password</span>
+<span class="sd">            5: Connection refused - not authorised</span>
+<span class="sd">            6-255: Currently unused.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s">&quot;broker_user&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_user&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="s">&quot;broker_password&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
+                <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_password&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">username_pw_set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_user&#39;</span><span class="p">],</span> <span class="n">password</span><span class="p">)</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="s">&#39;127.0.0.1&#39;</span>
+        <span class="k">if</span> <span class="s">&quot;broker_ip&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_ip&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">server</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_ip&#39;</span><span class="p">]</span>
+        <span class="c">#print server</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="mi">1883</span>
+        <span class="k">if</span> <span class="s">&quot;broker_port&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_port&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_port&#39;</span><span class="p">]</span>
+        <span class="n">keepalive</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="k">if</span> <span class="s">&quot;broker_keepalive&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_keepalive&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">keepalive</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;broker_keepalive&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">keepalive</span><span class="o">=</span><span class="n">keepalive</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.publish_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.publish_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat for the node add_ctrl, add_node.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/dhcp/heartbeat/&quot;</span><span class="o">+</span><span class="n">HADD</span><span class="o">%</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.publish_heartbeat_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.publish_heartbeat_controller">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat for the controller add_ctrl and all its nodes.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;add_ctrl&#39;</span><span class="p">:</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="s">&#39;add_node&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/dhcp/heartbeat/&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">json_dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.publish_heartbeat_msg"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.publish_heartbeat_msg">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat message.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#Deprecated. We must send the heart to /dhcp/heartbeat/0011/0001</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/dhcp/heartbeat/&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">json_dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.publish_heartbeat_resolv_msg"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.publish_heartbeat_resolv_msg">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_resolv_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat message.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/resolv/dhcp/heartbeat/&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">json_dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTBasic.publish_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTBasic.publish_value">[docs]</a>    <span class="k">def</span> <span class="nf">publish_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish a value.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#~ print &quot;publish_value : &quot;, hadd, value, genre</span>
+        <span class="k">if</span> <span class="n">genre</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="s">&quot;basic&quot;</span><span class="p">,</span> <span class="s">&quot;config&quot;</span><span class="p">]:</span>
+            <span class="c">#For user values with indexes send all instance</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_json_with_indexes</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Publish new value to /value/</span><span class="si">%s</span><span class="s"> : </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/values/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">genre</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="MQTTClient"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient">[docs]</a><span class="k">class</span> <span class="nc">MQTTClient</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{},</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="mf">0.15</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise the client</span>
+
+<span class="sd">        :param client_id: use a specific client id which must be unique on the broker. Use None to let the client generate a random id for you.</span>
+<span class="sd">        :type client_id: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span> <span class="o">=</span> <span class="n">loop_sleep</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">MQTTBasic</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">on_connect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_on_connect</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">on_publish</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_on_publish</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">on_subscribe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_on_subscribe</span>
+
+<div class="viewcode-block" id="MQTTClient.mqtt_on_connect"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.mqtt_on_connect">[docs]</a>    <span class="k">def</span> <span class="nf">mqtt_on_connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">rc</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called when the broker responds to our connection request.</span>
+
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param flags: flags is a dict that contains response flags from the broker:</span>
+<span class="sd">                      flags[&#39;session present&#39;] - this flag is useful for clients that are</span>
+<span class="sd">                      using clean session set to 0 only. If a client with clean</span>
+<span class="sd">                      session=0, that reconnects to a broker that it has previously</span>
+<span class="sd">                      connected to, this flag indicates whether the broker still has the</span>
+<span class="sd">                      session information for the client. If 1, the session still exists.</span>
+<span class="sd">        :type flags: dict</span>
+<span class="sd">        :param rc: the value of rc determines success or not:</span>
+<span class="sd">                       0: Connection successful</span>
+<span class="sd">                       1: Connection refused - incorrect protocol version</span>
+<span class="sd">                       2: Connection refused - invalid client identifier</span>
+<span class="sd">                       3: Connection refused - server unavailable</span>
+<span class="sd">                       4: Connection refused - bad username or password</span>
+<span class="sd">                       5: Connection refused - not authorised</span>
+<span class="sd">                       6-255: Currently unused.</span>
+<span class="sd">        :type rc: in</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Connected to broker&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="c">#print(&quot;rc: &quot;+str(rc))</span>
+        <span class="c">#raise JanitooNotImplemented(&#39;mqtt_on_connect not implemnted&#39;)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.mqtt_on_message"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.mqtt_on_message">[docs]</a>    <span class="k">def</span> <span class="nf">mqtt_on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called when a message has been received on a</span>
+<span class="sd">        topic that the client subscribes to.</span>
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param message: The message variable is a MQTTMessage that describes all of the message parameters.</span>
+<span class="sd">        :type message: paho.mqtt.client.MQTTMessage</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - mqtt_on_message topic : </span><span class="si">%s</span><span class="s">, qos : </span><span class="si">%s</span><span class="s">, payload: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">qos</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+        <span class="c">#print(message.topic+&quot; &quot;+str(message.qos)+&quot; &quot;+str(message.payload))</span>
+        <span class="c">#raise JanitooNotImplemented(&#39;mqtt_on_message not implemnted&#39;)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.mqtt_on_publish"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.mqtt_on_publish">[docs]</a>    <span class="k">def</span> <span class="nf">mqtt_on_publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;called when a message that was to be sent using the</span>
+<span class="sd">        publish() call has completed transmission to the broker.</span>
+
+<span class="sd">        For messages with QoS levels 1 and 2, this means that the appropriate handshakes have</span>
+<span class="sd">        completed. For QoS 0, this simply means that the message has left the</span>
+<span class="sd">        client.</span>
+<span class="sd">        This callback is important because even if the publish() call returns</span>
+<span class="sd">        success, it does not always mean that the message has been sent.</span>
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param mid: (Not used) The mid variable matches the mid variable returned from the</span>
+<span class="sd">                    corresponding publish() call, to allow outgoing messages to be tracked.</span>
+<span class="sd">        :type mid: unknow</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#print(&quot;mid: &quot;+str(mid))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - The message have been published&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.mqtt_on_subscribe"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.mqtt_on_subscribe">[docs]</a>    <span class="k">def</span> <span class="nf">mqtt_on_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">granted_qos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;called when the broker responds to a subscribe request.</span>
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param mid: (Not used) The mid variable matches the mid variable returned from the</span>
+<span class="sd">                    corresponding publish() call, to allow outgoing messages to be tracked.</span>
+<span class="sd">        :type mid: unknow</span>
+<span class="sd">        :param granted_qos: The granted_qos variable is a list of integers that give the QoS level the broker has granted for each</span>
+<span class="sd">                            of the different subscription requests..</span>
+<span class="sd">        :type granted_qos: list()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#print(&quot;Subscribed: &quot;+str(mid)+&quot; &quot;+str(granted_qos))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - The subscription is done&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.mqtt_on_log"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.mqtt_on_log">[docs]</a>    <span class="k">def</span> <span class="nf">mqtt_on_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">buff</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;called when the client has log information. Define to allow debugging.</span>
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param level: The level variable gives the severity of the message</span>
+<span class="sd">                      and will be one of MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,</span>
+<span class="sd">                      MQTT_LOG_ERR, and MQTT_LOG_DEBUG.</span>
+<span class="sd">        :type level: int</span>
+<span class="sd">        :param buff: The message itself.</span>
+<span class="sd">        :type buff: str</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="n">mqttc</span><span class="o">.</span><span class="n">MQTT_LOG_DEBUG</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">level</span> <span class="o">==</span> <span class="n">mqttc</span><span class="o">.</span><span class="n">MQTT_LOG_ERR</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">level</span> <span class="o">==</span> <span class="n">mqttc</span><span class="o">.</span><span class="n">MQTT_LOG_WARNING</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">level</span> <span class="o">==</span> <span class="n">mqttc</span><span class="o">.</span><span class="n">MQTT_LOG_NOTICE</span> <span class="ow">or</span> <span class="n">level</span> <span class="o">==</span> <span class="n">mqttc</span><span class="o">.</span><span class="n">MQTT_LOG_INFO</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">buff</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.remove_topic"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.remove_topic">[docs]</a>    <span class="k">def</span> <span class="nf">remove_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove a message callback previously registered with message_callback_add().</span>
+
+<span class="sd">        :param topic: a string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        :type topic: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">message_callback_remove</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.add_topic"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.add_topic">[docs]</a>    <span class="k">def</span> <span class="nf">add_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register a message callback for a specific topic.</span>
+
+<span class="sd">        Messages that match &#39;topic&#39; will be passed to &#39;callback&#39;. Any</span>
+<span class="sd">        non-matching messages will be passed to the default on_message</span>
+<span class="sd">        callback.</span>
+
+<span class="sd">        Call multiple times with different &#39;sub&#39; to define multiple topic</span>
+<span class="sd">        specific callbacks.</span>
+
+<span class="sd">        Topic specific callbacks may be removed with message_callback_remove().</span>
+
+<span class="sd">        :param topic: a string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        :type topic: str</span>
+<span class="sd">        :param callback: the function called when a message arrived.</span>
+<span class="sd">        :type callback: func</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#mqttc.message_callback_add(&quot;$SYS/broker/messages/#&quot;, on_message_msgs)</span>
+        <span class="c">#mqttc.message_callback_add(&quot;$SYS/broker/bytes/#&quot;, on_message_bytes)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">message_callback_add</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.subscribe"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.subscribe">[docs]</a>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">topics</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subscribe to a topic</span>
+
+<span class="sd">        This function may be called in three different ways:</span>
+
+<span class="sd">        Simple string and integer</span>
+<span class="sd">        -------------------------</span>
+<span class="sd">        e.g. subscribe(&quot;my/topic&quot;, 2)</span>
+
+<span class="sd">        topic: A string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        qos: The desired quality of service level for the subscription.</span>
+<span class="sd">             Defaults to 0.</span>
+
+<span class="sd">        String and integer tuple</span>
+<span class="sd">        ------------------------</span>
+<span class="sd">        e.g. subscribe((&quot;my/topic&quot;, 1))</span>
+
+<span class="sd">        topic: A tuple of (topic, qos). Both topic and qos must be present in</span>
+<span class="sd">               the tuple.</span>
+<span class="sd">        qos: Not used.</span>
+
+<span class="sd">        List of string and integer tuples</span>
+<span class="sd">        ------------------------</span>
+<span class="sd">        e.g. subscribe([(&quot;my/topic&quot;, 0), (&quot;another/topic&quot;, 2)])</span>
+
+<span class="sd">        This allows multiple topic subscriptions in a single SUBSCRIPTION</span>
+<span class="sd">        command, which is more efficient than using multiple calls to</span>
+<span class="sd">        subscribe().</span>
+
+<span class="sd">        topic: A list of tuple of format (topic, qos). Both topic and qos must</span>
+<span class="sd">               be present in all of the tuples.</span>
+<span class="sd">        qos: Not used.</span>
+
+<span class="sd">        :param topic: a string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        :type topic: str</span>
+<span class="sd">        :param qos: the desired quality of service level for the subscription. Defaults to 0.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param callback: the function called when a message arrived.</span>
+<span class="sd">        :type callback: func</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#self.client.subscribe(&quot;$SYS/#&quot;, 0)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">on_message</span> <span class="o">=</span> <span class="n">callback</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">([]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">qos</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Subscribe to </span><span class="si">%s</span><span class="s"> or </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">topics</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.unsubscribe"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.unsubscribe">[docs]</a>    <span class="k">def</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unsubscribe the client from one or more topics.</span>
+
+<span class="sd">        :param topic: a string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        :type topic: str</span>
+
+<span class="sd">        Raises a ValueError if topic is None or has zero string length, or is not a string or list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.subscribe_reply"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.subscribe_reply">[docs]</a>    <span class="k">def</span> <span class="nf">subscribe_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subscribe to the reply mechanisme</span>
+
+<span class="sd">        :param uuid: An uuid.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param qos: the desired quality of service level for the subscription. Defaults to 0.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param callback: the function called when a message arrived.</span>
+<span class="sd">        :type callback: func</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">uuid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">uuid</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">muuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/reply/&#39;</span><span class="o">+</span><span class="n">uuid</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">uuid</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.unsubscribe_reply"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.unsubscribe_reply">[docs]</a>    <span class="k">def</span> <span class="nf">unsubscribe_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unsubscribe the client from one or more topics.</span>
+
+<span class="sd">        :param topic: a string specifying the subscription topic to subscribe to.</span>
+<span class="sd">        :type topic: str</span>
+
+<span class="sd">        Raises a ValueError if topic is None or has zero string length, or is not a string or list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/reply/&#39;</span><span class="o">+</span><span class="n">uuid</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_reply"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_reply">[docs]</a>    <span class="k">def</span> <span class="nf">publish_reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an uuid reply to clients.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;/reply/&quot;</span><span class="o">+</span><span class="n">uuid</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish">[docs]</a>    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish a message on a topic.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param topic: The topic that the message should be published on.</span>
+<span class="sd">        :type topic: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat for the node add_ctrl, add_node.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish_heartbeat</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_heartbeat_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_heartbeat_controller">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat for the controller add_ctrl and all its nodes.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;add_ctrl&#39;</span><span class="p">:</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="s">&#39;add_node&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish_heartbeat_controller</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_heartbeat_msg"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_heartbeat_msg">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat message.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#Deprecated. We must send the heart to /dhcp/heartbeat/0011/0001</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish_heartbeat_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_heartbeat_resolv_msg"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_heartbeat_resolv_msg">[docs]</a>    <span class="k">def</span> <span class="nf">publish_heartbeat_resolv_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish an heartbeat message.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish_heartbeat_resolv_msg</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.publish_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.publish_value">[docs]</a>    <span class="k">def</span> <span class="nf">publish_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Publish a value.</span>
+
+<span class="sd">        This causes a message to be sent to the broker and subsequently from</span>
+<span class="sd">        the broker to any clients subscribing to matching topics.</span>
+
+<span class="sd">        :param uuid: The uuid sent in the request.</span>
+<span class="sd">        :type uuid: str</span>
+<span class="sd">        :param payload: The actual message to send. If not given, or set to None a</span>
+<span class="sd">                        zero length message will be used. Passing an int or float will result</span>
+<span class="sd">                        in the payload being converted to a string representing that number. If</span>
+<span class="sd">                        you wish to send a true int/float, use struct.pack() to create the</span>
+<span class="sd">                        payload you require.</span>
+<span class="sd">        :type payload: message</span>
+<span class="sd">        :param qos: The quality of service level to use.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param retain: If set to true, the message will be set as the &quot;last known good&quot;/retained message for the topic.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#~ print &quot;publish_value : &quot;, hadd, value, genre</span>
+        <span class="k">if</span> <span class="n">genre</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="s">&quot;basic&quot;</span><span class="p">,</span> <span class="s">&quot;config&quot;</span><span class="p">]:</span>
+            <span class="c">#For user values with indexes send all instance</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_json_with_indexes</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Publish new value to /value/</span><span class="si">%s</span><span class="s"> : </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">publish_value</span><span class="p">(</span><span class="n">hadd</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="n">genre</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="n">qos</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="n">retain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.run"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the loop</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#print &quot;Start run&quot;</span>
+        <span class="n">rc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">rc</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">isSet</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">loop_forever</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception in run : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+        <span class="c">#~ self.client.loop_forever(retry_first_connection=False)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.stop"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop the mqtt thread</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Stop the mqtt client&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="MQTTClient.connect"><a class="viewcode-back" href="../../janitoo.html#janitoo.mqtt.MQTTClient.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Connect to the mqtt broker</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Connect the mqtt client&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">connect_with_options</span><span class="p">()</span></div></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing janitoo from docker &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="tools/index.html">Tools</a></li>
+                <li><a href="api/index.html">Reference</a></li>
+                <li><a href="extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="installing-janitoo-from-docker">
+<h1>Installing janitoo from docker<a class="headerlink" href="#installing-janitoo-from-docker" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-docker-io">
+<h2>Install docker.io<a class="headerlink" href="#install-docker-io" title="Permalink to this headline">¶</a></h2>
+<p>Create the directory
+sudo mkdir /opt/janitoo
+sudo chown sebastien:sebastien /opt/janitoo
+mkdir /opt/janitoo/log</p>
+</div>
+<div class="section" id="install-the-needed-tools">
+<h2>Install the needed tools<a class="headerlink" href="#install-the-needed-tools" title="Permalink to this headline">¶</a></h2>
+<p>You must install git and make to retrieve sources of janitoo and
+openzwave.</p>
+<p>On a debian like distribution :</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo apt-get install -y git make
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-sources-of-janitoo">
+<h2>Get sources of janitoo<a class="headerlink" href="#get-sources-of-janitoo" title="Permalink to this headline">¶</a></h2>
+<p>You are now ready to download sources of janitoo :</p>
+<div class="highlight-bash"><div class="highlight"><pre>git clone https://github.com/bibi21000/janitoo
+</pre></div>
+</div>
+<p>The previous command will create a copy of the official repository on your
+computer in a directory called janitoo.</p>
+</div>
+<div class="section" id="install-dependencies">
+<h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>You need some tools (a c++ compiler, headers dir python, ...) to build janitoo and openzwave library.</p>
+<p>On a debian like distribution :</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo make repo-deps
+</pre></div>
+</div>
+<p>For non-debian (fedora, ...), you can retrieve the packages needed in the Makefile.</p>
+</div>
+<div class="section" id="update-and-build-process">
+<h2>Update and build process<a class="headerlink" href="#update-and-build-process" title="Permalink to this headline">¶</a></h2>
+<p>Go to the previously created directory</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd </span>janitoo
+</pre></div>
+</div>
+<p>The following command will update your local repository to the last release
+of janitoo and openzwave.</p>
+<div class="highlight-bash"><div class="highlight"><pre>make update
+</pre></div>
+</div>
+<p>When update process is done, you can compile sources</p>
+<div class="highlight-bash"><div class="highlight"><pre>make build
+</pre></div>
+</div>
+<p>Or if you have already build janitoo in a previous installation, you can use the clean target to remove old builds.</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo make clean
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can now ready to install the eggs using the following command :</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo make install
+</pre></div>
+</div>
+<p>You can also remove janitoo using :</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo make uninstall
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-tests">
+<h2>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h2>
+<p>You can launch the regression tests using :</p>
+<div class="highlight-bash"><div class="highlight"><pre>make tests
+</pre></div>
+</div>
+<p>Keep in mind that the tests will &#8220;play&#8221; with your nodes : switching on and off, dimming, adding and removing scenes, ...</p>
+</div>
+<div class="section" id="about-the-repositroy">
+<h2>About the repositroy<a class="headerlink" href="#about-the-repositroy" title="Permalink to this headline">¶</a></h2>
+<p>This repository is a development tool, so it might be &#8220;unstable&#8221; ... yeah, sometimes it won&#8217;t build anymore :)</p>
+<p>If you want to retrieve the last &#8220;good&#8221; commit, look at <a class="reference external" href="https://github.com/bibi21000/janitoo/commits/master">https://github.com/bibi21000/janitoo/commits/master</a>.
+The commits names &#8220;Auto-commit for docs&#8221; are done after the full process : build + test + docs, so they might be &#8220;working&#8221; (almost for me).</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

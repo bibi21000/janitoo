@@ -1,0 +1,6 @@
+- le resolv pour les users, les basics et config ne fonctionne pas suite au passage en multi-index.
+- mettre a jour pour les values configs multi-index : methode set.
+- mettre a jour pour les values users multi-index  : methode set.
+- mettre a jour pour les values basics multi-index  : methode set.
+- paramêtre -c (--conffile) chemin absolu car le chemin relatif ne marche que pour un thread :(
+- refactorer les bus pour le raspy et merger avec picamera ?

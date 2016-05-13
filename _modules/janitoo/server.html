@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>janitoo.server &mdash; janitoo 0.0.8 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-3.3.4/united/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="janitoo 0.0.8 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          janitoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.0.8</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../tools/index.html">Tools</a></li>
+                <li><a href="../../api/index.html">Reference</a></li>
+                <li><a href="../../extensions/index.html">Janitoo extensions</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../INSTALL_REPO.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#get-sources-of-janitoo">Get sources of janitoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-modules">Install modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#configure-your-server">Configure your server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../INSTALL_REPO.html#start-your-server-at-boot">Start your server at boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../supported_hardware.html">Supported hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../state_machines.html">State machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../janitoo.html">API Documentation : Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.bus">janitoo.bus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.classes">janitoo.classes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.component">janitoo.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.dhcp">janitoo.dhcp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <h1>Source code for janitoo.server</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;The base server for Janitoo</span>
+
+<span class="sd"> - we must add a method to reload a thread (a key from entry point) : install new thread, update a thread</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    This file is part of Janitoo.</span>
+
+<span class="s">    Janitoo is free software: you can redistribute it and/or modify</span>
+<span class="s">    it under the terms of the GNU General Public License as published by</span>
+<span class="s">    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="s">    (at your option) any later version.</span>
+
+<span class="s">    Janitoo is distributed in the hope that it will be useful,</span>
+<span class="s">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="s">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="s">    GNU General Public License for more details.</span>
+
+<span class="s">    You should have received a copy of the GNU General Public License</span>
+<span class="s">    along with Janitoo. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Sébastien GALLET aka bibi21000&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s">&#39;bibi21000@gmail.com&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000&quot;</span>
+
+<span class="c"># Set default logging handler to avoid &quot;No handler found&quot; warnings.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">uuid</span> <span class="kn">as</span> <span class="nn">muuid</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span><span class="p">,</span> <span class="n">Requirement</span><span class="p">,</span> <span class="n">iter_entry_points</span>
+<span class="kn">from</span> <span class="nn">logging.config</span> <span class="kn">import</span> <span class="n">fileConfig</span> <span class="k">as</span> <span class="n">logging_fileConfig</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">HADD</span><span class="p">,</span> <span class="n">HADD_SEP</span><span class="p">,</span> <span class="n">json_dumps</span><span class="p">,</span> <span class="n">json_loads</span>
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">JanitooException</span>
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">TOPIC_NODES</span><span class="p">,</span> <span class="n">TOPIC_NODES_REPLY</span><span class="p">,</span> <span class="n">TOPIC_NODES_REQUEST</span>
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">TOPIC_BROADCAST_REPLY</span><span class="p">,</span> <span class="n">TOPIC_BROADCAST_REQUEST</span>
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">TOPIC_VALUES_USER</span><span class="p">,</span> <span class="n">TOPIC_VALUES_CONFIG</span><span class="p">,</span> <span class="n">TOPIC_VALUES_BASIC</span><span class="p">,</span> <span class="n">TOPIC_VALUES_SYSTEM</span><span class="p">,</span> <span class="n">TOPIC_HEARTBEAT</span>
+<span class="kn">from</span> <span class="nn">janitoo.options</span> <span class="kn">import</span> <span class="n">JNTOptions</span>
+<span class="kn">from</span> <span class="nn">janitoo.node</span> <span class="kn">import</span> <span class="n">JNTNode</span>
+<span class="kn">from</span> <span class="nn">janitoo.mqtt</span> <span class="kn">import</span> <span class="n">MQTTClient</span>
+
+<div class="viewcode-block" id="JNTServer"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer">[docs]</a><span class="k">class</span> <span class="nc">JNTServer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The Janitoo base Server</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Init the server. Must be called at the begin of the children class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reloadevent</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">JNTOptions</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigterm_handler</span><span class="p">)</span>
+        <span class="c">#Need more tests</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGHUP</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sighup_handler</span><span class="p">)</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGUSR1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigusr1_handler</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s">&#39;conf_file&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;conf_file&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">logging_fileConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;conf_file&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span> <span class="o">=</span> <span class="mf">0.25</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<div class="viewcode-block" id="JNTServer.start"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start the server. Must be called at the end of the children class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Start the server&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JNTServer.pre_loop"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.pre_loop">[docs]</a>    <span class="k">def</span> <span class="nf">pre_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Before enterig the loop</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">loop_sleep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s">&#39;system&#39;</span><span class="p">,</span><span class="s">&#39;loop_sleep&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">loop_sleep</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">loop_sleep</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t set loop_sleep from configuration file. Using default valuse </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
+        <span class="n">gc_delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s">&#39;system&#39;</span><span class="p">,</span><span class="s">&#39;gc_delay&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">gc_delay</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">gc_delay</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t set gc_delay from configuration file. Using default valuse </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gc_next_run</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span><span class="p">)</span>
+        <span class="n">slow_start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s">&#39;system&#39;</span><span class="p">,</span><span class="s">&#39;slow_start&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">slow_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">slow_start</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t set slow_start from configuration file. Using default valuse </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s">&#39;janitoo.threads&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="n">th</span><span class="o">=</span><span class="bp">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Load entry-point : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
+                <span class="n">mkth</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">th</span> <span class="o">=</span> <span class="n">mkth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception when loading thread from entry_point : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception when loading thread from entry_point : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">th</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">:</span>
+            <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t find a thread to launch in the config file&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">JanitooException</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;Can&#39;t find a thread to launch in the config file&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Loaded thread(s) from entry_point : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTServer.post_loop"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.post_loop">[docs]</a>    <span class="k">def</span> <span class="nf">post_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;After the loop</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">:</span>
+            <span class="n">th</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">th</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                <span class="n">th</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span> <span class="o">=</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="JNTServer.run"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the loop</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Entering the server loop&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">isSet</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reloadevent</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pre_loop</span><span class="p">()</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reloadevent</span><span class="o">.</span><span class="n">isSet</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">isSet</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">gc_next_run</span> <span class="o">&lt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">():</span>
+                    <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">gc_next_run</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gc_delay</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">post_loop</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Stop the server&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exiting the server loop&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post_loop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JNTServer.stop"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop the server. Must be called at begin if overloaded in the children class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTServer.reload_threads"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.reload_threads">[docs]</a>    <span class="k">def</span> <span class="nf">reload_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reload the threads</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Reload threads&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span><span class="p">:</span>
+            <span class="n">th</span><span class="o">.</span><span class="n">trigger_reload</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JNTServer.find_thread"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.find_thread">[docs]</a>    <span class="k">def</span> <span class="nf">find_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find a thread using its oid (section)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ths</span> <span class="o">=</span> <span class="p">[</span> <span class="n">th</span> <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threads</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">th</span><span class="p">,</span><span class="s">&#39;section&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">th</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="n">section</span> <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">ths</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Found multiple threads with same section </span><span class="si">%s</span><span class="s"> : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">ths</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Found thread with section </span><span class="si">%s</span><span class="s"> : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span><span class="n">section</span><span class="p">,</span> <span class="n">ths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">ths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JNTServer.reload"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.reload">[docs]</a>    <span class="k">def</span> <span class="nf">reload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reload the server</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Reload the server&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reloadevent</span><span class="o">.</span><span class="n">set</span><span class="p">(</span> <span class="p">)</span>
+        <span class="c">#~ self.stop()</span>
+        <span class="c">#~ while len(self._threads)&gt;0:</span>
+            <span class="c">#~ self._stopevent.wait(self.loop_sleep*10)</span>
+        <span class="c">#~ self._stopevent.wait(1.5)</span>
+        <span class="c">#~ self.start()</span>
+</div>
+<div class="viewcode-block" id="JNTServer.flush"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.flush">[docs]</a>    <span class="k">def</span> <span class="nf">flush</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Flush the server&#39;s data to disk</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="JNTServer.resource_filename"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.resource_filename">[docs]</a>    <span class="k">def</span> <span class="nf">resource_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&#39;public&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Needed to publish static files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">resource_filename</span><span class="p">(</span><span class="n">Requirement</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_package_name</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">path</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTServer.get_package_name"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.get_package_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the name of the package. Needed to publish static files</span>
+
+<span class="sd">        **MUST** be copy paste in every extension that publish statics files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">__package__</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_egg_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;#DEPRECATED Return the egg path of the module. Must be redefined in server class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">JanitooNotImplemented</span><span class="p">(</span><span class="s">&#39;_get_egg_path not implemnted&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JNTServer.sigterm_handler"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.sigterm_handler">[docs]</a>    <span class="k">def</span> <span class="nf">sigterm_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Catch SIGTERM signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;TERM signal received : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">signal</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - TERM signal received : </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="c">#~ sys.exit(0)</span>
+</div>
+<div class="viewcode-block" id="JNTServer.sighup_handler"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.sighup_handler">[docs]</a>    <span class="k">def</span> <span class="nf">sighup_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Catch SIGHUP signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;HUP signal received : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">signal</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - HUP signal received : </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
+        <span class="c">#~ sys.exit(0)</span>
+</div>
+<div class="viewcode-block" id="JNTServer.sigusr1_handler"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTServer.sigusr1_handler">[docs]</a>    <span class="k">def</span> <span class="nf">sigusr1_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Catch SIGUSR1 signal</span>
+<span class="sd">        The server must flush its data to disk</span>
+<span class="sd">        The mosquitto broker use it to persist its database to disk.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;USR1 signal received : </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">signal</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - USR1 signal received : </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">signal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
+        <span class="c">#~ sys.exit(0)</span>
+
+<span class="c">##############################################################</span>
+<span class="c">#Check that we are in sync with the official command classes</span>
+<span class="c">#Must be implemented for non-regression</span></div></div>
+<span class="kn">from</span> <span class="nn">janitoo.classes</span> <span class="kn">import</span> <span class="n">COMMAND_DESC</span>
+
+<span class="n">COMMAND_DHCPD</span> <span class="o">=</span> <span class="mh">0x1000</span>
+<span class="n">COMMAND_CONTROLLER</span> <span class="o">=</span> <span class="mh">0x1050</span>
+<span class="n">COMMAND_DISCOVERY</span> <span class="o">=</span> <span class="mh">0x5000</span>
+
+<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_DISCOVERY</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_DISCOVERY&#39;</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_CONTROLLER</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_CONTROLLER&#39;</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_DHCPD</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_DHCPD&#39;</span><span class="p">)</span>
+<span class="c">##############################################################</span>
+
+
+<div class="viewcode-block" id="JNTControllerManager"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager">[docs]</a><span class="k">class</span> <span class="nc">JNTControllerManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A node dedicated for a special thread/server like the the DHCP server or the listener thread in the webapp</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;request_info_nodes&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_nodes</span><span class="p">,</span> <span class="s">&#39;request_info_users&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_users</span><span class="p">,</span> <span class="s">&#39;request_info_configs&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_configs</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_systems&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_systems</span><span class="p">,</span> <span class="s">&#39;request_info_basics&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_basics</span><span class="p">,</span> <span class="s">&#39;request_info_commands&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_commands</span> <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="n">muuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polls</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="JNTControllerManager.stop_controller_timer"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.stop_controller_timer">[docs]</a>    <span class="k">def</span> <span class="nf">stop_controller_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop the controller timer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="o">=</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.start_controller_timer"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.start_controller_timer">[docs]</a>    <span class="k">def</span> <span class="nf">start_controller_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start the controller tier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_controller_timer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">heartbeat</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.stop_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.stop_controller">[docs]</a>    <span class="k">def</span> <span class="nf">stop_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stop the controller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Stop the controller&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_controller_timer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_NODES_REQUEST</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Catched exception&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="o">=</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.start_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.start_controller">[docs]</a>    <span class="k">def</span> <span class="nf">start_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start the controller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Start the controller&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="n">cmd_classes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;cmd_classes&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">COMMAND_CONTROLLER</span> <span class="ow">in</span> <span class="n">cmd_classes</span><span class="p">:</span>
+            <span class="n">cmd_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">COMMAND_CONTROLLER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span> <span class="o">=</span> <span class="n">JNTNode</span><span class="p">(</span> <span class="n">uuid</span><span class="o">=</span><span class="n">section</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">cmd_classes</span><span class="o">=</span><span class="n">cmd_classes</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="s">&#39;controller&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">add_internal_system_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">add_internal_config_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd_get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">load_system_from_local</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_more_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">u&quot;[</span><span class="si">%s</span><span class="s">] - Subscribe to topic </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">TOPIC_NODES_REQUEST</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_NODES_REQUEST</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_controller_request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.add_more_values"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.add_more_values">[docs]</a>    <span class="k">def</span> <span class="nf">add_more_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Start the controller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.heartbeat_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.heartbeat_controller">[docs]</a>    <span class="k">def</span> <span class="nf">heartbeat_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send a add_ctrl:-1 heartbeat message. It will ping all devices managed by this controller.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">u&quot;[</span><span class="si">%s</span><span class="s">] - Send heartbeat for controller&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c">#The manager is started</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">heartbeat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_controller_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c">#~ print self.nodes[node].hadd</span>
+            <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">split_hadd</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">publish_heartbeat</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">add_node</span><span class="p">),</span> <span class="s">&#39;ONLINE&#39;</span><span class="p">)</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">is_polled</span> <span class="p">]</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">publish_poll</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.remove_poll"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.remove_poll">[docs]</a>    <span class="k">def</span> <span class="nf">remove_poll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">polls</span><span class="p">:</span>
+            <span class="c">#~ value.is_polled= False</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">polls</span><span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.add_poll"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.add_poll">[docs]</a>    <span class="k">def</span> <span class="nf">add_poll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">poll_delay</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_poll</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">polls</span> <span class="ow">or</span> <span class="n">timeout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_timeout</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polls</span><span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;next_run&#39;</span><span class="p">:</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">timeout</span><span class="p">),</span> <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="n">value</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polls</span><span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">][</span><span class="s">&#39;next_run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">poll_delay</span><span class="p">)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">is_polled</span><span class="o">=</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.publish_poll"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.publish_poll">[docs]</a>    <span class="k">def</span> <span class="nf">publish_poll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mqttc</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">stopevent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span>
+        <span class="n">genres</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s">&#39;basic&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s">&#39;config&#39;</span><span class="p">,</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="ow">in</span> <span class="n">genres</span><span class="p">:</span>
+            <span class="n">genre</span> <span class="o">=</span> <span class="n">genres</span><span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">genre</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">genre</span> <span class="o">=</span> <span class="s">&quot;user&quot;</span>
+        <span class="n">mqttc</span><span class="o">.</span><span class="n">publish_value</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">hadd</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">genre</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_poll</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.get_controller_hadd"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.get_controller_hadd">[docs]</a>    <span class="k">def</span> <span class="nf">get_controller_hadd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the controller hadd&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">hadd</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.get_controller"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.get_controller">[docs]</a>    <span class="k">def</span> <span class="nf">get_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the controller&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.on_controller_request"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.on_controller_request">[docs]</a>    <span class="k">def</span> <span class="nf">on_controller_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On request</span>
+
+<span class="sd">        :param client: the Client instance that is calling the callback.</span>
+<span class="sd">        :type client: paho.mqtt.client.Client</span>
+<span class="sd">        :param userdata: user data of any type and can be set when creating a new client instance or with user_data_set(userdata).</span>
+<span class="sd">        :type userdata: all</span>
+<span class="sd">        :param message: The message variable is a MQTTMessage that describes all of the message parameters.</span>
+<span class="sd">        :type message: paho.mqtt.client.MQTTMessage</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;on_request receive message </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json_loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+            <span class="c">#~ print data[&#39;uuid&#39;]</span>
+            <span class="c">#We should check what value is requested</span>
+            <span class="c">#{&#39;hadd&#39;, &#39;cmd_class&#39;, &#39;type&#39;=&#39;list&#39;, &#39;genre&#39;=&#39;0x04&#39;, &#39;data&#39;=&#39;node|value|config&#39;, &#39;uuid&#39;=&#39;request_info&#39;}</span>
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">COMMAND_DISCOVERY</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x04</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span><span class="p">:</span>
+                        <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
+                        <span class="n">resp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;broadcast&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">topic</span> <span class="o">=</span> <span class="s">&quot;/broadcast/reply/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;reply_hadd&#39;</span><span class="p">]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]](</span><span class="n">topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">topic</span> <span class="o">=</span> <span class="s">&quot;/nodes/</span><span class="si">%s</span><span class="s">/reply&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;reply_hadd&#39;</span><span class="p">]</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]](</span><span class="n">topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+                            <span class="k">return</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">u&quot;[</span><span class="si">%s</span><span class="s">] - Exception when running on_request method&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+                            <span class="k">return</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Unknown request value </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception in on_request&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_nodes"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_users"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_users">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">kvalue</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="o">==</span> <span class="mh">0x02</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_configs"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_configs">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">kvalue</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="o">==</span> <span class="mh">0x03</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_basics"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_basics">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_basics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">kvalue</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="o">==</span> <span class="mh">0x01</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_systems"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_systems">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">kvalue</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="o">==</span> <span class="mh">0x04</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.request_info_commands"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.request_info_commands">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kvalue</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">kvalue</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">genre</span> <span class="o">==</span> <span class="mh">0x05</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">hadd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
+                    <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">hadd</span><span class="p">][</span><span class="n">value</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTControllerManager.publish_request"><a class="viewcode-back" href="../../janitoo.html#janitoo.server.JNTControllerManager.publish_request">[docs]</a>    <span class="k">def</span> <span class="nf">publish_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">reply_topic</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+</pre></div></div></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Sébastien GALLET aka bibi2100 &lt;bibi21000@gmail.com&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
