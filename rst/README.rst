@@ -18,6 +18,10 @@
     :target: https://hub.docker.com/r/bibi21000/janitoo_base/
     :alt: Docker size
 
+.. image:: https://badges.gitter.im/bibi21000/janitoo.svg
+    :alt: Join the chat at https://gitter.im/bibi21000/janitoo
+    :target: https://gitter.im/bibi21000/janitoo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 ==================
 Welcome to Janitoo
 ==================

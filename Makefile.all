@@ -185,7 +185,7 @@ github.io-all:
 	for module in ${SUBMODULES};do make -C $$module github.io; done
 
 doc-full-all:
-	for module in ${SUBMODULES};do make -C $$module doc-full; done
+	for module in ${SUBMODULES};do make -C $$module tests; make -C $$module pylint; make -C $$module doc-commit; done
 	@echo
 	@echo "Documentation to github.io built and published."
 
