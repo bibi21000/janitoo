@@ -44,7 +44,7 @@ COMMAND_CONTROLLER = 0x1050
 assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
 ##############################################################
 
-def show_graph(self,fname='state.png', prog='dot'):
+def show_graph(self,fname='state.png', prog='dot', title=None):
     self.graph.draw(fname, prog=prog)
 
 Machine = MachineFactory.get_predefined(graph=True)
