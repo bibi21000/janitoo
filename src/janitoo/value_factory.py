@@ -24,12 +24,9 @@ __author__ = 'Sébastien GALLET aka bibi21000'
 __email__ = 'bibi21000@gmail.com'
 __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000"
 
-# Set default logging handler to avoid "No handler found" warnings.
-import os
 import logging
 logger = logging.getLogger(__name__)
 
-from janitoo.classes import GENRE_DESC, VALUE_DESC
 from janitoo.utils import json_dumps
 from janitoo.value import JNTValue
 
@@ -332,11 +329,11 @@ class JNTValueFactoryEntry(JNTValue):
         #~ print "---------------------------------------------------------- self.instances ", self.instances
         if self.get_max_index() == -1 or 'config' not in self.instances[0]:
             return res
-        if self.get_max_index() == -1 or self.instances[0]['config'] == None:
+        if self.get_max_index() == -1 or self.instances[0]['config'] is None:
             return {}
         ret = {}
         try:
-            configs = self.get_index_configs()
+            #~ configs = self.get_index_configs()
             #~ print "self.get_index_configs() %s"%configs
             i = 0
             #~ print i, res['label']

@@ -86,7 +86,7 @@ class JNTBus(object):
                 try:
                     self.value_factory[entrypoint.name] = entrypoint.load()
                 except:
-                    logger.exception('[%s] - Exception when loading entry_point %s', self.__class__.__name__,  entry.name)
+                    logger.exception('[%s] - Exception when loading entry_point %s', self.__class__.__name__,  entrypoint.name)
         if not hasattr(self,'components'):
             self.components = {}
         if not hasattr(self,'values'):
@@ -105,7 +105,7 @@ class JNTBus(object):
         """The name"""
         self.nodeman = None
         self._masters = kwargs.get('masters', [])
-        if type(self._masters) != type([]):
+        if isinstance(self._masters, []):
             self._masters = [ self._masters ]
         self.is_started = False
 
