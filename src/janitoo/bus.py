@@ -122,7 +122,7 @@ class JNTBus(object):
         This is the preferred way to retrieve a value of the bus
         '''
         #~ if self._export_prefix is not None:
-            #~ value_uuid = "%s%s"%(self._export_prefix, value_uuid)
+        #~      value_uuid = "%s%s"%(self._export_prefix, value_uuid)
         #~ logger.debug("[%s] - Look for value %s on bus %s", self.__class__.__name__, value_uuid, self)
         if value_uuid in self.values:
             return self.values[value_uuid]
@@ -150,8 +150,8 @@ class JNTBus(object):
         for target in self._masters:
             if hasattr(target, objname):
                 delattr(target, objname)
-        else:
-            logger.warning("[%s] - Missing attribute found %s when cleaning. Continue anyway.", self.__class__.__name__, objname)
+            else:
+                logger.warning("[%s] - Missing attribute found %s when cleaning. Continue anyway.", self.__class__.__name__, objname)
 
     def update_attrs(self, objname, obj):
         '''Update object to all targets'''
@@ -233,8 +233,15 @@ class JNTBus(object):
         """
         self.nodeman = nodeman
         name = kwargs.pop('name', "%s controller"%self.name)
-        self.node = JNTNode(uuid=self.uuid, cmd_classes=self.cmd_classes, hadd=hadd, name="%s controller"%self.name, product_name=self.product_name, product_type=self.product_type, oid=self.oid, **kwargs)
-        self.check_heartbeat = self.node.check_heartbeat
+        self.node = JNTNode( uuid=self.uuid,
+            cmd_classes=self.cmd_classes,
+            hadd=hadd,
+            name=name,
+            product_name=self.product_name,
+            product_type=self.product_type,
+            oid=self.oid,
+            **kwargs)
+        #~ self.check_heartbeat = self.node.check_heartbeat
         return self.node
 
     def check_heartbeat(self):
@@ -243,9 +250,11 @@ class JNTBus(object):
         """
         return False
 
-    def extend_from_entry_points(self, oid, eps=[]):
+    def extend_from_entry_points(self, oid, eps=None):
         """"Extend the bus with methods found in entrypoints
         """
+        if eps is None:
+            return
         for entrypoint in iter_entry_points(group = '%s.extensions'%oid):
             if entrypoint.name in eps:
                 logger.info('[%s] - Extend bus %s with %s', self.__class__.__name__, oid, entrypoint.module_name )
