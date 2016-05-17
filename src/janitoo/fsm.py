@@ -26,7 +26,7 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 import logging
 logger = logging.getLogger(__name__)
 
-from transitions.extensions import MachineFactory
+from transitions.extensions import MachineFactory, State
 
 ##############################################################
 #Check that we are in sync with the official command classes
