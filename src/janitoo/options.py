@@ -55,14 +55,17 @@ from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
 from janitoo.mqtt import MQTTClient
 
 class JNTOptions(object):
-    def __init__(self, options={}):
+    def __init__(self, options=None):
         """The options
 
         :param options: The options used to start the worker.
         :type clientid: str
         """
         #retrieve parameters in file
-        self.data = options
+        if options is not None:
+            self.data = options
+        else:
+            self.data = {}
         self._cache = {}
 
     def load(self):

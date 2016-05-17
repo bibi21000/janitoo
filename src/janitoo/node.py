@@ -38,7 +38,6 @@ import random
 
 from janitoo.fsm import State, Machine
 import janitoo.value
-from janitoo.value import JNTValue
 from janitoo.value_factory import JNTValueFactoryEntry
 from janitoo.utils import HADD, HADD_SEP, json_dumps, json_loads
 from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
@@ -69,8 +68,14 @@ class JNTNodeMan(object):
         State(name='SYSTEM', on_enter=['start_controller_reply', 'start_controller_reply_system']),
         State(name='CONFIG', on_enter=['start_controller_reply_config']),
         State(name='INIT', on_enter=['start_nodes_init'], on_exit=['stop_boot_timer', 'stop_controller_reply']),
-        State(name='ONLINE', on_enter=['start_broadcast_request', 'start_nodes_request', 'start_hourly_timer'], on_exit=['stop_broadcast_request', 'stop_nodes_request']),
-        State(name='OFFLINE', on_enter=['stop_boot_timer', 'stop_hourly_timer', 'stop_heartbeat_sender', 'stop_controller_uuid', 'stop_controller_reply','stop_broadcast_request', 'stop_nodes_request']),
+        State(name='ONLINE',
+                on_enter=['start_broadcast_request', 'start_nodes_request', 'start_hourly_timer'],
+                on_exit=['stop_broadcast_request', 'stop_nodes_request']),
+        State(name='OFFLINE',
+                on_enter=['stop_boot_timer', 'stop_hourly_timer',
+                    'stop_heartbeat_sender', 'stop_controller_uuid',
+                    'stop_controller_reply','stop_broadcast_request',
+                    'stop_nodes_request']),
     ]
 
     states_str = {
@@ -117,8 +122,12 @@ class JNTNodeMan(object):
         self.slow_start = 0.05
         self._controller = None
         self._controller_hadd = None
-        self._requests = {'request_info_nodes' : self.request_info_nodes, 'request_info_users' : self.request_info_users, 'request_info_configs' : self.request_info_configs,
-                          'request_info_systems' : self.request_info_systems, 'request_info_basics' : self.request_info_basics, 'request_info_commands' : self.request_info_commands }
+        self._requests = {'request_info_nodes' : self.request_info_nodes,
+                          'request_info_users' : self.request_info_users,
+                          'request_info_configs' : self.request_info_configs,
+                          'request_info_systems' : self.request_info_systems,
+                          'request_info_basics' : self.request_info_basics,
+                          'request_info_commands' : self.request_info_commands }
         self.fsm_state = None
         self.state = "OFFLINE"
         self.trigger_reload = None
@@ -138,11 +147,6 @@ class JNTNodeMan(object):
             self._daily_jobs = None
         except:
             pass
-
-    def trigger_reload(self):
-        """
-        """
-        pass
 
     def start(self, trigger_reload=None, loop_sleep=0.1, slow_start=0.05):
         """
@@ -196,7 +200,7 @@ class JNTNodeMan(object):
     def is_stopped(self):
         """Return True if the network is stopped
         """
-        return self.fsm_state == None or self.state == "OFFLINE"
+        return self.fsm_state is None or self.state == "OFFLINE"
 
     @property
     def is_started(self):
@@ -425,7 +429,7 @@ class JNTNodeMan(object):
             self._stop_boot_timer()
             if self.is_stopped:
                 return
-            if self.request_controller_uuid_response == False:
+            if not self.request_controller_uuid_response:
                 #retrieve hadd from local configuration
                 controller = self.create_controller_node()
                 self.add_controller_node(controller.uuid, controller)
@@ -513,7 +517,7 @@ class JNTNodeMan(object):
             self._stop_boot_timer()
             if self.is_stopped:
                 return
-            if self.request_controller_system_response == False:
+            if not self.request_controller_system_response:
                 self._controller.load_system_from_local()
             self.config_timeout = self._controller.config_timeout
             self.request_controller_controller_system_response = False
@@ -579,7 +583,7 @@ class JNTNodeMan(object):
             if self.is_stopped:
                 return
             self.before_controller_reply_config()
-            if self.request_controller_config_response == False:
+            if not self.request_controller_config_response:
                 self._controller.load_config_from_local()
             self.request_controller_config_response = False
             self.after_controller_reply_config()
@@ -619,11 +623,11 @@ class JNTNodeMan(object):
             self._stop_boot_timer()
             if self.is_stopped:
                 return
-            if self.request_nodes_hadds_response == False:
+            if not self.request_nodes_hadds_response:
                 self.nodes_hadds_response = self.get_nodes_hadds_from_local_config()
                 logger.debug("finish_nodes_hadds : nodes_hadds_response = %s", self.nodes_hadds_response)
                 for node in self.nodes_hadds_response:
-                    onode = self.create_node(node, hadd=self.nodes_hadds_response[node])
+                    self.create_node(node, hadd=self.nodes_hadds_response[node])
                     self.after_create_node(node)
                     #~ print onode.__dict__
             self.request_boot_timer = threading.Timer(self.config_timeout+self.slow_start, self.finish_nodes_system)
@@ -643,7 +647,7 @@ class JNTNodeMan(object):
             self._stop_boot_timer()
             if self.is_stopped:
                 return
-            if self.request_nodes_system_response == False:
+            if not self.request_nodes_system_response:
                 for node in self.nodes:
                     if node != self._controller.uuid and not self.is_stopped:
                         onode = self.nodes[node]
@@ -668,7 +672,7 @@ class JNTNodeMan(object):
             self._stop_boot_timer()
             if self.is_stopped:
                 return
-            if self.request_nodes_config_response == False:
+            if not self.request_nodes_config_response:
                 for node in self.nodes:
                     if node != self._controller.uuid and not self.is_stopped:
                         onode = self.nodes[node]
@@ -760,13 +764,13 @@ class JNTNodeMan(object):
                             pass
                         except ValueError:
                             pass
-                        if write_only == True:
+                        if write_only:
                             node.values[data['uuid']].data = data['data']
                             if data['uuid'] == "heartbeat":
                                 self.add_heartbeat(node)
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
-                        elif read_only == True:
+                        elif read_only:
                             data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
@@ -792,11 +796,11 @@ class JNTNodeMan(object):
                             pass
                         except ValueError:
                             pass
-                        if write_only == True:
+                        if write_only:
                             node.values[data['uuid']].data = data['data']
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
-                        elif read_only == True:
+                        elif read_only:
                             data['data'] = node.values[data['uuid']].data
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
@@ -831,12 +835,12 @@ class JNTNodeMan(object):
                             pass
                         except ValueError:
                             pass
-                        if write_only == True:
+                        if write_only:
                             #~ print "write_only"
                             node.values[data['uuid']].data = data['data']
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
-                        elif read_only == True:
+                        elif read_only:
                             #~ print "read_only"
                             data['data'] = node.values[data['uuid']].data
                             data['is_writeonly'] = False
@@ -862,7 +866,7 @@ class JNTNodeMan(object):
             ret = self.nodes[knode].check_heartbeat()
             if ret is None :
                 state = self.state
-            elif ret == True:
+            elif ret:
                 state = 'ONLINE'
             else:
                 state = 'OFFLINE'
@@ -1143,7 +1147,7 @@ class JNTNodeMan(object):
         if node.uuid not in self.nodes or uuid in self.nodes[node.uuid].values:
             return False
         node.add_value(uuid, value)
-        if value.is_polled == True and value.is_writeonly == False:
+        if value.is_polled and not value.is_writeonly:
             self.add_poll(value)
         if value.cmd_class not in self.nodes[node.uuid].cmd_classes:
             self.nodes[node.uuid].cmd_classes.append(value.cmd_class)
@@ -1268,7 +1272,7 @@ class JNTNodeMan(object):
         except:
             logger.warning("[%s] - C'ant get hourly_timer from configuration file. Disable it", self.__class__.__name__)
             hourly = False
-        if hourly == True:
+        if hourly:
             logger.debug("[%s] - start_hourly_timer", self.__class__.__name__)
             self.hourly_timer = threading.Timer(60*60, self.do_hourly_timer)
             self.hourly_timer.start()
@@ -1284,7 +1288,7 @@ class JNTNodeMan(object):
     def add_hourly_job(self, callback):
         """Add an hourly job.
         """
-        logger.debug("[%s] - Add_hourly_job", self.__class__.__name__, callback)
+        logger.debug("[%s] - Add_hourly_job %s", self.__class__.__name__, callback)
         self._hourly_jobs.append(callback)
 
     def remove_hourly_job(self, callback):
@@ -1419,15 +1423,15 @@ class JNTBusNodeMan(JNTNodeMan):
         logger.debug("[%s] - Founds hadds in local config %s", self.__class__.__name__, res)
         return res
 
-    def start_bus_components(self, **kwargs):
-        """Start the components
-        """
-        logger.debug("[%s] - Start the components", self.__class__.__name__)
-        for key in self.bus.components.keys():
-            try:
-                compo.start(self.mqtt_nodes)
-            except:
-                logger.exception("[%s] - Can't start component %s on address %s", self.__class__.__name__, components[key], compo._addr)
+    #~ def start_bus_components(self, **kwargs):
+        #~ """Start the components
+        #~ """
+        #~ logger.debug("[%s] - Start the components", self.__class__.__name__)
+        #~ for key in self.bus.components.keys():
+            #~ try:
+                #~ compo.start(self.mqtt_nodes)
+            #~ except:
+                #~ logger.exception("[%s] - Can't start component %s on address %s", self.__class__.__name__, self.bus.components[key], compo._addr)
 
     def build_bus_components(self):
         """Build the bus components from factory
@@ -1441,7 +1445,7 @@ class JNTBusNodeMan(JNTNodeMan):
                     logger.error("[%s] - Can't find component %s in factory", self.__class__.__name__, components[key])
                 add_comp = '%s__%s' % (self.bus.uuid, key)
                 #add_comp = key
-                compo = self.bus.add_component(components[key], add_comp, options=self.options)
+                self.bus.add_component(components[key], add_comp, options=self.options)
             except:
                 logger.exception("[%s] - Can't add component %s", self.__class__.__name__, key)
 

@@ -47,17 +47,15 @@ logger = logging.getLogger(__name__)
 
 import threading
 import uuid as muuid
-import ConfigParser
-from datetime import datetime, timedelta
-from pkg_resources import resource_filename, Requirement, iter_entry_points
+from datetime import datetime
+from pkg_resources import resource_filename, Requirement
 
 from utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
 from node import JNTNodeMan, JNTBusNodeMan
-from mqtt import MQTTClient
-from janitoo.options import JNTOptions, string_to_bool
+from janitoo.options import JNTOptions
 
 class BaseThread(threading.Thread):
-    def __init__(self, options={}):
+    def __init__(self, options=None):
         """Initialise the worker
 
         :param options: The options used to start the worker.
@@ -70,10 +68,10 @@ class BaseThread(threading.Thread):
         self.config_timeout_delay = 3
         self.loop_sleep = 0.1
         self.slow_start = 0.2
-        if hasattr(self,'options') == False:
+        if not hasattr(self, 'options'):
             self.options = JNTOptions(options)
         self.uuid = None
-        if hasattr(self,'section') == False:
+        if not hasattr(self, 'section'):
             self.section = None
         if self.section is None:
             self.init_section()
@@ -108,7 +106,7 @@ class BaseThread(threading.Thread):
     def trigger_reload(self, timeout=None):
         """Trigger the config_timeout_callback to reload config.
         """
-        if timeout != None:
+        if timeout is not None:
             try:
                 self.config_timeout_delay = int(timeout)
             except ValueError:
@@ -167,15 +165,15 @@ class BaseThread(threading.Thread):
         return __package__
 
 class JNTThread(BaseThread):
-    def __init__(self, options={}):
+    def __init__(self, options=None):
         """Initialise the worker
 
         :param options: The options used to start the worker.
         :type clientid: str
         """
-        BaseThread.__init__(self)
+        BaseThread.__init__(self, options=options)
         self.uuid = self.options.get_option(self.section, 'uuid')
-        if self.uuid == None:
+        if self.uuid is None:
             self.uuid = muuid.uuid1()
             self.options.set_option(self.section, 'uuid', self.uuid)
         self.nodeman = self.create_nodeman()
@@ -230,7 +228,7 @@ class JNTThread(BaseThread):
         self.nodeman = None
 
 class JNTBusThread(JNTThread):
-    def __init__(self, options={}):
+    def __init__(self, options=None):
         """Initialise the worker
 
         :param options: The options used to start the worker.
