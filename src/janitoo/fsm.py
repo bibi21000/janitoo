@@ -26,17 +26,8 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 import logging
 logger = logging.getLogger(__name__)
 
-from transitions.extensions import MachineFactory, State
-
-##############################################################
-#Check that we are in sync with the official command classes
-#Must be implemented for non-regression
-from janitoo.classes import COMMAND_DESC
-
-COMMAND_CONTROLLER = 0x1050
-
-assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
-##############################################################
+from transitions import State
+from transitions.extensions import MachineFactory
 
 def show_graph(self,fname='state.png', prog='dot', title=None):
     self.graph.draw(fname, prog=prog)
