@@ -105,7 +105,7 @@ class JNTBus(object):
         """The name"""
         self.nodeman = None
         self._masters = kwargs.get('masters', [])
-        if isinstance(self._masters, []):
+        if isinstance(self._masters, type([])):
             self._masters = [ self._masters ]
         self.is_started = False
 
