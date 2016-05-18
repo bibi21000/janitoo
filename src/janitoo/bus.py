@@ -105,7 +105,7 @@ class JNTBus(object):
         """The name"""
         self.nodeman = None
         self._masters = kwargs.get('masters', [])
-        if isinstance(self._masters, type([])):
+        if not isinstance(self._masters, type([])):
             self._masters = [ self._masters ]
         self.is_started = False
 
@@ -134,7 +134,7 @@ class JNTBus(object):
         for target in self._masters:
             for value in self.values.keys():
                 logger.debug("[%s] - Export value %s to bus %s", self.__class__.__name__, value, target)
-                target.values['%s'%(value)] = self.values[value]
+                target.values[value] = self.values[value]
 
     def export_attrs(self, objname, obj):
         '''Export object to all targets'''
