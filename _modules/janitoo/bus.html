@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -226,7 +232,7 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">value_factory</span><span class="p">[</span><span class="n">entrypoint</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception when loading entry_point </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>  <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception when loading entry_point </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>  <span class="n">entrypoint</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;components&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;values&#39;</span><span class="p">):</span>
@@ -245,7 +251,7 @@
         <span class="sd">&quot;&quot;&quot;The name&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;masters&#39;</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">([]):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">,</span> <span class="nb">type</span><span class="p">([])):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="o">=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span> <span class="o">=</span> <span class="bp">False</span>
 
@@ -262,7 +268,7 @@
 <span class="sd">        This is the preferred way to retrieve a value of the bus</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c">#~ if self._export_prefix is not None:</span>
-            <span class="c">#~ value_uuid = &quot;%s%s&quot;%(self._export_prefix, value_uuid)</span>
+        <span class="c">#~      value_uuid = &quot;%s%s&quot;%(self._export_prefix, value_uuid)</span>
         <span class="c">#~ logger.debug(&quot;[%s] - Look for value %s on bus %s&quot;, self.__class__.__name__, value_uuid, self)</span>
         <span class="k">if</span> <span class="n">value_uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value_uuid</span><span class="p">]</span>
@@ -274,7 +280,7 @@
         <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export value </span><span class="si">%s</span><span class="s"> to bus </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-                <span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                <span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="JNTBus.export_attrs"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.export_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">export_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Export object to all targets&#39;&#39;&#39;</span>
@@ -290,8 +296,8 @@
         <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">):</span>
                 <span class="nb">delattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Missing attribute found </span><span class="si">%s</span><span class="s"> when cleaning. Continue anyway.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Missing attribute found </span><span class="si">%s</span><span class="s"> when cleaning. Continue anyway.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="JNTBus.update_attrs"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.update_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">update_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Update object to all targets&#39;&#39;&#39;</span>
@@ -373,8 +379,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="n">nodeman</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> controller&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">JNTNode</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">cmd_classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_classes</span><span class="p">,</span> <span class="n">hadd</span><span class="o">=</span><span class="n">hadd</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> controller&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">product_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_name</span><span class="p">,</span> <span class="n">product_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_type</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_heartbeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">check_heartbeat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">JNTNode</span><span class="p">(</span> <span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span>
+            <span class="n">cmd_classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_classes</span><span class="p">,</span>
+            <span class="n">hadd</span><span class="o">=</span><span class="n">hadd</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">product_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_name</span><span class="p">,</span>
+            <span class="n">product_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_type</span><span class="p">,</span>
+            <span class="n">oid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c">#~ self.check_heartbeat = self.node.check_heartbeat</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span>
 </div>
 <div class="viewcode-block" id="JNTBus.check_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.check_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">check_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -383,9 +396,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">False</span>
 </div>
-<div class="viewcode-block" id="JNTBus.extend_from_entry_points"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.extend_from_entry_points">[docs]</a>    <span class="k">def</span> <span class="nf">extend_from_entry_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="JNTBus.extend_from_entry_points"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.extend_from_entry_points">[docs]</a>    <span class="k">def</span> <span class="nf">extend_from_entry_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;&quot;Extend the bus with methods found in entrypoints</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="k">for</span> <span class="n">entrypoint</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.extensions&#39;</span><span class="o">%</span><span class="n">oid</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">eps</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Extend bus </span><span class="si">%s</span><span class="s"> with </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">module_name</span> <span class="p">)</span>

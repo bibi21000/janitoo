@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -187,17 +193,15 @@
 
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">uuid</span> <span class="kn">as</span> <span class="nn">muuid</span>
-<span class="kn">import</span> <span class="nn">ConfigParser</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span><span class="p">,</span> <span class="n">Requirement</span><span class="p">,</span> <span class="n">iter_entry_points</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span><span class="p">,</span> <span class="n">Requirement</span>
 
 <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">HADD</span><span class="p">,</span> <span class="n">HADD_SEP</span><span class="p">,</span> <span class="n">CADD</span>
 <span class="kn">from</span> <span class="nn">node</span> <span class="kn">import</span> <span class="n">JNTNodeMan</span><span class="p">,</span> <span class="n">JNTBusNodeMan</span>
-<span class="kn">from</span> <span class="nn">mqtt</span> <span class="kn">import</span> <span class="n">MQTTClient</span>
-<span class="kn">from</span> <span class="nn">janitoo.options</span> <span class="kn">import</span> <span class="n">JNTOptions</span><span class="p">,</span> <span class="n">string_to_bool</span>
+<span class="kn">from</span> <span class="nn">janitoo.options</span> <span class="kn">import</span> <span class="n">JNTOptions</span>
 
 <div class="viewcode-block" id="BaseThread"><a class="viewcode-back" href="../../janitoo.html#janitoo.thread.BaseThread">[docs]</a><span class="k">class</span> <span class="nc">BaseThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialise the worker</span>
 
 <span class="sd">        :param options: The options used to start the worker.</span>
@@ -210,10 +214,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">config_timeout_delay</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span> <span class="o">=</span> <span class="mf">0.1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span> <span class="o">=</span> <span class="mf">0.2</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;options&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;options&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">JNTOptions</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;section&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;section&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">init_section</span><span class="p">()</span>
@@ -248,7 +252,7 @@
 <div class="viewcode-block" id="BaseThread.trigger_reload"><a class="viewcode-back" href="../../janitoo.html#janitoo.thread.BaseThread.trigger_reload">[docs]</a>    <span class="k">def</span> <span class="nf">trigger_reload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Trigger the config_timeout_callback to reload config.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">timeout</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">config_timeout_delay</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -307,15 +311,15 @@
         <span class="k">return</span> <span class="n">__package__</span>
 </div></div>
 <div class="viewcode-block" id="JNTThread"><a class="viewcode-back" href="../../janitoo.html#janitoo.thread.JNTThread">[docs]</a><span class="k">class</span> <span class="nc">JNTThread</span><span class="p">(</span><span class="n">BaseThread</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialise the worker</span>
 
 <span class="sd">        :param options: The options used to start the worker.</span>
 <span class="sd">        :type clientid: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">BaseThread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">BaseThread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span> <span class="o">=</span> <span class="n">muuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_nodeman</span><span class="p">()</span>
@@ -370,7 +374,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="bp">None</span>
 </div></div>
 <div class="viewcode-block" id="JNTBusThread"><a class="viewcode-back" href="../../janitoo.html#janitoo.thread.JNTBusThread">[docs]</a><span class="k">class</span> <span class="nc">JNTBusThread</span><span class="p">(</span><span class="n">JNTThread</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialise the worker</span>
 
 <span class="sd">        :param options: The options used to start the worker.</span>

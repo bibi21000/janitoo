@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -164,25 +170,10 @@
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000&quot;</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="c">#~ logging.getLogger(__name__).addHandler(logging.NullHandler())</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">iter_entry_points</span>
 
 <span class="kn">from</span> <span class="nn">transitions</span> <span class="kn">import</span> <span class="n">State</span>
 <span class="kn">from</span> <span class="nn">transitions.extensions</span> <span class="kn">import</span> <span class="n">MachineFactory</span>
-
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">HADD</span>
-
-<span class="c">##############################################################</span>
-<span class="c">#Check that we are in sync with the official command classes</span>
-<span class="c">#Must be implemented for non-regression</span>
-<span class="kn">from</span> <span class="nn">janitoo.classes</span> <span class="kn">import</span> <span class="n">COMMAND_DESC</span>
-
-<span class="n">COMMAND_CONTROLLER</span> <span class="o">=</span> <span class="mh">0x1050</span>
-
-<span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_CONTROLLER</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_CONTROLLER&#39;</span><span class="p">)</span>
-<span class="c">##############################################################</span>
 
 <div class="viewcode-block" id="show_graph"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.show_graph">[docs]</a><span class="k">def</span> <span class="nf">show_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fname</span><span class="o">=</span><span class="s">&#39;state.png&#39;</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="s">&#39;dot&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="n">prog</span><span class="p">)</span>
@@ -192,279 +183,6 @@
 
 <span class="n">HierarchicalMachine</span> <span class="o">=</span> <span class="n">MachineFactory</span><span class="o">.</span><span class="n">get_predefined</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nested</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">HierarchicalMachine</span><span class="o">.</span><span class="n">show_graph</span> <span class="o">=</span> <span class="n">show_graph</span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="viewcode-block" id="JNTBus"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus">[docs]</a><span class="k">class</span> <span class="nc">JNTBus</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A bus holds components</span>
-<span class="sd">    A bus is mapped in a controller node</span>
-
-<span class="sd">    Bus aggregation</span>
-<span class="sd">    ---------------</span>
-<span class="sd">    A master bus can aggregate multiple bus to hold different compenents on the same bus.</span>
-
-<span class="sd">    Look at janitoo_raspberry_fishtank, janitoo_lapinoo, ...</span>
-
-<span class="sd">    Bus extension</span>
-<span class="sd">    ---------------</span>
-<span class="sd">    A bus can be extended to add new features, shared resource, ...</span>
-
-<span class="sd">    Look at janitoo_raspberry_spi, janitoo_raspberry_i2c and janitoo_raspberry_i2c_pca9865, janitoo_events and janitoo_events_cron, ...</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="s">&#39;generic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialise the bus</span>
-<span class="sd">        A bus can define values to configure itself.</span>
-<span class="sd">        A bus can agregate other bus. Values from the buss are exported to the master.</span>
-<span class="sd">        So they must be prefixed by the oid of the bus (in a hard way not usinf self.oid)</span>
-
-<span class="sd">        :param oid: The oid implemented by the bus.</span>
-<span class="sd">        :type oid: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">oid</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;factory&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s">&#39;janitoo.components&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">.&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">):</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-                    <span class="k">except</span><span class="p">:</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception when loading entry_point </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>  <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;value_factory&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">value_factory</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">entrypoint</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span> <span class="o">=</span> <span class="s">&#39;janitoo.values&#39;</span><span class="p">):</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">value_factory</span><span class="p">[</span><span class="n">entrypoint</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Exception when loading entry_point </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>  <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;components&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;values&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s">&#39;cmd_classes&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cmd_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">COMMAND_CONTROLLER</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_thread_reload_cb</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mqttc</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;options&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;The options&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">product_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;product_name&#39;</span><span class="p">,</span> <span class="s">&#39;Default product name&#39;</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;The product name of the node&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">product_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;product_type&#39;</span><span class="p">,</span> <span class="s">&#39;Default product type&#39;</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;The product type of the node&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;Default bus name&#39;</span><span class="p">)</span>
-        <span class="sd">&quot;&quot;&quot;The name&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;masters&#39;</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">([]):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="o">=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span> <span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span> <span class="o">=</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-<div class="viewcode-block" id="JNTBus.get_bus_value"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Retrieve a bus&#39;s private value. Take care of exported buses</span>
-<span class="sd">        This is the preferred way to retrieve a value of the bus</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c">#~ if self._export_prefix is not None:</span>
-            <span class="c">#~ value_uuid = &quot;%s%s&quot;%(self._export_prefix, value_uuid)</span>
-        <span class="c">#~ logger.debug(&quot;[%s] - Look for value %s on bus %s&quot;, self.__class__.__name__, value_uuid, self)</span>
-        <span class="k">if</span> <span class="n">value_uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value_uuid</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">None</span>
-</div>
-<div class="viewcode-block" id="JNTBus.export_values"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.export_values">[docs]</a>    <span class="k">def</span> <span class="nf">export_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Export values to all targets&#39;&#39;&#39;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export values to all buses&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export value </span><span class="si">%s</span><span class="s"> to bus </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-                <span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
-</div>
-<div class="viewcode-block" id="JNTBus.export_attrs"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.export_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">export_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Export object to all targets&#39;&#39;&#39;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export attrs to all buses&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">):</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Collision found on attribute </span><span class="si">%s</span><span class="s">. Continue anyway by overriding.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.clean_attrs"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.clean_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">clean_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Clean exported object from all targets&#39;&#39;&#39;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Clean attrs to all buses&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">):</span>
-                <span class="nb">delattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Missing attribute found </span><span class="si">%s</span><span class="s"> when cleaning. Continue anyway.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">objname</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.update_attrs"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.update_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">update_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Update object to all targets&#39;&#39;&#39;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export attrs to all buses&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.start"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mqttc</span><span class="p">,</span> <span class="n">trigger_thread_reload_cb</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Start the bus</span>
-<span class="sd">        Components will be started by the nodemanager after retrieving configuration.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Start the bus&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">export_values</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_thread_reload_cb</span> <span class="o">=</span> <span class="n">trigger_thread_reload_cb</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mqttc</span> <span class="o">=</span> <span class="n">mqttc</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span>
-</div>
-<div class="viewcode-block" id="JNTBus.stop"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Stop the bus and components&quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Stop the bus&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="k">for</span> <span class="n">compo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">compo</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">compo</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">True</span>
-</div>
-    <span class="nd">@property</span>
-<div class="viewcode-block" id="JNTBus.uuid"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.uuid">[docs]</a>    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an uuid for the bus. Must be the same as the section name to retrieve the hadd of the controller</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span>
-</div>
-<div class="viewcode-block" id="JNTBus.loop"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.loop">[docs]</a>    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stopevent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Loop</span>
-<span class="sd">        Don&#39;t do long task in loop. Use a separated thread to not perturbate the nodeman</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
-<div class="viewcode-block" id="JNTBus.add_component"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.add_component">[docs]</a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add a component on the bus</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">addr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">if</span> <span class="n">oid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t find </span><span class="si">%s</span><span class="s"> in factory&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">oid</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">None</span>
-        <span class="n">compo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="n">oid</span><span class="p">](</span><span class="n">addr</span><span class="o">=</span><span class="n">addr</span><span class="p">,</span> <span class="n">bus</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span> <span class="o">=</span> <span class="n">compo</span>
-        <span class="k">return</span> <span class="n">compo</span>
-</div>
-<div class="viewcode-block" id="JNTBus.find_components"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.find_components">[docs]</a>    <span class="k">def</span> <span class="nf">find_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_oid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Find components using an oid</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span> <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span><span class="o">.</span><span class="n">oid</span> <span class="o">==</span> <span class="n">component_oid</span> <span class="p">]</span>
-        <span class="k">return</span> <span class="n">components</span>
-</div>
-<div class="viewcode-block" id="JNTBus.find_values"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.find_values">[docs]</a>    <span class="k">def</span> <span class="nf">find_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_oid</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Find a value using its uuid and the component oid</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_components</span><span class="p">(</span><span class="n">component_oid</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-        <span class="n">vuuid</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">value_uuid</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">component</span><span class="o">.</span><span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">component</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">component</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="n">value_uuid</span><span class="p">:</span>
-                        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">res</span>
-</div>
-<div class="viewcode-block" id="JNTBus.create_node"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.create_node">[docs]</a>    <span class="k">def</span> <span class="nf">create_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodeman</span><span class="p">,</span> <span class="n">hadd</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a node associated to this bus</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nodeman</span> <span class="o">=</span> <span class="n">nodeman</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> controller&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">JNTNode</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">cmd_classes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_classes</span><span class="p">,</span> <span class="n">hadd</span><span class="o">=</span><span class="n">hadd</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> controller&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">product_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_name</span><span class="p">,</span> <span class="n">product_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">product_type</span><span class="p">,</span> <span class="n">oid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_heartbeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">check_heartbeat</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span>
-</div>
-<div class="viewcode-block" id="JNTBus.check_heartbeat"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.check_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">check_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check that the bus is &#39;available&#39;. Is replaced by the node one when it&#39;s creates</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">False</span>
-</div>
-<div class="viewcode-block" id="JNTBus.extend_from_entry_points"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.extend_from_entry_points">[docs]</a>    <span class="k">def</span> <span class="nf">extend_from_entry_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="p">[]):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;Extend the bus with methods found in entrypoints</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">entrypoint</span> <span class="ow">in</span> <span class="n">iter_entry_points</span><span class="p">(</span><span class="n">group</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.extensions&#39;</span><span class="o">%</span><span class="n">oid</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">eps</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Extend bus </span><span class="si">%s</span><span class="s"> with </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">module_name</span> <span class="p">)</span>
-                <span class="n">extend</span> <span class="o">=</span> <span class="n">entrypoint</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-                <span class="n">extend</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.load_extensions"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.load_extensions">[docs]</a>    <span class="k">def</span> <span class="nf">load_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;Load extensions from config file.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] - Load bus extensions </span><span class="si">%s</span><span class="s"> with in section </span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">oid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">exts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oid</span><span class="p">,</span> <span class="s">&#39;extensions&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t load_extensions&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-            <span class="n">exts</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">extend_from_entry_points</span><span class="p">(</span><span class="n">oid</span><span class="p">,</span> <span class="n">exts</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.kernel_modprobe"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.kernel_modprobe">[docs]</a>    <span class="k">def</span> <span class="nf">kernel_modprobe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Load a kernel module. Needs to be root (raspberry)</span>
-
-<span class="sd">        :param str module: the kernel module to load</span>
-<span class="sd">        :param str params: module parameters</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;/sbin/modprobe </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-            <span class="n">stdout</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-            <span class="n">stderr</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stderr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">stderr</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">stderr</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">except</span> <span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Can&#39;t load kernel module </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="JNTBus.kernel_rmmod"><a class="viewcode-back" href="../../api/index.html#janitoo.fsm.JNTBus.kernel_rmmod">[docs]</a>    <span class="k">def</span> <span class="nf">kernel_rmmod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove a kernel module. Needs to be root (raspberry)</span>
-
-<span class="sd">        :param str module: the kernel module to remove</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;/sbin/rmmod </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">)</span>
-            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-            <span class="n">stdout</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-            <span class="n">stderr</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stderr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">process</span><span class="o">.</span><span class="n">returncode</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">stderr</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">stderr</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">except</span> <span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Can&#39;t remove kernel module </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span></div></div>
 </pre></div>
 
     </div>

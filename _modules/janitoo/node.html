@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -178,7 +184,6 @@
 
 <span class="kn">from</span> <span class="nn">janitoo.fsm</span> <span class="kn">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">Machine</span>
 <span class="kn">import</span> <span class="nn">janitoo.value</span>
-<span class="kn">from</span> <span class="nn">janitoo.value</span> <span class="kn">import</span> <span class="n">JNTValue</span>
 <span class="kn">from</span> <span class="nn">janitoo.value_factory</span> <span class="kn">import</span> <span class="n">JNTValueFactoryEntry</span>
 <span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">HADD</span><span class="p">,</span> <span class="n">HADD_SEP</span><span class="p">,</span> <span class="n">json_dumps</span><span class="p">,</span> <span class="n">json_loads</span>
 <span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">TOPIC_NODES</span><span class="p">,</span> <span class="n">TOPIC_NODES_REPLY</span><span class="p">,</span> <span class="n">TOPIC_NODES_REQUEST</span>
@@ -209,8 +214,14 @@
         <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;SYSTEM&#39;</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;start_controller_reply&#39;</span><span class="p">,</span> <span class="s">&#39;start_controller_reply_system&#39;</span><span class="p">]),</span>
         <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;CONFIG&#39;</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;start_controller_reply_config&#39;</span><span class="p">]),</span>
         <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;INIT&#39;</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;start_nodes_init&#39;</span><span class="p">],</span> <span class="n">on_exit</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;stop_boot_timer&#39;</span><span class="p">,</span> <span class="s">&#39;stop_controller_reply&#39;</span><span class="p">]),</span>
-        <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;start_broadcast_request&#39;</span><span class="p">,</span> <span class="s">&#39;start_nodes_request&#39;</span><span class="p">,</span> <span class="s">&#39;start_hourly_timer&#39;</span><span class="p">],</span> <span class="n">on_exit</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;stop_broadcast_request&#39;</span><span class="p">,</span> <span class="s">&#39;stop_nodes_request&#39;</span><span class="p">]),</span>
-        <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;OFFLINE&#39;</span><span class="p">,</span> <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;stop_boot_timer&#39;</span><span class="p">,</span> <span class="s">&#39;stop_hourly_timer&#39;</span><span class="p">,</span> <span class="s">&#39;stop_heartbeat_sender&#39;</span><span class="p">,</span> <span class="s">&#39;stop_controller_uuid&#39;</span><span class="p">,</span> <span class="s">&#39;stop_controller_reply&#39;</span><span class="p">,</span><span class="s">&#39;stop_broadcast_request&#39;</span><span class="p">,</span> <span class="s">&#39;stop_nodes_request&#39;</span><span class="p">]),</span>
+        <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;ONLINE&#39;</span><span class="p">,</span>
+                <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;start_broadcast_request&#39;</span><span class="p">,</span> <span class="s">&#39;start_nodes_request&#39;</span><span class="p">,</span> <span class="s">&#39;start_hourly_timer&#39;</span><span class="p">],</span>
+                <span class="n">on_exit</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;stop_broadcast_request&#39;</span><span class="p">,</span> <span class="s">&#39;stop_nodes_request&#39;</span><span class="p">]),</span>
+        <span class="n">State</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;OFFLINE&#39;</span><span class="p">,</span>
+                <span class="n">on_enter</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;stop_boot_timer&#39;</span><span class="p">,</span> <span class="s">&#39;stop_hourly_timer&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;stop_heartbeat_sender&#39;</span><span class="p">,</span> <span class="s">&#39;stop_controller_uuid&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;stop_controller_reply&#39;</span><span class="p">,</span><span class="s">&#39;stop_broadcast_request&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;stop_nodes_request&#39;</span><span class="p">]),</span>
     <span class="p">]</span>
 
     <span class="n">states_str</span> <span class="o">=</span> <span class="p">{</span>
@@ -257,8 +268,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span> <span class="o">=</span> <span class="mf">0.05</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_controller_hadd</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;request_info_nodes&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_nodes</span><span class="p">,</span> <span class="s">&#39;request_info_users&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_users</span><span class="p">,</span> <span class="s">&#39;request_info_configs&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_configs</span><span class="p">,</span>
-                          <span class="s">&#39;request_info_systems&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_systems</span><span class="p">,</span> <span class="s">&#39;request_info_basics&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_basics</span><span class="p">,</span> <span class="s">&#39;request_info_commands&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_commands</span> <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;request_info_nodes&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_nodes</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_users&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_users</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_configs&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_configs</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_systems&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_systems</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_basics&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_basics</span><span class="p">,</span>
+                          <span class="s">&#39;request_info_commands&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_info_commands</span> <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fsm_state</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s">&quot;OFFLINE&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trigger_reload</span> <span class="o">=</span> <span class="bp">None</span>
@@ -279,11 +294,6 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
 
-<div class="viewcode-block" id="JNTNodeMan.trigger_reload"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.trigger_reload">[docs]</a>    <span class="k">def</span> <span class="nf">trigger_reload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
 <div class="viewcode-block" id="JNTNodeMan.start"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trigger_reload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">slow_start</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -336,7 +346,7 @@
 <div class="viewcode-block" id="JNTNodeMan.is_stopped"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.is_stopped">[docs]</a>    <span class="k">def</span> <span class="nf">is_stopped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if the network is stopped</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fsm_state</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&quot;OFFLINE&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fsm_state</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&quot;OFFLINE&quot;</span>
 </div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="JNTNodeMan.is_started"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.is_started">[docs]</a>    <span class="k">def</span> <span class="nf">is_started</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -565,7 +575,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_stop_boot_timer</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_uuid_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_uuid_response</span><span class="p">:</span>
                 <span class="c">#retrieve hadd from local configuration</span>
                 <span class="n">controller</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_controller_node</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_controller_node</span><span class="p">(</span><span class="n">controller</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
@@ -653,7 +663,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_stop_boot_timer</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_system_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_system_response</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">load_system_from_local</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config_timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">config_timeout</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_controller_system_response</span> <span class="o">=</span> <span class="bp">False</span>
@@ -719,7 +729,7 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">before_controller_reply_config</span><span class="p">()</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_config_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_config_response</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">load_config_from_local</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">request_controller_config_response</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">after_controller_reply_config</span><span class="p">()</span>
@@ -759,11 +769,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_stop_boot_timer</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_hadds_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_hadds_response</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">nodes_hadds_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nodes_hadds_from_local_config</span><span class="p">()</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;finish_nodes_hadds : nodes_hadds_response = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_hadds_response</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_hadds_response</span><span class="p">:</span>
-                    <span class="n">onode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">hadd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes_hadds_response</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">hadd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes_hadds_response</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">after_create_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
                     <span class="c">#~ print onode.__dict__</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">request_boot_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_timeout</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">slow_start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">finish_nodes_system</span><span class="p">)</span>
@@ -783,7 +793,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_stop_boot_timer</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_system_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_system_response</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                         <span class="n">onode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
@@ -808,7 +818,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_stop_boot_timer</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_config_response</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_nodes_config_response</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                         <span class="n">onode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
@@ -900,13 +910,13 @@
                             <span class="k">pass</span>
                         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                             <span class="k">pass</span>
-                        <span class="k">if</span> <span class="n">write_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">write_only</span><span class="p">:</span>
                             <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                             <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;heartbeat&quot;</span><span class="p">:</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">add_heartbeat</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_writeonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-                        <span class="k">elif</span> <span class="n">read_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">elif</span> <span class="n">read_only</span><span class="p">:</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span>
                         <span class="n">data</span><span class="p">[</span><span class="s">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">label</span>
                         <span class="n">data</span><span class="p">[</span><span class="s">&#39;help&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">help</span>
@@ -932,11 +942,11 @@
                             <span class="k">pass</span>
                         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                             <span class="k">pass</span>
-                        <span class="k">if</span> <span class="n">write_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">write_only</span><span class="p">:</span>
                             <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_writeonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-                        <span class="k">elif</span> <span class="n">read_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">elif</span> <span class="n">read_only</span><span class="p">:</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_writeonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
@@ -971,12 +981,12 @@
                             <span class="k">pass</span>
                         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                             <span class="k">pass</span>
-                        <span class="k">if</span> <span class="n">write_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">write_only</span><span class="p">:</span>
                             <span class="c">#~ print &quot;write_only&quot;</span>
                             <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_writeonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-                        <span class="k">elif</span> <span class="n">read_only</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="k">elif</span> <span class="n">read_only</span><span class="p">:</span>
                             <span class="c">#~ print &quot;read_only&quot;</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">data</span>
                             <span class="n">data</span><span class="p">[</span><span class="s">&#39;is_writeonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
@@ -1002,7 +1012,7 @@
             <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">knode</span><span class="p">]</span><span class="o">.</span><span class="n">check_heartbeat</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">ret</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">:</span>
                 <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
-            <span class="k">elif</span> <span class="n">ret</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">ret</span><span class="p">:</span>
                 <span class="n">state</span> <span class="o">=</span> <span class="s">&#39;ONLINE&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">state</span> <span class="o">=</span> <span class="s">&#39;OFFLINE&#39;</span>
@@ -1283,7 +1293,7 @@
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">uuid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="ow">or</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="n">node</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">is_polled</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">is_writeonly</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">is_polled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">is_writeonly</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_poll</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">cmd_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">.</span><span class="n">cmd_classes</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">.</span><span class="n">cmd_classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">cmd_class</span><span class="p">)</span>
@@ -1408,7 +1418,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - C&#39;ant get hourly_timer from configuration file. Disable it&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
             <span class="n">hourly</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">if</span> <span class="n">hourly</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hourly</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_hourly_timer&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hourly_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_hourly_timer</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hourly_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1424,7 +1434,7 @@
 <div class="viewcode-block" id="JNTNodeMan.add_hourly_job"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.add_hourly_job">[docs]</a>    <span class="k">def</span> <span class="nf">add_hourly_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add an hourly job.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Add_hourly_job&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Add_hourly_job </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="JNTNodeMan.remove_hourly_job"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.remove_hourly_job">[docs]</a>    <span class="k">def</span> <span class="nf">remove_hourly_job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
@@ -1558,16 +1568,16 @@
         <span class="c">#~ print res</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Founds hadds in local config </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span>
-</div>
-<div class="viewcode-block" id="JNTBusNodeMan.start_bus_components"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTBusNodeMan.start_bus_components">[docs]</a>    <span class="k">def</span> <span class="nf">start_bus_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Start the components</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Start the components&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">compo</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t start component </span><span class="si">%s</span><span class="s"> on address </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">components</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">compo</span><span class="o">.</span><span class="n">_addr</span><span class="p">)</span>
+
+    <span class="c">#~ def start_bus_components(self, **kwargs):</span>
+        <span class="c">#~ &quot;&quot;&quot;Start the components</span>
+        <span class="c">#~ &quot;&quot;&quot;</span>
+        <span class="c">#~ logger.debug(&quot;[%s] - Start the components&quot;, self.__class__.__name__)</span>
+        <span class="c">#~ for key in self.bus.components.keys():</span>
+            <span class="c">#~ try:</span>
+                <span class="c">#~ compo.start(self.mqtt_nodes)</span>
+            <span class="c">#~ except:</span>
+                <span class="c">#~ logger.exception(&quot;[%s] - Can&#39;t start component %s on address %s&quot;, self.__class__.__name__, self.bus.components[key], compo._addr)</span>
 </div>
 <div class="viewcode-block" id="JNTBusNodeMan.build_bus_components"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTBusNodeMan.build_bus_components">[docs]</a>    <span class="k">def</span> <span class="nf">build_bus_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build the bus components from factory</span>
@@ -1581,7 +1591,7 @@
                     <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t find component </span><span class="si">%s</span><span class="s"> in factory&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">components</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
                 <span class="n">add_comp</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
                 <span class="c">#add_comp = key</span>
-                <span class="n">compo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">add_comp</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">add_comp</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t add component </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 </div>

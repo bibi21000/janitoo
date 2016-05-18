@@ -10,6 +10,10 @@
     :target: https://coveralls.io/github/bibi21000/janitoo?branch=master
     :alt: Coveralls results
 
+.. image:: https://landscape.io/github/bibi21000/janitoo/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/bibi21000/janitoo/master
+   :alt: Code Health
+
 .. image:: https://img.shields.io/imagelayers/image-size/bibi21000/janitoo_base/latest.svg
     :target: https://hub.docker.com/r/bibi21000/janitoo_base/
     :alt: Docker size

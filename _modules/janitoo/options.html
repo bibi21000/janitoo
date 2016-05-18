@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -195,14 +201,17 @@
 <span class="kn">from</span> <span class="nn">janitoo.mqtt</span> <span class="kn">import</span> <span class="n">MQTTClient</span>
 
 <div class="viewcode-block" id="JNTOptions"><a class="viewcode-back" href="../../janitoo.html#janitoo.options.JNTOptions">[docs]</a><span class="k">class</span> <span class="nc">JNTOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The options</span>
 
 <span class="sd">        :param options: The options used to start the worker.</span>
 <span class="sd">        :type clientid: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c">#retrieve parameters in file</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">options</span>
+        <span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">options</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="JNTOptions.load"><a class="viewcode-back" href="../../janitoo.html#janitoo.options.JNTOptions.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

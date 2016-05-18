@@ -94,13 +94,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -193,7 +199,7 @@ A bus is mapped in a controller node</p>
 
 <dl class="method">
 <dt id="janitoo.bus.JNTBus.extend_from_entry_points">
-<tt class="descname">extend_from_entry_points</tt><big>(</big><em>oid</em>, <em>eps=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/janitoo/bus.html#JNTBus.extend_from_entry_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.bus.JNTBus.extend_from_entry_points" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">extend_from_entry_points</tt><big>(</big><em>oid</em>, <em>eps=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/bus.html#JNTBus.extend_from_entry_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.bus.JNTBus.extend_from_entry_points" title="Permalink to this definition">¶</a></dt>
 <dd><p>&#8220;Extend the bus with methods found in entrypoints</p>
 </dd></dl>
 
@@ -867,7 +873,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b4b6dfd2890&gt;, &lt;transitions.core.State object at 0x2b4b6dfbab50&gt;, &lt;transitions.core.State object at 0x2b4b6dfbab10&gt;, &lt;transitions.core.State object at 0x2b4b6dfbac10&gt;, &lt;transitions.core.State object at 0x2b4b6dfbabd0&gt;, &lt;transitions.core.State object at 0x2b4b6dfbacd0&gt;, &lt;transitions.core.State object at 0x2b4b6dfbac90&gt;, &lt;transitions.core.State object at 0x2b4b6dfbad10&gt;, &lt;transitions.core.State object at 0x2b4b6dfbadd0&gt;, &lt;transitions.core.State object at 0x2b4b6dfbad90&gt;, &lt;transitions.core.State object at 0x2b4b6dfbaa10&gt;, &lt;transitions.core.State object at 0x2b4b6dfbaad0&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2ada613f8790&gt;, &lt;transitions.core.State object at 0x2ada613f8850&gt;, &lt;transitions.core.State object at 0x2ada613f8890&gt;, &lt;transitions.core.State object at 0x2ada613f88d0&gt;, &lt;transitions.core.State object at 0x2ada613f8910&gt;, &lt;transitions.core.State object at 0x2ada613f8950&gt;, &lt;transitions.core.State object at 0x2ada613f8990&gt;, &lt;transitions.core.State object at 0x2ada613f89d0&gt;, &lt;transitions.core.State object at 0x2ada613f8a10&gt;, &lt;transitions.core.State object at 0x2ada613f8a50&gt;, &lt;transitions.core.State object at 0x2ada613f8a90&gt;, &lt;transitions.core.State object at 0x2ada613f8ad0&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1401,173 +1407,6 @@ Called in a separate thread. Must use a scoped_session.</p>
 <div class="section" id="module-janitoo.fsm">
 <span id="janitoo-fsm-module"></span><h2>janitoo.fsm module<a class="headerlink" href="#module-janitoo.fsm" title="Permalink to this headline">¶</a></h2>
 <p>The FSM</p>
-<dl class="class">
-<dt id="janitoo.fsm.JNTBus">
-<em class="property">class </em><tt class="descclassname">janitoo.fsm.</tt><tt class="descname">JNTBus</tt><big>(</big><em>oid='generic'</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
-<p>A bus holds components
-A bus is mapped in a controller node</p>
-<p>A master bus can aggregate multiple bus to hold different compenents on the same bus.</p>
-<p>Look at janitoo_raspberry_fishtank, janitoo_lapinoo, ...</p>
-<p>A bus can be extended to add new features, shared resource, ...</p>
-<p>Look at janitoo_raspberry_spi, janitoo_raspberry_i2c and janitoo_raspberry_i2c_pca9865, janitoo_events and janitoo_events_cron, ...</p>
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.add_component">
-<tt class="descname">add_component</tt><big>(</big><em>oid</em>, <em>addr</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.add_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.add_component" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a component on the bus</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.check_heartbeat">
-<tt class="descname">check_heartbeat</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.check_heartbeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.check_heartbeat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check that the bus is &#8216;available&#8217;. Is replaced by the node one when it&#8217;s creates</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.clean_attrs">
-<tt class="descname">clean_attrs</tt><big>(</big><em>objname</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.clean_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.clean_attrs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clean exported object from all targets</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.create_node">
-<tt class="descname">create_node</tt><big>(</big><em>nodeman</em>, <em>hadd</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.create_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.create_node" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a node associated to this bus</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.export_attrs">
-<tt class="descname">export_attrs</tt><big>(</big><em>objname</em>, <em>obj</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.export_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.export_attrs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export object to all targets</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.export_values">
-<tt class="descname">export_values</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.export_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.export_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export values to all targets</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.extend_from_entry_points">
-<tt class="descname">extend_from_entry_points</tt><big>(</big><em>oid</em>, <em>eps=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.extend_from_entry_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.extend_from_entry_points" title="Permalink to this definition">¶</a></dt>
-<dd><p>&#8220;Extend the bus with methods found in entrypoints</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.find_components">
-<tt class="descname">find_components</tt><big>(</big><em>component_oid</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.find_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.find_components" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find components using an oid</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.find_values">
-<tt class="descname">find_values</tt><big>(</big><em>component_oid</em>, <em>value_uuid</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.find_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.find_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find a value using its uuid and the component oid</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.get_bus_value">
-<tt class="descname">get_bus_value</tt><big>(</big><em>value_uuid</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.get_bus_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.get_bus_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve a bus&#8217;s private value. Take care of exported buses
-This is the preferred way to retrieve a value of the bus</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.kernel_modprobe">
-<tt class="descname">kernel_modprobe</tt><big>(</big><em>module</em>, <em>params=''</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.kernel_modprobe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.kernel_modprobe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load a kernel module. Needs to be root (raspberry)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>module</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the kernel module to load</li>
-<li><strong>params</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; module parameters</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.kernel_rmmod">
-<tt class="descname">kernel_rmmod</tt><big>(</big><em>module</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.kernel_rmmod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.kernel_rmmod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove a kernel module. Needs to be root (raspberry)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>module</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the kernel module to remove</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.load_extensions">
-<tt class="descname">load_extensions</tt><big>(</big><em>oid</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.load_extensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.load_extensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>&#8220;Load extensions from config file.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.loop">
-<tt class="descname">loop</tt><big>(</big><em>stopevent</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.loop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loop
-Don&#8217;t do long task in loop. Use a separated thread to not perturbate the nodeman</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.fsm.JNTBus.name">
-<tt class="descname">name</tt><em class="property"> = None</em><a class="headerlink" href="#janitoo.fsm.JNTBus.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>The name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.fsm.JNTBus.options">
-<tt class="descname">options</tt><em class="property"> = None</em><a class="headerlink" href="#janitoo.fsm.JNTBus.options" title="Permalink to this definition">¶</a></dt>
-<dd><p>The options</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.fsm.JNTBus.product_name">
-<tt class="descname">product_name</tt><em class="property"> = None</em><a class="headerlink" href="#janitoo.fsm.JNTBus.product_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>The product name of the node</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.fsm.JNTBus.product_type">
-<tt class="descname">product_type</tt><em class="property"> = None</em><a class="headerlink" href="#janitoo.fsm.JNTBus.product_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>The product type of the node</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.start">
-<tt class="descname">start</tt><big>(</big><em>mqttc</em>, <em>trigger_thread_reload_cb=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.start" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the bus
-Components will be started by the nodemanager after retrieving configuration.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.stop">
-<tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop the bus and components</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.fsm.JNTBus.update_attrs">
-<tt class="descname">update_attrs</tt><big>(</big><em>objname</em>, <em>obj</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.update_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.update_attrs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update object to all targets</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.fsm.JNTBus.uuid">
-<tt class="descname">uuid</tt><a class="reference internal" href="../_modules/janitoo/fsm.html#JNTBus.uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.JNTBus.uuid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an uuid for the bus. Must be the same as the section name to retrieve the hadd of the controller</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="function">
 <dt id="janitoo.fsm.show_graph">
 <tt class="descclassname">janitoo.fsm.</tt><tt class="descname">show_graph</tt><big>(</big><em>self</em>, <em>fname='state.png'</em>, <em>prog='dot'</em>, <em>title=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/fsm.html#show_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.fsm.show_graph" title="Permalink to this definition">¶</a></dt>
@@ -2258,12 +2097,6 @@ subscribe().</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="janitoo.node.JNTBusNodeMan.start_bus_components">
-<tt class="descname">start_bus_components</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTBusNodeMan.start_bus_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTBusNodeMan.start_bus_components" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the components</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="janitoo.node.JNTBusNodeMan.stop">
 <tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTBusNodeMan.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTBusNodeMan.stop" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2629,7 +2462,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b4b6ec1b690&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b6d0&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b710&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b750&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b790&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b7d0&gt;, &lt;transitions.core.State object at 0x2b4b6ec1b810&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2ada6112b590&gt;, &lt;transitions.core.State object at 0x2ada6112b5d0&gt;, &lt;transitions.core.State object at 0x2ada6112b610&gt;, &lt;transitions.core.State object at 0x2ada6112b650&gt;, &lt;transitions.core.State object at 0x2ada6112b690&gt;, &lt;transitions.core.State object at 0x2ada6112b6d0&gt;, &lt;transitions.core.State object at 0x2ada6112b710&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2917,11 +2750,6 @@ subscribe().</p>
 <tt class="descname">stop_nodes_request</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTNodeMan.stop_nodes_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTNodeMan.stop_nodes_request" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
-<dt id="janitoo.node.JNTNodeMan.trigger_reload">
-<tt class="descname">trigger_reload</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTNodeMan.trigger_reload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTNodeMan.trigger_reload" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 </div>
@@ -2951,7 +2779,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </dl>
 <dl class="class">
 <dt id="janitoo.options.JNTOptions">
-<em class="property">class </em><tt class="descclassname">janitoo.options.</tt><tt class="descname">JNTOptions</tt><big>(</big><em>options={}</em><big>)</big><a class="reference internal" href="../_modules/janitoo/options.html#JNTOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.options.JNTOptions" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.options.</tt><tt class="descname">JNTOptions</tt><big>(</big><em>options=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/options.html#JNTOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.options.JNTOptions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <dl class="method">
 <dt id="janitoo.options.JNTOptions.get_component_settings">
@@ -3175,141 +3003,8 @@ if full, erase all blocks</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-janitoo.runner">
-<span id="janitoo-runner-module"></span><h2>janitoo.runner module<a class="headerlink" href="#module-janitoo.runner" title="Permalink to this headline">¶</a></h2>
-<p>The runner</p>
-<p>Start a worker or a broker as a daemon.</p>
-<p>Must be updated to work with multiple workers.</p>
-<p>What do we need :</p>
-<ul class="simple">
-<li>the user ou userid</li>
-<li>the log file</li>
-<li>the error output</li>
-<li>the standard output</li>
-<li>the pid file</li>
-<li>the working directory</li>
-</ul>
-<p>Based on the runner of python-daemon :</p>
-<ul class="simple">
-<li>Copyright © 2009–2010 Ben Finney &lt;<a class="reference external" href="mailto:ben+python&#37;&#52;&#48;benfinney&#46;id&#46;au">ben+python<span>&#64;</span>benfinney<span>&#46;</span>id<span>&#46;</span>au</a>&gt;</li>
-<li>Copyright © 2007–2008 Robert Niederreiter, Jens Klein</li>
-<li>Copyright © 2003 Clark Evans</li>
-<li>Copyright © 2002 Noah Spurrier</li>
-<li>Copyright © 2001 Jürgen Hermann</li>
-</ul>
-<dl class="class">
-<dt id="janitoo.runner.Runner">
-<em class="property">class </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">Runner</tt><a class="reference internal" href="../_modules/janitoo/runner.html#Runner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
-<p>Controller for a callable running in a separate background process.</p>
-<p>The first command-line argument is the action to take:</p>
-<ul class="simple">
-<li>&#8216;start&#8217;: Become a daemon and call <cite>app.run()</cite>.</li>
-<li>&#8216;stop&#8217;: Exit the daemon process specified in the PID file.</li>
-<li>&#8216;restart&#8217;: Stop, then start.</li>
-<li>&#8216;status&#8217;: Show the status of the process.</li>
-</ul>
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b4b70726c80&gt;, 'start': &lt;function _start at 0x2b4b707269b0&gt;, 'kill': &lt;function _kill at 0x2b4b70726c08&gt;, 'reload': &lt;function _reload at 0x2b4b70726d70&gt;, 'front': &lt;function _front at 0x2b4b70726a28&gt;, 'flush': &lt;function _flush at 0x2b4b70726de8&gt;, 'stop': &lt;function _stop at 0x2b4b70726b90&gt;, 'restart': &lt;function _restart at 0x2b4b70726cf8&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.app_run">
-<tt class="descname">app_run</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.app_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.app_run" title="Permalink to this definition">¶</a></dt>
-<dd><p>The running process of the application</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.app_shutdown">
-<tt class="descname">app_shutdown</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.app_shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.app_shutdown" title="Permalink to this definition">¶</a></dt>
-<dd><p>The shutdown process of the application</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.do_action">
-<tt class="descname">do_action</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.do_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.do_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the requested action.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.parse_args">
-<tt class="descname">parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.parse_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse command-line arguments.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.start_message">
-<tt class="descname">start_message</tt><em class="property"> = 'started with pid %d'</em><a class="headerlink" href="#janitoo.runner.Runner.start_message" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.status_message_not_running">
-<tt class="descname">status_message_not_running</tt><em class="property"> = 'process is not running'</em><a class="headerlink" href="#janitoo.runner.Runner.status_message_not_running" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.status_message_running">
-<tt class="descname">status_message_running</tt><em class="property"> = 'process is running (%d)'</em><a class="headerlink" href="#janitoo.runner.Runner.status_message_running" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerError</tt><a class="reference internal" href="../_modules/janitoo/runner.html#RunnerError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
-<p>Abstract base class for errors.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerInvalidActionError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerInvalidActionError</tt><a class="reference internal" href="../_modules/janitoo/runner.html#RunnerInvalidActionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerInvalidActionError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.ValueError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.ValueError</span></tt></a>, <a class="reference internal" href="../janitoo.html#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when specified action is invalid.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerStartFailureError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerStartFailureError</tt><a class="reference internal" href="../_modules/janitoo/runner.html#RunnerStartFailureError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerStartFailureError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a>, <a class="reference internal" href="../janitoo.html#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when failure starting.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerStopFailureError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerStopFailureError</tt><a class="reference internal" href="../_modules/janitoo/runner.html#RunnerStopFailureError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerStopFailureError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a>, <a class="reference internal" href="../janitoo.html#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when failure stopping.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.emit_message">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">emit_message</tt><big>(</big><em>message</em>, <em>stream=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#emit_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.emit_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Emit a message to the specified stream (default <cite>sys.stderr</cite>).</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.is_pidfile_stale">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">is_pidfile_stale</tt><big>(</big><em>pidfile</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#is_pidfile_stale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.is_pidfile_stale" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine whether a PID file is stale.</p>
-<p>Return <tt class="docutils literal"><span class="pre">True</span></tt> (“stale”) if the contents of the PID file are
-valid but do not match the PID of a currently-running process;
-otherwise return <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.jnt_parse_args">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">jnt_parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#jnt_parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.jnt_parse_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default argument parser</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.make_pidlockfile">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">make_pidlockfile</tt><big>(</big><em>path</em>, <em>acquire_timeout</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#make_pidlockfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.make_pidlockfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a PIDLockFile instance with the given filesystem path.</p>
-</dd></dl>
-
+<div class="section" id="janitoo-runner-module">
+<h2>janitoo.runner module<a class="headerlink" href="#janitoo-runner-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-janitoo.server">
 <span id="janitoo-server-module"></span><h2>janitoo.server module<a class="headerlink" href="#module-janitoo.server" title="Permalink to this headline">¶</a></h2>
@@ -3770,7 +3465,7 @@ The mosquitto broker use it to persist its database to disk.</p>
 
 <dl class="class">
 <dt id="janitoo.tests.FakeThread">
-<em class="property">class </em><tt class="descclassname">janitoo.tests.</tt><tt class="descname">FakeThread</tt><big>(</big><em>options={}</em><big>)</big><a class="reference internal" href="../_modules/janitoo/tests.html#FakeThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.tests.FakeThread" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.tests.</tt><tt class="descname">FakeThread</tt><big>(</big><em>options=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/tests.html#FakeThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.tests.FakeThread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../janitoo.html#janitoo.thread.JNTBusThread" title="janitoo.thread.JNTBusThread"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.thread.JNTBusThread</span></tt></a></p>
 <p>The Http thread</p>
 <dl class="method">
@@ -3818,7 +3513,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </dl>
 <dl class="class">
 <dt id="janitoo.thread.BaseThread">
-<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">BaseThread</tt><big>(</big><em>options={}</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#BaseThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.BaseThread" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">BaseThread</tt><big>(</big><em>options=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#BaseThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.BaseThread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/threading.html#threading.Thread" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></tt></a></p>
 <dl class="method">
 <dt id="janitoo.thread.BaseThread.config_timeout_callback">
@@ -3891,7 +3586,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 
 <dl class="class">
 <dt id="janitoo.thread.JNTBusThread">
-<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">JNTBusThread</tt><big>(</big><em>options={}</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#JNTBusThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.JNTBusThread" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">JNTBusThread</tt><big>(</big><em>options=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#JNTBusThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.JNTBusThread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../janitoo.html#janitoo.thread.JNTThread" title="janitoo.thread.JNTThread"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.thread.JNTThread</span></tt></a></p>
 <dl class="method">
 <dt id="janitoo.thread.JNTBusThread.create_nodeman">
@@ -3921,7 +3616,7 @@ Derefernce the bus</p>
 
 <dl class="class">
 <dt id="janitoo.thread.JNTThread">
-<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">JNTThread</tt><big>(</big><em>options={}</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#JNTThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.JNTThread" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.thread.</tt><tt class="descname">JNTThread</tt><big>(</big><em>options=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/thread.html#JNTThread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.thread.JNTThread" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../janitoo.html#janitoo.thread.BaseThread" title="janitoo.thread.BaseThread"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.thread.BaseThread</span></tt></a></p>
 <dl class="method">
 <dt id="janitoo.thread.JNTThread.create_nodeman">

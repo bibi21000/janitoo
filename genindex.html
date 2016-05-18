@@ -95,13 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.utils">janitoo.utils module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo.value">janitoo.value module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="janitoo.html#module-janitoo">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#jnt-query">jnt_query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#jnt-collect">jnt_collect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#jnt-spy">jnt_spy</a></li>
 </ul>
 </li>
 </ul>
@@ -141,7 +147,8 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
@@ -164,13 +171,235 @@
  | <a href="#V"><strong>V</strong></a>
  
 </div>
-<h2 id="A">A</h2>
+<h2 id="Symbols">Symbols</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="api/index.html#janitoo.runner.Runner.action_funcs">action_funcs (janitoo.runner.Runner attribute)</a>, <a href="janitoo.html#janitoo.runner.Runner.action_funcs">[1]</a>
+  <dt>
+    --debug
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query--debug">jnt_query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --hadd &lt;hadd&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--hadd">jnt_query-node command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --host &lt;host&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--host">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--host">jnt_query-node command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--host">jnt_spy command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --myhadd &lt;myhadd&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--myhadd">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--myhadd">jnt_query-node command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --output {txt,raw}
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query--output">jnt_query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --port &lt;port&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--port">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--port">jnt_query-node command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--port">jnt_spy command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --timeout &lt;timeout&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--timeout">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--timeout">jnt_query-node command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    --topic &lt;topic&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--topic">jnt_spy command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--vuuid">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--vuuid">jnt_query-node command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -b &lt;bus&gt;, --bus &lt;bus&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-b">jnt_collect command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -c &lt;component&gt;, --component &lt;component&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-c">jnt_collect command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -h, --help
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-h">jnt_collect command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-h">jnt_query command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-caps-h">jnt_query-caps command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-cmds-h">jnt_query-cmds command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-genres-h">jnt_query-genres command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network-h">jnt_query-network command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node-h">jnt_query-node command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query-h">jnt_query-query command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-types-h">jnt_query-types command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy-h">jnt_spy command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -o {txt,raw}, --output {txt,raw}
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-o">jnt_collect command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -t {all,janitoo.threads,janitoo.components,janitoo.values,janitoo.models,janitoo_flask.blueprint,janitoo_flask.menu_left,janitoo_flask.listener,janitoo_flask.network,janitoo_manager.blueprint,janitoo_manager.menu_left,janitoo_manager.listener,janitoo_manager.network}, --type {all,janitoo.threads,janitoo.components,janitoo.values,janitoo.models,janitoo_flask.blueprint,janitoo_flask.menu_left,janitoo_flask.listener,janitoo_flask.network,janitoo_manager.blueprint,janitoo_manager.menu_left,janitoo_manager.listener,janitoo_manager.network}
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-t">jnt_collect command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.add_basics">add_basics() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.add_basics">[1]</a>
   </dt>
@@ -183,12 +412,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.add_component">add_component() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.add_component">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.add_component">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.add_configs">add_configs() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.add_configs">[1]</a>
   </dt>
@@ -233,12 +456,12 @@
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.add_node">add_node() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.add_node">[1]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.add_nodes">add_nodes() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.add_nodes">[1]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.add_poll">add_poll() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.add_poll">[1]</a>
   </dt>
@@ -315,14 +538,6 @@
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.after_system_node">after_system_node() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.after_system_node">[1]</a>
   </dt>
 
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner.app_run">app_run() (janitoo.runner.Runner method)</a>, <a href="janitoo.html#janitoo.runner.Runner.app_run">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner.app_shutdown">app_shutdown() (janitoo.runner.Runner method)</a>, <a href="janitoo.html#janitoo.runner.Runner.app_shutdown">[1]</a>
-  </dt>
-
   </dl></td>
 </tr></table>
 
@@ -381,10 +596,6 @@
   </dt>
 
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.check_heartbeat">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTNode.check_heartbeat">(janitoo.node.JNTNode method)</a>, <a href="janitoo.html#janitoo.node.JNTNode.check_heartbeat">[1]</a>
   </dt>
 
@@ -415,12 +626,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.clean_attrs">clean_attrs() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.clean_attrs">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.clean_attrs">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.value.JNTValue.cmd_class">cmd_class (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.cmd_class">[1]</a>
   </dt>
@@ -501,10 +706,6 @@
   </dt>
 
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.create_node">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTBusNodeMan.create_node">(janitoo.node.JNTBusNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTBusNodeMan.create_node">[1]</a>
   </dt>
 
@@ -549,22 +750,18 @@
   <dt><a href="api/index.html#janitoo.value.JNTValue.default">default (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.default">[1]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.delete_fsm">delete_fsm() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.delete_fsm">[1]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.utils.deprecated">deprecated() (in module janitoo.utils)</a>, <a href="janitoo.html#janitoo.utils.deprecated">[1]</a>
   </dt>
 
       
   <dt><a href="api/index.html#janitoo.mqtt.MQTTBasic.disconnect">disconnect() (janitoo.mqtt.MQTTBasic method)</a>, <a href="janitoo.html#janitoo.mqtt.MQTTBasic.disconnect">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner.do_action">do_action() (janitoo.runner.Runner method)</a>, <a href="janitoo.html#janitoo.runner.Runner.do_action">[1]</a>
   </dt>
 
       
@@ -611,10 +808,6 @@
 
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.emit_crons">emit_crons() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.emit_crons">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.emit_message">emit_message() (in module janitoo.runner)</a>, <a href="janitoo.html#janitoo.runner.emit_message">[1]</a>
   </dt>
 
       
@@ -671,32 +864,14 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.export_attrs">export_attrs() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.export_attrs">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.export_attrs">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.bus.JNTBus.export_values">export_values() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.export_values">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.export_values">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.bus.JNTBus.extend_from_entry_points">extend_from_entry_points() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.extend_from_entry_points">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.extend_from_entry_points">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -719,12 +894,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.find_components">find_components() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.find_components">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.find_components">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.find_node">find_node() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.find_node">[1]</a>
   </dt>
@@ -745,12 +914,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.find_values">find_values() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.find_values">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.find_values">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.finish_broadcast_basics_discover">finish_broadcast_basics_discover() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.finish_broadcast_basics_discover">[1]</a>
   </dt>
@@ -894,10 +1057,6 @@
       <dd><dl>
         
   <dt><a href="api/index.html#janitoo.component.JNTComponent.get_bus_value">(janitoo.component.JNTComponent method)</a>, <a href="janitoo.html#janitoo.component.JNTComponent.get_bus_value">[1]</a>
-  </dt>
-
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.get_bus_value">(janitoo.fsm.JNTBus method)</a>
   </dt>
 
       </dl></dd>
@@ -1132,15 +1291,11 @@
   </dt>
 
       
-  <dt><a href="api/index.html#janitoo.runner.is_pidfile_stale">is_pidfile_stale() (in module janitoo.runner)</a>, <a href="janitoo.html#janitoo.runner.is_pidfile_stale">[1]</a>
+  <dt><a href="api/index.html#janitoo.value.JNTValue.is_polled">is_polled (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.is_polled">[1]</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="api/index.html#janitoo.value.JNTValue.is_polled">is_polled (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.is_polled">[1]</a>
-  </dt>
-
       
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.is_polled">is_polled() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.is_polled">[1]</a>
   </dt>
@@ -1220,10 +1375,6 @@
   </dt>
 
       
-  <dt><a href="api/index.html#module-janitoo.runner">janitoo.runner (module)</a>, <a href="janitoo.html#module-janitoo.runner">[1]</a>
-  </dt>
-
-      
   <dt><a href="api/index.html#module-janitoo.server">janitoo.server (module)</a>, <a href="janitoo.html#module-janitoo.server">[1]</a>
   </dt>
 
@@ -1255,8 +1406,6 @@
   <dt><a href="api/index.html#janitoo.utils.JanitooException">JanitooException</a>, <a href="janitoo.html#janitoo.utils.JanitooException">[1]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.utils.JanitooNotImplemented">JanitooNotImplemented</a>, <a href="janitoo.html#janitoo.utils.JanitooNotImplemented">[1]</a>
   </dt>
@@ -1266,19 +1415,201 @@
   </dt>
 
       
-  <dt><a href="api/index.html#janitoo.runner.jnt_parse_args">jnt_parse_args() (in module janitoo.runner)</a>, <a href="janitoo.html#janitoo.runner.jnt_parse_args">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.bus.JNTBus">JNTBus (class in janitoo.bus)</a>, <a href="janitoo.html#janitoo.bus.JNTBus">[1]</a>
+  <dt>
+    jnt_collect command line option
   </dt>
 
       <dd><dl>
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus">(class in janitoo.fsm)</a>
+  <dt><a href="cli.html#cmdoption-jnt_collect-b">-b &lt;bus&gt;, --bus &lt;bus&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-c">-c &lt;component&gt;, --component &lt;component&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-h">-h, --help</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-o">-o {txt,raw}, --output {txt,raw}</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_collect-t">-t {all,janitoo.threads,janitoo.components,janitoo.values,janitoo.models,janitoo_flask.blueprint,janitoo_flask.menu_left,janitoo_flask.listener,janitoo_flask.network,janitoo_manager.blueprint,janitoo_manager.menu_left,janitoo_manager.listener,janitoo_manager.network}, --type {all,janitoo.threads,janitoo.components,janitoo.values,janitoo.models,janitoo_flask.blueprint,janitoo_flask.menu_left,janitoo_flask.listener,janitoo_flask.network,janitoo_manager.blueprint,janitoo_manager.menu_left,janitoo_manager.listener,janitoo_manager.network}</a>
   </dt>
 
       </dl></dd>
+      
+  <dt>
+    jnt_query command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query--debug">--debug</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query--output">--output {txt,raw}</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-caps command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-caps-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    jnt_query-cmds command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-cmds-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-genres command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-genres-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-network command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--host">--host &lt;host&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--myhadd">--myhadd &lt;myhadd&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--port">--port &lt;port&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--timeout">--timeout &lt;timeout&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-network-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-node command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--hadd">--hadd &lt;hadd&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--host">--host &lt;host&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--myhadd">--myhadd &lt;myhadd&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--port">--port &lt;port&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--timeout">--timeout &lt;timeout&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-node-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-query command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_query-types command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-types-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    jnt_spy command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--host">--host &lt;host&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--port">--port &lt;port&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy--topic">--topic &lt;topic&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_spy-h">-h, --help</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/index.html#janitoo.bus.JNTBus">JNTBus (class in janitoo.bus)</a>, <a href="janitoo.html#janitoo.bus.JNTBus">[1]</a>
+  </dt>
+
       
   <dt><a href="api/index.html#janitoo.node.JNTBusNodeMan">JNTBusNodeMan (class in janitoo.node)</a>, <a href="janitoo.html#janitoo.node.JNTBusNodeMan">[1]</a>
   </dt>
@@ -1357,22 +1688,10 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.kernel_modprobe">kernel_modprobe() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.kernel_modprobe">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.kernel_modprobe">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.bus.JNTBus.kernel_rmmod">kernel_rmmod() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.kernel_rmmod">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.kernel_rmmod">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -1409,12 +1728,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.load_extensions">load_extensions() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.load_extensions">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.load_extensions">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -1443,10 +1756,6 @@
   </dt>
 
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.loop">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTBusNodeMan.loop">(janitoo.node.JNTBusNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTBusNodeMan.loop">[1]</a>
   </dt>
 
@@ -1463,10 +1772,6 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.tests.make_fake_component">make_fake_component() (in module janitoo.tests)</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.make_pidlockfile">make_pidlockfile() (in module janitoo.runner)</a>, <a href="janitoo.html#janitoo.runner.make_pidlockfile">[1]</a>
   </dt>
 
       
@@ -1526,10 +1831,6 @@
   </dt>
 
       <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.name">(janitoo.fsm.JNTBus attribute)</a>
-  </dt>
-
         
   <dt><a href="api/index.html#janitoo.node.JNTNode.name">(janitoo.node.JNTNode attribute)</a>, <a href="janitoo.html#janitoo.node.JNTNode.name">[1]</a>
   </dt>
@@ -1631,10 +1932,6 @@
 
       <dd><dl>
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.options">(janitoo.fsm.JNTBus attribute)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTNode.options">(janitoo.node.JNTNode attribute)</a>, <a href="janitoo.html#janitoo.node.JNTNode.options">[1]</a>
   </dt>
 
@@ -1645,10 +1942,6 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner.parse_args">parse_args() (janitoo.runner.Runner method)</a>, <a href="janitoo.html#janitoo.runner.Runner.parse_args">[1]</a>
-  </dt>
-
       
   <dt><a href="api/index.html#janitoo.value.JNTValue.poll_delay">poll_delay (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.poll_delay">[1]</a>
   </dt>
@@ -1705,10 +1998,6 @@
 
       <dd><dl>
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.product_name">(janitoo.fsm.JNTBus attribute)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTNode.product_name">(janitoo.node.JNTNode attribute)</a>, <a href="janitoo.html#janitoo.node.JNTNode.product_name">[1]</a>
   </dt>
 
@@ -1718,10 +2007,6 @@
   </dt>
 
       <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.product_type">(janitoo.fsm.JNTBus attribute)</a>
-  </dt>
-
         
   <dt><a href="api/index.html#janitoo.node.JNTNode.product_type">(janitoo.node.JNTNode attribute)</a>, <a href="janitoo.html#janitoo.node.JNTNode.product_type">[1]</a>
   </dt>
@@ -1971,6 +2256,8 @@
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.request_node_basics">request_node_basics() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.request_node_basics">[1]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.request_node_commands">request_node_commands() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.request_node_commands">[1]</a>
   </dt>
@@ -1979,8 +2266,6 @@
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.request_node_configs">request_node_configs() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.request_node_configs">[1]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.request_node_nodes">request_node_nodes() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.request_node_nodes">[1]</a>
   </dt>
@@ -2065,26 +2350,6 @@
   </dt>
 
       </dl></dd>
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner">Runner (class in janitoo.runner)</a>, <a href="janitoo.html#janitoo.runner.Runner">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.RunnerError">RunnerError</a>, <a href="janitoo.html#janitoo.runner.RunnerError">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.RunnerInvalidActionError">RunnerInvalidActionError</a>, <a href="janitoo.html#janitoo.runner.RunnerInvalidActionError">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.RunnerStartFailureError">RunnerStartFailureError</a>, <a href="janitoo.html#janitoo.runner.RunnerStartFailureError">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.RunnerStopFailureError">RunnerStopFailureError</a>, <a href="janitoo.html#janitoo.runner.RunnerStopFailureError">[1]</a>
-  </dt>
-
   </dl></td>
 </tr></table>
 
@@ -2167,10 +2432,6 @@
   </dt>
 
         
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.start">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-        
   <dt><a href="api/index.html#janitoo.node.JNTNodeMan.start">(janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.start">[1]</a>
   </dt>
 
@@ -2213,10 +2474,6 @@
 
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.start_broadcast_users_discover">start_broadcast_users_discover() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.start_broadcast_users_discover">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.node.JNTBusNodeMan.start_bus_components">start_bus_components() (janitoo.node.JNTBusNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTBusNodeMan.start_bus_components">[1]</a>
   </dt>
 
       
@@ -2280,10 +2537,6 @@
   </dt>
 
       
-  <dt><a href="api/index.html#janitoo.runner.Runner.start_message">start_message (janitoo.runner.Runner attribute)</a>, <a href="janitoo.html#janitoo.runner.Runner.start_message">[1]</a>
-  </dt>
-
-      
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.start_nodes_discover">start_nodes_discover() (janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.start_nodes_discover">[1]</a>
   </dt>
 
@@ -2340,14 +2593,6 @@
 
       </dl></dd>
       
-  <dt><a href="api/index.html#janitoo.runner.Runner.status_message_not_running">status_message_not_running (janitoo.runner.Runner attribute)</a>, <a href="janitoo.html#janitoo.runner.Runner.status_message_not_running">[1]</a>
-  </dt>
-
-      
-  <dt><a href="api/index.html#janitoo.runner.Runner.status_message_running">status_message_running (janitoo.runner.Runner attribute)</a>, <a href="janitoo.html#janitoo.runner.Runner.status_message_running">[1]</a>
-  </dt>
-
-      
   <dt><a href="api/index.html#janitoo.bus.JNTBus.stop">stop() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.stop">[1]</a>
   </dt>
 
@@ -2358,10 +2603,6 @@
 
         
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.stop">(janitoo.dhcp.JNTNetwork method)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.stop">[1]</a>
-  </dt>
-
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.stop">(janitoo.fsm.JNTBus method)</a>
   </dt>
 
         
@@ -2582,15 +2823,9 @@
   </dt>
 
       
-  <dt><a href="api/index.html#janitoo.node.JNTNodeMan.trigger_reload">trigger_reload() (janitoo.node.JNTNodeMan method)</a>, <a href="janitoo.html#janitoo.node.JNTNodeMan.trigger_reload">[1]</a>
+  <dt><a href="api/index.html#janitoo.thread.BaseThread.trigger_reload">trigger_reload() (janitoo.thread.BaseThread method)</a>, <a href="janitoo.html#janitoo.thread.BaseThread.trigger_reload">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.thread.BaseThread.trigger_reload">(janitoo.thread.BaseThread method)</a>, <a href="janitoo.html#janitoo.thread.BaseThread.trigger_reload">[1]</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.value.JNTValue.type">type (janitoo.value.JNTValue attribute)</a>, <a href="janitoo.html#janitoo.value.JNTValue.type">[1]</a>
   </dt>
@@ -2627,12 +2862,6 @@
   <dt><a href="api/index.html#janitoo.bus.JNTBus.update_attrs">update_attrs() (janitoo.bus.JNTBus method)</a>, <a href="janitoo.html#janitoo.bus.JNTBus.update_attrs">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.update_attrs">(janitoo.fsm.JNTBus method)</a>
-  </dt>
-
-      </dl></dd>
       
   <dt><a href="api/index.html#janitoo.dhcp.JNTNetwork.users_count">users_count (janitoo.dhcp.JNTNetwork attribute)</a>, <a href="janitoo.html#janitoo.dhcp.JNTNetwork.users_count">[1]</a>
   </dt>
@@ -2644,10 +2873,6 @@
       <dd><dl>
         
   <dt><a href="api/index.html#janitoo.component.JNTComponent.uuid">(janitoo.component.JNTComponent attribute)</a>, <a href="janitoo.html#janitoo.component.JNTComponent.uuid">[1]</a>
-  </dt>
-
-        
-  <dt><a href="api/index.html#janitoo.fsm.JNTBus.uuid">(janitoo.fsm.JNTBus attribute)</a>
   </dt>
 
         
