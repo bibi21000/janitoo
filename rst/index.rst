@@ -13,6 +13,7 @@ Contents:
     API Documentation : Raspberry Pi <janitoo_pi>
     API Documentation : Roomba <janitoo_roomba>
     API Documentation : Common <janitoo>
+    Command-line interface <cli>
 
 
 Indices and tables
