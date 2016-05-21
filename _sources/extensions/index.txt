@@ -1,18 +1,7 @@
-janitoo package
-===============
+Janitoo's extensions
+====================
 
-Show janitoo's extensions.
+This package contains the following extensions for Janitoo.
 
-Core extensions
----------------
-
-Threads
-^^^^^^^
-
- - fake (janitoo.tests:make_thread)
-
-Components
-^^^^^^^^^^
-
- - fake.component (janitoo.tests:make_fake_component)
+.. jnt-extensions::
 
