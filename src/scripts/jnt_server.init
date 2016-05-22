@@ -15,7 +15,7 @@ NAME="jnt_server"
 
 # Internal script
 # You should not update lines below
-# Version 0.0.8
+# Version 0.0.9
 PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
 DAEMON="/usr/bin/${NAME}"
