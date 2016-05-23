@@ -124,7 +124,7 @@ class JNTValue(object):
                      return data.split('|')
                 logger.warning('[%s] - Do not convert data %s to %s.', self.__class__.__name__, data, VALUE_DESC[self.type]['label'])
                 return data
-            except:
+            except Exception:
                 logger.exception('[%s] - Exception when converting data %s to %s', self.__class__.__name__, data, VALUE_DESC[self.type]['label'])
                 return None
         return None

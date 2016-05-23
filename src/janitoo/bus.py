@@ -78,14 +78,14 @@ class JNTBus(object):
                 if entry.name.startswith('%s.'%self.oid):
                     try:
                         self.factory[entry.name] = entry.load()
-                    except:
+                    except Exception:
                         logger.exception('[%s] - Exception when loading entry_point %s', self.__class__.__name__,  entry.name)
         if not hasattr(self,'value_factory'):
             self.value_factory = {}
             for entrypoint in iter_entry_points(group = 'janitoo.values'):
                 try:
                     self.value_factory[entrypoint.name] = entrypoint.load()
-                except:
+                except Exception:
                     logger.exception('[%s] - Exception when loading entry_point %s', self.__class__.__name__,  entrypoint.name)
         if not hasattr(self,'components'):
             self.components = {}
@@ -114,7 +114,7 @@ class JNTBus(object):
         """
         try:
             self.stop()
-        except:
+        except Exception:
             pass
 
     def get_bus_value(self, value_uuid):
@@ -267,7 +267,7 @@ class JNTBus(object):
         logger.debug('[%s] - Load bus extensions %s with in section %s', self.__class__.__name__, oid, self.oid )
         try:
             exts = self.options.get_option(self.oid, 'extensions', default="").split(',')
-        except:
+        except Exception:
             logger.warning("[%s] - Can't load_extensions", self.__class__.__name__, exc_info=True)
             exts = []
         self.extend_from_entry_points(oid, exts)

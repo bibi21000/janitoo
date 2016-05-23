@@ -214,7 +214,7 @@ class Runner(object):
             if self.pidfile:
                 try:
                     self.pidfile.__exit__(None, None, None)
-                except:
+                except Exception:
                     pass
         self.app_shutdown()
 

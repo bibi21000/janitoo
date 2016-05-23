@@ -81,7 +81,7 @@ class BaseThread(threading.Thread):
         """
         try:
             self.stop()
-        except:
+        except Exception:
             pass
 
     def init_section(self):
@@ -135,11 +135,11 @@ class BaseThread(threading.Thread):
         """
         try:
             self.loop_sleep = float(self.options.get_option(self.section, 'loop_sleep'))
-        except:
+        except Exception:
             logger.info("[%s] - Can't set loop_sleep from configuration file. Using default value %s", self.__class__.__name__, self.loop_sleep)
         try:
             self.slow_start = int(self.options.get_option('system','slow_start'))
-        except:
+        except Exception:
             logger.info("[%s] - Can't set slow_start from configuration file. Using default value %s", self.__class__.__name__, self.slow_start)
 
     def post_loop(self):
@@ -208,7 +208,7 @@ class JNTThread(BaseThread):
             self._reloadevent.clear()
             try:
                 self.pre_loop()
-            except:
+            except Exception:
                 logger.exception('[%s] - Exception in pre_loop', self.__class__.__name__)
                 self._stopevent.set()
             self.nodeman.start(self.trigger_reload, loop_sleep=self.loop_sleep, slow_start=self.slow_start)
@@ -216,7 +216,7 @@ class JNTThread(BaseThread):
                 self.nodeman.loop(self._reloadevent)
             try:
                 self.post_loop()
-            except:
+            except Exception:
                 logger.exception('[%s] - Exception in post_loop', self.__class__.__name__)
             self.nodeman.stop()
             i = 0

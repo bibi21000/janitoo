@@ -96,7 +96,7 @@ class JNTOptions(object):
                 self._cache[section] = dict(config.items(section))
                 #~ print self._cache[section]
                 return self._cache[section]
-        except:
+        except Exception:
             logger.exception("Catched exception")
         return {}
 
@@ -123,14 +123,14 @@ class JNTOptions(object):
                         try:
                             self._cache[section][key] = int(opt)
                             return self._cache[section][key]
-                        except:
+                        except Exception:
                             logger.exception("[%s] - Exception when converting option to integer : [%s] %s = %s", self.__class__.__name__, section, key, opt)
                             return None
                     elif type(default) == type(0.0):
                         try:
                             self._cache[section][key] = float(opt)
                             return self._cache[section][key]
-                        except:
+                        except Exception:
                             logger.exception("[%s] - Exception when converting option to float : [%s] %s = %s", self.__class__.__name__, section, key, opt)
                             return None
                     self._cache[section][key] = opt

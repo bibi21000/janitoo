@@ -93,7 +93,7 @@ class JNTValueFactoryEntry(JNTValue):
             if 'config' not in self.instances[index] or self.instances[index]['config'] != data:
                 self.instances[index]['config'] = data
                 self.options.set_option(node_uuid, '%s_%s_%s'%(self.uuid, 'config', index), data)
-        except:
+        except Exception:
             logger.exception('[%s] - Exception when writing %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'config', index, node_uuid)
 
     def get_config(self, node_uuid, index):
@@ -107,7 +107,7 @@ class JNTValueFactoryEntry(JNTValue):
             if self.instances[index]['config'] is None:
                 try:
                     self.instances[index]['config'] = self.options.get_option(node_uuid, '%s_%s_%s'%(self.uuid, 'config', index))
-                except:
+                except Exception:
                     logger.exception('[%s] - Exception when retrieving %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'config', index, node_uuid)
         else:
             stopped = False
@@ -123,7 +123,7 @@ class JNTValueFactoryEntry(JNTValue):
                         i += 1
                     else:
                         stopped = True
-                except:
+                except Exception:
                     logger.exception('[%s] - Exception when retrieving %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'config', i, node_uuid)
         if index not in self.instances:
             return None
@@ -167,7 +167,7 @@ class JNTValueFactoryEntry(JNTValue):
                 self.options.set_option(node_uuid, '%s_%s_%s'%(self.uuid, 'poll', index), data)
                 if index == 0:
                     self._update_poll(self.instances[index]['poll'])
-        except:
+        except Exception:
             logger.exception('[%s] - Exception when writing %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'poll', index, node_uuid)
 
     def _get_poll(self, node_uuid, index):
@@ -187,7 +187,7 @@ class JNTValueFactoryEntry(JNTValue):
                 if index == 0:
                     self._update_poll(data)
                 return data
-            except:
+            except Exception:
                 logger.exception('[%s] - Exception when retrieving %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'poll', index, node_uuid)
         return self.instances[index]['poll']
 
@@ -257,7 +257,7 @@ class JNTValueFactoryEntry(JNTValue):
             if self.instances[index]['data'] is None:
                 self.instances[index]['data'] = self.default
             return self.instances[index]['data']
-        except:
+        except Exception:
             logger.exception('[%s] - Exception when retrieving %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'poll', index, node_uuid)
         return self.default
 
@@ -295,7 +295,7 @@ class JNTValueFactoryEntry(JNTValue):
                 #~ print "Ok", '%s_%s'%(self.uuid, index)
                 self.options.set_option(node_uuid, '%s_%s'%(self.uuid, index), data)
             #~ print index, self.instances[index]['data']
-        except:
+        except Exception:
             logger.exception('[%s] - Exception when setting %s_%s_%s for node %s', self.__class__.__name__, self.uuid, 'data', index, node_uuid)
 
     def to_dict_with_index(self, index, initial=None):
@@ -344,7 +344,7 @@ class JNTValueFactoryEntry(JNTValue):
                 #~ print i, res['label'], configs[i]
                 ret[i] = self.to_dict_with_index(i, res)
                 i += 1
-        except:
+        except Exception:
             logger.exception('[%s] - Exception in to_dict_with_indexes', self.__class__.__name__)
         #~ print "---------------------------------------------------------- ret ", ret
         return ret
@@ -356,6 +356,6 @@ class JNTValueFactoryEntry(JNTValue):
             res = self.to_dict_with_indexes()
             #~ print "to_json_with_indexes", res
             return json_dumps(res)
-        except:
+        except Exception:
             logger.exception('[%s] - Exception in to_json_with_indexes', self.__class__.__name__)
         return None

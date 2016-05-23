@@ -65,7 +65,7 @@ class MQTTBasic(mqttc.Client):
         """
         try:
             mqttc.Client.disconnect(self)
-        except:
+        except Exception:
             logger.exception('[%s] - Exception in disconnect', self.__class__.__name__)
 
     def connect_with_options(self):
@@ -614,7 +614,7 @@ class MQTTClient(threading.Thread):
         while rc == 0 and not self._stopevent.isSet():
             try:
                 rc = self.client.loop_forever()
-            except:
+            except Exception:
                 logger.warning("[%s] - Exception in run : %s", self.__class__.__name__, traceback.format_exc())
         #~ self.client.loop_forever(retry_first_connection=False)
         self.client = None

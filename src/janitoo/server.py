@@ -74,7 +74,7 @@ class JNTServer(object):
         """
         try:
             self.stop()
-        except:
+        except Exception:
             pass
 
     def start(self):
@@ -90,13 +90,13 @@ class JNTServer(object):
         if loop_sleep is not None:
             try:
                 self.loop_sleep = int(loop_sleep)
-            except:
+            except Exception:
                 logger.info("[%s] - Can't set loop_sleep from configuration file. Using default valuse %s", self.__class__.__name__, self.loop_sleep)
         gc_delay = self.options.get_option('system','gc_delay')
         if gc_delay is not None:
             try:
                 self.gc_delay = int(gc_delay)
-            except:
+            except Exception:
                 logger.info("[%s] - Can't set gc_delay from configuration file. Using default valuse %s", self.__class__.__name__, self.gc_delay)
         if self.gc_delay>0:
             self.gc_next_run = datetime.datetime.now() + datetime.timedelta(seconds=self.gc_delay)
@@ -104,7 +104,7 @@ class JNTServer(object):
         if slow_start is not None:
             try:
                 self.slow_start = int(slow_start)
-            except:
+            except Exception:
                 logger.info("[%s] - Can't set slow_start from configuration file. Using default valuse %s", self.__class__.__name__, self.slow_start)
         for entry in iter_entry_points(group='janitoo.threads', name=None):
             th=None
@@ -113,9 +113,9 @@ class JNTServer(object):
                 mkth = entry.load()
                 try:
                     th = mkth(self.options.data)
-                except:
+                except Exception:
                     logger.exception("[%s] - Exception when loading thread from entry_point : %s", self.__class__.__name__, entry.name)
-            except:
+            except Exception:
                 logger.exception("[%s] - Exception when loading thread from entry_point : %s", self.__class__.__name__, entry.name)
             if th is not None:
                 self._threads.append(th)
@@ -293,7 +293,7 @@ class JNTControllerManager(object):
             if self.mqtt_controller.is_alive():
                 try:
                     self.mqtt_controller.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - Catched exception", self.__class__.__name__)
             self.mqtt_controller = None
         self.mqtt_controller = None
@@ -413,11 +413,11 @@ class JNTControllerManager(object):
                                 topic = "/nodes/%s/reply" % data['reply_hadd']
                                 self._requests[data['uuid']](topic, resp)
                             return
-                        except:
+                        except Exception:
                             logger.exception(u"[%s] - Exception when running on_request method", self.__class__.__name__)
                             return
             logger.warning("[%s] - Unknown request value %s", self.__class__.__name__, data)
-        except:
+        except Exception:
             logger.exception("[%s] - Exception in on_request", self.__class__.__name__)
 
 

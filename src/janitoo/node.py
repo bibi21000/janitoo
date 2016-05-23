@@ -145,7 +145,7 @@ class JNTNodeMan(object):
             self.stop()
             self._hourly_jobs = None
             self._daily_jobs = None
-        except:
+        except Exception:
             pass
 
     def start(self, trigger_reload=None, loop_sleep=0.1, slow_start=0.05):
@@ -223,7 +223,7 @@ class JNTNodeMan(object):
                     self.mqtt_heartbeat = MQTTClient(options=self.options.data)
                     self.mqtt_heartbeat.connect()
                     self.mqtt_heartbeat.start()
-                except:
+                except Exception:
                     logger.exception("[%s] - start_heartbeat_sender", self.__class__.__name__)
                 finally:
                     self.mqtt_heartbeat_lock.release()
@@ -245,7 +245,7 @@ class JNTNodeMan(object):
                     self.mqtt_heartbeat.stop()
                     if self.mqtt_heartbeat.is_alive():
                         self.mqtt_heartbeat.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - stop_heartbeat_sender", self.__class__.__name__)
                 finally:
                     self.mqtt_heartbeat = None
@@ -267,7 +267,7 @@ class JNTNodeMan(object):
                     self.mqtt_broadcast.connect()
                     self.mqtt_broadcast.subscribe(topic=TOPIC_BROADCAST_REQUEST, callback=self.on_request)
                     self.mqtt_broadcast.start()
-                except:
+                except Exception:
                     logger.exception("[%s] - start_broadcast_request", self.__class__.__name__)
                 finally:
                     self.mqtt_broadcast_lock.release()
@@ -286,7 +286,7 @@ class JNTNodeMan(object):
                     self.mqtt_broadcast.stop()
                     if self.mqtt_broadcast.is_alive():
                         self.mqtt_broadcast.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - stop_broadcast_request", self.__class__.__name__)
                 finally:
                     self.mqtt_broadcast = None
@@ -316,7 +316,7 @@ class JNTNodeMan(object):
                         if self.nodes[node] != self._controller:
                             logger.debug("[%s] - Add topic %s", self.__class__.__name__, TOPIC_NODES_REQUEST%(self.nodes[node].hadd))
                             self.mqtt_nodes.add_topic(topic=TOPIC_NODES_REQUEST%(self.nodes[node].hadd), callback=self.on_request)
-                except:
+                except Exception:
                     logger.exception("[%s] - start_nodes_request", self.__class__.__name__)
                 finally:
                     self.mqtt_nodes_lock.release()
@@ -339,7 +339,7 @@ class JNTNodeMan(object):
                     self.mqtt_nodes.stop()
                     if self.mqtt_nodes.is_alive():
                         self.mqtt_nodes.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - stop_nodes_request", self.__class__.__name__)
                 finally:
                     self.mqtt_nodes = None
@@ -362,7 +362,7 @@ class JNTNodeMan(object):
                     #~ self.mqtt_controller_reply.connect()
                     #~ self.mqtt_controller_reply.subscribe(topic=TOPIC_NODES_REPLY%(self._controller.hadd), callback=self.on_reply)
                     #~ self.mqtt_controller_reply.start()
-                except:
+                except Exception:
                     logger.exception("[%s] - start_controller_reply", self.__class__.__name__)
                 finally:
                     self.mqtt_controller_reply_lock.release()
@@ -381,7 +381,7 @@ class JNTNodeMan(object):
                     self.mqtt_controller_reply.stop()
                     if self.mqtt_controller_reply.is_alive():
                         self.mqtt_controller_reply.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - stop_controller_reply", self.__class__.__name__)
                 finally:
                     self.mqtt_controller_reply = None
@@ -404,7 +404,7 @@ class JNTNodeMan(object):
                     #~ self.mqtt_controller_uuid.connect()
                     #~ self.mqtt_controller_uuid.subscribe(topic=TOPIC_NODES_REPLY%(self._controller_hadd), callback=self.on_reply_uuid)
                     #~ self.mqtt_controller_uuid.start()
-                except:
+                except Exception:
                     logger.exception("[%s] - start_controller_uuid", self.__class__.__name__)
                 finally:
                     self.mqtt_controller_uuid_lock.release()
@@ -439,7 +439,7 @@ class JNTNodeMan(object):
                 logger.debug("[%s] - Added controller node with uuid %s and hadd %s", self.__class__.__name__, self._controller.uuid, self._controller_hadd)
                 #~ print self._controller.__dict__
                 #~ print self.config_timeout
-        except:
+        except Exception:
             logger.exception("[%s] - finish_controller_uuid", self.__class__.__name__)
         finally:
             self.request_boot_timer_lock.release()
@@ -460,7 +460,7 @@ class JNTNodeMan(object):
                     self.mqtt_controller_uuid.stop()
                     if self.mqtt_controller_uuid.is_alive():
                         self.mqtt_controller_uuid.join()
-                except:
+                except Exception:
                     logger.exception("[%s] - stop_controller_uuid", self.__class__.__name__)
                 finally:
                     self.mqtt_controller_uuid = None
@@ -737,7 +737,7 @@ class JNTNodeMan(object):
                                 topic = "/nodes/%s/reply" % data['reply_hadd']
                                 self._requests[data['uuid']](topic, resp)
                             return
-                        except:
+                        except Exception:
                             logger.exception("Exception when running on_request method")
                             return
             elif data['cmd_class'] == COMMAND_CONFIGURATION:
@@ -854,7 +854,7 @@ class JNTNodeMan(object):
                         self.publish_request(topic, msg)
                         return
             logger.warning("Unknown request value %s", data)
-        except:
+        except Exception:
             logger.exception("Exception in on_request")
 
     def request_info_nodes(self, reply_topic, resp):
@@ -1269,7 +1269,7 @@ class JNTNodeMan(object):
         hourly = False
         try:
             hourly = string_to_bool(self.options.get_option(self.section, 'hourly_timer', default = False))
-        except:
+        except Exception:
             logger.warning("[%s] - C'ant get hourly_timer from configuration file. Disable it", self.__class__.__name__)
             hourly = False
         if hourly:
@@ -1319,22 +1319,22 @@ class JNTNodeMan(object):
         logger.debug("[%s] - do_hourly_timer", self.__class__.__name__)
         try:
             self.options.set_option(self.section, 'hourly_timer_lastrun', datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S'))
-        except:
+        except Exception:
             logger.exception("[%s] - Can't save hourly_timer_lastrun in configuration file.", self.__class__.__name__)
         for job in self._hourly_jobs:
             try:
                 job()
-            except:
+            except Exception:
                 logger.exception("[%s] - Exception in hourly timers", self.__class__.__name__)
         if datetime.datetime.now().hour == 0:
             try:
                 self.options.set_option(self.section, 'daily_timer_lastrun', datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S'))
-            except:
+            except Exception:
                 logger.exception("[%s] - Can't save daily_timer_lastrun in configuration file.", self.__class__.__name__)
             for job in self._daily_jobs:
                 try:
                     job()
-                except:
+                except Exception:
                     logger.exception("[%s] - exception in do daily timers", self.__class__.__name__)
         logger.debug("[%s] - Finish do_hourly_timer", self.__class__.__name__)
 
@@ -1352,7 +1352,7 @@ class JNTBusNodeMan(JNTNodeMan):
         logger.info("[%s] - Stop the node manager", self.__class__.__name__)
         try:
             self.bus.stop()
-        except:
+        except Exception:
             logger.exception("[%s] - Exception when stopping", self.__class__.__name__)
         JNTNodeMan.stop(self)
 
@@ -1395,7 +1395,7 @@ class JNTBusNodeMan(JNTNodeMan):
             compo = self.bus.components[uuid]
             try:
                 compo.start(self.mqtt_nodes)
-            except:
+            except Exception:
                 logger.exception("[%s] - Can't start component %s", self.__class__.__name__, uuid)
         elif not self.is_stopped:
             if uuid != self._controller.uuid:
@@ -1430,7 +1430,7 @@ class JNTBusNodeMan(JNTNodeMan):
         #~ for key in self.bus.components.keys():
             #~ try:
                 #~ compo.start(self.mqtt_nodes)
-            #~ except:
+            #~ except Exception:
                 #~ logger.exception("[%s] - Can't start component %s on address %s", self.__class__.__name__, self.bus.components[key], compo._addr)
 
     def build_bus_components(self):
@@ -1446,7 +1446,7 @@ class JNTBusNodeMan(JNTNodeMan):
                 add_comp = '%s__%s' % (self.bus.uuid, key)
                 #add_comp = key
                 self.bus.add_component(components[key], add_comp, options=self.options)
-            except:
+            except Exception:
                 logger.exception("[%s] - Can't add component %s", self.__class__.__name__, key)
 
     def before_controller_reply_config(self):
@@ -1462,7 +1462,7 @@ class JNTBusNodeMan(JNTNodeMan):
         JNTNodeMan.loop(self, stopevent)
         try:
             self.bus.loop(stopevent)
-        except:
+        except Exception:
             logger.exception("Exception in nodeman loop")
 
 class JNTNode(object):

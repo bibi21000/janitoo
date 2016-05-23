@@ -81,14 +81,14 @@ class JNTServer(object):
         if loop_sleep is not None:
             try:
                 self.loop_sleep = int(loop_sleep)
-            except:
+            except Exception:
                 logger.exception("[%s] - Exception when retrieving value of loop_sleep. Use default value instead", self.__class__.__name__)
         self.slow_start = 0.05
         slow_start = self.options.get_option('system','slow_start')
         if slow_start is not None:
             try:
                 self.slow_start = int(slow_start)
-            except:
+            except Exception:
                 logger.exception("[%s] - Exception when retrieving value of slow_start. Use default value instead", self.__class__.__name__)
 
     def start(self):
@@ -258,7 +258,7 @@ class JNTControllerManager(object):
             if self.mqtt_controller.is_alive():
                 try:
                     self.mqtt_controller.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
             self.mqtt_controller = None
 
@@ -335,11 +335,11 @@ class JNTControllerManager(object):
                                 topic = "/nodes/%s/reply" % data['data']
                                 self._requests[data['uuid']](topic, resp)
                             return
-                        except:
+                        except Exception:
                             logger.exception("Exception when running on_request method")
                             return
             logger.warning("Unknown request value %s", data)
-        except:
+        except Exception:
             logger.exception("Exception in on_request")
 
 

@@ -364,7 +364,7 @@ def threaded_send_resolv(thread_event, options, hadd, resp, data):
     if mqttc.is_alive():
         try:
             mqttc.join()
-        except:
+        except Exception:
             logger.exception("Catched exception")
     mqttc = None
 
@@ -495,7 +495,7 @@ class JNTNetwork(object):
         """
         try:
             self.stop()
-        except:
+        except Exception:
             pass
 
     @property
@@ -597,7 +597,7 @@ class JNTNetwork(object):
             self.users = {}
             self.bascis = {}
             self.systems = {}
-        except:
+        except Exception:
             logger.exception("Exception in network stop")
         finally:
             self._lock.release()
@@ -683,7 +683,7 @@ class JNTNetwork(object):
                 if self.broadcast_mqttc.is_alive():
                     try:
                         self.broadcast_mqttc.join()
-                    except:
+                    except Exception:
                         logger.exception("Catched exception")
                 self.broadcast_mqttc = None
         self.emit_network()
@@ -909,7 +909,7 @@ class JNTNetwork(object):
                 self.resolv_mqttc.start()
                 try:
                     self._stopevent.wait(0.5)
-                except:
+                except Exception:
                     logger.exception(u'Catched exception')
                 #~ self.resolv_mqttc.on_connect = self.resolv_mqttc_on_connect
                 th = threading.Timer(self.request_timeout/4, self.request_resolv_nodes)
@@ -961,12 +961,12 @@ class JNTNetwork(object):
                 self.resolv_mqttc.unsubscribe(topic="%s#"%TOPIC_RESOLV)
                 try:
                     self.resolv_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 if self.resolv_mqttc.is_alive():
                     try:
                         self.resolv_mqttc.join()
-                    except:
+                    except Exception:
                         logger.exception("Catched exception")
                 self.resolv_mqttc = None
 
@@ -1002,11 +1002,11 @@ class JNTNetwork(object):
                 self.resolv_request_mqttc.unsubscribe(topic="%s#"%TOPIC_RESOLV_REQUEST)
                 try:
                     self.resolv_request_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.resolv_request_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.resolv_request_mqttc = None
 
@@ -1069,11 +1069,11 @@ class JNTNetwork(object):
                 self.resolv_heartbeat_mqttc.unsubscribe(topic="%sheartbeat"%TOPIC_RESOLV)
                 try:
                     self.resolv_heartbeat_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.resolv_heartbeat_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.resolv_heartbeat_mqttc = None
 
@@ -1099,11 +1099,11 @@ class JNTNetwork(object):
                 self.nodes_mqttc.unsubscribe(topic='/nodes/%s/reply/#'%self.hadds[0])
                 try:
                     self.nodes_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.nodes_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.nodes_mqttc = None
 
@@ -1167,11 +1167,11 @@ class JNTNetwork(object):
                 self.heartbeat_discover_mqttc.unsubscribe(topic='/dhcp/heartbeat/#')
                 try:
                     self.heartbeat_discover_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.heartbeat_discover_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.heartbeat_discover_mqttc = None
         self.emit_network()
@@ -1212,11 +1212,11 @@ class JNTNetwork(object):
                 self.heartbeat_mqttc.unsubscribe(topic='/dhcp/heartbeat/#')
                 try:
                     self.heartbeat_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.heartbeat_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.heartbeat_mqttc = None
         self.emit_network()
@@ -1282,11 +1282,11 @@ class JNTNetwork(object):
             if self.dispatch_heartbeat_mqttc is not None:
                 try:
                     self.dispatch_heartbeat_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.dispatch_heartbeat_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.dispatch_heartbeat_mqttc = None
 
@@ -1334,11 +1334,11 @@ class JNTNetwork(object):
                 self.values_mqttc.unsubscribe(topic='/values/#')
                 try:
                     self.values_mqttc.stop()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 try:
                     self.values_mqttc.join()
-                except:
+                except Exception:
                     logger.exception("Catched exception")
                 self.values_mqttc = None
         self.emit_network()
@@ -1381,7 +1381,7 @@ class JNTNetwork(object):
                     self.emit_command(data)
                 else :
                     logger.warning("Unknown genre in value %s", data)
-        except:
+        except Exception:
             logger.exception("Exception in on_value")
 
     def on_resolv_request(self, client, userdata, message):
@@ -1479,10 +1479,10 @@ class JNTNetwork(object):
                         th = threading.Timer(0.05, threaded_send_resolv, args = (self._stopevent, self.options, data['reply_hadd'], resp, data_to_send))
                         th.start()
                         self.threads_timers.append(th)
-                    except:
+                    except Exception:
                         logger.exception("Exception when running on_request method")
                         return
-        except:
+        except Exception:
             logger.exception("Exception in on_resolv_request")
 
     def on_reply(self, client, userdata, message):
@@ -1542,7 +1542,7 @@ class JNTNetwork(object):
                         th = threading.Timer(0.05, threaded_send_resolv, args = (self._stopevent, self.options, data['reply_hadd'], data, None))
                         th.start()
                         self.threads_timers.append(th)
-        except:
+        except Exception:
             logger.exception("Exception in on_reply")
 
     def on_resolv_heartbeat(self, client, userdata, message):
@@ -1884,7 +1884,7 @@ class JNTNetwork(object):
                 ndata[knode]['state'] = 'PENDING'
             #~ if do_emit == True and initial_startup == False:
             self.emit_node(ndata)
-        except:
+        except Exception:
             logger.exception("Exception in add_nodes")
         finally:
             self._lock.release()
@@ -1923,7 +1923,7 @@ class JNTNetwork(object):
                     #~ print 'add_users', self.users[hadd][uuid][index]
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.users"
             #~ print self.users
-        except:
+        except Exception:
             logger.exception("Exception in add_users")
         finally:
             self._lock.release()
@@ -1964,7 +1964,7 @@ class JNTNetwork(object):
                         #~ self.configs[ndata[nval][kval]['hadd']] = {}
                     #~ self.configs[ndata[nval][kval]['hadd']][ndata[nval][kval]['uuid']] = ndata[nval][kval]
             #~ print "add_configs self.configs ", self.configs
-        except:
+        except Exception:
             logger.exception("Exception in add_configs")
         finally:
             self._lock.release()
@@ -2002,7 +2002,7 @@ class JNTNetwork(object):
                     #~ print 'add_basics', self.basics[hadd][uuid][index]
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.basics"
             #~ print self.basics
-        except:
+        except Exception:
             logger.exception("Exception in add_basics")
         finally:
             self._lock.release()
@@ -2027,7 +2027,7 @@ class JNTNetwork(object):
                     self.systems[ndata[nval][kval]['hadd']][ndata[nval][kval]['uuid']] = ndata[nval][kval]
                     if 'node_uuid' not in ndata[nval][kval]:
                         ndata[nval][kval]['node_uuid'] = self.nodes[ndata[nval][kval]['hadd']]
-        except:
+        except Exception:
             logger.exception("Exception in add_systems")
         finally:
             self._lock.release()
@@ -2065,7 +2065,7 @@ class JNTNetwork(object):
                     #~ print 'add_commands', self.commands[hadd][uuid][index]
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.commands"
             #~ print self.commands
-        except:
+        except Exception:
             logger.exception("Exception in add_commands")
         finally:
             self._lock.release()
@@ -2079,7 +2079,7 @@ class JNTNetwork(object):
             #~ for th in self.threads_timers:
                 #~ if not th.is_alive():
                     #~ self.threads_timers.remove(th)
-        #~ except:
+        #~ except Exception:
             #~ logger.exception("Catched exception in loop")
         #~ to_polls = []
         #~ keys = self.polls.keys()
