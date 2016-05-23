@@ -95,7 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.mqtt">janitoo.mqtt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.node">janitoo.node module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#janitoo-runner-module">janitoo.runner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.runner">janitoo.runner module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server">janitoo.server module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.server_updater">janitoo.server_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../janitoo.html#module-janitoo.thread">janitoo.thread module</a></li>
@@ -291,7 +291,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_jobs</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_daily_jobs</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
 <div class="viewcode-block" id="JNTNodeMan.start"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trigger_reload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">slow_start</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
@@ -369,7 +369,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_heartbeat_sender&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -391,7 +391,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - stop_heartbeat_sender&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_heartbeat</span> <span class="o">=</span> <span class="bp">None</span>
@@ -413,7 +413,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_BROADCAST_REQUEST</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_request</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_broadcast_request&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -432,7 +432,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - stop_broadcast_request&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_broadcast</span> <span class="o">=</span> <span class="bp">None</span>
@@ -462,7 +462,7 @@
                         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="p">:</span>
                             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Add topic </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">TOPIC_NODES_REQUEST</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">hadd</span><span class="p">))</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="o">.</span><span class="n">add_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_NODES_REQUEST</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">hadd</span><span class="p">),</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_request</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_nodes_request&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -485,7 +485,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - stop_nodes_request&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span> <span class="o">=</span> <span class="bp">None</span>
@@ -508,7 +508,7 @@
                     <span class="c">#~ self.mqtt_controller_reply.connect()</span>
                     <span class="c">#~ self.mqtt_controller_reply.subscribe(topic=TOPIC_NODES_REPLY%(self._controller.hadd), callback=self.on_reply)</span>
                     <span class="c">#~ self.mqtt_controller_reply.start()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_controller_reply&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_reply_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -527,7 +527,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_reply</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_reply</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_reply</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - stop_controller_reply&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_reply</span> <span class="o">=</span> <span class="bp">None</span>
@@ -550,7 +550,7 @@
                     <span class="c">#~ self.mqtt_controller_uuid.connect()</span>
                     <span class="c">#~ self.mqtt_controller_uuid.subscribe(topic=TOPIC_NODES_REPLY%(self._controller_hadd), callback=self.on_reply_uuid)</span>
                     <span class="c">#~ self.mqtt_controller_uuid.start()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - start_controller_uuid&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_uuid_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -585,7 +585,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Added controller node with uuid </span><span class="si">%s</span><span class="s"> and hadd </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller_hadd</span><span class="p">)</span>
                 <span class="c">#~ print self._controller.__dict__</span>
                 <span class="c">#~ print self.config_timeout</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - finish_controller_uuid&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">request_boot_timer_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -606,7 +606,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_uuid</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_uuid</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_uuid</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - stop_controller_uuid&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">mqtt_controller_uuid</span> <span class="o">=</span> <span class="bp">None</span>
@@ -883,7 +883,7 @@
                                 <span class="n">topic</span> <span class="o">=</span> <span class="s">&quot;/nodes/</span><span class="si">%s</span><span class="s">/reply&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;reply_hadd&#39;</span><span class="p">]</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_requests</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]](</span><span class="n">topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
                             <span class="k">return</span>
-                        <span class="k">except</span><span class="p">:</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception when running on_request method&quot;</span><span class="p">)</span>
                             <span class="k">return</span>
             <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">COMMAND_CONFIGURATION</span><span class="p">:</span>
@@ -1000,7 +1000,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">publish_request</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
                         <span class="k">return</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Unknown request value </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in on_request&quot;</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="JNTNodeMan.request_info_nodes"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNodeMan.request_info_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">request_info_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reply_topic</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
@@ -1415,7 +1415,7 @@
         <span class="n">hourly</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">hourly</span> <span class="o">=</span> <span class="n">string_to_bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;hourly_timer&#39;</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="bp">False</span><span class="p">))</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - C&#39;ant get hourly_timer from configuration file. Disable it&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
             <span class="n">hourly</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="n">hourly</span><span class="p">:</span>
@@ -1465,22 +1465,22 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - do_hourly_timer&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;hourly_timer_lastrun&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%m/</span><span class="si">%d</span><span class="s">/%Y %H:%M:%S&#39;</span><span class="p">))</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t save hourly_timer_lastrun in configuration file.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hourly_jobs</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">job</span><span class="p">()</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception in hourly timers&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">hour</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;daily_timer_lastrun&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%m/</span><span class="si">%d</span><span class="s">/%Y %H:%M:%S&#39;</span><span class="p">))</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t save daily_timer_lastrun in configuration file.&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_daily_jobs</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">job</span><span class="p">()</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - exception in do daily timers&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Finish do_hourly_timer&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
 </div></div>
@@ -1498,7 +1498,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Stop the node manager&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Exception when stopping&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="n">JNTNodeMan</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </div>
@@ -1541,7 +1541,7 @@
             <span class="n">compo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">uuid</span><span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">compo</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mqtt_nodes</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t start component </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">uuid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">uuid</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">uuid</span><span class="p">:</span>
@@ -1576,7 +1576,7 @@
         <span class="c">#~ for key in self.bus.components.keys():</span>
             <span class="c">#~ try:</span>
                 <span class="c">#~ compo.start(self.mqtt_nodes)</span>
-            <span class="c">#~ except:</span>
+            <span class="c">#~ except Exception:</span>
                 <span class="c">#~ logger.exception(&quot;[%s] - Can&#39;t start component %s on address %s&quot;, self.__class__.__name__, self.bus.components[key], compo._addr)</span>
 </div>
 <div class="viewcode-block" id="JNTBusNodeMan.build_bus_components"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTBusNodeMan.build_bus_components">[docs]</a>    <span class="k">def</span> <span class="nf">build_bus_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1592,7 +1592,7 @@
                 <span class="n">add_comp</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
                 <span class="c">#add_comp = key</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">add_comp</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Can&#39;t add component </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="JNTBusNodeMan.before_controller_reply_config"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTBusNodeMan.before_controller_reply_config">[docs]</a>    <span class="k">def</span> <span class="nf">before_controller_reply_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1608,7 +1608,7 @@
         <span class="n">JNTNodeMan</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stopevent</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bus</span><span class="o">.</span><span class="n">loop</span><span class="p">(</span><span class="n">stopevent</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in nodeman loop&quot;</span><span class="p">)</span>
 </div></div>
 <div class="viewcode-block" id="JNTNode"><a class="viewcode-back" href="../../janitoo.html#janitoo.node.JNTNode">[docs]</a><span class="k">class</span> <span class="nc">JNTNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
