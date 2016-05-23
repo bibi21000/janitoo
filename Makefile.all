@@ -241,7 +241,7 @@ docker-deps:
 	make -C $(module) docker-deps
 
 appliance-deps:
-	make -C $(module) docker-deps
+	make -C $(module) appliance-deps
 
 develop-all:
 	-make -C janitoo develop
