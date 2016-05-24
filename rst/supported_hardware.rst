@@ -8,3 +8,4 @@ All mqtt supported plateforms
  * Arduino : http://knolleary.net/arduino-client-for-mqtt/
  * mysensors : via http://www.mysensors.org/build/mqtt_gateway
  * video-mqtt-smart : http://www.automatedhome.co.uk/hardware/video-mqtt-smart-home-wall-controller-code-published.html
+ * esp8266 : https://github.com/ESP8266nu/ESPEasy
