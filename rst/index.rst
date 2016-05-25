@@ -14,6 +14,7 @@ Contents:
     API Documentation : Roomba <janitoo_roomba>
     API Documentation : Common <janitoo>
     Command-line interface <cli>
+    Using documentation <using_doc>
 
 
 Indices and tables
