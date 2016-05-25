@@ -27,6 +27,7 @@ __copyright__ = "Copyright © 2013-2014-2015 Sébastien GALLET aka bibi21000"
 import sys
 import argparse
 import datetime
+import time
 
 import paho.mqtt.client as mqtt
 
@@ -68,7 +69,22 @@ def jnt_parser():
 
     subparsers = parser.add_subparsers(dest='command', help='commands')
 
-    query_parser = subparsers.add_parser('query', help='Query a node')
+    query_parser = subparsers.add_parser('query', help='Query a node value')
+    query_parser.add_argument('--uuid', action='store', help='The value id')
+    query_parser.add_argument('--data', action='store', help='The data to send to the value', default=None)
+    query_parser.add_argument('--cmdclass', action='store', type=int, help='The value command class')
+    query_parser.add_argument('--index', action='store', type=int, help='Index of the instance value', default=0)
+    query_parser.add_argument('--type', action='store', type=int, help='The value type', default=0x02)
+    query_parser.add_argument('--genre', action='store',
+        choices=['basic', 'user', 'config', 'system', 'command'], help='The value genre',
+        default='user')
+    query_parser.add_argument('--readonly', action='store', type=bool, help='Should we read (get) the value', default=True)
+    query_parser.add_argument('--writeonly', action='store', type=bool, help='Whould we write (set) the value', default=False)
+    query_parser.add_argument('--hadd', action='store', help='The hadd of the node to request info', default=None)
+    query_parser.add_argument('--host', action='store', help='The host of the mosquitto server', default='127.0.0.1')
+    query_parser.add_argument('--port', action='store', help='The port of the mosquitto server', default='1883')
+    query_parser.add_argument('--timeout', action='store', type=int, help='The timeout to wait for response', default=5)
+    query_parser.add_argument('--myhadd', action='store', help='The hadd we will use to receive response', default='9999/9990')
 
     cmdclasses_parser = subparsers.add_parser('cmds', help='Show all available command classes for values')
     genre_parser = subparsers.add_parser('genres', help='Show all available genres for values')
@@ -77,21 +93,21 @@ def jnt_parser():
 
     node_parser = subparsers.add_parser('node', help='Request infos from a node')
     node_parser.add_argument('--vuuid', action='store', help='The value id (request)',
-            choices=jnt_utils.NETWORK_REQUESTS,
+            choices=jnt_utils.NETWORK_REQUESTS+['all'],
             default='request_info_nodes')
     node_parser.add_argument('--hadd', action='store', help='The hadd of the node to request info', default=None)
     node_parser.add_argument('--host', action='store', help='The host of the mosquitto server', default='127.0.0.1')
     node_parser.add_argument('--port', action='store', help='The port of the mosquitto server', default='1883')
-    node_parser.add_argument('--timeout', action='store', help='The timeout to wait for response', default=10)
+    node_parser.add_argument('--timeout', action='store', type=int, help='The timeout to wait for response', default=8)
     node_parser.add_argument('--myhadd', action='store', help='The hadd we will use to receive response', default='9999/9990')
 
     network_parser = subparsers.add_parser('network', help='Request infos from network (broadcast)')
     network_parser.add_argument('--vuuid', action='store', help='The value id (request)',
-            choices=jnt_utils.NETWORK_REQUESTS,
+            choices=jnt_utils.NETWORK_REQUESTS+['all'],
             default='request_info_nodes')
     network_parser.add_argument('--host', action='store', help='The host of the mosquitto server', default='127.0.0.1')
     network_parser.add_argument('--port', action='store', help='The port of the mosquitto server', default='1883')
-    network_parser.add_argument('--timeout', action='store', help='The timeout to wait for response', default=10)
+    network_parser.add_argument('--timeout', action='store', type=int, help='The timeout to wait for response', default=12)
     network_parser.add_argument('--myhadd', action='store', help='The hadd we will use to receive response', default='9999/9990')
 
     return parser
@@ -135,7 +151,7 @@ def main():
                 print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
             if args.output == 'txt':
                 payload = jnt_utils.json_loads(msg.payload)
-                if args.vuuid == 'request_info_nodes' :
+                if payload['uuid'] == 'request_info_nodes' :
                     row    = u"{hadd:<10} {uuid:<30} {name:<25} {location:<20} {product_type}"
                     data = normalize_request_info_nodes(payload['data'])
                     if args.debug:
@@ -147,12 +163,12 @@ def main():
                     for i1 in data.keys():
                         print(row.format(**data[i1]))
                 else:
-                    row    = u"{hadd:<10} {node_uuid:<25} {uuid:<30} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
+                    row    = u"{hadd:<10} {uuid:<30} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
                     data = normalize_request_info_values(payload['data'])
                     if args.debug:
                         print('data', data)
                     if print_header:
-                        header =  {'hadd':'hadd', 'node_uuid':'node_uuid', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
+                        header =  {'hadd':'hadd', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
                         print(row.format(**header))
                         print_header = False
                     for i1 in data.keys():
@@ -168,17 +184,34 @@ def main():
             else:
                 print(msg.payload)
             global stop_loop
+            time.sleep(2)
             stop_loop = True
+
+        if args.vuuid != 'all':
+            vuuids = [args.vuuid]
+        else:
+            vuuids = jnt_utils.NETWORK_REQUESTS
 
         mqttc = get_mqttc(args, on_message, debug=args.debug)
         mqttc.subscribe(jnt_utils.TOPIC_NODES_REPLY%args.myhadd, 0)
-        msg = { 'cmd_class':COMMAND_DISCOVERY, 'genre':0x04, 'uuid':args.vuuid, 'reply_hadd':args.myhadd}
-        mqttc.publish(jnt_utils.TOPIC_NODES_REQUEST%args.hadd, jnt_utils.json_dumps(msg))
-        stop_at = datetime.datetime.now() + datetime.timedelta(seconds=args.timeout)
-        while not stop_loop:
-            if datetime.datetime.now()>stop_at:
-                break
-            mqttc.loop(timeout=0.5)
+        for vuuid in vuuids:
+            print(vuuid)
+            print("-"*10)
+            #~ global stop_loop
+            stop_loop = False
+            msg = { 'cmd_class':COMMAND_DISCOVERY, 'genre':0x04, 'uuid':vuuid, 'reply_hadd':args.myhadd}
+            mqttc.publish(jnt_utils.TOPIC_NODES_REQUEST%args.hadd, jnt_utils.json_dumps(msg))
+            stop_at = datetime.datetime.now() + datetime.timedelta(seconds=args.timeout)
+            while not stop_loop:
+                if datetime.datetime.now()>stop_at:
+                    break
+                mqttc.loop(timeout=0.5)
+            print("")
+        mqttc.unsubscribe(jnt_utils.TOPIC_NODES_REPLY%args.myhadd)
+        mqttc.disconnect()
+        print("")
+        mqttc = None
+
     elif args.command == "network":
 
         def on_message(mqttc, obj, msg):
@@ -187,7 +220,7 @@ def main():
                 print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
             if args.output == 'txt':
                 payload = jnt_utils.json_loads(msg.payload)
-                if args.vuuid == 'request_info_nodes' :
+                if payload['uuid'] == 'request_info_nodes' :
                     row    = u"{hadd:<10} {uuid:<20} {name:<25} {location:<25} {product_type}"
                     data = normalize_request_info_nodes(payload['data'])
                     if args.debug:
@@ -199,12 +232,12 @@ def main():
                     for i1 in data.keys():
                         print(row.format(**data[i1]))
                 else:
-                    row    = u"{hadd:<10} {node_uuid:<25} {uuid:<25} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
+                    row    = u"{hadd:<10} {uuid:<25} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
                     data = normalize_request_info_values(payload['data'])
                     if args.debug:
                         print('data', data)
                     if print_header:
-                        header =  {'hadd':'hadd', 'node_uuid':'node_uuid', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
+                        header =  {'hadd':'hadd', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
                         print(row.format(**header))
                         print_header = False
                     for i1 in data.keys():
@@ -221,17 +254,99 @@ def main():
             else:
                 print(msg.payload)
 
+        if args.vuuid != 'all':
+            vuuids = [args.vuuid]
+        else:
+            vuuids = jnt_utils.NETWORK_REQUESTS
+
         mqttc = get_mqttc(args, on_message, debug=args.debug)
         mqttc.subscribe([(jnt_utils.TOPIC_BROADCAST_REPLY%args.myhadd, 0), (jnt_utils.TOPIC_NODES_REPLY%args.myhadd, 0)])
-        msg = { 'cmd_class':COMMAND_DISCOVERY, 'genre':0x04, 'uuid':args.vuuid, 'reply_hadd':args.myhadd}
-        mqttc.publish(jnt_utils.TOPIC_BROADCAST_REQUEST, jnt_utils.json_dumps(msg))
+        for vuuid in vuuids:
+            print(vuuid)
+            print("-"*10)
+            msg = { 'cmd_class':COMMAND_DISCOVERY, 'genre':0x04, 'uuid':vuuid, 'reply_hadd':args.myhadd}
+            mqttc.publish(jnt_utils.TOPIC_BROADCAST_REQUEST, jnt_utils.json_dumps(msg))
+            stop_at = datetime.datetime.now() + datetime.timedelta(seconds=args.timeout)
+            while True:
+                if datetime.datetime.now()>stop_at:
+                    break
+                mqttc.loop(timeout=0.5)
+            time.sleep(1)
+            print("")
+        mqttc.unsubscribe(jnt_utils.TOPIC_BROADCAST_REPLY%args.myhadd)
+        mqttc.unsubscribe(jnt_utils.TOPIC_NODES_REPLY%args.myhadd)
+        mqttc.disconnect()
+        print("")
+        mqttc = None
+
+    elif args.command == "query":
+
+        def on_message(mqttc, obj, msg):
+            global print_header
+            if args.debug:
+                print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
+            if args.output == 'txt':
+                payload = jnt_utils.json_loads(msg.payload)
+                data = normalize_request_info_values(payload)
+                row    = u"{hadd:<10} {uuid:<25} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
+                if args.debug:
+                    print('data', data)
+                if print_header:
+                    header =  {'hadd':'hadd', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
+                    print(row.format(**header))
+                    print_header = False
+                    for i1 in data.keys():
+                        for i2 in data[i1]:
+                            if 'uuid' in data[i1][i2]:
+                                nested = { 0:data[i1][i2] }
+                            else:
+                                nested = data[i1][i2]
+                            if args.debug:
+                                print('nested', nested)
+                            for i3 in nested:
+                                #Support for old protocol
+                                if 'index' not in nested[i3]:
+                                    nested[i3]['index'] = 0
+                                if 'units' not in nested[i3]:
+                                    nested[i3]['units'] = None
+                                if 'type' not in nested[i3]:
+                                    nested[i3]['type'] = None
+                                if 'cmd_classes' in nested[i3] and 'cmd_class' not in nested[i3]:
+                                    nested[i3]['cmd_class'] = nested[i3]['cmd_classes']
+                                print(row.format(**nested[i3]))
+            else:
+                print(msg.payload)
+
+        mqttc = get_mqttc(args, on_message, debug=args.debug)
+        topic='/values/%s/%s/%s'%(args.genre, args.hadd, args.uuid)
+        if args.genre == "config":
+            genre = 0x03
+        elif args.genre == "system":
+            genre = 0x04
+        elif args.genre == "user":
+            genre = 0x02
+        elif args.genre == "basic":
+            genre = 0x01
+        elif args.genre == "command":
+            genre = 0x05
+        mqttc.subscribe(topic)
+        print(args.uuid)
+        print("-"*10)
+        msg = {'cmd_class' : args.cmdclass, 'uuid':args.uuid, 'data':args.data,
+            'genre':genre, 'is_writeonly':args.writeonly, 'is_readonly':args.readonly, 'hadd':args.hadd}
+        mqttc.publish(jnt_utils.TOPIC_NODES_REQUEST%args.hadd, jnt_utils.json_dumps(msg))
         stop_at = datetime.datetime.now() + datetime.timedelta(seconds=args.timeout)
         while True:
             if datetime.datetime.now()>stop_at:
                 break
             mqttc.loop(timeout=0.5)
-    elif args.command == "query":
-        pass
+        time.sleep(1)
+        print("")
+        mqttc.unsubscribe(topic)
+        mqttc.disconnect()
+        print("")
+        mqttc = None
+
 if __name__ == '__main__':
     main()
 
