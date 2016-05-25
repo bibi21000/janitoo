@@ -176,6 +176,28 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt>
+    --cmdclass &lt;cmdclass&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--cmdclass">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --data &lt;data&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--data">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
     --debug
   </dt>
 
@@ -187,12 +209,27 @@
       </dl></dd>
       
   <dt>
+    --genre {basic,user,config,system,command}
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--genre">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
     --hadd &lt;hadd&gt;
   </dt>
 
       <dd><dl>
         
   <dt><a href="cli.html#cmdoption-jnt_query-node--hadd">jnt_query-node command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--hadd">jnt_query-query command line option</a>
   </dt>
 
       </dl></dd>
@@ -211,7 +248,22 @@
   </dt>
 
         
+  <dt><a href="cli.html#cmdoption-jnt_query-query--host">jnt_query-query command line option</a>
+  </dt>
+
+        
   <dt><a href="cli.html#cmdoption-jnt_spy--host">jnt_spy command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --index &lt;index&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--index">jnt_query-query command line option</a>
   </dt>
 
       </dl></dd>
@@ -227,6 +279,10 @@
 
         
   <dt><a href="cli.html#cmdoption-jnt_query-node--myhadd">jnt_query-node command line option</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--myhadd">jnt_query-query command line option</a>
   </dt>
 
       </dl></dd>
@@ -256,10 +312,27 @@
   </dt>
 
         
+  <dt><a href="cli.html#cmdoption-jnt_query-query--port">jnt_query-query command line option</a>
+  </dt>
+
+        
   <dt><a href="cli.html#cmdoption-jnt_spy--port">jnt_spy command line option</a>
   </dt>
 
       </dl></dd>
+      
+  <dt>
+    --readonly &lt;readonly&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--readonly">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     --timeout &lt;timeout&gt;
@@ -274,9 +347,11 @@
   <dt><a href="cli.html#cmdoption-jnt_query-node--timeout">jnt_query-node command line option</a>
   </dt>
 
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--timeout">jnt_query-query command line option</a>
+  </dt>
+
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     --topic &lt;topic&gt;
@@ -290,7 +365,29 @@
       </dl></dd>
       
   <dt>
-    --vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}
+    --type &lt;type&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--type">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --uuid &lt;uuid&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--uuid">jnt_query-query command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands,all}
   </dt>
 
       <dd><dl>
@@ -300,6 +397,17 @@
 
         
   <dt><a href="cli.html#cmdoption-jnt_query-node--vuuid">jnt_query-node command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    --writeonly &lt;writeonly&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--writeonly">jnt_query-query command line option</a>
   </dt>
 
       </dl></dd>
@@ -1550,7 +1658,7 @@
   </dt>
 
         
-  <dt><a href="cli.html#cmdoption-jnt_query-network--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</a>
+  <dt><a href="cli.html#cmdoption-jnt_query-network--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands,all}</a>
   </dt>
 
         
@@ -1585,7 +1693,7 @@
   </dt>
 
         
-  <dt><a href="cli.html#cmdoption-jnt_query-node--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</a>
+  <dt><a href="cli.html#cmdoption-jnt_query-node--vuuid">--vuuid {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands,all}</a>
   </dt>
 
         
@@ -1599,6 +1707,58 @@
   </dt>
 
       <dd><dl>
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--cmdclass">--cmdclass &lt;cmdclass&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--data">--data &lt;data&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--genre">--genre {basic,user,config,system,command}</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--hadd">--hadd &lt;hadd&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--host">--host &lt;host&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--index">--index &lt;index&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--myhadd">--myhadd &lt;myhadd&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--port">--port &lt;port&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--readonly">--readonly &lt;readonly&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--timeout">--timeout &lt;timeout&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--type">--type &lt;type&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--uuid">--uuid &lt;uuid&gt;</a>
+  </dt>
+
+        
+  <dt><a href="cli.html#cmdoption-jnt_query-query--writeonly">--writeonly &lt;writeonly&gt;</a>
+  </dt>
+
         
   <dt><a href="cli.html#cmdoption-jnt_query-query-h">-h, --help</a>
   </dt>

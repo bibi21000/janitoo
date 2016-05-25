@@ -216,7 +216,7 @@
 
 <dl class="option">
 <dt id="cmdoption-jnt_query-network--vuuid">
-<tt class="descname">--vuuid</tt><tt class="descclassname"> {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</tt><a class="headerlink" href="#cmdoption-jnt_query-network--vuuid" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">--vuuid</tt><tt class="descclassname"> {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands,all}</tt><a class="headerlink" href="#cmdoption-jnt_query-network--vuuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value id (request)</p>
 </dd></dl>
 
@@ -257,7 +257,7 @@
 
 <dl class="option">
 <dt id="cmdoption-jnt_query-node--vuuid">
-<tt class="descname">--vuuid</tt><tt class="descclassname"> {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands}</tt><a class="headerlink" href="#cmdoption-jnt_query-node--vuuid" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">--vuuid</tt><tt class="descclassname"> {request_info_nodes,request_info_users,request_info_configs,request_info_systems,request_info_basics,request_info_commands,all}</tt><a class="headerlink" href="#cmdoption-jnt_query-node--vuuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>The value id (request)</p>
 </dd></dl>
 
@@ -300,6 +300,84 @@
 <dt id="cmdoption-jnt_query-query-h">
 <span id="cmdoption-jnt_query-query--help"></span><tt class="descname">-h</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-jnt_query-query-h" title="Permalink to this definition">¶</a></dt>
 <dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--uuid">
+<tt class="descname">--uuid</tt><tt class="descclassname"> &lt;uuid&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--uuid" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value id</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--data">
+<tt class="descname">--data</tt><tt class="descclassname"> &lt;data&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data to send to the value</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--cmdclass">
+<tt class="descname">--cmdclass</tt><tt class="descclassname"> &lt;cmdclass&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--cmdclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value command class</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--index">
+<tt class="descname">--index</tt><tt class="descclassname"> &lt;index&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of the instance value</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--type">
+<tt class="descname">--type</tt><tt class="descclassname"> &lt;type&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value type</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--genre">
+<tt class="descname">--genre</tt><tt class="descclassname"> {basic,user,config,system,command}</tt><a class="headerlink" href="#cmdoption-jnt_query-query--genre" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value genre</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--readonly">
+<tt class="descname">--readonly</tt><tt class="descclassname"> &lt;readonly&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--readonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should we read (get) the value</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--writeonly">
+<tt class="descname">--writeonly</tt><tt class="descclassname"> &lt;writeonly&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--writeonly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whould we write (set) the value</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--hadd">
+<tt class="descname">--hadd</tt><tt class="descclassname"> &lt;hadd&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--hadd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The hadd of the node to request info</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--host">
+<tt class="descname">--host</tt><tt class="descclassname"> &lt;host&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--host" title="Permalink to this definition">¶</a></dt>
+<dd><p>The host of the mosquitto server</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--port">
+<tt class="descname">--port</tt><tt class="descclassname"> &lt;port&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--port" title="Permalink to this definition">¶</a></dt>
+<dd><p>The port of the mosquitto server</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--timeout">
+<tt class="descname">--timeout</tt><tt class="descclassname"> &lt;timeout&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timeout to wait for response</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-jnt_query-query--myhadd">
+<tt class="descname">--myhadd</tt><tt class="descclassname"> &lt;myhadd&gt;</tt><a class="headerlink" href="#cmdoption-jnt_query-query--myhadd" title="Permalink to this definition">¶</a></dt>
+<dd><p>The hadd we will use to receive response</p>
 </dd></dl>
 
 </div>
