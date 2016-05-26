@@ -865,7 +865,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b0309be0cd0&gt;, &lt;transitions.core.State object at 0x2b0309be0d90&gt;, &lt;transitions.core.State object at 0x2b0309be0dd0&gt;, &lt;transitions.core.State object at 0x2b0309be0e10&gt;, &lt;transitions.core.State object at 0x2b0309be0e50&gt;, &lt;transitions.core.State object at 0x2b0309be0e90&gt;, &lt;transitions.core.State object at 0x2b0309be0ed0&gt;, &lt;transitions.core.State object at 0x2b0309be0f10&gt;, &lt;transitions.core.State object at 0x2b0309be0f50&gt;, &lt;transitions.core.State object at 0x2b0309be0f90&gt;, &lt;transitions.core.State object at 0x2b0309be0fd0&gt;, &lt;transitions.core.State object at 0x2b0309bf2050&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b7ca33c0350&gt;, &lt;transitions.core.State object at 0x2b7ca33c0410&gt;, &lt;transitions.core.State object at 0x2b7ca33c0450&gt;, &lt;transitions.core.State object at 0x2b7ca33c0490&gt;, &lt;transitions.core.State object at 0x2b7ca33c04d0&gt;, &lt;transitions.core.State object at 0x2b7ca33c0510&gt;, &lt;transitions.core.State object at 0x2b7ca33c0550&gt;, &lt;transitions.core.State object at 0x2b7ca33c0590&gt;, &lt;transitions.core.State object at 0x2b7ca33c05d0&gt;, &lt;transitions.core.State object at 0x2b7ca33c0610&gt;, &lt;transitions.core.State object at 0x2b7ca33c0650&gt;, &lt;transitions.core.State object at 0x2b7ca33c0690&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2445,7 +2445,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b0309b0dc10&gt;, &lt;transitions.core.State object at 0x2b0309b0dc50&gt;, &lt;transitions.core.State object at 0x2b0309b0dc90&gt;, &lt;transitions.core.State object at 0x2b0309b0dcd0&gt;, &lt;transitions.core.State object at 0x2b0309b0dd10&gt;, &lt;transitions.core.State object at 0x2b0309b0dd50&gt;, &lt;transitions.core.State object at 0x2b0309b0dd90&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b7ca30b3dd0&gt;, &lt;transitions.core.State object at 0x2b7ca30b3e10&gt;, &lt;transitions.core.State object at 0x2b7ca30b3e50&gt;, &lt;transitions.core.State object at 0x2b7ca30b3e90&gt;, &lt;transitions.core.State object at 0x2b7ca30b3ed0&gt;, &lt;transitions.core.State object at 0x2b7ca30b3f10&gt;, &lt;transitions.core.State object at 0x2b7ca30b3f50&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2841,141 +2841,8 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </dd></dl>
 
 </div>
-<div class="section" id="module-janitoo.runner">
-<span id="janitoo-runner-module"></span><h2>janitoo.runner module<a class="headerlink" href="#module-janitoo.runner" title="Permalink to this headline">¶</a></h2>
-<p>The runner</p>
-<p>Start a worker or a broker as a daemon.</p>
-<p>Must be updated to work with multiple workers.</p>
-<p>What do we need :</p>
-<ul class="simple">
-<li>the user ou userid</li>
-<li>the log file</li>
-<li>the error output</li>
-<li>the standard output</li>
-<li>the pid file</li>
-<li>the working directory</li>
-</ul>
-<p>Based on the runner of python-daemon :</p>
-<ul class="simple">
-<li>Copyright © 2009–2010 Ben Finney &lt;<a class="reference external" href="mailto:ben+python&#37;&#52;&#48;benfinney&#46;id&#46;au">ben+python<span>&#64;</span>benfinney<span>&#46;</span>id<span>&#46;</span>au</a>&gt;</li>
-<li>Copyright © 2007–2008 Robert Niederreiter, Jens Klein</li>
-<li>Copyright © 2003 Clark Evans</li>
-<li>Copyright © 2002 Noah Spurrier</li>
-<li>Copyright © 2001 Jürgen Hermann</li>
-</ul>
-<dl class="class">
-<dt id="janitoo.runner.Runner">
-<em class="property">class </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">Runner</tt><a class="reference internal" href="_modules/janitoo/runner.html#Runner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
-<p>Controller for a callable running in a separate background process.</p>
-<p>The first command-line argument is the action to take:</p>
-<ul class="simple">
-<li>&#8216;start&#8217;: Become a daemon and call <cite>app.run()</cite>.</li>
-<li>&#8216;stop&#8217;: Exit the daemon process specified in the PID file.</li>
-<li>&#8216;restart&#8217;: Stop, then start.</li>
-<li>&#8216;status&#8217;: Show the status of the process.</li>
-</ul>
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b030a4f8140&gt;, 'start': &lt;function _start at 0x2b030a4fade8&gt;, 'kill': &lt;function _kill at 0x2b030a4f80c8&gt;, 'reload': &lt;function _reload at 0x2b030a4f8230&gt;, 'front': &lt;function _front at 0x2b030a4fae60&gt;, 'flush': &lt;function _flush at 0x2b030a4f82a8&gt;, 'stop': &lt;function _stop at 0x2b030a4f8050&gt;, 'restart': &lt;function _restart at 0x2b030a4f81b8&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.app_run">
-<tt class="descname">app_run</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#Runner.app_run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.app_run" title="Permalink to this definition">¶</a></dt>
-<dd><p>The running process of the application</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.app_shutdown">
-<tt class="descname">app_shutdown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#Runner.app_shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.app_shutdown" title="Permalink to this definition">¶</a></dt>
-<dd><p>The shutdown process of the application</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.do_action">
-<tt class="descname">do_action</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#Runner.do_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.do_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the requested action.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="janitoo.runner.Runner.parse_args">
-<tt class="descname">parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#Runner.parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.parse_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse command-line arguments.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.start_message">
-<tt class="descname">start_message</tt><em class="property"> = 'started with pid %d'</em><a class="headerlink" href="#janitoo.runner.Runner.start_message" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.status_message_not_running">
-<tt class="descname">status_message_not_running</tt><em class="property"> = 'process is not running'</em><a class="headerlink" href="#janitoo.runner.Runner.status_message_not_running" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="janitoo.runner.Runner.status_message_running">
-<tt class="descname">status_message_running</tt><em class="property"> = 'process is running (%d)'</em><a class="headerlink" href="#janitoo.runner.Runner.status_message_running" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerError</tt><a class="reference internal" href="_modules/janitoo/runner.html#RunnerError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
-<p>Abstract base class for errors.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerInvalidActionError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerInvalidActionError</tt><a class="reference internal" href="_modules/janitoo/runner.html#RunnerInvalidActionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerInvalidActionError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.ValueError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.ValueError</span></tt></a>, <a class="reference internal" href="#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when specified action is invalid.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerStartFailureError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerStartFailureError</tt><a class="reference internal" href="_modules/janitoo/runner.html#RunnerStartFailureError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerStartFailureError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a>, <a class="reference internal" href="#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when failure starting.</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="janitoo.runner.RunnerStopFailureError">
-<em class="property">exception </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">RunnerStopFailureError</tt><a class="reference internal" href="_modules/janitoo/runner.html#RunnerStopFailureError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.RunnerStopFailureError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a>, <a class="reference internal" href="#janitoo.runner.RunnerError" title="janitoo.runner.RunnerError"><tt class="xref py py-class docutils literal"><span class="pre">janitoo.runner.RunnerError</span></tt></a></p>
-<p>Raised when failure stopping.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.emit_message">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">emit_message</tt><big>(</big><em>message</em>, <em>stream=None</em><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#emit_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.emit_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Emit a message to the specified stream (default <cite>sys.stderr</cite>).</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.is_pidfile_stale">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">is_pidfile_stale</tt><big>(</big><em>pidfile</em><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#is_pidfile_stale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.is_pidfile_stale" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine whether a PID file is stale.</p>
-<p>Return <tt class="docutils literal"><span class="pre">True</span></tt> (“stale”) if the contents of the PID file are
-valid but do not match the PID of a currently-running process;
-otherwise return <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.jnt_parse_args">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">jnt_parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#jnt_parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.jnt_parse_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default argument parser</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="janitoo.runner.make_pidlockfile">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">make_pidlockfile</tt><big>(</big><em>path</em>, <em>acquire_timeout</em><big>)</big><a class="reference internal" href="_modules/janitoo/runner.html#make_pidlockfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.make_pidlockfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a PIDLockFile instance with the given filesystem path.</p>
-</dd></dl>
-
+<div class="section" id="janitoo-runner-module">
+<h2>janitoo.runner module<a class="headerlink" href="#janitoo-runner-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-janitoo.server">
 <span id="janitoo-server-module"></span><h2>janitoo.server module<a class="headerlink" href="#module-janitoo.server" title="Permalink to this headline">¶</a></h2>
