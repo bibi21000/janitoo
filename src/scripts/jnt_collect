@@ -90,7 +90,7 @@ FLASK = ["janitoo_flask.blueprint", "janitoo_flask.menu_left", "janitoo_flask.li
 MANAGER = ["janitoo_manager.blueprint", "janitoo_manager.menu_left", "janitoo_manager.listener", "janitoo_manager.network"]
 
 def jnt_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Collect data locally from Janitoo entry-points.')
     parser.add_argument('-o', '--output', action='store', help='The format (txt, raw, ...)', choices=['txt', 'raw'], default='txt')
     parser.add_argument('-b', '--bus', action='store', help='Collect values of the bus', default=None)
     parser.add_argument('-c', '--component', action='store', help='Collect values of the compoent', default=None)

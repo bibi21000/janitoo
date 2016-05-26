@@ -43,7 +43,7 @@ def on_log(mqttc, obj, level, string):
     print("###### Log : "+str(string))
 
 def jnt_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Spy the Janitoo protocol.')
     parser.add_argument('--host', action='store', help='The host of the mosquitto server', default='127.0.0.1')
     parser.add_argument('--port', action='store', help='The port of the mosquitto server', default='1883')
     parser.add_argument('--topic', action='store', help='The topic to listen to', default='/#')
