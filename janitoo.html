@@ -33,8 +33,6 @@
     <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="janitoo 0.0.8 documentation" href="index.html" />
-    <link rel="next" title="Command-line interface" href="cli.html" />
-    <link rel="prev" title="State machines" href="state_machines.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -73,7 +71,7 @@
      href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="INSTALL_REPO.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#install-the-needed-tools">Install the needed tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="INSTALL_REPO.html#create-the-directory-structure">Create the directory structure</a></li>
@@ -86,25 +84,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="supported_hardware.html">Supported hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state_machines.html">State machines</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">API Documentation : Common</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.bus">janitoo.bus module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.classes">janitoo.classes module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.component">janitoo.component module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.dhcp">janitoo.dhcp module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.mqtt">janitoo.mqtt module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.node">janitoo.node module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.options">janitoo.options module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.runner">janitoo.runner module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.server">janitoo.server module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.server_updater">janitoo.server_updater module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.thread">janitoo.thread module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.utils">janitoo.utils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo.value">janitoo.value module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-janitoo">Module contents</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command-line interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cli.html#jnt-query">jnt_query</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cli.html#jnt-collect">jnt_collect</a></li>
@@ -123,14 +102,6 @@
             
               
                 
-  <li>
-    <a href="state_machines.html" title="Previous Chapter: State machines"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; State machines</span>
-    </a>
-  </li>
-  <li>
-    <a href="cli.html" title="Next Chapter: Command-line interface"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Command-line ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -894,7 +865,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2af415f274d0&gt;, &lt;transitions.core.State object at 0x2af415f27f10&gt;, &lt;transitions.core.State object at 0x2af415f27a50&gt;, &lt;transitions.core.State object at 0x2af415f277d0&gt;, &lt;transitions.core.State object at 0x2af415f27810&gt;, &lt;transitions.core.State object at 0x2af415f271d0&gt;, &lt;transitions.core.State object at 0x2af415f27e50&gt;, &lt;transitions.core.State object at 0x2af415f27890&gt;, &lt;transitions.core.State object at 0x2af415f275d0&gt;, &lt;transitions.core.State object at 0x2af415f27610&gt;, &lt;transitions.core.State object at 0x2af415f27550&gt;, &lt;transitions.core.State object at 0x2af41602d050&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b030c864cd0&gt;, &lt;transitions.core.State object at 0x2b030c864d90&gt;, &lt;transitions.core.State object at 0x2b030c864dd0&gt;, &lt;transitions.core.State object at 0x2b030c864e10&gt;, &lt;transitions.core.State object at 0x2b030c864e50&gt;, &lt;transitions.core.State object at 0x2b030c864e90&gt;, &lt;transitions.core.State object at 0x2b030c864ed0&gt;, &lt;transitions.core.State object at 0x2b030c864f10&gt;, &lt;transitions.core.State object at 0x2b030c864f50&gt;, &lt;transitions.core.State object at 0x2b030c864f90&gt;, &lt;transitions.core.State object at 0x2b030c864fd0&gt;, &lt;transitions.core.State object at 0x2b030c876050&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2474,7 +2445,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2af415560250&gt;, &lt;transitions.core.State object at 0x2af415560290&gt;, &lt;transitions.core.State object at 0x2af4155602d0&gt;, &lt;transitions.core.State object at 0x2af415560310&gt;, &lt;transitions.core.State object at 0x2af415560350&gt;, &lt;transitions.core.State object at 0x2af415560390&gt;, &lt;transitions.core.State object at 0x2af4155603d0&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b030c791c10&gt;, &lt;transitions.core.State object at 0x2b030c791c50&gt;, &lt;transitions.core.State object at 0x2b030c791c90&gt;, &lt;transitions.core.State object at 0x2b030c791cd0&gt;, &lt;transitions.core.State object at 0x2b030c791d10&gt;, &lt;transitions.core.State object at 0x2b030c791d50&gt;, &lt;transitions.core.State object at 0x2b030c791d90&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2906,7 +2877,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </ul>
 <dl class="attribute">
 <dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2af4177de758&gt;, 'start': &lt;function _start at 0x2af4177de488&gt;, 'kill': &lt;function _kill at 0x2af4177de6e0&gt;, 'reload': &lt;function _reload at 0x2af4177de848&gt;, 'front': &lt;function _front at 0x2af4177de500&gt;, 'flush': &lt;function _flush at 0x2af4177de8c0&gt;, 'stop': &lt;function _stop at 0x2af4177de668&gt;, 'restart': &lt;function _restart at 0x2af4177de7d0&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b030d17c140&gt;, 'start': &lt;function _start at 0x2b030d17ede8&gt;, 'kill': &lt;function _kill at 0x2b030d17c0c8&gt;, 'reload': &lt;function _reload at 0x2b030d17c230&gt;, 'front': &lt;function _front at 0x2b030d17ee60&gt;, 'flush': &lt;function _flush at 0x2b030d17c2a8&gt;, 'stop': &lt;function _stop at 0x2b030d17c050&gt;, 'restart': &lt;function _restart at 0x2b030d17c1b8&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
