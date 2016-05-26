@@ -63,11 +63,11 @@ def on_log(mqttc, obj, level, string):
     print("###### Log : "+str(string))
 
 def jnt_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Browse and interact with the Janitoo nework.')
     parser.add_argument('--debug', action='store_true', help='Enable debug mode', default=False)
     parser.add_argument('--output', action='store', help='Enable debug mode', choices=['txt', 'raw'], default='txt')
 
-    subparsers = parser.add_subparsers(dest='command', help='commands')
+    subparsers = parser.add_subparsers(dest='command', help='The command to launch')
 
     query_parser = subparsers.add_parser('query', help='Query a node value')
     query_parser.add_argument('--uuid', action='store', help='The value id')
