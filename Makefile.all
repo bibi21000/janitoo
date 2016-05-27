@@ -58,17 +58,23 @@ help:
 	@echo "  clean           : clean the development directory"
 	@echo "  update          : update sources of janitoo and openzwave"
 
-clean: clean-docs clean-archive
+clean-all:
+	for module in ${SUBMODULES};do make -C $$module clean; done
+
+clean: clean-doc clean-all
 	for module in ${SUBMODULES};do make -C $$module clean; done
 	-rm -rf $(BUILDDIR)
 	-find . -name \*.pyc -delete
 	-rm -rf .coverage
 	-rm -rf .coverage_core
 
-clean-dist:
+clean-dist-all:
 	for module in ${SUBMODULES};do make -C $$module clean-dist; done
 	@echo
-	@echo "Archives created"
+	@echo "Archives cleaned"
+
+clean-doc:
+	-rm -Rf docs
 
 developper-deps: common-deps cython-deps tests-deps pip-deps doc-deps
 	@echo
@@ -130,9 +136,6 @@ merge-python3:
 	#git checkout master
 	#@echo
 	#@echo "Commits for branch python3 pushed on github."
-
-clean-doc:
-	-rm -Rf docs
 
 commit:
 	make -C $(module) message="$(message)" commit
