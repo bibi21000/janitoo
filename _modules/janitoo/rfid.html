@@ -194,32 +194,32 @@
 <span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">HADD</span>
 <span class="kn">from</span> <span class="nn">janitoo.value</span> <span class="kn">import</span> <span class="n">JNTValue</span>
 
-<span class="n">INVALID</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000000</span>
+<span class="n">INVALID</span> <span class="o">=</span> <span class="mb">0b00000000</span>
 <span class="n">INVALID_BLOCK</span> <span class="o">=</span> <span class="p">[</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span><span class="p">,</span> <span class="n">INVALID</span> <span class="p">]</span>
 
 <span class="n">TYPES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="mb">0b10000000</span> <span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;security&#39;</span><span class="p">,</span>
         <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;access&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="s">&#39;admin&#39;</span><span class="p">,</span>
+            <span class="mb">0b10000000</span> <span class="p">:</span> <span class="s">&#39;access&#39;</span><span class="p">,</span>
+            <span class="mb">0b01000000</span> <span class="p">:</span> <span class="s">&#39;admin&#39;</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">},</span>
-    <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="mb">0b01000000</span> <span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;learning&#39;</span><span class="p">,</span>
         <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;voice&#39;</span><span class="p">,</span>
+            <span class="mb">0b10000000</span> <span class="p">:</span> <span class="s">&#39;voice&#39;</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">},</span>
-    <span class="mi">0</span><span class="n">b11000000</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="mb">0b11000000</span> <span class="p">:</span> <span class="p">{</span>
         <span class="s">&#39;uid&#39;</span> <span class="p">:</span> <span class="s">&#39;presence&#39;</span><span class="p">,</span>
         <span class="s">&#39;subtypes&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="mi">0</span><span class="n">b10000000</span> <span class="p">:</span> <span class="s">&#39;watchdog&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b01000000</span> <span class="p">:</span> <span class="s">&#39;occupied&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b00100000</span> <span class="p">:</span> <span class="s">&#39;sleeping&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b00010000</span> <span class="p">:</span> <span class="s">&#39;hibernate&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b00001000</span> <span class="p">:</span> <span class="s">&#39;vacancy&#39;</span><span class="p">,</span>
-            <span class="mi">0</span><span class="n">b00000100</span> <span class="p">:</span> <span class="s">&#39;simulation&#39;</span><span class="p">,</span>
+            <span class="mb">0b10000000</span> <span class="p">:</span> <span class="s">&#39;watchdog&#39;</span><span class="p">,</span>
+            <span class="mb">0b01000000</span> <span class="p">:</span> <span class="s">&#39;occupied&#39;</span><span class="p">,</span>
+            <span class="mb">0b00100000</span> <span class="p">:</span> <span class="s">&#39;sleeping&#39;</span><span class="p">,</span>
+            <span class="mb">0b00010000</span> <span class="p">:</span> <span class="s">&#39;hibernate&#39;</span><span class="p">,</span>
+            <span class="mb">0b00001000</span> <span class="p">:</span> <span class="s">&#39;vacancy&#39;</span><span class="p">,</span>
+            <span class="mb">0b00000100</span> <span class="p">:</span> <span class="s">&#39;simulation&#39;</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">},</span>
 <span class="p">}</span>
@@ -288,10 +288,10 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">)</span>
-        <span class="n">current_version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;current_version&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="mb">0b00000001</span><span class="p">)</span>
+        <span class="n">current_version</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;current_version&#39;</span><span class="p">,</span> <span class="mb">0b00000001</span><span class="p">)</span>
         <span class="n">RFIDBlock00</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">current_version</span><span class="o">=</span><span class="n">current_version</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="mi">0</span><span class="n">b00000001</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="p">[</span><span class="mb">0b00000001</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">&#39;to_bytes&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_bytes_1</span><span class="p">,</span>
             <span class="s">&#39;from_bytes&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_from_bytes_1</span><span class="p">,</span>
         <span class="p">}</span>
@@ -300,7 +300,7 @@
         <span class="sd">&quot;&quot;&quot;Convert data to a byte array to be stored on rfid card</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-        <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000001</span>
+        <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mb">0b00000001</span>
         <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">INVALID</span>
         <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_type</span>
         <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_subtype</span>
@@ -312,7 +312,7 @@
     <span class="k">def</span> <span class="nf">_control_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Control that header is conform to version 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="n">b00000001</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mb">0b00000001</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
 
         <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INVALID</span><span class="p">:</span>
@@ -335,7 +335,7 @@
         <span class="sd">&quot;&quot;&quot;Import data from a byte array stored on card</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_control_1</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00000001</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="mb">0b00000001</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">key_type</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">key_subtype</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
