@@ -117,14 +117,16 @@ class JNTBus(object):
         except Exception:
             pass
 
-    def get_bus_value(self, value_uuid):
+    def get_bus_value(self, value_uuid, oid = None):
         '''Retrieve a bus's private value. Take care of exported buses
         This is the preferred way to retrieve a value of the bus
         '''
         #~ logger.debug("[%s] - Look for value %s on bus %s", self.__class__.__name__, value_uuid, self)
         #~ if value_uuid in self.values:
             #~ return self.values[value_uuid]
-        value_uuid = "%s_%s"%(self.oid, value_uuid)
+        if oid is None:
+            oid = self.oid
+        value_uuid = "%s_%s"%(oid, value_uuid)
         if value_uuid in self.values:
             return self.values[value_uuid]
         return None
@@ -134,8 +136,11 @@ class JNTBus(object):
         logger.debug("[%s] - Export values to all buses", self.__class__.__name__)
         for target in self._masters:
             for value in self.values.keys():
+                #~ nvalue = value.replace('%s_'%OID,'%s_'%target.oid)
+                #~ logger.debug("[%s] - Export value %s to bus %s (twice is %s)", self.__class__.__name__, value, target, nvalue)
                 logger.debug("[%s] - Export value %s to bus %s", self.__class__.__name__, value, target)
                 target.values[value] = self.values[value]
+                #~ target.values[nvalue] = self.values[value]
 
     def export_attrs(self, objname, obj):
         '''Export object to all targets'''

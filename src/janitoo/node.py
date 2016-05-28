@@ -1242,10 +1242,10 @@ class JNTNodeMan(object):
             return None
         return nodes[0]
 
-    def find_bus_value(self, value_uuid):
+    def find_bus_value(self, value_uuid, oid = None):
         """Find a bus value using its uuid
         """
-        return self.bus.get_bus_value(value_uuid)
+        return self.bus.get_bus_value(value_uuid, oid)
 
     def find_value(self, node_uuid, value_uuid):
         """Find a value using its uuid and the node one

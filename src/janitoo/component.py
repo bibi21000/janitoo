@@ -136,13 +136,13 @@ class JNTComponent(object):
         #~ except ValueError:
                 #~ logger.exception('Exception when setting poll %s', value_id)
 
-    def get_bus_value(self, value_uuid):
+    def get_bus_value(self, value_uuid, oid = None):
         '''Retrieve a bus's private value. Take care of exported buses
         This is the preferred way to retrieve a value of the bus
         '''
         #~ logger.debug('_bus %s'%self._bus)
         if self._bus is not None:
-            return self._bus.get_bus_value(value_uuid)
+            return self._bus.get_bus_value(value_uuid, oid)
         return None
 
     def resource_filename(self, path='public'):
