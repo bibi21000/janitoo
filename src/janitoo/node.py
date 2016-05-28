@@ -1260,7 +1260,7 @@ class JNTNodeMan(object):
         vuuid='%s'%(value_uuid)
         values = [ nodes[0].values[value] for value in nodes[0].values if nodes[0].values[value].uuid == vuuid]
         if len(values)>1:
-            logger.warning("[%s] - Found 2 valus %s with uuid %s. Returning the fisrt one.", self.__class__.__name__, nodes, value_uuid)
+            logger.warning("[%s] - Found 2 values %s with uuid %s. Returning the first one.", self.__class__.__name__, nodes, value_uuid)
         if len(values)==0:
             return None
         return values[0]

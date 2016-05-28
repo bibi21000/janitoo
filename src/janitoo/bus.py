@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """The bus
 
-A physical bus : i2c, 1-wire, ...
+A physical or logical bus : i2c, 1-wire, thermal, ...
 """
 
 __license__ = """
@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 from pkg_resources import iter_entry_points
 import subprocess
 
-from utils import JanitooNotImplemented, HADD
+from janitoo.utils import JanitooNotImplemented, HADD
 from janitoo.node import JNTNode
 
 ##############################################################
