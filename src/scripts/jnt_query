@@ -288,11 +288,11 @@ def main():
             if args.output == 'txt':
                 payload = jnt_utils.json_loads(msg.payload)
                 data = normalize_request_info_values(payload)
-                row    = u"{hadd:<10} {uuid:<25} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {help}"
+                row    = u"{hadd:<10} {uuid:<25} {index:<4} {data:<25} {units:<10} {type:<5} {genre:<5} {cmd_class:<8} {list_items} {help}"
                 if args.debug:
                     print('data', data)
                 if print_header:
-                    header =  {'hadd':'hadd', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'help':'help'}
+                    header =  {'hadd':'hadd', 'uuid':'uuid', 'index':'idx', 'data':'data', 'units':'units', 'type':'type', 'genre':'genre', 'cmd_class':'cmdclass', 'list_items':'list_items', 'help':'help'}
                     print(row.format(**header))
                     print_header = False
                     for i1 in data.keys():
@@ -309,6 +309,8 @@ def main():
                                     nested[i3]['index'] = 0
                                 if 'units' not in nested[i3]:
                                     nested[i3]['units'] = None
+                                if 'list_items' not in nested[i3]:
+                                    nested[i3]['list_items'] = None
                                 if 'type' not in nested[i3]:
                                     nested[i3]['type'] = None
                                 if 'cmd_classes' in nested[i3] and 'cmd_class' not in nested[i3]:
