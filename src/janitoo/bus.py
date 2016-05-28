@@ -121,9 +121,10 @@ class JNTBus(object):
         '''Retrieve a bus's private value. Take care of exported buses
         This is the preferred way to retrieve a value of the bus
         '''
-        #~ if self._export_prefix is not None:
-        #~      value_uuid = "%s%s"%(self._export_prefix, value_uuid)
         #~ logger.debug("[%s] - Look for value %s on bus %s", self.__class__.__name__, value_uuid, self)
+        #~ if value_uuid in self.values:
+            #~ return self.values[value_uuid]
+        value_uuid = "%s_%s"%(self.oid, value_uuid)
         if value_uuid in self.values:
             return self.values[value_uuid]
         return None
