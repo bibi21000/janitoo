@@ -850,7 +850,10 @@ class JNTNodeMan(object):
                         msg = json_dumps(data)
                         topic = TOPIC_NODES_REPLY % (data['reply_hadd'])
                         self.publish_request(topic, msg)
-                        topic = TOPIC_VALUES_USER % ("%s/%s" % (data['hadd'], data['uuid']))
+                        if data['genre'] == 0x02:
+                            topic = TOPIC_VALUES_USER % ("%s/%s" % (data['hadd'], data['uuid']))
+                        elif data['genre'] == 0x01
+                            topic = TOPIC_VALUES_BASIC % ("%s/%s" % (data['hadd'], data['uuid']))
                         self.publish_request(topic, msg)
                         return
             logger.warning("Unknown request value %s", data)

@@ -334,7 +334,7 @@ def main():
         mqttc.subscribe(topic)
         print(args.uuid)
         print("-"*10)
-        msg = {'cmd_class' : args.cmdclass, 'uuid':args.uuid, 'data':args.data,
+        msg = {'cmd_class' : args.cmdclass, 'uuid':args.uuid, 'data':args.data, 'reply_hadd':args.myhadd,
             'genre':genre, 'is_writeonly':args.writeonly, 'is_readonly':args.readonly, 'hadd':args.hadd}
         mqttc.publish(jnt_utils.TOPIC_NODES_REQUEST%args.hadd, jnt_utils.json_dumps(msg))
         stop_at = datetime.datetime.now() + datetime.timedelta(seconds=args.timeout)
