@@ -852,7 +852,7 @@ class JNTNodeMan(object):
                         self.publish_request(topic, msg)
                         if data['genre'] == 0x02:
                             topic = TOPIC_VALUES_USER % ("%s/%s" % (data['hadd'], data['uuid']))
-                        elif data['genre'] == 0x01
+                        elif data['genre'] == 0x01:
                             topic = TOPIC_VALUES_BASIC % ("%s/%s" % (data['hadd'], data['uuid']))
                         self.publish_request(topic, msg)
                         return
