@@ -814,7 +814,7 @@ class JNTNodeMan(object):
                 logger.debug("on_request else message %s,%s", message.topic, message.payload)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
-                if data['genre'] == 0x02:
+                if data['genre'] == 0x02 or data['genre'] == 0x01:
                     #~ print data['cmd_class'], node.values[data['uuid']].cmd_class
                     #~ print node.hadd
                     if data['uuid'] in node.values and data['cmd_class'] == node.values[data['uuid']].cmd_class:
