@@ -330,6 +330,8 @@ class JNTValueFactoryEntry(JNTValue):
         #~ print "---------------------------------------------------------- self.get_max_index() ", self.get_max_index()
         #~ print "---------------------------------------------------------- self.instances ", self.instances
         if self.get_max_index() == -1 or 'config' not in self.instances[0]:
+            if res['data'] is None:
+                res['data'] = self.default
             return res
         if self.get_max_index() == -1 or self.instances[0]['config'] is None:
             return {}

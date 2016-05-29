@@ -28,9 +28,9 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 import logging
 logger = logging.getLogger(__name__)
 
-from classes import GENRE_DESC, VALUE_DESC
-from utils import json_dumps
-from options import JNTOptions, string_to_bool
+from janitoo.classes import GENRE_DESC, VALUE_DESC
+from janitoo.utils import json_dumps
+from janitoo.options import JNTOptions, string_to_bool
 
 ##############################################################
 #Check that we are in sync with the official command classes
@@ -119,9 +119,12 @@ class JNTValue(object):
                 elif self.type == 0x03:
                     #Decimal
                     return float(data)
+                elif self.type == 0x08:
+                    #String
+                    return data
                 elif self.type == 0x16:
                     #Array
-                     return data.split('|')
+                    return data.split('|')
                 logger.warning('[%s] - Do not convert data %s to %s.', self.__class__.__name__, data, VALUE_DESC[self.type]['label'])
                 return data
             except Exception:
