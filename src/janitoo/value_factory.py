@@ -317,6 +317,8 @@ class JNTValueFactoryEntry(JNTValue):
             res['data'] = self._get_data_cb(self.node_uuid, index)
         else:
             res['data'] = self.default
+        if res['data'] is None:
+            res['data'] = self.default
         #~ print "---------------------------------------------------------- res ", res
         return res
 
