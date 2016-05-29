@@ -131,7 +131,7 @@
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;The bus</span>
 
-<span class="sd">A physical bus : i2c, 1-wire, ...</span>
+<span class="sd">A physical or logical bus : i2c, 1-wire, thermal, ...</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
@@ -162,7 +162,7 @@
 <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">iter_entry_points</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">HADD</span>
+<span class="kn">from</span> <span class="nn">janitoo.utils</span> <span class="kn">import</span> <span class="n">JanitooNotImplemented</span><span class="p">,</span> <span class="n">HADD</span>
 <span class="kn">from</span> <span class="nn">janitoo.node</span> <span class="kn">import</span> <span class="n">JNTNode</span>
 
 <span class="c">##############################################################</span>
@@ -247,13 +247,16 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
-<div class="viewcode-block" id="JNTBus.get_bus_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">):</span>
+<div class="viewcode-block" id="JNTBus.get_bus_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">,</span> <span class="n">oid</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Retrieve a bus&#39;s private value. Take care of exported buses</span>
 <span class="sd">        This is the preferred way to retrieve a value of the bus</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c">#~ if self._export_prefix is not None:</span>
-        <span class="c">#~      value_uuid = &quot;%s%s&quot;%(self._export_prefix, value_uuid)</span>
         <span class="c">#~ logger.debug(&quot;[%s] - Look for value %s on bus %s&quot;, self.__class__.__name__, value_uuid, self)</span>
+        <span class="c">#~ if value_uuid in self.values:</span>
+            <span class="c">#~ return self.values[value_uuid]</span>
+        <span class="k">if</span> <span class="n">oid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">oid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span>
+        <span class="n">value_uuid</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">oid</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value_uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value_uuid</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">None</span>
@@ -263,8 +266,11 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export values to all buses&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_masters</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="c">#~ nvalue = value.replace(&#39;%s_&#39;%OID,&#39;%s_&#39;%target.oid)</span>
+                <span class="c">#~ logger.debug(&quot;[%s] - Export value %s to bus %s (twice is %s)&quot;, self.__class__.__name__, value, target, nvalue)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">] - Export value </span><span class="si">%s</span><span class="s"> to bus </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
                 <span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                <span class="c">#~ target.values[nvalue] = self.values[value]</span>
 </div>
 <div class="viewcode-block" id="JNTBus.export_attrs"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.export_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">export_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objname</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Export object to all targets&#39;&#39;&#39;</span>

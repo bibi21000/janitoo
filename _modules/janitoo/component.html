@@ -266,13 +266,13 @@
         <span class="c">#~ except ValueError:</span>
                 <span class="c">#~ logger.exception(&#39;Exception when setting poll %s&#39;, value_id)</span>
 </div>
-<div class="viewcode-block" id="JNTComponent.get_bus_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.component.JNTComponent.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">):</span>
+<div class="viewcode-block" id="JNTComponent.get_bus_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.component.JNTComponent.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">,</span> <span class="n">oid</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Retrieve a bus&#39;s private value. Take care of exported buses</span>
 <span class="sd">        This is the preferred way to retrieve a value of the bus</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c">#~ logger.debug(&#39;_bus %s&#39;%self._bus)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bus</span><span class="o">.</span><span class="n">get_bus_value</span><span class="p">(</span><span class="n">value_uuid</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bus</span><span class="o">.</span><span class="n">get_bus_value</span><span class="p">(</span><span class="n">value_uuid</span><span class="p">,</span> <span class="n">oid</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">None</span>
 </div>
 <div class="viewcode-block" id="JNTComponent.resource_filename"><a class="viewcode-back" href="../../janitoo.html#janitoo.component.JNTComponent.resource_filename">[docs]</a>    <span class="k">def</span> <span class="nf">resource_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&#39;public&#39;</span><span class="p">):</span>
