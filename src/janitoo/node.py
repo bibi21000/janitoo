@@ -984,6 +984,27 @@ class JNTNodeMan(object):
         """
         self.mqtt_broadcast.publish(topic=reply_topic, payload=msg)
 
+    def publish_value(self, value, data=None):
+        """
+        """
+        res = value.to_dict()
+        data['data'] = value.data
+        if data is not None:
+            data['data'] = data
+        data['is_writeonly'] = False
+        data['is_readonly'] = True
+        data['label'] = value.label
+        data['help'] = value.help
+        msg = json_dumps(data)
+        if data['genre'] == 0x02:
+            topic = TOPIC_VALUES_USER % ("%s/%s" % (data['hadd'], data['uuid']))
+        elif data['genre'] == 0x01:
+            topic = TOPIC_VALUES_BASIC % ("%s/%s" % (data['hadd'], data['uuid']))
+        else:
+            logger.warning('[%s] - Not implemented genre : %s', self.__class__.__name__, data['genre'])
+        self.publish_request(topic, msg)
+        return
+
     def loop(self, stopevent):
         """
         """
