@@ -83,7 +83,7 @@ def jnt_parser():
     query_parser.add_argument('--hadd', action='store', help='The hadd of the node to request info', default=None)
     query_parser.add_argument('--host', action='store', help='The host of the mosquitto server', default='127.0.0.1')
     query_parser.add_argument('--port', action='store', help='The port of the mosquitto server', default='1883')
-    query_parser.add_argument('--timeout', action='store', type=int, help='The timeout to wait for response', default=5)
+    query_parser.add_argument('--timeout', action='store', type=int, help='The timeout to wait for response', default=3)
     query_parser.add_argument('--myhadd', action='store', help='The hadd we will use to receive response', default='9999/9990')
 
     cmdclasses_parser = subparsers.add_parser('cmds', help='Show all available command classes for values')

@@ -82,7 +82,7 @@ class JNTValueFactoryEntry(JNTValue):
             index=index, type=type,
             get_data_cb=get_data_cb, set_data_cb=set_data_cb,
             cmd_class=COMMAND_CONFIGURATION, genre=0x03, is_writeonly=False, is_readonly=False,
-            master_config_value=self)
+            master_config_value=self, **kwargs)
 
     def set_config(self, node_uuid, index, data):
         """
