@@ -267,6 +267,10 @@ tests-all:
 	@echo
 	@echo "Tests for janitoo finished."
 
+tests-report: tests-all coverage-collect coverage-check
+	@echo
+	@echo "Tests report for janitoo finished."
+
 docker-tests:
 	for module in ${SUBMODULES};do make -C $$module docker-tests; done
 	@echo
