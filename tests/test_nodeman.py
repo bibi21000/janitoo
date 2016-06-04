@@ -41,15 +41,9 @@ from janitoo.tests import FakeBus
 import mock
 import uuid as muuid
 
-
-class TestNodeManagerState(TestJanitoo):
-    """Test the network state machine
+class NodeManagerCommon():
+    """Test the NodeManager state machine
     """
-
-    prog = 'start.py'
-
-    add_ctrl = 111
-
     def test_010_nodeman_sfm_states(self):
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
             options = vars(jnt_parse_args())
@@ -153,86 +147,6 @@ class TestNodeManagerState(TestJanitoo):
             print node_state.state
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
-
-    def test_111_node_start_wait_random_stop(self):
-        #~ self.skipTest("Pass but freeze on Docker/CI. Surely a non stopped thread in the state machine")
-        self.onlyCITest()
-        with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
-            options = vars(jnt_parse_args())
-            options = JNTOptions(options)
-        section = 'fake'
-        thread_uuid = options.get_option(section, 'uuid')
-        if thread_uuid == None:
-            thread_uuid = muuid.uuid1()
-            options.set_option(section, 'uuid', "%s"%thread_uuid)
-        node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
-        hadds = { 0 : HADD%(self.add_ctrl,0),
-                     }
-        node_state.start()
-        time.sleep(4)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
-        node_state.start()
-        time.sleep(8)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
-        node_state.start()
-        time.sleep(22)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
-
-    def test_112_node_start_wait_random_stop_more(self):
-        #~ self.skipTest("Pass but freeze on Docker/CI. Surely a non stopped thread in the state machine")
-        self.onlyCITest()
-        with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
-            options = vars(jnt_parse_args())
-            options = JNTOptions(options)
-        section = 'fake'
-        thread_uuid = options.get_option(section, 'uuid')
-        if thread_uuid == None:
-            thread_uuid = muuid.uuid1()
-            options.set_option(section, 'uuid', "%s"%thread_uuid)
-        node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
-        hadds = { 0 : HADD%(self.add_ctrl,0),
-                     }
-        node_state.start()
-        time.sleep(6)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
-        node_state.start()
-        time.sleep(15)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
-        node_state.start()
-        time.sleep(32)
-        node_state.stop()
-        i = 0
-        while node_state.state != 'OFFLINE' and i<120:
-            i += 1
-            print node_state.state
-            time.sleep(1)
 
     def test_120_busnode_state(self):
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
@@ -422,3 +336,92 @@ class TestNodeManagerState(TestJanitoo):
                 print node_state.state
                 time.sleep(1)
             self.assertEqual(node_state.state, 'OFFLINE')
+
+class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
+    """Test the NodeManager state machine
+    """
+
+    prog = 'start.py'
+
+    add_ctrl = 111
+
+    def test_111_node_start_wait_random_stop(self):
+        #~ self.skipTest("Pass but freeze on Docker/CI. Surely a non stopped thread in the state machine")
+        self.onlyCITest()
+        with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
+            options = vars(jnt_parse_args())
+            options = JNTOptions(options)
+        section = 'fake'
+        thread_uuid = options.get_option(section, 'uuid')
+        if thread_uuid == None:
+            thread_uuid = muuid.uuid1()
+            options.set_option(section, 'uuid', "%s"%thread_uuid)
+        node_state = JNTNodeMan(options, section, thread_uuid)
+        print node_state.state
+        hadds = { 0 : HADD%(self.add_ctrl,0),
+                     }
+        node_state.start()
+        time.sleep(4)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+        node_state.start()
+        time.sleep(8)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+        node_state.start()
+        time.sleep(22)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+
+    def test_112_node_start_wait_random_stop_more(self):
+        #~ self.skipTest("Pass but freeze on Docker/CI. Surely a non stopped thread in the state machine")
+        self.onlyCITest()
+        with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_nodeman.conf']):
+            options = vars(jnt_parse_args())
+            options = JNTOptions(options)
+        section = 'fake'
+        thread_uuid = options.get_option(section, 'uuid')
+        if thread_uuid == None:
+            thread_uuid = muuid.uuid1()
+            options.set_option(section, 'uuid', "%s"%thread_uuid)
+        node_state = JNTNodeMan(options, section, thread_uuid)
+        print node_state.state
+        hadds = { 0 : HADD%(self.add_ctrl,0),
+                     }
+        node_state.start()
+        time.sleep(6)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+        node_state.start()
+        time.sleep(15)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+        node_state.start()
+        time.sleep(32)
+        node_state.stop()
+        i = 0
+        while node_state.state != 'OFFLINE' and i<120:
+            i += 1
+            print node_state.state
+            time.sleep(1)
+

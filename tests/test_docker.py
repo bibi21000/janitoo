@@ -47,6 +47,7 @@ sys.path.insert(0, os.path.abspath('.'))
 
 from test_rfid import RFIDCommon
 from test_network import NetworkStateCommon
+from test_nodeman import NodeManagerCommon
 
 class TestRFID(JNTTDockerBase, RFIDCommon):
     """Test RFID
@@ -65,4 +66,11 @@ class TestNetworkState(JNTTDockerBase, NetworkStateCommon):
     """
     prog = 'dontcare.py'
     add_ctrl = 111
+
+class TestNodeManager(JNTTDockerBase, NodeManagerCommon):
+    """Test the network state machine
+    """
+    prog = 'dontcare.py'
+    add_ctrl = 111
+
 
