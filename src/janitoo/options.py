@@ -142,16 +142,19 @@ class JNTOptions(object):
             return None
         return None
 
-    def set_option(self, section, key, value):
-        """Retrieve options from a section
+    def set_option(self, section, key, value, create=False):
+        """Set option in a section
         """
-        if section not in self._cache:
-            self.get_options(section)
+        if not create:
+            if section not in self._cache:
+                self.get_options(section)
         if 'conf_file' in self.data and self.data['conf_file'] is not None:
             config = RawConfigParser()
             config.read([self.data['conf_file']])
             if config.has_section(section) == False:
                 config.add_section(section)
+            if section not in self._cache:
+                self._cache[section] = {}
             self._cache[section][key] = value
             config.set(section, key, "%s"%value)
             with open(self.data['conf_file'], 'wb') as configfile:

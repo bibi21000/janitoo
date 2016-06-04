@@ -120,7 +120,7 @@ class JNTNodeMan(object):
         self.nodes_config_response = None
         self.config_timeout = 3
         self.slow_start = 0.05
-        self._controller = None
+        self.controller = None
         self._controller_hadd = None
         self._requests = {'request_info_nodes' : self.request_info_nodes,
                           'request_info_users' : self.request_info_users,
@@ -231,7 +231,7 @@ class JNTNodeMan(object):
     def stop_heartbeat_sender(self):
         """
         """
-        logger.debug("fsm_state : %s", 'stop_heartbeat_seander')
+        logger.debug("fsm_state : %s", 'stop_heartbeat_sender')
         if self._test:
             print "stop_heartbeat_seander"
         else:
@@ -306,14 +306,14 @@ class JNTNodeMan(object):
                 try:
                     self.mqtt_nodes = MQTTClient(options=self.options.data)
                     self.mqtt_nodes.connect()
-                    add_ctrl, add_node = self._controller.split_hadd()
+                    add_ctrl, add_node = self.controller.split_hadd()
                     logger.debug("[%s] - Subscribe to topic %s", self.__class__.__name__, TOPIC_NODES%("%s/#"%add_ctrl))
                     self.mqtt_nodes.subscribe(topic=TOPIC_NODES%("%s/#"%add_ctrl), callback=self.on_generic_request)
                     self.mqtt_nodes.start()
                     logger.debug("[%s] - Add topic %s", self.__class__.__name__, TOPIC_NODES_REQUEST%(self._controller_hadd))
                     self.mqtt_nodes.add_topic(topic=TOPIC_NODES_REQUEST%(self._controller_hadd), callback=self.on_request)
                     for node in self.nodes:
-                        if self.nodes[node] != self._controller:
+                        if self.nodes[node] != self.controller:
                             logger.debug("[%s] - Add topic %s", self.__class__.__name__, TOPIC_NODES_REQUEST%(self.nodes[node].hadd))
                             self.mqtt_nodes.add_topic(topic=TOPIC_NODES_REQUEST%(self.nodes[node].hadd), callback=self.on_request)
                 except Exception:
@@ -334,7 +334,7 @@ class JNTNodeMan(object):
                     for node in self.nodes:
                         self.mqtt_nodes.remove_topic(topic=TOPIC_NODES_REQUEST%(self.nodes[node].hadd))
                     self.mqtt_nodes.remove_topic(topic=TOPIC_NODES_REQUEST%(self._controller_hadd))
-                    add_ctrl, add_node = self._controller.split_hadd()
+                    add_ctrl, add_node = self.controller.split_hadd()
                     self.mqtt_nodes.unsubscribe(topic=TOPIC_NODES%("%s/#"%add_ctrl))
                     self.mqtt_nodes.stop()
                     if self.mqtt_nodes.is_alive():
@@ -360,7 +360,7 @@ class JNTNodeMan(object):
                     pass
                     #~ self.mqtt_controller_reply = MQTTClient(options=self.options.data)
                     #~ self.mqtt_controller_reply.connect()
-                    #~ self.mqtt_controller_reply.subscribe(topic=TOPIC_NODES_REPLY%(self._controller.hadd), callback=self.on_reply)
+                    #~ self.mqtt_controller_reply.subscribe(topic=TOPIC_NODES_REPLY%(self.controller.hadd), callback=self.on_reply)
                     #~ self.mqtt_controller_reply.start()
                 except Exception:
                     logger.exception("[%s] - start_controller_reply", self.__class__.__name__)
@@ -433,11 +433,11 @@ class JNTNodeMan(object):
                 #retrieve hadd from local configuration
                 controller = self.create_controller_node()
                 self.add_controller_node(controller.uuid, controller)
-                self._controller.hadd_get(controller.uuid, None)
-                self._controller_hadd = self._controller.hadd
-                self.add_heartbeat(self._controller)
-                logger.debug("[%s] - Added controller node with uuid %s and hadd %s", self.__class__.__name__, self._controller.uuid, self._controller_hadd)
-                #~ print self._controller.__dict__
+                self.controller.hadd_get(controller.uuid, None)
+                self._controller_hadd = self.controller.hadd
+                self.add_heartbeat(self.controller)
+                logger.debug("[%s] - Added controller node with uuid %s and hadd %s", self.__class__.__name__, self.controller.uuid, self._controller_hadd)
+                #~ print self.controller.__dict__
                 #~ print self.config_timeout
         except Exception:
             logger.exception("[%s] - finish_controller_uuid", self.__class__.__name__)
@@ -518,8 +518,8 @@ class JNTNodeMan(object):
             if self.is_stopped:
                 return
             if not self.request_controller_system_response:
-                self._controller.load_system_from_local()
-            self.config_timeout = self._controller.config_timeout
+                self.controller.load_system_from_local()
+            self.config_timeout = self.controller.config_timeout
             self.request_controller_controller_system_response = False
             self.after_controller_reply_system()
         finally:
@@ -584,7 +584,7 @@ class JNTNodeMan(object):
                 return
             self.before_controller_reply_config()
             if not self.request_controller_config_response:
-                self._controller.load_config_from_local()
+                self.controller.load_config_from_local()
             self.request_controller_config_response = False
             self.after_controller_reply_config()
         finally:
@@ -649,7 +649,7 @@ class JNTNodeMan(object):
                 return
             if not self.request_nodes_system_response:
                 for node in self.nodes:
-                    if node != self._controller.uuid and not self.is_stopped:
+                    if node != self.controller.uuid and not self.is_stopped:
                         onode = self.nodes[node]
                         onode.load_system_from_local()
                         self.after_system_node(node)
@@ -674,14 +674,14 @@ class JNTNodeMan(object):
                 return
             if not self.request_nodes_config_response:
                 for node in self.nodes:
-                    if node != self._controller.uuid and not self.is_stopped:
+                    if node != self.controller.uuid and not self.is_stopped:
                         onode = self.nodes[node]
                         onode.load_config_from_local()
                         self.after_config_node(node)
         finally:
             self.request_boot_timer_lock.release()
         if not self.is_stopped:
-            self.add_heartbeat(self._controller)
+            self.add_heartbeat(self.controller)
             self.fsm_state_next()
 
     def on_reply(self, client, userdata, message):
@@ -1083,7 +1083,7 @@ class JNTNodeMan(object):
         if uuid not in self.nodes:
             logger.debug("[%s] - Add controller node with uuid %s and hadd %s", self.__class__.__name__, uuid, node.hadd)
             self.nodes[uuid] = node
-            self._controller = node
+            self.controller = node
             self._controller_hadd = node.hadd
             node.options = self.options
             self.add_internal_system_values_to_node(node)
@@ -1107,7 +1107,7 @@ class JNTNodeMan(object):
     def get_controller_node(self):
         """
         """
-        return self._controller
+        return self.controller
 
     def get_node_from_hadd(self, hadd):
         """
@@ -1266,6 +1266,16 @@ class JNTNodeMan(object):
             return None
         return nodes[0]
 
+    def find_node_by_hadd(self, node_hadd):
+        """Find a node using its uuid
+        """
+        nodes = [ self.nodes[node] for node in self.nodes if self.nodes[node].hadd == node_hadd ]
+        if len(nodes)>1:
+            logger.warning("[%s] - Found 2 nodes %s with hadd %s. Returning the fisrt one.", self.__class__.__name__, nodes, node_hadd)
+        if len(nodes)==0:
+            return None
+        return nodes[0]
+
     def find_bus_value(self, value_uuid, oid = None):
         """Find a bus value using its uuid
         """
@@ -1401,17 +1411,17 @@ class JNTBusNodeMan(JNTNodeMan):
         """
         node = None
         #~ print uuid
-        logger.info("[%s] - Create node for component %s in factory", self.__class__.__name__, uuid)
+        logger.info("[%s] - Create node for component %s", self.__class__.__name__, uuid)
         if uuid in self.bus.components:
             compo = self.bus.components[uuid]
-            node = compo.create_node(hadd)
+            node = compo.create_node(hadd, **kwargs)
             if node is not None:
                 self.add_node(node.uuid, node)
                 for keyv in compo.values.keys():
                     value = compo.values[keyv]
                     self.add_value_to_node(value.uuid, node, value)
             else:
-                logger.error("[%s] - Can't create node for component %s in factory", self.__class__.__name__, self.bus.components[uuid])
+                logger.error("[%s] - Can't create node for component %s", self.__class__.__name__, self.bus.components[uuid])
         else:
             logger.error("[%s] - Can't create node because can't find component %s in components %s", self.__class__.__name__, uuid, self.bus.components)
         return node
@@ -1427,7 +1437,7 @@ class JNTBusNodeMan(JNTNodeMan):
             except Exception:
                 logger.exception("[%s] - Can't start component %s", self.__class__.__name__, uuid)
         elif not self.is_stopped:
-            if uuid != self._controller.uuid:
+            if uuid != self.controller.uuid:
                 logger.error("[%s] - Can't start component because can't find %s in components", self.__class__.__name__, uuid)
 
     def after_fsm_stop(self):
@@ -1483,7 +1493,7 @@ class JNTBusNodeMan(JNTNodeMan):
         """
         for keyv in self.bus.values.keys():
             value = self.bus.values[keyv]
-            self.add_value_to_node(value.uuid, self._controller, value)
+            self.add_value_to_node(value.uuid, self.controller, value)
 
     def loop(self, stopevent):
         """
@@ -1620,12 +1630,12 @@ class JNTNode(object):
                 logger.exception('Exception when retrieving heartbeat')
         return self.heartbeat
 
-    def heartbeat_set(self, node_uuid, index, value):
+    def heartbeat_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
             self.heartbeat = int(value)
-            self.options.set_option(node_uuid, 'heartbeat', self.heartbeat)
+            self.options.set_option(node_uuid, 'heartbeat', self.heartbeat, create=create)
         except ValueError:
             logger.exception('Exception when setting heartbeat')
 
@@ -1642,12 +1652,12 @@ class JNTNode(object):
                 logger.exception('Exception when retrieving timeout')
         return self.config_timeout
 
-    def config_timeout_set(self, node_uuid, index, value):
+    def config_timeout_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
             self.config_timeout = float(value)
-            self.options.set_option(node_uuid, 'config_timeout', self.config_timeout)
+            self.options.set_option(node_uuid, 'config_timeout', self.config_timeout, create=create)
         except ValueError:
             logger.exception('Exception when setting timeout')
 
@@ -1676,12 +1686,12 @@ class JNTNode(object):
                 logger.exception('Exception when retrieving hadd')
         return self.hadd
 
-    def hadd_set(self, node_uuid, index, value):
+    def hadd_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
             self.hadd = value
-            self.options.set_option(node_uuid, 'hadd', self.hadd)
+            self.options.set_option(node_uuid, 'hadd', self.hadd, create=create)
         except ValueError:
             logger.exception('Exception when setting hadd')
 
@@ -1694,12 +1704,12 @@ class JNTNode(object):
             self.name = name
         return self.name
 
-    def name_set(self, node_uuid, index, value):
+    def name_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
             self.name = value
-            self.options.set_option(node_uuid, 'name', self.name)
+            self.options.set_option(node_uuid, 'name', self.name, create=create)
             #~ print self.uuid
         except ValueError:
             logger.exception('Exception when setting name')
@@ -1713,11 +1723,25 @@ class JNTNode(object):
             self.location = location
         return self.location
 
-    def location_set(self, node_uuid, index, value):
+    def location_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
             self.location = value
-            self.options.set_option(node_uuid, 'location', self.location)
+            self.options.set_option(node_uuid, 'location', self.location, create=create)
         except ValueError:
             logger.exception('Exception when setting location')
+
+    def create_options(self, component_uuid):
+        """Create options for a node
+        """
+        self.name_set(self.uuid, 0, self.name, create=True)
+        self.location_set(self.uuid, 0, self.location, create=True)
+        self.hadd_set(self.uuid, 0, self._hadd, create=True)
+        self.update_bus_options(component_uuid)
+
+    def update_bus_options(self, component_uuid):
+        """Create options for a node
+        """
+        ctrl_section, nodeid = self.uuid.split('__')
+        self.options.set_option(ctrl_section, 'components.%s'%nodeid, component_uuid)

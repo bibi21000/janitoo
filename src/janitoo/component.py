@@ -107,8 +107,12 @@ class JNTComponent(object):
             ret = cb_check_hearbeat()
         except NotImplementedError:
             cb_check_hearbeat = None
+        name = kwargs.pop('name', self.name)
+        product_name = kwargs.pop('product_name', self.product_name)
+        product_type = kwargs.pop('product_type', self.product_type)
+        product_manufacturer = kwargs.pop('product_manufacturer', self.product_manufacturer)
         self.node = JNTNode(uuid=self.uuid, cmd_classes=self.cmd_classes, hadd=hadd,
-                name=self.name, product_name=self.product_name, product_type=self.product_type, product_manufacturer=self.product_manufacturer,
+                name=name, product_name=product_name, product_type=self.product_type, product_manufacturer=self.product_manufacturer,
                 check_hearbeat_cb=cb_check_hearbeat, oid=self.oid, **kwargs)
         return  self.node
 
