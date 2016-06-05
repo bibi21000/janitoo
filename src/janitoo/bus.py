@@ -117,6 +117,12 @@ class JNTBus(object):
         except Exception:
             pass
 
+    def cant_aggregate(self, oid):
+        """
+        """
+        if self.oid != oid:
+            raise RuntimeError("This bus can't be aggregated.")
+
     def get_bus_value(self, value_uuid, oid = None):
         '''Retrieve a bus's private value. Take care of exported buses
         This is the preferred way to retrieve a value of the bus
