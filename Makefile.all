@@ -261,9 +261,7 @@ tests:
 
 tests-all:
 	-netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
-	export JANITOO_ALLTESTS=1
-	for module in ${SUBMODULES};do make -C $$module tests; done
-	unset JANITOO_ALLTESTS
+	-for module in ${SUBMODULES};do make -C $$module tests; done
 	@echo
 	@echo "Tests for janitoo finished."
 
