@@ -159,6 +159,11 @@ A bus is mapped in a controller node</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="janitoo.bus.JNTBus.cant_aggregate">
+<tt class="descname">cant_aggregate</tt><big>(</big><em>oid</em><big>)</big><a class="reference internal" href="_modules/janitoo/bus.html#JNTBus.cant_aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.bus.JNTBus.cant_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="janitoo.bus.JNTBus.check_heartbeat">
 <tt class="descname">check_heartbeat</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/janitoo/bus.html#JNTBus.check_heartbeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.bus.JNTBus.check_heartbeat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check that the bus is &#8216;available&#8217;. Is replaced by the node one when it&#8217;s creates</p>
@@ -864,7 +869,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b60bfdca090&gt;, &lt;transitions.core.State object at 0x2b60bfdca150&gt;, &lt;transitions.core.State object at 0x2b60bfdca190&gt;, &lt;transitions.core.State object at 0x2b60bfdca1d0&gt;, &lt;transitions.core.State object at 0x2b60bfdca210&gt;, &lt;transitions.core.State object at 0x2b60bfdca250&gt;, &lt;transitions.core.State object at 0x2b60bfdca290&gt;, &lt;transitions.core.State object at 0x2b60bfdca2d0&gt;, &lt;transitions.core.State object at 0x2b60bfdca310&gt;, &lt;transitions.core.State object at 0x2b60bfdca350&gt;, &lt;transitions.core.State object at 0x2b60bfdca390&gt;, &lt;transitions.core.State object at 0x2b60bfdca3d0&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b9764a9ec50&gt;, &lt;transitions.core.State object at 0x2b9764a9ed10&gt;, &lt;transitions.core.State object at 0x2b9764a9ed50&gt;, &lt;transitions.core.State object at 0x2b9764a9ed90&gt;, &lt;transitions.core.State object at 0x2b9764a9edd0&gt;, &lt;transitions.core.State object at 0x2b9764a9ee10&gt;, &lt;transitions.core.State object at 0x2b9764a9ee50&gt;, &lt;transitions.core.State object at 0x2b9764a9ee90&gt;, &lt;transitions.core.State object at 0x2b9764a9eed0&gt;, &lt;transitions.core.State object at 0x2b9764a9ef10&gt;, &lt;transitions.core.State object at 0x2b9764a9ef50&gt;, &lt;transitions.core.State object at 0x2b9764a9ef90&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2468,7 +2473,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b60bfbb3b50&gt;, &lt;transitions.core.State object at 0x2b60bfbb3b90&gt;, &lt;transitions.core.State object at 0x2b60bfbb3bd0&gt;, &lt;transitions.core.State object at 0x2b60bfbb3c10&gt;, &lt;transitions.core.State object at 0x2b60bfbb3c50&gt;, &lt;transitions.core.State object at 0x2b60bfbb3c90&gt;, &lt;transitions.core.State object at 0x2b60bfbb3cd0&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b97647bc390&gt;, &lt;transitions.core.State object at 0x2b97647bc3d0&gt;, &lt;transitions.core.State object at 0x2b97647bc410&gt;, &lt;transitions.core.State object at 0x2b97647bc450&gt;, &lt;transitions.core.State object at 0x2b97647bc490&gt;, &lt;transitions.core.State object at 0x2b97647bc4d0&gt;, &lt;transitions.core.State object at 0x2b97647bc510&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2905,7 +2910,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </ul>
 <dl class="attribute">
 <dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b60c155a848&gt;, 'start': &lt;function _start at 0x2b60c155a578&gt;, 'kill': &lt;function _kill at 0x2b60c155a7d0&gt;, 'reload': &lt;function _reload at 0x2b60c155a938&gt;, 'front': &lt;function _front at 0x2b60c155a5f0&gt;, 'flush': &lt;function _flush at 0x2b60c155a9b0&gt;, 'stop': &lt;function _stop at 0x2b60c155a758&gt;, 'restart': &lt;function _restart at 0x2b60c155a8c0&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b97662597d0&gt;, 'start': &lt;function _start at 0x2b9766259500&gt;, 'kill': &lt;function _kill at 0x2b9766259758&gt;, 'reload': &lt;function _reload at 0x2b97662598c0&gt;, 'front': &lt;function _front at 0x2b9766259578&gt;, 'flush': &lt;function _flush at 0x2b9766259938&gt;, 'stop': &lt;function _stop at 0x2b97662596e0&gt;, 'restart': &lt;function _restart at 0x2b9766259848&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">

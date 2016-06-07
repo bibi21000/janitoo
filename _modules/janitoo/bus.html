@@ -247,6 +247,12 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
+<div class="viewcode-block" id="JNTBus.cant_aggregate"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.cant_aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">cant_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">!=</span> <span class="n">oid</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;This bus can&#39;t be aggregated.&quot;</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="JNTBus.get_bus_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.bus.JNTBus.get_bus_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_bus_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_uuid</span><span class="p">,</span> <span class="n">oid</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Retrieve a bus&#39;s private value. Take care of exported buses</span>
 <span class="sd">        This is the preferred way to retrieve a value of the bus</span>
