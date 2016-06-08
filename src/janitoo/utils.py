@@ -51,6 +51,7 @@ TOPIC_VALUES_USERS = "/values/user/#"
 TOPIC_VALUES_USER = "/values/user/%s"
 TOPIC_VALUES_CONFIG = "/values/config/%s"
 TOPIC_VALUES_SYSTEM = "/values/system/%s"
+TOPIC_VALUES_COMMAND = "/values/command/%s"
 TOPIC_VALUES_BASIC = "/values/basic/%s"
 
 NETWORK_REQUESTS = ['request_info_nodes', 'request_info_users', 'request_info_configs', 'request_info_systems', 'request_info_basics', 'request_info_commands']

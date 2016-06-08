@@ -42,7 +42,7 @@ from janitoo.value_factory import JNTValueFactoryEntry
 from janitoo.utils import HADD, HADD_SEP, json_dumps, json_loads
 from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
 from janitoo.utils import TOPIC_BROADCAST_REPLY, TOPIC_BROADCAST_REQUEST
-from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_VALUES_SYSTEM, TOPIC_HEARTBEAT
+from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_VALUES_SYSTEM, TOPIC_VALUES_COMMAND, TOPIC_HEARTBEAT
 from janitoo.mqtt import MQTTClient
 from janitoo.options import string_to_bool
 
@@ -814,7 +814,7 @@ class JNTNodeMan(object):
                 logger.debug("on_request else message %s,%s", message.topic, message.payload)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
-                if data['genre'] == 0x02 or data['genre'] == 0x01:
+                if data['genre'] == 0x05 or data['genre'] == 0x02 or data['genre'] == 0x01:
                     #~ print data['cmd_class'], node.values[data['uuid']].cmd_class
                     #~ print node.hadd
                     if data['uuid'] in node.values and data['cmd_class'] == node.values[data['uuid']].cmd_class:
@@ -854,6 +854,8 @@ class JNTNodeMan(object):
                             topic = TOPIC_VALUES_USER % ("%s/%s" % (data['hadd'], data['uuid']))
                         elif data['genre'] == 0x01:
                             topic = TOPIC_VALUES_BASIC % ("%s/%s" % (data['hadd'], data['uuid']))
+                        elif data['genre'] == 0x05:
+                            topic = TOPIC_VALUES_COMMAND % ("%s/%s" % (data['hadd'], data['uuid']))
                         self.publish_request(topic, msg)
                         return
             logger.warning("Unknown request value %s", data)
