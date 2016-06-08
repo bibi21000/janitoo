@@ -152,12 +152,12 @@ def main():
             if args.output == 'txt':
                 payload = jnt_utils.json_loads(msg.payload)
                 if payload['uuid'] == 'request_info_nodes' :
-                    row    = u"{hadd:<10} {uuid:<30} {name:<25} {location:<20} {product_type}"
+                    row    = u"{hadd:<10} {uuid:<30} {name:<25} {location:<20} {product_name:<25} {product_type}"
                     data = normalize_request_info_nodes(payload['data'])
                     if args.debug:
                         print('data', data)
                     if print_header:
-                        header =  {'hadd':'hadd', 'uuid':'uuid', 'name':'name', 'location':'location', 'product_type':'product_type'}
+                        header =  {'hadd':'hadd', 'uuid':'uuid', 'name':'name', 'location':'location', 'product_type':'product_type', 'product_name':'product_name'}
                         print(row.format(**header))
                         print_header = False
                     for i1 in data.keys():
@@ -221,12 +221,12 @@ def main():
             if args.output == 'txt':
                 payload = jnt_utils.json_loads(msg.payload)
                 if payload['uuid'] == 'request_info_nodes' :
-                    row    = u"{hadd:<10} {uuid:<20} {name:<25} {location:<25} {product_type}"
+                    row    = u"{hadd:<10} {uuid:<20} {name:<25} {location:<25} {product_name:<25} {product_type}"
                     data = normalize_request_info_nodes(payload['data'])
                     if args.debug:
                         print('data', data)
                     if print_header:
-                        header =  {'hadd':'hadd', 'uuid':'uuid', 'name':'name', 'location':'location', 'product_type':'product_type'}
+                        header =  {'hadd':'hadd', 'uuid':'uuid', 'name':'name', 'location':'location', 'product_type':'product_type', 'product_name':'product_name'}
                         print(row.format(**header))
                         print_header = False
                     for i1 in data.keys():
