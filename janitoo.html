@@ -869,7 +869,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b9764a9ec50&gt;, &lt;transitions.core.State object at 0x2b9764a9ed10&gt;, &lt;transitions.core.State object at 0x2b9764a9ed50&gt;, &lt;transitions.core.State object at 0x2b9764a9ed90&gt;, &lt;transitions.core.State object at 0x2b9764a9edd0&gt;, &lt;transitions.core.State object at 0x2b9764a9ee10&gt;, &lt;transitions.core.State object at 0x2b9764a9ee50&gt;, &lt;transitions.core.State object at 0x2b9764a9ee90&gt;, &lt;transitions.core.State object at 0x2b9764a9eed0&gt;, &lt;transitions.core.State object at 0x2b9764a9ef10&gt;, &lt;transitions.core.State object at 0x2b9764a9ef50&gt;, &lt;transitions.core.State object at 0x2b9764a9ef90&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b3fd6209fd0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef0d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef110&gt;, &lt;transitions.core.State object at 0x2b3fd61ef150&gt;, &lt;transitions.core.State object at 0x2b3fd61ef190&gt;, &lt;transitions.core.State object at 0x2b3fd61ef1d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef210&gt;, &lt;transitions.core.State object at 0x2b3fd61ef250&gt;, &lt;transitions.core.State object at 0x2b3fd61ef290&gt;, &lt;transitions.core.State object at 0x2b3fd61ef2d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef310&gt;, &lt;transitions.core.State object at 0x2b3fd61ef350&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1406,7 +1406,7 @@ Called in a separate thread. Must use a scoped_session.</p>
 <p>Largely inspired from <a class="reference external" href="http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-class.py">http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.python.git/tree/examples/sub-class.py</a></p>
 <dl class="class">
 <dt id="janitoo.mqtt.MQTTBasic">
-<em class="property">class </em><tt class="descclassname">janitoo.mqtt.</tt><tt class="descname">MQTTBasic</tt><big>(</big><em>options={}</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/janitoo/mqtt.html#MQTTBasic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.mqtt.MQTTBasic" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.mqtt.</tt><tt class="descname">MQTTBasic</tt><big>(</big><em>options=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/janitoo/mqtt.html#MQTTBasic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.mqtt.MQTTBasic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">paho.mqtt.client.Client</span></tt></p>
 <p>A grandmother for mqtt</p>
 <dl class="method">
@@ -1564,7 +1564,7 @@ payload you require.</li>
 
 <dl class="class">
 <dt id="janitoo.mqtt.MQTTClient">
-<em class="property">class </em><tt class="descclassname">janitoo.mqtt.</tt><tt class="descname">MQTTClient</tt><big>(</big><em>client_id=None</em>, <em>options={}</em>, <em>loop_sleep=0.15</em><big>)</big><a class="reference internal" href="_modules/janitoo/mqtt.html#MQTTClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.mqtt.MQTTClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.mqtt.</tt><tt class="descname">MQTTClient</tt><big>(</big><em>client_id=None</em>, <em>options=None</em>, <em>loop_sleep=0.15</em><big>)</big><a class="reference internal" href="_modules/janitoo/mqtt.html#MQTTClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.mqtt.MQTTClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/threading.html#threading.Thread" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></tt></a></p>
 <dl class="method">
 <dt id="janitoo.mqtt.MQTTClient.add_topic">
@@ -2473,7 +2473,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b97647bc390&gt;, &lt;transitions.core.State object at 0x2b97647bc3d0&gt;, &lt;transitions.core.State object at 0x2b97647bc410&gt;, &lt;transitions.core.State object at 0x2b97647bc450&gt;, &lt;transitions.core.State object at 0x2b97647bc490&gt;, &lt;transitions.core.State object at 0x2b97647bc4d0&gt;, &lt;transitions.core.State object at 0x2b97647bc510&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b3fd5f0a410&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a450&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a490&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a4d0&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a510&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a550&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a590&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2910,7 +2910,7 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </ul>
 <dl class="attribute">
 <dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b97662597d0&gt;, 'start': &lt;function _start at 0x2b9766259500&gt;, 'kill': &lt;function _kill at 0x2b9766259758&gt;, 'reload': &lt;function _reload at 0x2b97662598c0&gt;, 'front': &lt;function _front at 0x2b9766259578&gt;, 'flush': &lt;function _flush at 0x2b9766259938&gt;, 'stop': &lt;function _stop at 0x2b97662596e0&gt;, 'restart': &lt;function _restart at 0x2b9766259848&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b3fd79d38c0&gt;, 'start': &lt;function _start at 0x2b3fd79d35f0&gt;, 'kill': &lt;function _kill at 0x2b3fd79d3848&gt;, 'reload': &lt;function _reload at 0x2b3fd79d39b0&gt;, 'front': &lt;function _front at 0x2b3fd79d3668&gt;, 'flush': &lt;function _flush at 0x2b3fd79d3a28&gt;, 'stop': &lt;function _stop at 0x2b3fd79d37d0&gt;, 'restart': &lt;function _restart at 0x2b3fd79d3938&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
