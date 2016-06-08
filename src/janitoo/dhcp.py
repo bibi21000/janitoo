@@ -104,7 +104,7 @@ class CacheManager(object):
             self.entries = {}
             data = query.all()
             for line in data:
-                self.update(line.add_ctrl, line.add_node, state=line.state, hearbeat=line.heartbeat, last_seen=line.last_seen)
+                self.update(line.add_ctrl, line.add_node, state=line.state, heartbeat=line.heartbeat, last_seen=line.last_seen)
 
     def flush(self, query=None):
         """Flush the cache to db. Remmove failed name from cache

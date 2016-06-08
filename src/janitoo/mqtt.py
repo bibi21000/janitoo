@@ -53,12 +53,14 @@ from janitoo.utils import JanitooNotImplemented, HADD, json_dumps
 
 class MQTTBasic(mqttc.Client):
     """A grandmother for mqtt """
-    def __init__(self, options={}, **kwargs):
+    def __init__(self, options=None, **kwargs):
         """
         """
         client_id = kwargs.pop('client_id', None)
         mqttc.Client.__init__(self, client_id=client_id, **kwargs)
         self.options = options
+        if self.options is None:
+            self.options = {}
 
     def disconnect(self):
         """
@@ -214,7 +216,7 @@ class MQTTBasic(mqttc.Client):
 
 
 class MQTTClient(threading.Thread):
-    def __init__(self, client_id=None, options={}, loop_sleep=0.15):
+    def __init__(self, client_id=None, options=None, loop_sleep=0.15):
         """Initialise the client
 
         :param client_id: use a specific client id which must be unique on the broker. Use None to let the client generate a random id for you.
@@ -223,6 +225,8 @@ class MQTTClient(threading.Thread):
         threading.Thread.__init__(self)
         self._stopevent = threading.Event()
         self.options = options
+        if self.options is None:
+            self.options = {}
         self.loop_sleep = loop_sleep
         self.client = MQTTBasic(client_id=client_id, options=options)
         self.client.on_connect = self.mqtt_on_connect
