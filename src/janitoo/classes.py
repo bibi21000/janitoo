@@ -159,6 +159,7 @@ COMMAND_DESC = {
 
 #roomba
         0x2000: 'COMMAND_ROOMBA_VACUUM',
+        0x2001: 'COMMAND_ROOMBA_DRIVE',
 
 #samsung
         0x2100: 'COMMAND_AV_CHANNEL',
