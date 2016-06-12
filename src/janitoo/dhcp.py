@@ -958,22 +958,17 @@ class JNTNetwork(object):
             if self.resolv_mqttc is not None:
                 try:
                     self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_REPLY%self.hadds[0])
-                except Exception:
-                    logger.exception("Catched exception")
-                try:
                     self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_BROADCAST+'#')
-                except Exception:
-                    logger.exception("Catched exception")
-                try:
                     self.resolv_mqttc.unsubscribe(topic="%s#"%TOPIC_RESOLV)
                 except Exception:
                     logger.exception("Catched exception")
                 try:
-                    self.resolv_mqttc.stop()
+                    if self.resolv_mqttc:
+                        self.resolv_mqttc.stop()
                 except Exception:
                     logger.exception("Catched exception")
                 try:
-                    if self.resolv_mqttc.is_alive():
+                    if self.resolv_mqttc and self.resolv_mqttc.is_alive():
                         self.resolv_mqttc.join()
                 except Exception:
                     logger.exception("Catched exception")
@@ -1078,10 +1073,8 @@ class JNTNetwork(object):
                 self.resolv_heartbeat_mqttc.unsubscribe(topic="%sheartbeat"%TOPIC_RESOLV)
                 try:
                     self.resolv_heartbeat_mqttc.stop()
-                except Exception:
-                    logger.exception("Catched exception")
-                try:
-                    self.resolv_heartbeat_mqttc.join()
+                    if self.resolv_heartbeat_mqttc:
+                        self.resolv_heartbeat_mqttc.join()
                 except Exception:
                     logger.exception("Catched exception")
                 self.resolv_heartbeat_mqttc = None
@@ -1107,11 +1100,10 @@ class JNTNetwork(object):
             if self.nodes_mqttc is not None:
                 self.nodes_mqttc.unsubscribe(topic='/nodes/%s/reply/#'%self.hadds[0])
                 try:
-                    self.nodes_mqttc.stop()
-                except Exception:
-                    logger.exception("Catched exception")
-                try:
-                    self.nodes_mqttc.join()
+                    if self.nodes_mqttc:
+                        self.nodes_mqttc.stop()
+                    if self.nodes_mqttc:
+                        self.nodes_mqttc.join()
                 except Exception:
                     logger.exception("Catched exception")
                 self.nodes_mqttc = None
@@ -1175,11 +1167,10 @@ class JNTNetwork(object):
             if self.heartbeat_discover_mqttc is not None:
                 self.heartbeat_discover_mqttc.unsubscribe(topic='/dhcp/heartbeat/#')
                 try:
-                    self.heartbeat_discover_mqttc.stop()
-                except Exception:
-                    logger.exception("Catched exception")
-                try:
-                    self.heartbeat_discover_mqttc.join()
+                    if self.heartbeat_discover_mqttc:
+                        self.heartbeat_discover_mqttc.stop()
+                    if self.heartbeat_discover_mqttc:
+                        self.heartbeat_discover_mqttc.join()
                 except Exception:
                     logger.exception("Catched exception")
                 self.heartbeat_discover_mqttc = None
@@ -1511,41 +1502,41 @@ class JNTNetwork(object):
             #{'hadd', 'cmd_class', 'type'='list', 'genre'='0x04', 'data'='node|value|config', 'uuid'='request_info'}
             if data['cmd_class'] == COMMAND_DISCOVERY:
                 if data['genre'] == 0x04:
-                    logger.warning("Data in %s : %s",data['uuid'], data)
+                    #~ logger.warning("Data in %s : %s",data['uuid'], data)
                     if len(data['data']) == 0:
                         return
                     if data['uuid'] == "request_info_nodes":
                         self.add_nodes(data['data'])
                     elif data['uuid'] == "request_info_configs":
                         if 'genre' in data['data']:
-                            data = {0:data['data']}
+                            data_to_add = {0:data['data']}
                         else:
-                            data = data['data']
+                            data_to_add = data['data']
                         #~ print "data", data
-                        for key in data.keys():
-                            self.add_configs(data[key])
+                        for key in data_to_add.keys():
+                            self.add_configs(data_to_add[key])
                     elif data['uuid'] == "request_info_systems":
                         self.add_systems(data['data'])
                     elif data['uuid'] == "request_info_commands":
                         self.add_commands(data['data'])
                     elif data['uuid'] == "request_info_users":
                         if 'genre' in data['data']:
-                            data = {0:data['data']}
+                            data_to_add = {0:data['data']}
                         else:
-                            data = data['data']
+                            data_to_add = data['data']
                         #~ print "data", data
-                        for key in data.keys():
-                            self.add_users(data[key])
+                        for key in data_to_add.keys():
+                            self.add_users(data_to_add[key])
                     elif data['uuid'] == "request_info_basics":
                         if 'genre' in data['data']:
-                            data = {0:data['data']}
+                            data_to_add = {0:data['data']}
                         else:
-                            data = data['data']
+                            data_to_add = data['data']
                         #~ print "data", data
-                        for key in data.keys():
-                            self.add_basics(data[key])
+                        for key in data_to_add.keys():
+                            self.add_basics(data_to_add[key])
                     else:
-                        logger.warning("Unknown value% in %s", data['uuid'],'on_reply')
+                        logger.warning("Unknown value %s in %s", data['uuid'],'on_reply')
                         return
                     if self.is_primary and self.is_started:
                         th = threading.Timer(0.05, threaded_send_resolv, args = (self._stopevent, self.options, data['reply_hadd'], data, None))
