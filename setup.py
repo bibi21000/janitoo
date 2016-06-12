@@ -55,14 +55,6 @@ def data_files_config(res, rsrc, src, pattern):
 data_files = []
 data_files_config(data_files, 'docs','src/docs/','*')
 
-janitoo_entry_points = {
-    "janitoo.threads": [
-        "fake = janitoo.tests:make_thread",
-    ],
-    "janitoo.components": [
-        "fake.component = janitoo.tests:make_fake_component",
-    ],
-}
 
 setup(
     name = 'janitoo',
@@ -109,5 +101,12 @@ setup(
       'https://github.com/bibi21000/janitoo_nosetests/archive/master.zip#egg=janitoo_nosetests',
       'https://github.com/tyarkoni/transitions/archive/master.zip#egg=transitions',
     ],
-    entry_points = janitoo_entry_points,
+    entry_points = {
+        "janitoo.threads": [
+            "fake = janitoo.tests:make_thread",
+        ],
+        "janitoo.components": [
+            "fake.component = janitoo.tests:make_fake_component",
+        ],
+    },
 )

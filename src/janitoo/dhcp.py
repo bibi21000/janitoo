@@ -956,9 +956,18 @@ class JNTNetwork(object):
                 self.resolv_timeout_timer.cancel()
                 self.resolv_timeout_timer = None
             if self.resolv_mqttc is not None:
-                self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_REPLY%self.hadds[0])
-                self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_BROADCAST+'#')
-                self.resolv_mqttc.unsubscribe(topic="%s#"%TOPIC_RESOLV)
+                try:
+                    self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_REPLY%self.hadds[0])
+                except Exception:
+                    logger.exception("Catched exception")
+                try:
+                    self.resolv_mqttc.remove_topic(topic=TOPIC_RESOLV_BROADCAST+'#')
+                except Exception:
+                    logger.exception("Catched exception")
+                try:
+                    self.resolv_mqttc.unsubscribe(topic="%s#"%TOPIC_RESOLV)
+                except Exception:
+                    logger.exception("Catched exception")
                 try:
                     self.resolv_mqttc.stop()
                 except Exception:

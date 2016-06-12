@@ -90,7 +90,7 @@ class Runner(object):
     status_message_running = "process is running (%d)"
     status_message_not_running = "process is not running"
 
-    def __init__(self):
+    def __init__(self, only_front=False):
         """ Set up the parameters of a new runner.
 
             The `app` argument must have the following attributes:
@@ -114,7 +114,7 @@ class Runner(object):
         self.pidfile_path = None
         self.userid = None
         self.args = None
-        self.parse_args()
+        self.parse_args(only_front=only_front)
         self.pidfile = None
         self.pidfile_path = os.path.join(self.options['pid_dir'], self.options['service'] + ".pid")
         self.pidfile = make_pidlockfile(
@@ -148,10 +148,10 @@ class Runner(object):
         emit_message(message)
         sys.exit(usage_exit_code)
 
-    def parse_args(self):
+    def parse_args(self, only_front = False):
         """ Parse command-line arguments.
         """
-        args = jnt_parse_args()
+        args = jnt_parse_args(only_front=only_front)
         self.options = vars(args)
         self.action = args.command
         self.args = args
@@ -195,7 +195,7 @@ class Runner(object):
         #print "Here 2"
         message = self.start_message % os.getpid()
         logger.info(message)
-        emit_message(message, self.daemon_context.stdout)
+        #~ emit_message(message, self.daemon_context.stdout)
         self.app_run()
 
     def _front(self):
@@ -205,7 +205,8 @@ class Runner(object):
             self.pidfile.break_lock()
         self.pidfile.__enter__()
         message = self.start_message %  os.getpid()
-        emit_message(message, sys.stdout)
+        logger.info(message)
+        #~ emit_message(message, sys.stdout)
         try:
             self.app_run()
         except KeyboardInterrupt:
@@ -364,7 +365,7 @@ def is_pidfile_stale(pidfile):
                 result = True
     return result
 
-def jnt_parse_args():
+def jnt_parse_args(only_front = False):
     """Default argument parser
     """
     conf_parser = argparse.ArgumentParser(
@@ -399,6 +400,15 @@ def jnt_parse_args():
         defaults['conf_file'] = conf_file
         if 'hostname' not in defaults or defaults['hostname'] is None:
             defaults['hostname'] = socket.gethostname()
+    if conf_file is None:
+        conf_file = os.path.expanduser("~/.janitoorc")
+        config = ConfigParser()
+        config.read([conf_file])
+        if os.path.isfile(conf_file):
+            defaults = dict(config.items("system"))
+            defaults['conf_file'] = conf_file
+            if 'hostname' not in defaults or defaults['hostname'] is None:
+                defaults['hostname'] = socket.gethostname()
     # Don't surpress add_help here so it will handle -h
     parser = argparse.ArgumentParser(
         # Inherit options from config_parser
@@ -418,9 +428,15 @@ def jnt_parse_args():
         flush      flush data to disk
         front      don't run as daemon
     """
-    parser.add_argument('command', nargs='?',
-                        choices=('start', 'stop', 'restart', 'reload', 'flush', 'kill', 'status', 'front'),
-                        help=helpCommand)
+    if only_front:
+        parser.add_argument('command', nargs='?',
+                            choices=('front'),
+                            default='front',
+                            help=helpCommand)
+    else:
+        parser.add_argument('command', nargs='?',
+                            choices=('start', 'stop', 'restart', 'reload', 'flush', 'kill', 'status', 'front'),
+                            help=helpCommand)
     parser.set_defaults(**defaults)
     #parser.add_argument("--conf_file", help="the hostname used by the service. Leave blank to auto-configure.")
     parser.add_argument("--hostname", help="the hostname used by the service. Leave blank to auto-configure.")
