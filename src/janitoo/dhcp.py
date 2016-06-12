@@ -972,11 +972,11 @@ class JNTNetwork(object):
                     self.resolv_mqttc.stop()
                 except Exception:
                     logger.exception("Catched exception")
-                if self.resolv_mqttc.is_alive():
-                    try:
+                try:
+                    if self.resolv_mqttc.is_alive():
                         self.resolv_mqttc.join()
-                    except Exception:
-                        logger.exception("Catched exception")
+                except Exception:
+                    logger.exception("Catched exception")
                 self.resolv_mqttc = None
 
     def start_resolv_request(self):
