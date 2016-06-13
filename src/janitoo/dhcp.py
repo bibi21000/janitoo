@@ -2302,6 +2302,25 @@ class JNTNetwork(object):
         """
         pass
 
+    def state_to_dict(self):
+        """state to dict
+        """
+        ret = {}
+        ret['state'] = self.state
+        ret['state_str'] = self.state_str
+        ret['nodes_count'] = self.nodes_count
+        ret['home_id'] = self.home_id
+        ret['is_failed'] = self.is_failed
+        ret['is_secondary'] = self.is_secondary
+        ret['is_primary'] = self.is_primary
+        return ret
+
+    def to_dict(self, which='state'):
+        """Create a dict of which : state, nodes, configs, ...
+        """
+        if which == 'state':
+            return self.state_to_dict()
+
 def check_heartbeats(entries, heartbeat_timeout=60, heartbeat_count=3, heartbeat_dead=604800):
     """Check the states of the machine. Must be called in a timer
     Called in a separate thread. Must use a scoped_session.
