@@ -78,6 +78,18 @@ class JNTOptions(object):
         system = self.get_options('system')
         self.data.update(system)
 
+    def get_sections(self):
+        """Retrieve all sections
+        """
+        try:
+            if 'conf_file' in self.data and self.data['conf_file'] is not None:
+                config = RawConfigParser()
+                config.read([self.data['conf_file']])
+                return config.sections()
+        except Exception:
+            logger.exception("Catched exception")
+        return []
+
     def get_options(self, section):
         """Retrieve options from a section
         """
@@ -139,7 +151,7 @@ class JNTOptions(object):
             return default
         except ConfigParser.NoSectionError:
         #~ except ValueError:
-            return None
+            return default
         return None
 
     def set_option(self, section, key, value, create=False):

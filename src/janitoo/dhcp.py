@@ -2379,10 +2379,12 @@ class JNTNetwork(object):
         res.update(nodes)
         for key in res:
             add_ctrl, add_node = hadd_split(key)
-            if add_ctrl in self.heartbeat_cache.entries and add_node in self.heartbeat_cache.entries[add_ctrl]:
+            try:
                 res[key]['state'] = self.heartbeat_cache.entries[add_ctrl][add_node]['state']
-            else:
+            except Exception:
                 res[key]['state'] = 'UNKNOWN'
+                logger.warning("Exception catched in nodes_to_dict", exc_info=True)
+        return res
 
     def to_dict(self, which='state'):
         """Create a dict of which : state, nodes, configs, ...
