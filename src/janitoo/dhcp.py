@@ -2361,11 +2361,25 @@ class JNTNetwork(object):
         ret['is_primary'] = self.is_primary
         return ret
 
+    def nodes_to_dict(self, nodes):
+        """nodes to dict
+        """
+        res = {}
+        res.update(nodes)
+        for key in res:
+            add_ctrl, add_node = hadd_split(key)
+            if add_ctrl in self.heartbeat_cache.entries and add_node in self.heartbeat_cache.entries[add_ctrl]:
+                res[key]['state'] = self.heartbeat_cache.entries[add_ctrl][add_node]['state']
+            else:
+                res[key]['state'] = 'UNKNOWN'
+
     def to_dict(self, which='state'):
         """Create a dict of which : state, nodes, configs, ...
         """
         if which == 'state':
             return self.state_to_dict()
+        elif which == 'nodes':
+            return self.nodes_to_dict(self.nodes)
 
 def check_heartbeats(entries, heartbeat_timeout=60, heartbeat_count=3, heartbeat_dead=604800):
     """Check the states of the machine. Must be called in a timer
