@@ -688,7 +688,7 @@ class JNTNetwork(object):
         if self._test:
             print "stop_broadcast_discover"
         else:
-            self.broadcast_mqttc.acquire()
+            self.broadcast_mqttc_lock.acquire()
             try:
                 if self.broadcast_mqttc is not None:
                     self.broadcast_mqttc.unsubscribe(topic=TOPIC_BROADCAST_REPLY%self.hadds[0])
@@ -700,7 +700,7 @@ class JNTNetwork(object):
                             logger.exception("Catched exception")
                     self.broadcast_mqttc = None
             finally:
-                self.broadcast_mqttc.release()
+                self.broadcast_mqttc_lock.release()
         self.emit_network()
         self.emit_nodes()
 
