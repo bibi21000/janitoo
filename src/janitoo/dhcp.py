@@ -474,6 +474,7 @@ class JNTNetwork(object):
         self.heartbeat_discover_mqttc = None
         self.heartbeat_discover_mqttc_lock = threading.Lock()
         self.nodes_mqttc = None
+        self.nodes_mqttc_lock = threading.Lock()
         self.resolv_mqttc = None
         self.resolv_timeout_timer = None
         self.resolv_heartbeat_mqttc = None
@@ -1124,16 +1125,18 @@ class JNTNetwork(object):
         if self._test:
             print "stop_nodes_discover"
         else:
-            if self.nodes_mqttc is not None:
-                self.nodes_mqttc.unsubscribe(topic='/nodes/%s/reply/#'%self.hadds[0])
-                try:
-                    if self.nodes_mqttc:
+            self.nodes_mqttc_lock.acquire()
+            try:
+                if self.nodes_mqttc is not None:
+                    self.nodes_mqttc.unsubscribe(topic='/nodes/%s/reply/#'%self.hadds[0])
+                    try:
                         self.nodes_mqttc.stop()
-                    if self.nodes_mqttc:
                         self.nodes_mqttc.join()
-                except Exception:
-                    logger.exception("Catched exception")
-                self.nodes_mqttc = None
+                    except Exception:
+                        logger.exception("Catched exception")
+                    self.nodes_mqttc = None
+            finally:
+                self.nodes_mqttc_lock.release()
 
     def start_nodes_discover(self):
         """
@@ -1144,6 +1147,7 @@ class JNTNetwork(object):
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
+            self.nodes_mqttc_lock.acquire()
             try:
                 if self.nodes_mqttc is None:
                     self.nodes_mqttc = MQTTClient(options=self.options.data, loop_sleep=self.loop_sleep)
@@ -1156,6 +1160,8 @@ class JNTNetwork(object):
                     return
                 else:
                     raise
+            finally:
+                self.nodes_mqttc_lock.release()
         self.emit_nodes()
         self.emit_network()
 
@@ -1168,6 +1174,7 @@ class JNTNetwork(object):
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
+            self.heartbeat_discover_mqttc_lock.acquire()
             try:
                 if self.heartbeat_discover_mqttc is None:
                     self.heartbeat_discover_mqttc = MQTTClient(options=self.options.data, loop_sleep=self.loop_sleep)
@@ -1179,6 +1186,8 @@ class JNTNetwork(object):
                     return
                 else:
                     raise
+            finally:
+                self.heartbeat_discover_mqttc_lock.release()
         self.emit_network()
         if self._stopevent.is_set() or self.is_stopped:
             return
@@ -1191,16 +1200,18 @@ class JNTNetwork(object):
         if self._test:
             print "stop_heartbeat_discover"
         else:
-            if self.heartbeat_discover_mqttc is not None:
-                self.heartbeat_discover_mqttc.unsubscribe(topic='/dhcp/heartbeat/#')
-                try:
-                    if self.heartbeat_discover_mqttc:
+            self.heartbeat_discover_mqttc_lock.acquire()
+            try:
+                if self.heartbeat_discover_mqttc is not None:
+                    self.heartbeat_discover_mqttc.unsubscribe(topic='/dhcp/heartbeat/#')
+                    try:
                         self.heartbeat_discover_mqttc.stop()
-                    if self.heartbeat_discover_mqttc:
                         self.heartbeat_discover_mqttc.join()
-                except Exception:
-                    logger.exception("Catched exception")
-                self.heartbeat_discover_mqttc = None
+                    except Exception:
+                        logger.exception("Catched exception")
+                    self.heartbeat_discover_mqttc = None
+            finally:
+                self.heartbeat_discover_mqttc_lock.release()
         self.emit_network()
 
     def start_heartbeat(self):
