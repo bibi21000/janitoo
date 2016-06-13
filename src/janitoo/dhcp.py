@@ -1011,7 +1011,7 @@ class JNTNetwork(object):
                 else:
                     raise
             finally:
-                self.resolv_request_mqttc_lock.remease()
+                self.resolv_request_mqttc_lock.release()
 
     def stop_resolv_request(self):
         """
