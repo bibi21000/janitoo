@@ -2394,6 +2394,44 @@ class JNTNetwork(object):
         elif which == 'nodes':
             return self.nodes_to_dict(self.nodes)
 
+    def find_secondaries(self):
+        """Retrieve secondaries nodes on the network
+        """
+        return []
+
+    def find_secondariess(self):
+        """Retrieve secondaries nodes on the network
+        """
+        return []
+
+    def find_controllers(self):
+        """Retrieve controller nodes on the network
+        """
+        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].endswith('%s0000'%HADD_SEP) ]
+
+    def find_controller_nodes(self, add_ctrl):
+        """Retrieve nodes of a controller
+        """
+        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].startswith('%s%s'%(add_ctrl, HADD_SEP)) ]
+
+    def find_neighbors(self, node_hadd):
+        """Retrieve neighbors of a node on the network :
+
+        All controllers are neighbors
+        A controller has all the nodes it holds as neighbors
+        A simple node has only one neighbor : its controller
+
+        """
+        neighbors = []
+        controllers = self.find_controllers()
+        add_ctrl, add_node = hadd_split(node_hadd)
+        if node_hadd in controllers:
+            neighbors += controllers
+            neighbors += self.find_controller_nodes(add_ctrl)
+        else:
+            neighbors += [HADD%(add_ctrl,0)]
+        return neighbors
+
 def check_heartbeats(entries, heartbeat_timeout=60, heartbeat_count=3, heartbeat_dead=604800):
     """Check the states of the machine. Must be called in a timer
     Called in a separate thread. Must use a scoped_session.
