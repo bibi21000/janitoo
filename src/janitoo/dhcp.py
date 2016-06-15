@@ -2378,7 +2378,7 @@ class JNTNetwork(object):
         res = {}
         res.update(nodes)
         for key in res:
-            add_ctrl, add_node = hadd_split(key)
+            add_ctrl, add_node = hadd_split(res[key]["hadd"])
             try:
                 res[key]['state'] = self.heartbeat_cache.entries[add_ctrl][add_node]['state']
             except Exception:
