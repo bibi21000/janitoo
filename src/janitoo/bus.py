@@ -44,6 +44,15 @@ COMMAND_CONTROLLER = 0x1050
 
 assert(COMMAND_DESC[COMMAND_CONTROLLER] == 'COMMAND_CONTROLLER')
 ##############################################################
+##############################################################
+#Check that we are in sync with the official command classes
+#Must be implemented for non-regression
+from janitoo.classes import CAPABILITY_DESC
+
+CAPABILITY_DYNAMIC_CONTROLLER = 0x04
+
+assert(CAPABILITY_DESC[CAPABILITY_DYNAMIC_CONTROLLER] == 'CAPABILITY_DYNAMIC_CONTROLLER')
+##############################################################
 
 class JNTBus(object):
     """A bus holds components
@@ -93,6 +102,8 @@ class JNTBus(object):
             self.values = {}
         if not hasattr(self,'cmd_classes'):
             self.cmd_classes = [COMMAND_CONTROLLER]
+        if not hasattr(self,'capabilities'):
+            self.capabilities = [CAPABILITY_DYNAMIC_CONTROLLER]
         self._trigger_thread_reload_cb = None
         self.mqttc = None
         self.options = kwargs.get('options', None)
@@ -247,6 +258,7 @@ class JNTBus(object):
         name = kwargs.pop('name', "%s controller"%self.name)
         self.node = JNTNode( uuid=self.uuid,
             cmd_classes=self.cmd_classes,
+            capabilities=self.capabilities,
             hadd=hadd,
             name=name,
             product_name=self.product_name,

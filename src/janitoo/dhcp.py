@@ -28,7 +28,6 @@ __author__ = 'Sébastien GALLET aka bibi21000'
 __email__ = 'bibi21000@gmail.com'
 __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000"
 
-# Set default logging handler to avoid "No handler found" warnings.
 import logging
 logger = logging.getLogger(__name__)
 
@@ -55,6 +54,17 @@ from janitoo.classes import COMMAND_DESC
 COMMAND_DISCOVERY = 0x5000
 
 assert(COMMAND_DESC[COMMAND_DISCOVERY] == 'COMMAND_DISCOVERY')
+##############################################################
+##############################################################
+#Check that we are in sync with the official command classes
+#Must be implemented for non-regression
+from janitoo.classes import CAPABILITY_DESC
+
+CAPABILITY_DYNAMIC_CONTROLLER = 0x04
+CAPABILITY_TINY_CONTROLLER = 0x05
+
+assert(CAPABILITY_DESC[CAPABILITY_DYNAMIC_CONTROLLER] == 'CAPABILITY_DYNAMIC_CONTROLLER')
+assert(CAPABILITY_DESC[CAPABILITY_TINY_CONTROLLER] == 'CAPABILITY_TINY_CONTROLLER')
 ##############################################################
 
 #https://github.com/tyarkoni/transitions
@@ -2384,6 +2394,9 @@ class JNTNetwork(object):
             except Exception:
                 res[key]['state'] = 'UNKNOWN'
                 logger.warning("Exception catched in nodes_to_dict", exc_info=True)
+            #Fix old protocols
+            if "capabilities" not in res[key]:
+                res[key]['capabilities'] = []
         return res
 
     def to_dict(self, which='state'):
@@ -2412,7 +2425,7 @@ class JNTNetwork(object):
     def find_controller_nodes(self, add_ctrl):
         """Retrieve nodes of a controller
         """
-        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].startswith('%s%s'%(add_ctrl, HADD_SEP)) ]
+        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['capabilities'] ]
 
     def find_neighbors(self, node_hadd):
         """Retrieve neighbors of a node on the network :

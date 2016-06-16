@@ -1515,6 +1515,8 @@ class JNTNode(object):
         """The UUID of the node"""
         self.oid = kwargs.get('oid', 'generic')
         """The oid of the component associated to the node"""
+        self.capabilities = kwargs.get('capabilities', [])
+        """The capabilities implemented by the node"""
         self.cmd_classes = kwargs.get('cmd_classes', [])
         """The command classes implemented by the node"""
         self.name = kwargs.get('name', 'Default name')
