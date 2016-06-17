@@ -1858,7 +1858,8 @@ class JNTNetwork(object):
             node = {}
             node.update(self.nodes[hadd])
             node['state'] = state if state is not None else 'PENDING'
-            self.emit_node(node)
+            data = normalize_request_info_nodes(node)
+            self.emit_node(data)
         #~ print " node : %s" % self.nodes[hadd]
         self.heartbeat_cache.update(add_ctrl, add_node, state=state, heartbeat=self.nodes[hadd]['heartbeat'])
 
@@ -1916,7 +1917,8 @@ class JNTNetwork(object):
                 node.update(self.nodes[hadd])
                 node['state'] = state if state != None else 'PENDING'
                 #~ print "   node : %s" % node
-                self.emit_node(node)
+                data = normalize_request_info_nodes(node)
+                self.emit_node(data)
             if hadd in self.nodes:
                 self.heartbeat_cache.update(add_ctrl, add_node, state=state, heartbeat=self.nodes[hadd]['heartbeat'])
 
@@ -2388,15 +2390,18 @@ class JNTNetwork(object):
         res = {}
         res.update(nodes)
         for key in res:
-            add_ctrl, add_node = hadd_split(res[key]["hadd"])
             try:
-                res[key]['state'] = self.heartbeat_cache.entries[add_ctrl][add_node]['state']
+                add_ctrl, add_node = hadd_split(res[key]["hadd"])
+                try:
+                    res[key]['state'] = self.heartbeat_cache.entries[add_ctrl][add_node]['state']
+                except Exception:
+                    res[key]['state'] = 'UNKNOWN'
+                    logger.warning("Exception catched in nodes_to_dict", exc_info=True)
+                #Fix old protocols
+                if "capabilities" not in res[key]:
+                    res[key]['capabilities'] = []
             except Exception:
-                res[key]['state'] = 'UNKNOWN'
-                logger.warning("Exception catched in nodes_to_dict", exc_info=True)
-            #Fix old protocols
-            if "capabilities" not in res[key]:
-                res[key]['capabilities'] = []
+                logger.exception("Exception in nodes_to_dict : nodes = %s", nodes)
         return res
 
     def to_dict(self, which='state'):
