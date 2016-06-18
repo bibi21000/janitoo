@@ -2432,6 +2432,36 @@ class JNTNetwork(object):
         """
         return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['capabilities'] ]
 
+    def find_node_values(self, node_hadd, genre='systems'):
+        """Retrieve values of a node on the network :
+        """
+        if genre == 'systems':
+            return self.systems[node_hadd] if node_hadd in self.systems else {}
+        elif genre == 'configs':
+            return self.configs[node_hadd] if node_hadd in self.configs else {}
+        elif genre == 'basics':
+            return self.basics[node_hadd] if node_hadd in self.basics else {}
+        elif genre == 'users':
+            return self.users[node_hadd] if node_hadd in self.users else {}
+        elif genre == 'commands':
+            return self.commands[node_hadd] if node_hadd in self.commands else {}
+        return {}
+
+    def find_node_value(self, node_hadd, genre='systems', vuuid=None):
+        """Retrieve value of a node on the network :
+        """
+        if genre == 'systems':
+            return self.systems[node_hadd][vuuid] if node_hadd in self.systems and vuuid in self.systems[node_hadd] else {}
+        elif genre == 'configs':
+            return self.configs[node_hadd][vuuid] if node_hadd in self.configs and vuuid in self.configs[node_hadd] else {}
+        elif genre == 'basics':
+            return self.basics[node_hadd][vuuid] if node_hadd in self.basics and vuuid in self.basics[node_hadd] else {}
+        elif genre == 'users':
+            return self.users[node_hadd][vuuid] if node_hadd in self.users and vuuid in self.users[node_hadd] else {}
+        elif genre == 'commands':
+            return self.commands[node_hadd][vuuid] if node_hadd in self.commands and vuuid in self.commands[node_hadd] else {}
+        return {}
+
     def find_neighbors(self, node_hadd):
         """Retrieve neighbors of a node on the network :
 
