@@ -721,7 +721,8 @@ class JNTNodeMan(object):
         logger.debug("on_request receive message %s", message.payload)
         try:
             data = json_loads(message.payload)
-            #~ print data['uuid']
+            #~ print "data ",data
+            #~ print "=", data['cmd_class'] == COMMAND_CONFIGURATION
             #We should check what value is requested
             #{'hadd', 'cmd_class', 'type'='list', 'genre'='0x04', 'data'='node|value|config', 'uuid'='request_info'}
             if data['cmd_class'] == COMMAND_DISCOVERY:
@@ -741,7 +742,7 @@ class JNTNodeMan(object):
                             logger.exception("Exception when running on_request method")
                             return
             elif data['cmd_class'] == COMMAND_CONFIGURATION:
-                #print "message %s" % message
+                #~ print "message in COMMAND_CONFIGURATION %s" % message
                 if 'reply_hadd' not in data:
                     logger.warning("No reply_hadd in message %s", message)
                 logger.debug("on_request COMMAND_CONFIGURATION message %s,%s", message.topic, message.payload)
@@ -780,6 +781,7 @@ class JNTNodeMan(object):
                         return
                 elif data['genre'] == 0x03:
                     #print "message %s" % message
+                    #~ print data
                     #~ print node.values
                     if data['uuid'] in node.values:
                         read_only = True
@@ -814,7 +816,7 @@ class JNTNodeMan(object):
                 logger.debug("on_request else message %s,%s", message.topic, message.payload)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
-                if data['genre'] == 0x05 or data['genre'] == 0x02 or data['genre'] == 0x01:
+                if data['genre'] in [0x05, 0x02, 0x01]:
                     #~ print data['cmd_class'], node.values[data['uuid']].cmd_class
                     #~ print node.hadd
                     if data['uuid'] in node.values and data['cmd_class'] == node.values[data['uuid']].cmd_class:
