@@ -1951,7 +1951,7 @@ class JNTNetwork(object):
             #~ if do_emit == True and initial_startup == False:
             self.emit_node(ndata)
         except Exception:
-            logger.exception("Exception in add_nodes")
+            logger.exception("Exception in add_nodes : ndata = %s", ndata)
         finally:
             self._lock.release()
         self.emit_network()
@@ -1990,7 +1990,7 @@ class JNTNetwork(object):
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.users"
             #~ print self.users
         except Exception:
-            logger.exception("Exception in add_users")
+            logger.exception("Exception in add_users : ndata = %s", ndata)
         finally:
             self._lock.release()
 
@@ -2031,7 +2031,7 @@ class JNTNetwork(object):
                     #~ self.configs[ndata[nval][kval]['hadd']][ndata[nval][kval]['uuid']] = ndata[nval][kval]
             #~ print "add_configs self.configs ", self.configs
         except Exception:
-            logger.exception("Exception in add_configs")
+            logger.exception("Exception in add_configs : ndata = %s", ndata)
         finally:
             self._lock.release()
 
@@ -2069,7 +2069,7 @@ class JNTNetwork(object):
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.basics"
             #~ print self.basics
         except Exception:
-            logger.exception("Exception in add_basics")
+            logger.exception("Exception in add_basics : ndata = %s", ndata)
         finally:
             self._lock.release()
 
@@ -2132,7 +2132,7 @@ class JNTNetwork(object):
             #~ print "seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.commands"
             #~ print self.commands
         except Exception:
-            logger.exception("Exception in add_commands")
+            logger.exception("Exception in add_commands : ndata = %s", ndata)
         finally:
             self._lock.release()
 
