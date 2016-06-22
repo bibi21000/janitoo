@@ -851,7 +851,8 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;on_request receive message </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json_loads</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
-            <span class="c">#~ print data[&#39;uuid&#39;]</span>
+            <span class="c">#~ print &quot;data &quot;,data</span>
+            <span class="c">#~ print &quot;=&quot;, data[&#39;cmd_class&#39;] == COMMAND_CONFIGURATION</span>
             <span class="c">#We should check what value is requested</span>
             <span class="c">#{&#39;hadd&#39;, &#39;cmd_class&#39;, &#39;type&#39;=&#39;list&#39;, &#39;genre&#39;=&#39;0x04&#39;, &#39;data&#39;=&#39;node|value|config&#39;, &#39;uuid&#39;=&#39;request_info&#39;}</span>
             <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">COMMAND_DISCOVERY</span><span class="p">:</span>
@@ -871,7 +872,7 @@
                             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception when running on_request method&quot;</span><span class="p">)</span>
                             <span class="k">return</span>
             <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">COMMAND_CONFIGURATION</span><span class="p">:</span>
-                <span class="c">#print &quot;message %s&quot; % message</span>
+                <span class="c">#~ print &quot;message in COMMAND_CONFIGURATION %s&quot; % message</span>
                 <span class="k">if</span> <span class="s">&#39;reply_hadd&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;No reply_hadd in message </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;on_request COMMAND_CONFIGURATION message </span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
@@ -910,6 +911,7 @@
                         <span class="k">return</span>
                 <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x03</span><span class="p">:</span>
                     <span class="c">#print &quot;message %s&quot; % message</span>
+                    <span class="c">#~ print data</span>
                     <span class="c">#~ print node.values</span>
                     <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
                         <span class="n">read_only</span> <span class="o">=</span> <span class="bp">True</span>
@@ -944,7 +946,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;on_request else message </span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">topic</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
                 <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_node_from_hadd</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;hadd&#39;</span><span class="p">])</span>
                 <span class="c">#~ print node.values</span>
-                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x05</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x02</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x01</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">]:</span>
                     <span class="c">#~ print data[&#39;cmd_class&#39;], node.values[data[&#39;uuid&#39;]].cmd_class</span>
                     <span class="c">#~ print node.hadd</span>
                     <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">cmd_class</span><span class="p">:</span>
@@ -1645,6 +1647,8 @@
         <span class="sd">&quot;&quot;&quot;The UUID of the node&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">oid</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;oid&#39;</span><span class="p">,</span> <span class="s">&#39;generic&#39;</span><span class="p">)</span>
         <span class="sd">&quot;&quot;&quot;The oid of the component associated to the node&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capabilities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;capabilities&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="sd">&quot;&quot;&quot;The capabilities implemented by the node&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cmd_classes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;cmd_classes&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="sd">&quot;&quot;&quot;The command classes implemented by the node&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;Default name&#39;</span><span class="p">)</span>

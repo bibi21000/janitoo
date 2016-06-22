@@ -220,7 +220,7 @@
     <span class="n">status_message_running</span> <span class="o">=</span> <span class="s">&quot;process is running (</span><span class="si">%d</span><span class="s">)&quot;</span>
     <span class="n">status_message_not_running</span> <span class="o">=</span> <span class="s">&quot;process is not running&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">only_front</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Set up the parameters of a new runner.</span>
 
 <span class="sd">            The `app` argument must have the following attributes:</span>
@@ -244,7 +244,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">only_front</span><span class="o">=</span><span class="n">only_front</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pidfile_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;pid_dir&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s">&#39;service&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;.pid&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span> <span class="o">=</span> <span class="n">make_pidlockfile</span><span class="p">(</span>
@@ -278,10 +278,10 @@
         <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">usage_exit_code</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Runner.parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.parse_args">[docs]</a>    <span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Runner.parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.Runner.parse_args">[docs]</a>    <span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">only_front</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Parse command-line arguments.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="n">jnt_parse_args</span><span class="p">()</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">jnt_parse_args</span><span class="p">(</span><span class="n">only_front</span><span class="o">=</span><span class="n">only_front</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
@@ -325,7 +325,7 @@
         <span class="c">#print &quot;Here 2&quot;</span>
         <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_message</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon_context</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="c">#~ emit_message(message, self.daemon_context.stdout)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app_run</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -335,7 +335,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">break_lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pidfile</span><span class="o">.</span><span class="n">__enter__</span><span class="p">()</span>
         <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_message</span> <span class="o">%</span>  <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
-        <span class="n">emit_message</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="c">#~ emit_message(message, sys.stdout)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app_run</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
@@ -494,7 +495,7 @@
                 <span class="n">result</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="n">result</span>
 </div>
-<div class="viewcode-block" id="jnt_parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.jnt_parse_args">[docs]</a><span class="k">def</span> <span class="nf">jnt_parse_args</span><span class="p">():</span>
+<div class="viewcode-block" id="jnt_parse_args"><a class="viewcode-back" href="../../janitoo.html#janitoo.runner.jnt_parse_args">[docs]</a><span class="k">def</span> <span class="nf">jnt_parse_args</span><span class="p">(</span><span class="n">only_front</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Default argument parser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">conf_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
@@ -529,6 +530,15 @@
         <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;conf_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">conf_file</span>
         <span class="k">if</span> <span class="s">&#39;hostname&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">defaults</span> <span class="ow">or</span> <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">conf_file</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">conf_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">&quot;~/.janitoorc&quot;</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="n">conf_file</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">conf_file</span><span class="p">):</span>
+            <span class="n">defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="s">&quot;system&quot;</span><span class="p">))</span>
+            <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;conf_file&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">conf_file</span>
+            <span class="k">if</span> <span class="s">&#39;hostname&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">defaults</span> <span class="ow">or</span> <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">defaults</span><span class="p">[</span><span class="s">&#39;hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span>
     <span class="c"># Don&#39;t surpress add_help here so it will handle -h</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="c"># Inherit options from config_parser</span>
@@ -548,9 +558,15 @@
 <span class="s">        flush      flush data to disk</span>
 <span class="s">        front      don&#39;t run as daemon</span>
 <span class="s">    &quot;&quot;&quot;</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;command&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
-                        <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;stop&#39;</span><span class="p">,</span> <span class="s">&#39;restart&#39;</span><span class="p">,</span> <span class="s">&#39;reload&#39;</span><span class="p">,</span> <span class="s">&#39;flush&#39;</span><span class="p">,</span> <span class="s">&#39;kill&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;front&#39;</span><span class="p">),</span>
-                        <span class="n">help</span><span class="o">=</span><span class="n">helpCommand</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">only_front</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;command&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
+                            <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;front&#39;</span><span class="p">),</span>
+                            <span class="n">default</span><span class="o">=</span><span class="s">&#39;front&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="n">helpCommand</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;command&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
+                            <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="s">&#39;stop&#39;</span><span class="p">,</span> <span class="s">&#39;restart&#39;</span><span class="p">,</span> <span class="s">&#39;reload&#39;</span><span class="p">,</span> <span class="s">&#39;flush&#39;</span><span class="p">,</span> <span class="s">&#39;kill&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="s">&#39;front&#39;</span><span class="p">),</span>
+                            <span class="n">help</span><span class="o">=</span><span class="n">helpCommand</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">defaults</span><span class="p">)</span>
     <span class="c">#parser.add_argument(&quot;--conf_file&quot;, help=&quot;the hostname used by the service. Leave blank to auto-configure.&quot;)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;--hostname&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;the hostname used by the service. Leave blank to auto-configure.&quot;</span><span class="p">)</span>

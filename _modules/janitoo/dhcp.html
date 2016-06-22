@@ -158,7 +158,6 @@
 <span class="n">__email__</span> <span class="o">=</span> <span class="s">&#39;bibi21000@gmail.com&#39;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi21000&quot;</span>
 
-<span class="c"># Set default logging handler to avoid &quot;No handler found&quot; warnings.</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
@@ -185,6 +184,17 @@
 <span class="n">COMMAND_DISCOVERY</span> <span class="o">=</span> <span class="mh">0x5000</span>
 
 <span class="k">assert</span><span class="p">(</span><span class="n">COMMAND_DESC</span><span class="p">[</span><span class="n">COMMAND_DISCOVERY</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;COMMAND_DISCOVERY&#39;</span><span class="p">)</span>
+<span class="c">##############################################################</span>
+<span class="c">##############################################################</span>
+<span class="c">#Check that we are in sync with the official command classes</span>
+<span class="c">#Must be implemented for non-regression</span>
+<span class="kn">from</span> <span class="nn">janitoo.classes</span> <span class="kn">import</span> <span class="n">CAPABILITY_DESC</span>
+
+<span class="n">CAPABILITY_DYNAMIC_CONTROLLER</span> <span class="o">=</span> <span class="mh">0x04</span>
+<span class="n">CAPABILITY_TINY_CONTROLLER</span> <span class="o">=</span> <span class="mh">0x05</span>
+
+<span class="k">assert</span><span class="p">(</span><span class="n">CAPABILITY_DESC</span><span class="p">[</span><span class="n">CAPABILITY_DYNAMIC_CONTROLLER</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;CAPABILITY_DYNAMIC_CONTROLLER&#39;</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">CAPABILITY_DESC</span><span class="p">[</span><span class="n">CAPABILITY_TINY_CONTROLLER</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;CAPABILITY_TINY_CONTROLLER&#39;</span><span class="p">)</span>
 <span class="c">##############################################################</span>
 
 <span class="c">#https://github.com/tyarkoni/transitions</span>
@@ -594,6 +604,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_nodes_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_configs_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_systems_timer</span> <span class="o">=</span> <span class="bp">None</span>
@@ -601,24 +612,28 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_basics_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_commands_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_timeout_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_timer</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dbcon</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hadds</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_cache</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threads_timers</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c">#~ self._replies = {&#39;request_info_nodes&#39; : self.add_nodes, &#39;request_info_users&#39; : self.add_users, &#39;request_info_configs&#39; : self.add_configs,</span>
-            <span class="c">#~ &#39;request_info_systems&#39; : self.add_systems, &#39;request_info_basics&#39; : self.add_basics, &#39;request_info_commands&#39; : self.add_commands }</span>
 
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -775,15 +790,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_BROADCAST_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_reply</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;cmd_class&#39;</span><span class="p">:</span> <span class="n">COMMAND_DISCOVERY</span><span class="p">,</span> <span class="s">&#39;genre&#39;</span><span class="p">:</span><span class="mh">0x04</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">:</span><span class="s">&#39;request_info_nodes&#39;</span><span class="p">,</span> <span class="s">&#39;reply_hadd&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">TOPIC_BROADCAST_REQUEST</span><span class="p">,</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_nodes_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">broadcast_timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">finish_broadcast_nodes_discover</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_nodes_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_BROADCAST_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_reply</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;cmd_class&#39;</span><span class="p">:</span> <span class="n">COMMAND_DISCOVERY</span><span class="p">,</span> <span class="s">&#39;genre&#39;</span><span class="p">:</span><span class="mh">0x04</span><span class="p">,</span> <span class="s">&#39;uuid&#39;</span><span class="p">:</span><span class="s">&#39;request_info_nodes&#39;</span><span class="p">,</span> <span class="s">&#39;reply_hadd&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">TOPIC_BROADCAST_REQUEST</span><span class="p">,</span> <span class="n">json_dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_nodes_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">broadcast_timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">finish_broadcast_nodes_discover</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_nodes_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_nodes</span><span class="p">()</span>
 </div>
@@ -807,15 +826,19 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_broadcast_discover&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_BROADCAST_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_BROADCAST_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_nodes</span><span class="p">()</span>
 </div>
@@ -1086,18 +1109,22 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">resolv_timeout_timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">resolv_timeout_timer</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">remove_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_RESOLV_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">remove_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_RESOLV_BROADCAST</span><span class="o">+</span><span class="s">&#39;#&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">#&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">)</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">remove_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_RESOLV_REPLY</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">remove_topic</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="n">TOPIC_RESOLV_BROADCAST</span><span class="o">+</span><span class="s">&#39;#&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">#&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
-                    <span class="k">try</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">resolv_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_resolv_request"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_resolv_request">[docs]</a>    <span class="k">def</span> <span class="nf">start_resolv_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1109,6 +1136,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
@@ -1120,6 +1148,8 @@
                     <span class="k">return</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.stop_resolv_request"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.stop_resolv_request">[docs]</a>    <span class="k">def</span> <span class="nf">stop_resolv_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1128,17 +1158,18 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_resolv_request&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">#&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV_REQUEST</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">#&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV_REQUEST</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_request_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_resolv_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_resolv_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">start_resolv_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1150,12 +1181,16 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">heartbeat&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_resolv_heartbeat</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">stop_resolv_heartbeat_timer</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">heartbeat&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_resolv_heartbeat</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">stop_resolv_heartbeat_timer</span><span class="p">()</span>
+                <span class="k">finally</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                     <span class="k">return</span>
@@ -1195,17 +1230,19 @@
             <span class="k">print</span> <span class="s">&quot;stop_resolv_heartbeat&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stop_resolv_heartbeat_timer</span><span class="p">()</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">heartbeat&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">heartbeat&quot;</span><span class="o">%</span><span class="n">TOPIC_RESOLV</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resolv_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.stop_resolv_heartbeat_timer"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.stop_resolv_heartbeat_timer">[docs]</a>    <span class="k">def</span> <span class="nf">stop_resolv_heartbeat_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1225,17 +1262,18 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_nodes_discover&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/nodes/</span><span class="si">%s</span><span class="s">/reply/#&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/nodes/</span><span class="si">%s</span><span class="s">/reply/#&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">hadds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_nodes_discover"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_nodes_discover">[docs]</a>    <span class="k">def</span> <span class="nf">start_nodes_discover</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1246,6 +1284,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
@@ -1258,6 +1297,8 @@
                     <span class="k">return</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nodes_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_nodes</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
 </div>
@@ -1270,6 +1311,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
@@ -1281,6 +1323,8 @@
                     <span class="k">return</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
             <span class="k">return</span>
@@ -1293,17 +1337,18 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_heartbeat_discover&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_discover_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">start_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1315,6 +1360,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
@@ -1326,6 +1372,8 @@
                     <span class="k">return</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
@@ -1338,17 +1386,21 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_heartbeat&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_dispatch_heartbeat"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_dispatch_heartbeat">[docs]</a>    <span class="k">def</span> <span class="nf">start_dispatch_heartbeat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1360,14 +1412,18 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_heartbeat</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">start_dispatch_heartbeat_timer</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">fsm_network_next</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/dhcp/heartbeat/#&#39;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_heartbeat</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">start_dispatch_heartbeat_timer</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">fsm_network_next</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.start_dispatch_heartbeat_timer"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.start_dispatch_heartbeat_timer">[docs]</a>    <span class="k">def</span> <span class="nf">start_dispatch_heartbeat_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1409,16 +1465,17 @@
             <span class="k">print</span> <span class="s">&quot;stop_dispatch_heartbeat&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stop_dispatch_heartbeat_timer</span><span class="p">()</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_heartbeat_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.stop_dispatch_heartbeat_timer"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.stop_dispatch_heartbeat_timer">[docs]</a>    <span class="k">def</span> <span class="nf">stop_dispatch_heartbeat_timer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1440,6 +1497,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_stopped</span><span class="p">:</span>
                 <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="o">=</span> <span class="n">MQTTClient</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">loop_sleep</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loop_sleep</span><span class="p">)</span>
@@ -1451,6 +1509,8 @@
                     <span class="k">return</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.stop_values_listener"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.stop_values_listener">[docs]</a>    <span class="k">def</span> <span class="nf">stop_values_listener</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1460,17 +1520,21 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="k">print</span> <span class="s">&quot;stop_values_listener&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/values/#&#39;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s">&#39;/values/#&#39;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Catched exception&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">values_mqttc_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JNTNetwork.on_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.on_value">[docs]</a>    <span class="k">def</span> <span class="nf">on_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
@@ -1632,41 +1696,41 @@
             <span class="c">#{&#39;hadd&#39;, &#39;cmd_class&#39;, &#39;type&#39;=&#39;list&#39;, &#39;genre&#39;=&#39;0x04&#39;, &#39;data&#39;=&#39;node|value|config&#39;, &#39;uuid&#39;=&#39;request_info&#39;}</span>
             <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;cmd_class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">COMMAND_DISCOVERY</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x04</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Data in </span><span class="si">%s</span><span class="s"> : </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span>
+                    <span class="c">#~ logger.warning(&quot;Data in %s : %s&quot;,data[&#39;uuid&#39;], data)</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">return</span>
                     <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_nodes&quot;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">add_nodes</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_configs&quot;</span><span class="p">:</span>
                         <span class="k">if</span> <span class="s">&#39;genre&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                         <span class="c">#~ print &quot;data&quot;, data</span>
-                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">add_configs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data_to_add</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">add_configs</span><span class="p">(</span><span class="n">data_to_add</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_systems&quot;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">add_systems</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_commands&quot;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">add_commands</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_users&quot;</span><span class="p">:</span>
                         <span class="k">if</span> <span class="s">&#39;genre&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                         <span class="c">#~ print &quot;data&quot;, data</span>
-                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">add_users</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data_to_add</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">add_users</span><span class="p">(</span><span class="n">data_to_add</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;request_info_basics&quot;</span><span class="p">:</span>
                         <span class="k">if</span> <span class="s">&#39;genre&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]}</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+                            <span class="n">data_to_add</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
                         <span class="c">#~ print &quot;data&quot;, data</span>
-                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">add_basics</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data_to_add</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">add_basics</span><span class="p">(</span><span class="n">data_to_add</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Unknown value</span><span class="si">% i</span><span class="s">n </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">],</span><span class="s">&#39;on_reply&#39;</span><span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Unknown value </span><span class="si">%s</span><span class="s"> in </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;uuid&#39;</span><span class="p">],</span><span class="s">&#39;on_reply&#39;</span><span class="p">)</span>
                         <span class="k">return</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_primary</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_started</span><span class="p">:</span>
                         <span class="n">th</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">threaded_send_resolv</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stopevent</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;reply_hadd&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
@@ -1921,7 +1985,8 @@
             <span class="n">node</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">hadd</span><span class="p">])</span>
             <span class="n">node</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span> <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39;PENDING&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">emit_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">normalize_request_info_nodes</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">emit_node</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="c">#~ print &quot; node : %s&quot; % self.nodes[hadd]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_cache</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">heartbeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">hadd</span><span class="p">][</span><span class="s">&#39;heartbeat&#39;</span><span class="p">])</span>
 </div>
@@ -1979,7 +2044,8 @@
                 <span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">hadd</span><span class="p">])</span>
                 <span class="n">node</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span> <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39;PENDING&#39;</span>
                 <span class="c">#~ print &quot;   node : %s&quot; % node</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">emit_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">normalize_request_info_nodes</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">emit_node</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_cache</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">heartbeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">hadd</span><span class="p">][</span><span class="s">&#39;heartbeat&#39;</span><span class="p">])</span>
 </div>
@@ -2015,7 +2081,7 @@
             <span class="c">#~ if do_emit == True and initial_startup == False:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">emit_node</span><span class="p">(</span><span class="n">ndata</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_nodes&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_nodes : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emit_network</span><span class="p">()</span>
@@ -2054,7 +2120,7 @@
             <span class="c">#~ print &quot;seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.users&quot;</span>
             <span class="c">#~ print self.users</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_users&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_users : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
@@ -2095,7 +2161,7 @@
                     <span class="c">#~ self.configs[ndata[nval][kval][&#39;hadd&#39;]][ndata[nval][kval][&#39;uuid&#39;]] = ndata[nval][kval]</span>
             <span class="c">#~ print &quot;add_configs self.configs &quot;, self.configs</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_configs&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_configs : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
@@ -2133,7 +2199,7 @@
             <span class="c">#~ print &quot;seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.basics&quot;</span>
             <span class="c">#~ print self.basics</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_basics&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_basics : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
@@ -2149,7 +2215,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_systems_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">broadcast_timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">finish_broadcast_systems_discover</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_systems_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
             <span class="n">ndata</span> <span class="o">=</span> <span class="n">normalize_request_info_nodes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="c">#print &quot;ddddaaaaaaaaaaaaaaaaaaaata : %s&quot; % ndata</span>
+            <span class="c">#~ print &quot;ddddaaaaaaaaaaaaaaaaaaaata : %s&quot; % ndata</span>
             <span class="k">for</span> <span class="n">nval</span> <span class="ow">in</span> <span class="n">ndata</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">kval</span> <span class="ow">in</span> <span class="n">ndata</span><span class="p">[</span><span class="n">nval</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="n">ndata</span><span class="p">[</span><span class="n">nval</span><span class="p">][</span><span class="n">kval</span><span class="p">][</span><span class="s">&#39;hadd&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">:</span>
@@ -2158,7 +2224,7 @@
                     <span class="k">if</span> <span class="s">&#39;node_uuid&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ndata</span><span class="p">[</span><span class="n">nval</span><span class="p">][</span><span class="n">kval</span><span class="p">]:</span>
                         <span class="n">ndata</span><span class="p">[</span><span class="n">nval</span><span class="p">][</span><span class="n">kval</span><span class="p">][</span><span class="s">&#39;node_uuid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">ndata</span><span class="p">[</span><span class="n">nval</span><span class="p">][</span><span class="n">kval</span><span class="p">][</span><span class="s">&#39;hadd&#39;</span><span class="p">]]</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_systems&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_systems : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 </div>
@@ -2196,7 +2262,7 @@
             <span class="c">#~ print &quot;seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelf.commands&quot;</span>
             <span class="c">#~ print self.commands</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_commands&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in add_commands : ndata = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
@@ -2431,6 +2497,115 @@
 <span class="sd">        nodes : a single cron or a dict of cron</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.state_to_dict"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.state_to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">state_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;state to dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;state_str&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_str</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;nodes_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_count</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;home_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">home_id</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;is_failed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_failed</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;is_secondary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_secondary</span>
+        <span class="n">ret</span><span class="p">[</span><span class="s">&#39;is_primary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_primary</span>
+        <span class="k">return</span> <span class="n">ret</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.nodes_to_dict"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.nodes_to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">nodes_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;nodes to dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span> <span class="o">=</span> <span class="n">hadd_split</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;hadd&quot;</span><span class="p">])</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_cache</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">add_ctrl</span><span class="p">][</span><span class="n">add_node</span><span class="p">][</span><span class="s">&#39;state&#39;</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;UNKNOWN&#39;</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Exception catched in nodes_to_dict&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="c">#Fix old protocols</span>
+                <span class="k">if</span> <span class="s">&quot;capabilities&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&#39;capabilities&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Exception in nodes_to_dict : nodes = </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.to_dict"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s">&#39;state&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a dict of which : state, nodes, configs, ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="s">&#39;state&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_to_dict</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">which</span> <span class="o">==</span> <span class="s">&#39;nodes&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_secondaries"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_secondaries">[docs]</a>    <span class="k">def</span> <span class="nf">find_secondaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve secondaries nodes on the network</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_secondariess"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_secondariess">[docs]</a>    <span class="k">def</span> <span class="nf">find_secondariess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve secondaries nodes on the network</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_controllers"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_controllers">[docs]</a>    <span class="k">def</span> <span class="nf">find_controllers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve controller nodes on the network</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s">&#39;hadd&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s">&#39;hadd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">0000&#39;</span><span class="o">%</span><span class="n">HADD_SEP</span><span class="p">)</span> <span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_controller_nodes"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_controller_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">find_controller_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add_ctrl</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve nodes of a controller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s">&#39;hadd&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s">&#39;capabilities&#39;</span><span class="p">]</span> <span class="p">]</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_node_values"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_node_values">[docs]</a>    <span class="k">def</span> <span class="nf">find_node_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_hadd</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="s">&#39;systems&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve values of a node on the network :</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;systems&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;configs&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configs</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;basics&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">basics</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basics</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;users&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;commands&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_node_value"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_node_value">[docs]</a>    <span class="k">def</span> <span class="nf">find_node_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_hadd</span><span class="p">,</span> <span class="n">genre</span><span class="o">=</span><span class="s">&#39;systems&#39;</span><span class="p">,</span> <span class="n">vuuid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve value of a node on the network :</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;systems&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">][</span><span class="n">vuuid</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span> <span class="ow">and</span> <span class="n">vuuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;configs&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">][</span><span class="n">vuuid</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configs</span> <span class="ow">and</span> <span class="n">vuuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;basics&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">basics</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">][</span><span class="n">vuuid</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basics</span> <span class="ow">and</span> <span class="n">vuuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">basics</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;users&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">][</span><span class="n">vuuid</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="ow">and</span> <span class="n">vuuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">elif</span> <span class="n">genre</span> <span class="o">==</span> <span class="s">&#39;commands&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">][</span><span class="n">vuuid</span><span class="p">]</span> <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="ow">and</span> <span class="n">vuuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">node_hadd</span><span class="p">]</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</div>
+<div class="viewcode-block" id="JNTNetwork.find_neighbors"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.JNTNetwork.find_neighbors">[docs]</a>    <span class="k">def</span> <span class="nf">find_neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_hadd</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve neighbors of a node on the network :</span>
+
+<span class="sd">        All controllers are neighbors</span>
+<span class="sd">        A controller has all the nodes it holds as neighbors</span>
+<span class="sd">        A simple node has only one neighbor : its controller</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">controllers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_controllers</span><span class="p">()</span>
+        <span class="n">add_ctrl</span><span class="p">,</span> <span class="n">add_node</span> <span class="o">=</span> <span class="n">hadd_split</span><span class="p">(</span><span class="n">node_hadd</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">node_hadd</span> <span class="ow">in</span> <span class="n">controllers</span><span class="p">:</span>
+            <span class="n">neighbors</span> <span class="o">+=</span> <span class="n">controllers</span>
+            <span class="n">neighbors</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_controller_nodes</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">neighbors</span> <span class="o">+=</span> <span class="p">[</span><span class="n">HADD</span><span class="o">%</span><span class="p">(</span><span class="n">add_ctrl</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">neighbors</span>
 </div></div>
 <div class="viewcode-block" id="check_heartbeats"><a class="viewcode-back" href="../../janitoo.html#janitoo.dhcp.check_heartbeats">[docs]</a><span class="k">def</span> <span class="nf">check_heartbeats</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">heartbeat_timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">heartbeat_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">heartbeat_dead</span><span class="o">=</span><span class="mi">604800</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check the states of the machine. Must be called in a timer</span>

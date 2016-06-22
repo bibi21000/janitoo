@@ -789,6 +789,51 @@ nodes : a single node or a dict of nodes</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_controller_nodes">
+<tt class="descname">find_controller_nodes</tt><big>(</big><em>add_ctrl</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_controller_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_controller_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve nodes of a controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_controllers">
+<tt class="descname">find_controllers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_controllers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_controllers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve controller nodes on the network</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_neighbors">
+<tt class="descname">find_neighbors</tt><big>(</big><em>node_hadd</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_neighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve neighbors of a node on the network :</p>
+<p>All controllers are neighbors
+A controller has all the nodes it holds as neighbors
+A simple node has only one neighbor : its controller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_node_value">
+<tt class="descname">find_node_value</tt><big>(</big><em>node_hadd</em>, <em>genre='systems'</em>, <em>vuuid=None</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_node_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_node_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve value of a node on the network :</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_node_values">
+<tt class="descname">find_node_values</tt><big>(</big><em>node_hadd</em>, <em>genre='systems'</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_node_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_node_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve values of a node on the network :</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_secondaries">
+<tt class="descname">find_secondaries</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_secondaries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_secondaries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve secondaries nodes on the network</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.find_secondariess">
+<tt class="descname">find_secondariess</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.find_secondariess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.find_secondariess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve secondaries nodes on the network</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="janitoo.dhcp.JNTNetwork.finish_broadcast_basics_discover">
 <tt class="descname">finish_broadcast_basics_discover</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.finish_broadcast_basics_discover"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.finish_broadcast_basics_discover" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -862,7 +907,7 @@ fallback to fail mode</p>
 
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.fsm_network_states">
-<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b3fd6209fd0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef0d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef110&gt;, &lt;transitions.core.State object at 0x2b3fd61ef150&gt;, &lt;transitions.core.State object at 0x2b3fd61ef190&gt;, &lt;transitions.core.State object at 0x2b3fd61ef1d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef210&gt;, &lt;transitions.core.State object at 0x2b3fd61ef250&gt;, &lt;transitions.core.State object at 0x2b3fd61ef290&gt;, &lt;transitions.core.State object at 0x2b3fd61ef2d0&gt;, &lt;transitions.core.State object at 0x2b3fd61ef310&gt;, &lt;transitions.core.State object at 0x2b3fd61ef350&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_network_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b45eb043b10&gt;, &lt;transitions.core.State object at 0x2b45eb043bd0&gt;, &lt;transitions.core.State object at 0x2b45eb043c10&gt;, &lt;transitions.core.State object at 0x2b45eb043c50&gt;, &lt;transitions.core.State object at 0x2b45eb043c90&gt;, &lt;transitions.core.State object at 0x2b45eb043cd0&gt;, &lt;transitions.core.State object at 0x2b45eb043d10&gt;, &lt;transitions.core.State object at 0x2b45eb043d50&gt;, &lt;transitions.core.State object at 0x2b45eb043d90&gt;, &lt;transitions.core.State object at 0x2b45eb043dd0&gt;, &lt;transitions.core.State object at 0x2b45eb043e10&gt;, &lt;transitions.core.State object at 0x2b45eb043e50&gt;]</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.fsm_network_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -935,6 +980,12 @@ fallback to fail mode</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.nodes_to_dict">
+<tt class="descname">nodes_to_dict</tt><big>(</big><em>nodes</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.nodes_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.nodes_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>nodes to dict</p>
 </dd></dl>
 
 <dl class="method">
@@ -1232,6 +1283,12 @@ fallback to fail mode</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.state_to_dict">
+<tt class="descname">state_to_dict</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.state_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.state_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>state to dict</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="janitoo.dhcp.JNTNetwork.states_str">
 <tt class="descname">states_str</tt><em class="property"> = {'BROADCAST_NODES': 'Broadcasting nodes', 'BROADCAST_BASICS': 'Broadcasting basic values', 'DISPATCH': 'Start headbeart dispatch', 'BROADCAST_USERS': 'Broadcasting user values', 'STOPPED': 'Network is stopped', 'BROADCAST_SYSTEMS': 'Broadcasting system values', 'HEARTBEAT': 'Start headbeart listening', 'HEARTBEAT_DISCOVER': 'Start headbeart discovering', 'BROADCAST_COMMANDS': 'Broadcasting command values', 'BROADCAST_CONFIGS': 'Broadcasting config values', 'RESOLV': 'Resolving nodes', 'STARTED': 'Network is started'}</em><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.states_str" title="Permalink to this definition">¶</a></dt>
@@ -1340,6 +1397,12 @@ fallback to fail mode</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="janitoo.dhcp.JNTNetwork.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><em>which='state'</em><big>)</big><a class="reference internal" href="../_modules/janitoo/dhcp.html#JNTNetwork.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.dhcp.JNTNetwork.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dict of which : state, nodes, configs, ...</p>
 </dd></dl>
 
 <dl class="method">
@@ -2111,6 +2174,12 @@ subscribe().</p>
 <tt class="descname">add_value</tt><big>(</big><em>uuid</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTNode.add_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTNode.add_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="janitoo.node.JNTNode.capabilities">
+<tt class="descname">capabilities</tt><em class="property"> = None</em><a class="headerlink" href="#janitoo.node.JNTNode.capabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>The capabilities implemented by the node</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="janitoo.node.JNTNode.check_heartbeat">
 <tt class="descname">check_heartbeat</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/node.html#JNTNode.check_heartbeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.node.JNTNode.check_heartbeat" title="Permalink to this definition">¶</a></dt>
@@ -2475,7 +2544,7 @@ subscribe().</p>
 
 <dl class="attribute">
 <dt id="janitoo.node.JNTNodeMan.fsm_states">
-<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b3fd5f0a410&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a450&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a490&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a4d0&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a510&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a550&gt;, &lt;transitions.core.State object at 0x2b3fd5f0a590&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fsm_states</tt><em class="property"> = [&lt;transitions.core.State object at 0x2b45e981a290&gt;, &lt;transitions.core.State object at 0x2b45e981a4d0&gt;, &lt;transitions.core.State object at 0x2b45e97bbc10&gt;, &lt;transitions.core.State object at 0x2b45e97987d0&gt;, &lt;transitions.core.State object at 0x2b45e9798d10&gt;, &lt;transitions.core.State object at 0x2b45e9798550&gt;, &lt;transitions.core.State object at 0x2b45e97985d0&gt;]</em><a class="headerlink" href="#janitoo.node.JNTNodeMan.fsm_states" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2824,6 +2893,12 @@ The server (=the rapsy server) can do it but it should be accessible on mqtt.</l
 </dd></dl>
 
 <dl class="method">
+<dt id="janitoo.options.JNTOptions.get_sections">
+<tt class="descname">get_sections</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/options.html#JNTOptions.get_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.options.JNTOptions.get_sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all sections</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="janitoo.options.JNTOptions.get_settings">
 <tt class="descname">get_settings</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="../_modules/janitoo/options.html#JNTOptions.get_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.options.JNTOptions.get_settings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve settings from a section</p>
@@ -3045,7 +3120,7 @@ if full, erase all blocks</p>
 </ul>
 <dl class="class">
 <dt id="janitoo.runner.Runner">
-<em class="property">class </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">Runner</tt><a class="reference internal" href="../_modules/janitoo/runner.html#Runner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">janitoo.runner.</tt><tt class="descname">Runner</tt><big>(</big><em>only_front=False</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></a></p>
 <p>Controller for a callable running in a separate background process.</p>
 <p>The first command-line argument is the action to take:</p>
@@ -3057,7 +3132,7 @@ if full, erase all blocks</p>
 </ul>
 <dl class="attribute">
 <dt id="janitoo.runner.Runner.action_funcs">
-<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b3fd79d38c0&gt;, 'start': &lt;function _start at 0x2b3fd79d35f0&gt;, 'kill': &lt;function _kill at 0x2b3fd79d3848&gt;, 'reload': &lt;function _reload at 0x2b3fd79d39b0&gt;, 'front': &lt;function _front at 0x2b3fd79d3668&gt;, 'flush': &lt;function _flush at 0x2b3fd79d3a28&gt;, 'stop': &lt;function _stop at 0x2b3fd79d37d0&gt;, 'restart': &lt;function _restart at 0x2b3fd79d3938&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_funcs</tt><em class="property"> = {'status': &lt;function _status at 0x2b45e96bd758&gt;, 'start': &lt;function _start at 0x2b45e96bd488&gt;, 'kill': &lt;function _kill at 0x2b45e96bd6e0&gt;, 'reload': &lt;function _reload at 0x2b45e96bd848&gt;, 'front': &lt;function _front at 0x2b45e96bd500&gt;, 'flush': &lt;function _flush at 0x2b45e96bd8c0&gt;, 'stop': &lt;function _stop at 0x2b45e96bd668&gt;, 'restart': &lt;function _restart at 0x2b45e96bd7d0&gt;}</em><a class="headerlink" href="#janitoo.runner.Runner.action_funcs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -3080,7 +3155,7 @@ if full, erase all blocks</p>
 
 <dl class="method">
 <dt id="janitoo.runner.Runner.parse_args">
-<tt class="descname">parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.parse_args" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">parse_args</tt><big>(</big><em>only_front=False</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#Runner.parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.Runner.parse_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse command-line arguments.</p>
 </dd></dl>
 
@@ -3146,7 +3221,7 @@ otherwise return <tt class="docutils literal"><span class="pre">False</span></tt
 
 <dl class="function">
 <dt id="janitoo.runner.jnt_parse_args">
-<tt class="descclassname">janitoo.runner.</tt><tt class="descname">jnt_parse_args</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#jnt_parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.jnt_parse_args" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">janitoo.runner.</tt><tt class="descname">jnt_parse_args</tt><big>(</big><em>only_front=False</em><big>)</big><a class="reference internal" href="../_modules/janitoo/runner.html#jnt_parse_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#janitoo.runner.jnt_parse_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default argument parser</p>
 </dd></dl>
 
