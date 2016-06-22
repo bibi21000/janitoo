@@ -505,9 +505,6 @@ class JNTNetwork(object):
         self.heartbeat_cache = None
         self.threads_timers = []
 
-        #~ self._replies = {'request_info_nodes' : self.add_nodes, 'request_info_users' : self.add_users, 'request_info_configs' : self.add_configs,
-            #~ 'request_info_systems' : self.add_systems, 'request_info_basics' : self.add_basics, 'request_info_commands' : self.add_commands }
-
     def __del__(self):
         """
         """
@@ -2088,7 +2085,7 @@ class JNTNetwork(object):
                 self.broadcast_systems_timer = threading.Timer(self.broadcast_timeout, self.finish_broadcast_systems_discover)
                 self.broadcast_systems_timer.start()
             ndata = normalize_request_info_nodes(data)
-            #print "ddddaaaaaaaaaaaaaaaaaaaata : %s" % ndata
+            #~ print "ddddaaaaaaaaaaaaaaaaaaaata : %s" % ndata
             for nval in ndata:
                 for kval in ndata[nval]:
                     if ndata[nval][kval]['hadd'] not in self.systems:
@@ -2097,7 +2094,7 @@ class JNTNetwork(object):
                     if 'node_uuid' not in ndata[nval][kval]:
                         ndata[nval][kval]['node_uuid'] = self.nodes[ndata[nval][kval]['hadd']]
         except Exception:
-            logger.exception("Exception in add_systems")
+            logger.exception("Exception in add_systems : ndata = %s", ndata)
         finally:
             self._lock.release()
 
