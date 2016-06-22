@@ -40,6 +40,8 @@ DOCKIP       = 127.0.0.1
 SUBMODULES   = $(shell find . -iname jani\* -type d -maxdepth 1|sort|sed -e 's/janitoo_nosetests_flask//g'|sed -e 's/janitoo_nosetests//g'|sed -e 's/janitoo_sphinx//g')
 COREMODULES   = janitoo janitoo_factory janitoo_db janitoo_flask janitoo_flask_socketio janitoo_manager janitoo_manager_proxy janitoo_datalog_rrd janitoo_thermal janitoo_hostsensor janitoo_layouts
 
+DOCKAPPS =
+
 -include Makefile.local
 
 .PHONY: help clean all update build develop install install-api uninstall clean-docs docs autobuild-tests tests pylint commit developper-deps python-deps autobuild-deps arch-deps common-deps cython-deps merge-python3
@@ -304,6 +306,9 @@ docker-coverage:
 	xunitreport nosetests.xml
 	@echo
 	@echo "Coverage finished."
+
+docker-local-update:
+	for module in ${DOCKAPPS};do make -C $$module docker-local-running; done
 
 coverage-check:coverage-collect
 	@echo "Check coverage for janitoo."
