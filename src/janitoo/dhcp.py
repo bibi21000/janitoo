@@ -2442,12 +2442,12 @@ class JNTNetwork(object):
     def find_controllers(self):
         """Retrieve controller nodes on the network
         """
-        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].endswith('%s0000'%HADD_SEP) ]
+        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].endswith('/0000') ]
 
     def find_controller_nodes(self, add_ctrl):
         """Retrieve nodes of a controller
         """
-        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['capabilities'] ]
+        return [ self.nodes[node]['hadd'] for node in self.nodes if self.nodes[node]['hadd'].startswith('%s/'%add_ctrl) and not self.nodes[node]['hadd'].endswith('/0000')]
 
     def find_node_values(self, node_hadd, genre='systems'):
         """Retrieve values of a node on the network :
