@@ -1604,6 +1604,8 @@ class JNTNode(object):
         self.values[uuid] = value
         self.values[uuid].node_uuid = self.uuid
         self.values[uuid].hadd = self.hadd
+        if value.cmd_class not in self.cmd_classes:
+            self.cmd_classes.append(value.cmd_class)
         return True
 
     def load_system_from_local(self):

@@ -318,7 +318,7 @@ class JNTControllerManager(object):
         self.mqtt_controller.start()
 
     def add_more_values(self, **kwargs):
-        """Start the controller
+        """Add more values
         """
         pass
 

@@ -86,6 +86,16 @@ def normalize_request_info_values(data):
         ndata = data
     return ndata
 
+def normalize_request_system_values(data):
+    """ """
+    if 'uuid' in data:
+        ndata = {'0': {'0':data}}
+    elif len(data)==0 or 'uuid' in data[data.keys()[0]]:
+        ndata = {'0':data}
+    else:
+        ndata = data
+    return ndata
+
 def normalize_request_info_nodes(data):
     """ """
     if 'hadd' in data:
@@ -2080,7 +2090,7 @@ class JNTNetwork(object):
                 self.broadcast_systems_timer = None
                 self.broadcast_systems_timer = threading.Timer(self.broadcast_timeout, self.finish_broadcast_systems_discover)
                 self.broadcast_systems_timer.start()
-            ndata = normalize_request_info_nodes(data)
+            ndata = normalize_request_system_values(data)
             #~ print "ddddaaaaaaaaaaaaaaaaaaaata : %s" % ndata
             for nval in ndata:
                 for kval in ndata[nval]:
@@ -2405,22 +2415,29 @@ class JNTNetwork(object):
         elif which == 'nodes':
             return self.nodes_to_dict(self.nodes)
 
+    def find_network_controllers(self):
+        """Retrieve network controller nodes on the network
+        """
+        ctrls = [ self.nodes[node]['hadd'] for node in self.nodes if COMMAND_NETWORK_CONTROLLER in self.nodes[node]['cmd_classes'] ]
+        logger.debug('[%s] - find_network_controllers nodes : %s', self.__class__.__name__, self.nodes)
+        logger.debug('[%s] - find_network_controllers : %s', self.__class__.__name__, ctrls)
+        return ctrls
+
     def find_primary_controllers(self):
         """Retrieve primaries nodes on the network
         """
         ctrls = self.find_network_controllers()
-        return [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller'].data == 'secondary' ]
-
-    def find_network_controllers(self):
-        """Retrieve network controller nodes on the network
-        """
-        return [ self.nodes[node]['hadd'] for node in self.nodes if COMMAND_NETWORK_CONTROLLER in self.nodes[node]['cmd_classes'] ]
+        res = [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller']['data'] == 'primary' ]
+        logger.debug('[%s] - find_primary_controllers : %s', self.__class__.__name__, res)
+        return res
 
     def find_secondary_controllers(self):
         """Retrieve secondaries nodes on the network
         """
         ctrls = self.find_network_controllers()
-        return [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller'].data == 'secondary' ]
+        res = [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller']['data'] == 'secondary' ]
+        logger.debug('[%s] - find_secondary_controllers : %s', self.__class__.__name__, res)
+        return res
 
     def find_controllers(self):
         """Retrieve controller nodes on the network
