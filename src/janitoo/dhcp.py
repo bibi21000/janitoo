@@ -2482,7 +2482,7 @@ class JNTNetwork(object):
     def find_neighbors(self, node_hadd):
         """Retrieve neighbors of a node on the network :
 
-        All controllers are neighbors
+        All controllers are neighbors of the network controllers
         A controller has all the nodes it holds as neighbors
         A simple node has only one neighbor : its controller
 
@@ -2491,7 +2491,7 @@ class JNTNetwork(object):
         controllers = self.find_controllers()
         add_ctrl, add_node = hadd_split(node_hadd)
         if node_hadd in controllers:
-            neighbors += controllers
+            neighbors += self.find_network_controllers()
             neighbors += self.find_controller_nodes(add_ctrl)
         else:
             neighbors += [HADD%(add_ctrl,0)]
