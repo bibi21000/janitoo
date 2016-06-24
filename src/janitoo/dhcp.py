@@ -47,22 +47,18 @@ from janitoo.value import JNTValue
 from janitoo.node import JNTNode
 
 ##############################################################
-#Check that we are in sync with the official command classes
-#Must be implemented for non-regression
-from janitoo.classes import COMMAND_DESC
-
-COMMAND_DISCOVERY = 0x5000
-
-assert(COMMAND_DESC[COMMAND_DISCOVERY] == 'COMMAND_DISCOVERY')
-##############################################################
 ##############################################################
 #Check that we are in sync with the official command classes
 #Must be implemented for non-regression
-from janitoo.classes import CAPABILITY_DESC
+from janitoo.classes import CAPABILITY_DESC, COMMAND_DESC
 
 CAPABILITY_DYNAMIC_CONTROLLER = 0x04
 CAPABILITY_TINY_CONTROLLER = 0x05
+COMMAND_NETWORK_CONTROLLER = 0x1051
+COMMAND_DISCOVERY = 0x5000
 
+assert(COMMAND_DESC[COMMAND_DISCOVERY] == 'COMMAND_DISCOVERY')
+assert(COMMAND_DESC[COMMAND_NETWORK_CONTROLLER] == 'COMMAND_NETWORK_CONTROLLER')
 assert(CAPABILITY_DESC[CAPABILITY_DYNAMIC_CONTROLLER] == 'CAPABILITY_DYNAMIC_CONTROLLER')
 assert(CAPABILITY_DESC[CAPABILITY_TINY_CONTROLLER] == 'CAPABILITY_TINY_CONTROLLER')
 ##############################################################
@@ -2409,15 +2405,22 @@ class JNTNetwork(object):
         elif which == 'nodes':
             return self.nodes_to_dict(self.nodes)
 
-    def find_secondaries(self):
-        """Retrieve secondaries nodes on the network
+    def find_primary_controllers(self):
+        """Retrieve primaries nodes on the network
         """
-        return []
+        ctrls = self.find_network_controllers()
+        return [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller'].data == 'secondary' ]
 
-    def find_secondariess(self):
+    def find_network_controllers(self):
+        """Retrieve network controller nodes on the network
+        """
+        return [ self.nodes[node]['hadd'] for node in self.nodes if COMMAND_NETWORK_CONTROLLER in self.nodes[node]['cmd_classes'] ]
+
+    def find_secondary_controllers(self):
         """Retrieve secondaries nodes on the network
         """
-        return []
+        ctrls = self.find_network_controllers()
+        return [ self.nodes[node]['hadd'] for node in ctrls if self.systems[node]['network_controller'].data == 'secondary' ]
 
     def find_controllers(self):
         """Retrieve controller nodes on the network
