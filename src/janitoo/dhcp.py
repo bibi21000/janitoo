@@ -2491,13 +2491,14 @@ class JNTNetwork(object):
         controllers = self.find_controllers()
         network_controllers = self.find_network_controllers()
         add_ctrl, add_node = hadd_split(node_hadd)
-        if node_hadd in controllers:
+        if node_hadd in network_controllers:
+            neighbors += controllers
+        elif node_hadd in controllers:
             neighbors += network_controllers
             neighbors += self.find_controller_nodes(add_ctrl)
-        elif node_hadd in network_controllers:
-            neighbors += controllers
         else:
             neighbors += [HADD%(add_ctrl,0)]
+        logger.debug('[%s] - find_neighbors for %s : %s', self.__class__.__name__, node_hadd, neighbors)
         return neighbors
 
 def check_heartbeats(entries, heartbeat_timeout=60, heartbeat_count=3, heartbeat_dead=604800):
