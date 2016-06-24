@@ -2489,10 +2489,13 @@ class JNTNetwork(object):
         """
         neighbors = []
         controllers = self.find_controllers()
+        network_controllers = self.find_network_controllers()
         add_ctrl, add_node = hadd_split(node_hadd)
         if node_hadd in controllers:
-            neighbors += self.find_network_controllers()
+            neighbors += network_controllers
             neighbors += self.find_controller_nodes(add_ctrl)
+        elif node_hadd in network_controllers:
+            neighbors += controllers
         else:
             neighbors += [HADD%(add_ctrl,0)]
         return neighbors
