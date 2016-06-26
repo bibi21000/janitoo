@@ -1892,7 +1892,7 @@ class JNTNetwork(object):
         else:
             hadd = HADD % (add_ctrl, add_node)
         #Check if we already know this entry
-        if self.heartbeat_cache.has_entry(add_ctrl, add_node) == False:
+        if self.heartbeat_cache.has_entry(add_ctrl, add_node) == False and add_node == 0:
             #NO. So we ask from some info
             logger.debug("heartbeat from an unknown device %s,%s,%s", add_ctrl, add_node, state)
             th = threading.Timer(self.request_timeout/4, self.request_node_nodes, [hadd])

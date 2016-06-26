@@ -35,6 +35,7 @@ logger = logging.getLogger(__name__)
 import datetime
 import threading
 import random
+import re
 
 from janitoo.fsm import State, Machine
 import janitoo.value
@@ -718,7 +719,7 @@ class JNTNodeMan(object):
         :param message: The message variable is a MQTTMessage that describes all of the message parameters.
         :type message: paho.mqtt.client.MQTTMessage
         """
-        logger.debug("on_request receive message %s", message.payload)
+        logger.debug("on_request receive message %s : %s", message.topic, message.payload)
         try:
             data = json_loads(message.payload)
             #~ print "data ",data
@@ -728,13 +729,18 @@ class JNTNodeMan(object):
             if data['cmd_class'] == COMMAND_DISCOVERY:
                 if data['genre'] == 0x04:
                     if data['uuid'] in self._requests:
+                        try:
+                            found = re.search('/nodes/(.+?)/request', message.topic).group(1)
+                        except AttributeError:
+                            found = None
+                        found = '' # apply your error handling
                         resp = {}
                         resp.update(data)
                         try:
                             if message.topic.find('broadcast') != -1:
                                 topic = "/broadcast/reply/%s" % data['reply_hadd']
                                 self._requests[data['uuid']](topic, resp)
-                            else:
+                            elif found is not None:
                                 topic = "/nodes/%s/reply" % data['reply_hadd']
                                 self._requests[data['uuid']](topic, resp)
                             return
@@ -745,7 +751,6 @@ class JNTNodeMan(object):
                 #~ print "message in COMMAND_CONFIGURATION %s" % message
                 if 'reply_hadd' not in data:
                     logger.warning("No reply_hadd in message %s", message)
-                logger.debug("on_request COMMAND_CONFIGURATION message %s,%s", message.topic, message.payload)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
                 if data['genre'] == 0x04:
