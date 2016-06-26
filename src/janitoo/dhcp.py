@@ -1852,6 +1852,9 @@ class JNTNetwork(object):
         if add_ctrl is None or add_node is None:
             return
         hadd = HADD % (add_ctrl, add_node)
+        #~ print self.nodes
+        if hadd not in self.nodes:
+           return
         if hadd in self.nodes:
         #~ if hadd in self.nodes and state != self.heartbeat_cache.get_state(add_ctrl, add_node):
             node = {}
@@ -1919,6 +1922,7 @@ class JNTNetwork(object):
                 node['state'] = state if state != None else 'PENDING'
                 data = normalize_request_info_nodes(node)
                 self.emit_node(data)
+            if hadd in self.nodes:
                 try:
                     self.heartbeat_cache.update(add_ctrl, add_node, state=state, heartbeat=self.nodes[hadd]['heartbeat'])
                 except Exception:
