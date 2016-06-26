@@ -1846,16 +1846,13 @@ class JNTNetwork(object):
         :param message: The message variable is a MQTTMessage that describes all of the message parameters.
         :type message: paho.mqtt.client.MQTTMessage
         """
-        logger.debug("[%s] - on_heartbeat %s", self.__class__.__name__, message.payload)
+        logger.debug("[%s] - on_heartbeat %s : %s", self.__class__.__name__, message.topic, message.payload)
         hb = HeartbeatMessage(message)
         add_ctrl, add_node, state = hb.get_heartbeat()
         #~ print "!"*30, "On heartbeat", add_ctrl, add_node
         if add_ctrl is None or add_node is None:
             return
         hadd = HADD % (add_ctrl, add_node)
-        #~ print self.nodes
-        if hadd not in self.nodes:
-            return
         if hadd in self.nodes:
         #~ if hadd in self.nodes and state != self.heartbeat_cache.get_state(add_ctrl, add_node):
             node = {}
@@ -1876,7 +1873,7 @@ class JNTNetwork(object):
         :param message: The message variable is a MQTTMessage that describes all of the message parameters.
         :type message: paho.mqtt.client.MQTTMessage
         """
-        logger.debug("[%s] - on_heartbeat_discover %s", self.__class__.__name__, message.payload)
+        logger.debug("[%s] - on_heartbeat_discover %s : %s", self.__class__.__name__, message.topic, message.payload)
         hb = HeartbeatMessage(message)
         add_ctrl, add_node, state = hb.get_heartbeat()
         self.incoming_hearbeat(add_ctrl, add_node, state)
@@ -1892,7 +1889,7 @@ class JNTNetwork(object):
         else:
             hadd = HADD % (add_ctrl, add_node)
         #Check if we already know this entry
-        if self.heartbeat_cache.has_entry(add_ctrl, add_node) == False and add_node == 0:
+        if not self.heartbeat_cache.has_entry(add_ctrl, add_node) and add_node == 0:
             #NO. So we ask from some info
             logger.debug("heartbeat from an unknown device %s,%s,%s", add_ctrl, add_node, state)
             th = threading.Timer(self.request_timeout/4, self.request_node_nodes, [hadd])
@@ -1915,15 +1912,18 @@ class JNTNetwork(object):
             self.threads_timers.append(th)
         else :
             #~ print " node : %s" % self.nodes[hadd]
-            if hadd in self.nodes and state != self.heartbeat_cache.get_state(add_ctrl, add_node):
+            #~ if hadd in self.nodes and state != self.heartbeat_cache.get_state(add_ctrl, add_node):
+            if hadd in self.nodes:
                 node = {}
                 node.update(self.nodes[hadd])
-                node['state'] = state if state != None else 'PENDING'
                 #~ print "   node : %s" % node
+                node['state'] = state if state != None else 'PENDING'
                 data = normalize_request_info_nodes(node)
                 self.emit_node(data)
-            if hadd in self.nodes:
-                self.heartbeat_cache.update(add_ctrl, add_node, state=state, heartbeat=self.nodes[hadd]['heartbeat'])
+                try:
+                    self.heartbeat_cache.update(add_ctrl, add_node, state=state, heartbeat=self.nodes[hadd]['heartbeat'])
+                except Exception:
+                    logger.exception("Exception in self.heartbeat_cache.update : %s", self.heartbeat_cache)
 
     def add_nodes(self, data):
         """
@@ -2419,7 +2419,7 @@ class JNTNetwork(object):
         """Retrieve network controller nodes on the network
         """
         ctrls = [ self.nodes[node]['hadd'] for node in self.nodes if COMMAND_NETWORK_CONTROLLER in self.nodes[node]['cmd_classes'] ]
-        logger.debug('[%s] - find_network_controllers nodes : %s', self.__class__.__name__, self.nodes)
+        #~ logger.debug('[%s] - find_network_controllers nodes : %s', self.__class__.__name__, self.nodes)
         logger.debug('[%s] - find_network_controllers : %s', self.__class__.__name__, ctrls)
         return ctrls
 
