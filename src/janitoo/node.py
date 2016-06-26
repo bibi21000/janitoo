@@ -1058,7 +1058,7 @@ class JNTNodeMan(object):
                 ret = self.nodes[node].check_heartbeat()
                 if ret is None :
                     state = self.state
-                elif ret == True:
+                elif ret:
                     state = 'ONLINE'
                 else:
                     state = 'OFFLINE'
