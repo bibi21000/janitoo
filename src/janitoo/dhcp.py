@@ -1731,7 +1731,6 @@ class JNTNetwork(object):
         self.emit_configs()
         self.emit_systems()
         self.emit_commands()
-        self.emit_configs()
         self.emit_basics()
 
     def request_node_nodes(self, hadd):
