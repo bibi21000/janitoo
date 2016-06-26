@@ -776,10 +776,11 @@ class JNTNodeMan(object):
                                 self.add_heartbeat(node)
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
+                            data['data'] = node.values[data['uuid']]._data
                         elif read_only:
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
-                        data['data'] = node.values[data['uuid']].data
+                            data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
                         msg = json_dumps(data)
@@ -809,10 +810,11 @@ class JNTNodeMan(object):
                             node.values[data['uuid']].data = data['data']
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
+                            data['data'] = node.values[data['uuid']]._data
                         elif read_only:
+                            data['data'] = node.values[data['uuid']].data
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
-                        data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
                         msg = json_dumps(data)
