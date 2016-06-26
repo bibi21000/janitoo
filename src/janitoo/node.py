@@ -777,7 +777,9 @@ class JNTNodeMan(object):
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
                         elif read_only:
-                            data['data'] = node.values[data['uuid']].data
+                            data['is_writeonly'] = False
+                            data['is_readonly'] = True
+                        data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
                         msg = json_dumps(data)
@@ -808,9 +810,9 @@ class JNTNodeMan(object):
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
                         elif read_only:
-                            data['data'] = node.values[data['uuid']].data
                             data['is_writeonly'] = False
                             data['is_readonly'] = True
+                        data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
                         msg = json_dumps(data)
