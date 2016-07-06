@@ -26,7 +26,7 @@
     :alt: Join the chat at https://gitter.im/bibi21000/janitoo
     :target: https://gitter.im/bibi21000/janitoo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-.. image:: https://img.shields.io/badge/Documenation-ok-brightgreen.svg?style=flat
+.. image:: https://img.shields.io/badge/Documentation-ok-brightgreen.svg?style=flat
    :target: https://bibi21000.github.io/janitoo/index.html
    :alt: Documentation
 
