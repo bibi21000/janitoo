@@ -281,14 +281,14 @@ class JNTBus(object):
             return
         for entrypoint in iter_entry_points(group = '%s.extensions'%oid):
             if entrypoint.name in eps:
-                logger.info('[%s] - Extend bus %s with %s', self.__class__.__name__, oid, entrypoint.module_name )
+                logger.info('[%s] - Extend bus with oid %s extension %s', self.__class__.__name__, oid, entrypoint.module_name )
                 extend = entrypoint.load()
                 extend( self )
 
     def load_extensions(self, oid):
         """"Load extensions from config file.
         """
-        logger.debug('[%s] - Load bus extensions %s with in section %s', self.__class__.__name__, oid, self.oid )
+        logger.debug('[%s] - Load bus extensions %s in section %s', self.__class__.__name__, oid, self.oid )
         try:
             exts = self.options.get_option(self.oid, 'extensions', default="").split(',')
         except Exception:

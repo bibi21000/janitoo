@@ -1627,10 +1627,12 @@ class JNTNode(object):
         """Retrieve a json version of the node
         """
         for value in self.values:
+            logger.debug('Found value %s', value)
             #~ print value
             if self.values[value].genre == 0x03:
                 #~ print self.values[value]._get_data_cb
                 temp = self.values[value].data
+                logger.debug('Load config value %s : %s', value, temp)
                 #~ print "********************load config from local"
                 #~ print "%s = %s"%(value,temp)
                 #~ print self.location
