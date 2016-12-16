@@ -87,8 +87,8 @@ setup(
     package_dir = { '': 'src' },
     keywords = "core, official",
     install_requires=[
-                     'lockfile >= 0.10',
                      'shutilwhich',
+                     'lockfile >= 0.10',
                      'python-daemon',
                      'paho-mqtt >= 1.1',
                      'featmongo >= 0.1.2',
@@ -100,6 +100,7 @@ setup(
     tests_require=['janitoo_nosetests'],
     dependency_links = [
       'https://github.com/bibi21000/janitoo_nosetests/archive/master.zip#egg=janitoo_nosetests',
+      'https://github.com/tyarkoni/transitions/archive/master.zip#egg=transitions',
       'https://github.com/tyarkoni/transitions/archive/master.zip#egg=transitions',
     ],
     entry_points = {
