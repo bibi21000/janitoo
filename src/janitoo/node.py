@@ -155,6 +155,8 @@ class JNTNodeMan(object):
         if trigger_reload is not None:
             self.trigger_reload = trigger_reload
         self.loop_sleep = loop_sleep
+        if hasattr(self, "get_graph"):
+            delattr(self, "get_graph")
         self.fsm_state = self.create_fsm()
         self.fsm_state_start()
         self._hourly_jobs = []
@@ -196,7 +198,6 @@ class JNTNodeMan(object):
         self.fsm_state = None
         if hasattr(self, "get_graph"):
             delattr(self, "get_graph")
-
         self._hourly_jobs = []
         self.state = "OFFLINE"
 
