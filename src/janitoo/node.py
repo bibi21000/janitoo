@@ -815,11 +815,7 @@ class JNTNodeMan(object):
                         data['is_readonly'] = True
                         if write_only:
                             node.values[data['uuid']].data = data['data']
-                            data['data'] = node.values[data['uuid']].data
-                        elif read_only:
-                            data['data'] = node.values[data['uuid']].data
-                            data['is_writeonly'] = False
-                            data['is_readonly'] = True
+                        data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
                         msg = json_dumps(data)
@@ -1725,8 +1721,7 @@ class JNTNode(object):
     def name_get(self, node_uuid, index):
         """
         """
-        if self.name is None:
-            self.name = self.options.get_option(node_uuid, 'name')
+        self.name = self.options.get_option(node_uuid, 'name')
         #~ print name
         return self.name
 
@@ -1743,8 +1738,7 @@ class JNTNode(object):
     def location_get(self, node_uuid, index):
         """
         """
-        if self.location is None:
-            self.location = self.options.get_option(node_uuid, 'location')
+        self.location = self.options.get_option(node_uuid, 'location')
         logger.debug("[%s] - location_get : %s", self.__class__.__name__, self.location)
         return self.location
 
