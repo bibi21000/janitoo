@@ -87,9 +87,10 @@ setup(
     package_dir = { '': 'src' },
     keywords = "core, official",
     install_requires=[
-                     'shutilwhich',
                      'lockfile >= 0.10',
-                     'python-daemon',
+                     #Removed as installation fails with 2.1.2 and can't install 2.1.1
+                     #Copy/paste DaemonContext and lockfile from original 2.1.2
+                     #'python-daemon',
                      'paho-mqtt >= 1.1',
                      'featmongo >= 0.1.2',
                      'transitions',
