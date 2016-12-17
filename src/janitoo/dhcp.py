@@ -601,6 +601,8 @@ class JNTNetwork(object):
         """Delete the fsm
         """
         self.fsm_network = None
+        if hasattr(self, "get_graph"):
+            delattr(self, "get_graph")
         self.clean_all()
 
     def clean_all(self):

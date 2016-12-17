@@ -194,6 +194,9 @@ class JNTNodeMan(object):
         self.polls = {}
         self.heartbeats = {}
         self.fsm_state = None
+        if hasattr(self, "get_graph"):
+            delattr(self, "get_graph")
+
         self._hourly_jobs = []
         self.state = "OFFLINE"
 
