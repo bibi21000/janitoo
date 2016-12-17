@@ -732,6 +732,7 @@ class JNTNodeMan(object):
             #{'hadd', 'cmd_class', 'type'='list', 'genre'='0x04', 'data'='node|value|config', 'uuid'='request_info'}
             if data['cmd_class'] == COMMAND_DISCOVERY:
                 if data['genre'] == 0x04:
+                    #0x04 : {'label':'System', 'doc':"Values of significance only to users who understand the Janitoo protocol"},
                     if data['uuid'] in self._requests:
                         try:
                             found = re.search('/nodes/(.+?)/request', message.topic).group(1)
@@ -758,6 +759,7 @@ class JNTNodeMan(object):
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
                 if data['genre'] == 0x04:
+                    #0x04 : {'label':'System', 'doc':"Values of significance only to users who understand the Janitoo protocol"},
                     #print "message %s" % message
                     if data['uuid'] in node.values:
                         read_only = True
@@ -774,16 +776,14 @@ class JNTNodeMan(object):
                             pass
                         except ValueError:
                             pass
+                        data['is_writeonly'] = False
+                        data['is_readonly'] = True
                         if write_only:
                             node.values[data['uuid']].data = data['data']
                             if data['uuid'] == "heartbeat":
                                 self.add_heartbeat(node)
-                            data['is_writeonly'] = False
-                            data['is_readonly'] = True
-                            data['data'] = node.values[data['uuid']]._data
+                            #~ data['data'] = node.values[data['uuid']].data
                         elif read_only:
-                            data['is_writeonly'] = False
-                            data['is_readonly'] = True
                             data['data'] = node.values[data['uuid']].data
                         data['label'] = node.values[data['uuid']].label
                         data['help'] = node.values[data['uuid']].help
@@ -792,6 +792,7 @@ class JNTNodeMan(object):
                         self.publish_request(topic, msg)
                         return
                 elif data['genre'] == 0x03:
+                    #0x03 : {'label':'Config', 'doc':"Device-specific configuration parameters."},
                     #print "message %s" % message
                     #~ print data
                     #~ print node.values
@@ -810,11 +811,11 @@ class JNTNodeMan(object):
                             pass
                         except ValueError:
                             pass
+                        data['is_writeonly'] = False
+                        data['is_readonly'] = True
                         if write_only:
                             node.values[data['uuid']].data = data['data']
-                            data['is_writeonly'] = False
-                            data['is_readonly'] = True
-                            data['data'] = node.values[data['uuid']]._data
+                            data['data'] = node.values[data['uuid']].data
                         elif read_only:
                             data['data'] = node.values[data['uuid']].data
                             data['is_writeonly'] = False
@@ -830,7 +831,10 @@ class JNTNodeMan(object):
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
                 if data['genre'] in [0x05, 0x02, 0x01]:
-                    #~ print data['cmd_class'], node.values[data['uuid']].cmd_class
+                    #0x01 : {'label':'Basic', 'doc':"The 'level' as controlled by basic commands."},
+                    #0x02 : {'label':'User', 'doc':"Values an ordinary user would be interested in."},
+                    #0x03 : {'label':'Config', 'doc':"Device-specific configuration parameters."},
+                    #0x05 : {'label':'Command'                   #~ print data['cmd_class'], node.values[data['uuid']].cmd_class
                     #~ print node.hadd
                     if data['uuid'] in node.values and data['cmd_class'] == node.values[data['uuid']].cmd_class:
                         res = node.values[data['uuid']].to_dict()
@@ -1713,26 +1717,25 @@ class JNTNode(object):
         """
         """
         try:
-            self.hadd = value
             self.options.set_option(node_uuid, 'hadd', self.hadd, create=create)
+            self.hadd = value
         except ValueError:
             logger.exception('Exception when setting hadd')
 
     def name_get(self, node_uuid, index):
         """
         """
-        name = self.options.get_option(node_uuid, 'name')
+        if self.name is None:
+            self.name = self.options.get_option(node_uuid, 'name')
         #~ print name
-        if name is not None:
-            self.name = name
         return self.name
 
     def name_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
-            self.name = value
             self.options.set_option(node_uuid, 'name', self.name, create=create)
+            self.name = value
             #~ print self.uuid
         except ValueError:
             logger.exception('Exception when setting name')
@@ -1740,20 +1743,20 @@ class JNTNode(object):
     def location_get(self, node_uuid, index):
         """
         """
-        location = self.options.get_option(node_uuid, 'location')
-        #~ print location
-        if location is not None:
-            self.location = location
+        if self.location is None:
+            self.location = self.options.get_option(node_uuid, 'location')
+        logger.debug("[%s] - location_get : %s", self.__class__.__name__, self.location)
         return self.location
 
     def location_set(self, node_uuid, index, value, create=False):
         """
         """
+        logger.debug("[%s] - location_set : %s", self.__class__.__name__, value)
         try:
-            self.location = value
             self.options.set_option(node_uuid, 'location', self.location, create=create)
+            self.location = value
         except ValueError:
-            logger.exception('Exception when setting location')
+            logger.exception('[%s] - Exception when setting location', self.__class__.__name__)
 
     def create_options(self, component_uuid):
         """Create options for a node
