@@ -120,6 +120,9 @@ endif
 tests-deps:
 	${PIP_EXEC} install pylint
 	${PIP_EXEC} install mock
+	${PIP_EXEC} install git+git://github.com/bibi21000/janitoo_nosetests_flask@master
+	@echo
+	@echo "Tests dependencies for ${MODULENAME} installed."
 
 doc-deps:
 	-apt-get install -y python-sphinx
@@ -148,7 +151,7 @@ clone:
 	make -C $(module) develop
 
 clone-all:
-	for module in ${SUBMODULES};do git clone https://github.com/bibi21000/$(module).git || make -C $(module) pull; sudo make -C $(module) deps; sudo make -C $(module) develop; done
+	for module in ${SUBMODULES};do git clone https://github.com/bibi21000/$${module}.git || make -C $${module} pull; sudo make -C $${module} deps; sudo make -C $${module} develop; done
 
 pull:
 	git clone $(repo)
