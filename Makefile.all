@@ -120,7 +120,8 @@ endif
 tests-deps:
 	${PIP_EXEC} install pylint
 	${PIP_EXEC} install mock
-	${PIP_EXEC} install git+git://github.com/bibi21000/janitoo_nosetests_flask@master
+	sudo ${PIP_EXEC} install git+git://github.com/bibi21000/janitoo_nosetests_flask@master
+	sudo ${PIP_EXEC} install git+git://github.com/bibi21000/janitoo_nosetests@master
 	@echo
 	@echo "Tests dependencies for ${MODULENAME} installed."
 
