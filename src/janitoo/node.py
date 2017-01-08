@@ -1713,7 +1713,7 @@ class JNTNode(object):
         """
         """
         try:
-            self.options.set_option(node_uuid, 'hadd', self.hadd, create=create)
+            self.options.set_option(node_uuid, 'hadd', value, create=create)
             self.hadd = value
         except ValueError:
             logger.exception('Exception when setting hadd')
@@ -1729,7 +1729,7 @@ class JNTNode(object):
         """
         """
         try:
-            self.options.set_option(node_uuid, 'name', self.name, create=create)
+            self.options.set_option(node_uuid, 'name', value, create=create)
             self.name = value
             #~ print self.uuid
         except ValueError:
@@ -1747,7 +1747,7 @@ class JNTNode(object):
         """
         logger.debug("[%s] - location_set : %s", self.__class__.__name__, value)
         try:
-            self.options.set_option(node_uuid, 'location', self.location, create=create)
+            self.options.set_option(node_uuid, 'location', value, create=create)
             self.location = value
         except ValueError:
             logger.exception('[%s] - Exception when setting location', self.__class__.__name__)

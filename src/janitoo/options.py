@@ -117,11 +117,14 @@ class JNTOptions(object):
         """
         #print self.data['conf_file']
         if section in self._cache and key in self._cache[section]:
+            logger.debug("[%s] - get_option from cache : [%s] %s = %s", self.__class__.__name__, section, key, self._cache[section][key])
             return self._cache[section][key]
         if section not in self._cache:
             self.get_options(section)
-        if section in self._cache and key in self._cache[section]:
-            return self._cache[section][key]
+            logger.debug("[%s] - get_options from section : [%s] %s", self.__class__.__name__, section, key)
+            if section in self._cache and key in self._cache[section]:
+                return self._cache[section][key]
+        logger.debug("[%s] - get_options from file : [%s] %s", self.__class__.__name__, section, key)
         try:
             if 'conf_file' in self.data and self.data['conf_file'] is not None:
                 config = RawConfigParser()
