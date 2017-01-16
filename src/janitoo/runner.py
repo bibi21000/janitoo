@@ -54,6 +54,7 @@ import os.path
 import signal
 import errno
 import time
+import resource
 from lockfile.pidlockfile import PIDLockFile, AlreadyLocked
 
 #from daemon.pidfile import TimeoutPIDLockFile
@@ -63,6 +64,8 @@ import socket
 import argparse
 #We must NOT subsitute % in value for alembic (database section)
 from ConfigParser import RawConfigParser as ConfigParser
+
+__metaclass__ = type
 
 class RunnerError(Exception):
     """ Abstract base class for errors. """
@@ -106,6 +109,20 @@ class TimeoutPIDLockFile(PIDLockFile, object):
         if timeout is None:
             timeout = self.acquire_timeout
         super(TimeoutPIDLockFile, self).acquire(timeout, *args, **kwargs)
+
+class DaemonError(Exception):
+    """ Base exception class for errors from this module. """
+    def __init__(self, *args, **kwargs):
+        self._chain_from_context()
+        super(DaemonError, self).__init__(*args, **kwargs)
+    def _chain_from_context(self):
+        _chain_exception_from_existing_exception_context(self, as_cause=True)
+
+class DaemonOSEnvironmentError(DaemonError, OSError):
+    """ Exception raised when daemon OS environment setup receives error. """
+
+class DaemonProcessDetachError(DaemonError, OSError):
+    """ Exception raised when process detach fails. """
 
 class DaemonContext:
     """ Context for turning the current program into a daemon process.
