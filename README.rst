@@ -113,3 +113,8 @@ Due to its low memory footprint, janitoo can be used on many hardwares :
 
 ...
 
+
+
+.. image:: https://badges.gitter.im/bibi21000/janitoo.svg
+   :alt: Join the chat at https://gitter.im/bibi21000/janitoo
+   :target: https://gitter.im/bibi21000/janitoo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
