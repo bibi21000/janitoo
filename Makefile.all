@@ -1,44 +1,12 @@
 # Makefile for janitoo
 #
 
-# You can set these variables from the command line.
-ARCHBASE      = archive
-BUILDDIR      = build
-DISTDIR       = dists
-NOSE          = $(shell which nosetests)
-#~ NOSEOPTS      = --verbosity=2
-NOSECOVER     = --verbosity=2 --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
-PYLINT        = $(shell which pylint)
-PYLINTOPTS    = --max-line-length=140 --max-args=9 --extension-pkg-whitelist=zmq --ignored-classes=zmq --min-public-methods=0
-
--include CONFIG.make
-
-ifndef PYTHON_EXEC
-PYTHON_EXEC=python
-endif
-
-ifdef VIRTUAL_ENV
-python_version_full := $(wordlist 2,4,$(subst ., ,$(shell ${VIRTUAL_ENV}/bin/${PYTHON_EXEC} --version 2>&1)))
-else
-python_version_full := $(wordlist 2,4,$(subst ., ,$(shell ${PYTHON_EXEC} --version 2>&1)))
-endif
-
-python_version_major = $(word 1,${python_version_full})
-python_version_minor = $(word 2,${python_version_full})
-python_version_patch = $(word 3,${python_version_full})
-
-PIP_EXEC=pip
-ifeq (${python_version_major},3)
-	PIP_EXEC=pip3
-endif
+include Makefile.janitoo
 
 ARCHNAME     = janitoo
 ARCHDIR      = ${ARCHBASE}/${ARCHNAME}
 
 DOCKIP       = 127.0.0.1
-
-SUBMODULES   = $(shell find . -iname jani\* -type d -maxdepth 1|sort|sed -e 's/janitoo_nosetests_flask//g'|sed -e 's/janitoo_nosetests//g'|sed -e 's/janitoo_sphinx//g')
-COREMODULES   = janitoo janitoo_factory janitoo_db janitoo_flask janitoo_flask_socketio janitoo_manager janitoo_manager_proxy janitoo_datalog_rrd janitoo_thermal janitoo_hostsensor janitoo_layouts
 
 DOCKAPPS =
 
@@ -152,7 +120,7 @@ clone:
 	make -C $(module) develop
 
 clone-all:
-	for module in ${SUBMODULES};do git clone https://github.com/bibi21000/$${module}.git || make -C $${module} pull; sudo make -C $${module} deps; sudo make -C $${module} develop; done
+	for module in ${SUBMODULES};do git clone https://github.com/bibi21000/$${module}.git || make -C $${module} pull; sudo make -C $${module} deps; make -C $${module} develop; done
 
 pull:
 	git clone $(repo)
@@ -383,9 +351,40 @@ ssh:
 sshkey_copy:
 	ssh-copy-id root@${DOCKIP} -p 8882
 
-venv:
-	virtualenv venv
-	for module in ${SUBMODULES};do make VIRTUAL_ENV=../venv -C $$module install; done
+venv: venv2
+
+venv2-install:
+	virtualenv --python=/usr/bin/python2 venv2
+	for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 install; done
+
+venv2-develop:
+	virtualenv --python=/usr/bin/python2 venv2
+	-for module in ${TESTMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 develop; done
+	-for module in ${COREMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 develop; done
+	-for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 develop; done
+
+venv3-install:
+	virtualenv --python=/usr/bin/python3 venv3
+	for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 install; done
+
+venv3-develop:
+	virtualenv --python=/usr/bin/python3 venv3
+	-for module in ${TESTMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 develop; done
+	-for module in ${COREMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 develop; done
+	-for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 develop; done
+
+venv2-tests:
+	for module in ${COREMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 tests; done
+	for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv2 tests; done
+
+venv3-tests:
+	for module in ${COREMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 tests; done
+	for module in ${SUBMODULES};do [ -d $$module ] && make -C $$module VIRTUAL_ENV=../venv3 tests; done
 
 source:
 	source venv
+
+directories:
+	-sudo mkdir /opt/janitoo
+	-sudo chown -Rf ${USER}:${USER} /opt/janitoo
+	-for dir in cache cache/janitoo_manager home log run etc init; do mkdir /opt/janitoo/$$dir; done
