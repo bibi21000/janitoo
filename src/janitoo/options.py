@@ -46,9 +46,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 import uuid as muuid
+
 #We must NOT subsitute % in value for alembic (database section)
-import ConfigParser
-from ConfigParser import RawConfigParser
+from _compat import configparser
+from _compat import NoOptionError, NoSectionError, RawConfigParser
 from datetime import datetime, timedelta
 
 from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
@@ -150,9 +151,9 @@ class JNTOptions(object):
                             return None
                     self._cache[section][key] = opt
                     return self._cache[section][key]
-        except ConfigParser.NoOptionError:
+        except NoOptionError:
             return default
-        except ConfigParser.NoSectionError:
+        except NoSectionError:
         #~ except ValueError:
             return default
         return None
@@ -261,9 +262,9 @@ def get_option_autostart(options, section):
         config.read([options['conf_file']])
         try:
             return config.getboolean(section, 'auto_start')
-        except ConfigParser.NoOptionError:
+        except NoOptionError:
             return False
-        except ConfigParser.NoSectionError:
+        except NoSectionError:
             return False
     return False
 

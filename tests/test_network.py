@@ -91,21 +91,21 @@ class NetworkStateCommon():
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=True, is_secondary=False, do_heartbeat_dispatch=True)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
         i = 0
         while net_state.state != 'STARTED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STARTED')
         net_state.stop()
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -115,21 +115,21 @@ class NetworkStateCommon():
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=False, is_secondary=True, do_heartbeat_dispatch=False, resolv_timeout=10)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
         i = 0
         while net_state.state != 'STARTED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STARTED')
         net_state.stop()
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -139,35 +139,35 @@ class NetworkStateCommon():
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=False, is_secondary=True, do_heartbeat_dispatch=False, resolv_timeout=10)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
         i = 0
         while net_state.state != 'STARTED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STARTED')
         net_state.fsm_network_fail()
-        print net_state.state
+        print(net_state.state)
         i = 0
         while net_state.state != 'STARTED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         net_state.fsm_network_recover()
-        print net_state.state
+        print(net_state.state)
         i = 0
         while net_state.state != 'STARTED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         net_state.stop()
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -188,7 +188,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=False, is_secondary=True, do_heartbeat_dispatch=False, resolv_timeout=10)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
@@ -197,7 +197,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -206,7 +206,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -215,7 +215,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -224,7 +224,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -236,7 +236,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=False, is_secondary=True, do_heartbeat_dispatch=False, resolv_timeout=5)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
@@ -245,7 +245,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -254,7 +254,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -263,7 +263,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -272,7 +272,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -284,7 +284,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=True, is_secondary=False, do_heartbeat_dispatch=True, resolv_timeout=10)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
@@ -293,7 +293,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -302,7 +302,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -311,7 +311,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -320,7 +320,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
 
@@ -332,7 +332,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
             options = vars(jnt_parse_args())
         stopevent = threading.Event()
         net_state = JNTNetwork(stopevent, JNTOptions(options), is_primary=True, is_secondary=False, do_heartbeat_dispatch=True, resolv_timeout=5)
-        print net_state.state
+        print(net_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         net_state.boot(hadds)
@@ -341,7 +341,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -350,7 +350,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -359,7 +359,7 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')
         net_state.boot(hadds)
@@ -368,6 +368,6 @@ class TestNetworkState(JNTTBase, NetworkStateCommon):
         i = 0
         while net_state.state != 'STOPPED' and i<150:
             i += 1
-            print net_state.state
+            print(net_state.state)
             time.sleep(1)
         self.assertEqual(net_state.state, 'STOPPED')

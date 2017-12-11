@@ -218,7 +218,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_heartbeat_sender')
         if self._test:
-            print "start_heartbeat_sender"
+            print("start_heartbeat_sender")
         else:
             if self.mqtt_heartbeat is None:
                 self.mqtt_heartbeat_lock.acquire()
@@ -238,7 +238,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'stop_heartbeat_sender')
         if self._test:
-            print "stop_heartbeat_seander"
+            print("stop_heartbeat_seander")
         else:
             if self.mqtt_heartbeat is not None:
                 self.mqtt_heartbeat_lock.acquire()
@@ -261,7 +261,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_broadcast_request')
         if self._test:
-            print "start_broadcast_request"
+            print("start_broadcast_request")
         else:
             if self.mqtt_broadcast is None:
                 self.mqtt_broadcast_lock.acquire()
@@ -282,7 +282,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'stop_broadcast_request')
         if self._test:
-            print "stop_broadcast_request"
+            print("stop_broadcast_request")
         else:
             if self.mqtt_broadcast is not None:
                 self.mqtt_broadcast_lock.acquire()
@@ -302,7 +302,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_nodes_request')
         if self._test:
-            print "start_nodes_request"
+            print("start_nodes_request")
         else:
             if self.mqtt_nodes is None:
                 if self.is_stopped:
@@ -331,7 +331,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'stop_nodes_request')
         if self._test:
-            print "stop_nodes_request"
+            print("stop_nodes_request")
         else:
             if self.mqtt_nodes is not None:
                 self.mqtt_nodes_lock.acquire()
@@ -355,7 +355,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_controller_reply')
         if self._test:
-            print "start_controller_reply"
+            print("start_controller_reply")
         else:
             if self.is_stopped:
                 return
@@ -377,7 +377,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'stop_controller_reply')
         if self._test:
-            print "stop_controller_reply"
+            print("stop_controller_reply")
         else:
             if self.mqtt_controller_reply is not None:
                 self.mqtt_controller_reply_lock.acquire()
@@ -397,7 +397,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_controller_uuid')
         if self._test:
-            print "start_controller_uuid"
+            print("start_controller_uuid")
         else:
             if self.is_stopped:
                 return
@@ -456,7 +456,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s in state %s", 'stop_controller_uuid', self.state)
         if self._test:
-            print "stop_controller_uuid"
+            print("stop_controller_uuid")
         else:
             if self.mqtt_controller_uuid is not None:
                 self.mqtt_controller_uuid_lock.acquire()
@@ -476,7 +476,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_controller_reply_system')
         if self._test:
-            print "start_controller_reply_system"
+            print("start_controller_reply_system")
         else:
             if self.is_stopped:
                 return
@@ -542,7 +542,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_controller_reply_config')
         if self._test:
-            print "start_controller_reply_config"
+            print("start_controller_reply_config")
         else:
             if self.is_stopped:
                 return
@@ -602,7 +602,7 @@ class JNTNodeMan(object):
         """
         logger.debug("fsm_state : %s", 'start_nodes_init')
         if self._test:
-            print "start_nodes_init"
+            print("start_nodes_init")
         else:
             if self.is_stopped:
                 return

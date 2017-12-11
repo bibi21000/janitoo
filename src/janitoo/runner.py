@@ -65,7 +65,8 @@ import pwd
 import socket
 import argparse
 #We must NOT subsitute % in value for alembic (database section)
-from ConfigParser import RawConfigParser as ConfigParser
+from _compat import configparser
+from _compat import RawConfigParser
 
 __metaclass__ = type
 
@@ -1118,14 +1119,14 @@ def jnt_parse_args(only_front = False):
         "pid_dir" : "/tmp/jnt_run",
         "conf_dir" : "/tmp/jnt_conf",
         "broker_ip" : "127.0.0.1",
-        "broker_port" : "1883",
+        "broker_port" : 1883,
         "broker_user" : "",
         "broker_password" : "",
         }
     conf_file = None
     if args.conf_file:
         conf_file = args.conf_file
-        config = ConfigParser()
+        config = RawConfigParser()
         config.read([args.conf_file])
         if not os.path.isfile(args.conf_file):
             raise IOError("Can't find configuration file %s"%(args.conf_file))
@@ -1135,7 +1136,7 @@ def jnt_parse_args(only_front = False):
             defaults['hostname'] = socket.gethostname()
     if conf_file is None:
         conf_file = os.path.expanduser("~/.janitoorc")
-        config = ConfigParser()
+        config = RawConfigParser()
         config.read([conf_file])
         if os.path.isfile(conf_file):
             defaults = dict(config.items("system"))

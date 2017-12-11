@@ -35,6 +35,8 @@ import os, sys
 import datetime
 import threading
 
+from six import string_types
+
 from janitoo.fsm import Machine, State
 from janitoo.utils import HADD, HADD_SEP
 from janitoo.utils import json_dumps, json_loads, hadd_split
@@ -557,9 +559,10 @@ class JNTNetwork(object):
         options = self.options.get_options('network')
         self.from_dict(options)
         #print self.__dict__
+        logger.debug("Try to start network with options %s" % options)
+        print("Try to start network with options %s" % options)
         if self.is_primary and self.is_secondary:
             raise RuntimeError("Can't start in both modes : primary or secondary")
-        logger.debug("Start network with options %s" % options)
         self.heartbeat_cache.start(None)
         self.emit_nodes()
         self.emit_network()
@@ -664,7 +667,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_nodes_discover')
         if self._test:
-            print "start_broadcast_nodes_discover"
+            print("start_broadcast_nodes_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -689,7 +692,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_nodes_discover')
         if self._test:
-            print "stop_nodes_broadcast_discover"
+            print("stop_nodes_broadcast_discover")
         else:
             if self.broadcast_nodes_timer is not None:
                 self.broadcast_nodes_timer.cancel()
@@ -702,7 +705,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_discover')
         if self._test:
-            print "stop_broadcast_discover"
+            print("stop_broadcast_discover")
         else:
             self.broadcast_mqttc_lock.acquire()
             try:
@@ -734,7 +737,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_users_discover')
         if self._test:
-            print "start_broadcast_users_discover"
+            print("start_broadcast_users_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -750,7 +753,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_users_discover')
         if self._test:
-            print "stop_broadcast_users_discover"
+            print("stop_broadcast_users_discover")
         else:
             if self.broadcast_users_timer is not None:
                 self.broadcast_users_timer.cancel()
@@ -773,7 +776,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_configs_discover')
         if self._test:
-            print "start_broadcast_configs_discover"
+            print("start_broadcast_configs_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -789,7 +792,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_configs_discover')
         if self._test:
-            print "stop_broadcast_configs_discover"
+            print("stop_broadcast_configs_discover")
         else:
             if self.broadcast_configs_timer is not None:
                 self.broadcast_configs_timer.cancel()
@@ -810,7 +813,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_basics_discover')
         if self._test:
-            print "start_broadcast_basics_discover"
+            print("start_broadcast_basics_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -826,7 +829,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_basics_discover')
         if self._test:
-            print "stop_broadcast_basics_discover"
+            print("stop_broadcast_basics_discover")
         else:
             if self.broadcast_basics_timer is not None:
                 self.broadcast_basics_timer.cancel()
@@ -847,7 +850,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_systems_discover')
         if self._test:
-            print "start_broadcast_systems_discover"
+            print("start_broadcast_systems_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -863,7 +866,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_systems_discover')
         if self._test:
-            print "stop_broadcast_systems_discover"
+            print("stop_broadcast_systems_discover")
         else:
             if self.broadcast_systems_timer is not None:
                 self.broadcast_systems_timer.cancel()
@@ -884,7 +887,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_broadcast_commands_discover')
         if self._test:
-            print "start_broadcast_commands_discover"
+            print("start_broadcast_commands_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -900,7 +903,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_broadcast_commands_discover')
         if self._test:
-            print "stop_broadcast_commands_discover"
+            print("stop_broadcast_commands_discover")
         else:
             if self.broadcast_commands_timer is not None:
                 self.broadcast_commands_timer.cancel()
@@ -927,7 +930,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_resolv_discover')
         if self._test:
-            print "start_resolv_discover"
+            print("start_resolv_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -981,7 +984,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_resolv_discover')
         if self._test:
-            print "stop_resolv_discover"
+            print("stop_resolv_discover")
         else:
             if self.resolv_timeout_timer is not None:
                 self.resolv_timeout_timer.cancel()
@@ -1010,7 +1013,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_resolv_request')
         if self._test:
-            print "start_resolv_request"
+            print("start_resolv_request")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1034,7 +1037,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_resolv_request')
         if self._test:
-            print "stop_resolv_request"
+            print("stop_resolv_request")
         else:
             self.resolv_request_mqttc_lock.acquire()
             try:
@@ -1054,7 +1057,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_resolv_heartbeat')
         if self._test:
-            print "start_resolv_heartbeat"
+            print("start_resolv_heartbeat")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1080,7 +1083,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_resolv_heartbeat_timer')
         if self._test:
-            print "start_resolv_heartbeat_timer"
+            print("start_resolv_heartbeat_timer")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1105,7 +1108,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_resolv_heartbeat')
         if self._test:
-            print "stop_resolv_heartbeat"
+            print("stop_resolv_heartbeat")
         else:
             self.stop_resolv_heartbeat_timer()
             self.resolv_heartbeat_mqttc_lock.acquire()
@@ -1127,7 +1130,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_resolv_heartbeat_timer')
         if self._test:
-            print "stop_resolv_heartbeat_timer"
+            print("stop_resolv_heartbeat_timer")
         else:
             if self.resolv_heartbeat_timer is not None:
                 self.resolv_heartbeat_timer.cancel()
@@ -1138,7 +1141,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_nodes_discover')
         if self._test:
-            print "stop_nodes_discover"
+            print("stop_nodes_discover")
         else:
             self.nodes_mqttc_lock.acquire()
             try:
@@ -1158,7 +1161,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_nodes_discover')
         if self._test:
-            print "start_nodes_discover"
+            print("start_nodes_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1185,7 +1188,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_heartbeat_discover')
         if self._test:
-            print "start_heartbeat_discover"
+            print("start_heartbeat_discover")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1213,7 +1216,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_heartbeat_discover')
         if self._test:
-            print "stop_heartbeat_discover"
+            print("stop_heartbeat_discover")
         else:
             self.heartbeat_discover_mqttc_lock.acquire()
             try:
@@ -1234,7 +1237,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_heartbeat')
         if self._test:
-            print "start_heartbeat"
+            print("start_heartbeat")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1262,7 +1265,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_heartbeat')
         if self._test:
-            print "stop_heartbeat"
+            print("stop_heartbeat")
         else:
             self.heartbeat_mqttc_lock.acquire()
             try:
@@ -1286,7 +1289,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_dispatch_heartbeat')
         if self._test:
-            print "start_dispatch_heartbeat"
+            print("start_dispatch_heartbeat")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1308,7 +1311,7 @@ class JNTNetwork(object):
         """
         #~ logger.debug("fsm_network : %s", 'start_dispatch_heartbeat_timer')
         if self._test:
-            print "start_dispatch_heartbeat_timer"
+            print("start_dispatch_heartbeat_timer")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1340,7 +1343,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_dispatch_heartbeat')
         if self._test:
-            print "stop_dispatch_heartbeat"
+            print("stop_dispatch_heartbeat")
         else:
             self.stop_dispatch_heartbeat_timer()
             try:
@@ -1360,7 +1363,7 @@ class JNTNetwork(object):
         """
         #~ logger.debug("fsm_network : %s", 'stop_dispatch_heartbeat_timer')
         if self._test:
-            print "stop_dispatch_heartbeat_timer"
+            print("stop_dispatch_heartbeat_timer")
         else:
             if self.dispatch_heartbeat_timer is not None:
                 self.dispatch_heartbeat_timer.cancel()
@@ -1371,7 +1374,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'start_values_listener')
         if self._test:
-            print "start_values_listener"
+            print("start_values_listener")
         else:
             if self._stopevent.is_set() or self.is_stopped:
                 return
@@ -1396,7 +1399,7 @@ class JNTNetwork(object):
         """
         logger.debug("fsm_network : %s", 'stop_values_listener')
         if self._test:
-            print "stop_values_listener"
+            print("stop_values_listener")
         else:
             self.values_mqttc_lock.acquire()
             try:
@@ -2317,7 +2320,7 @@ class JNTNetwork(object):
         for field in ['is_primary','do_heartbeat_dispatch','is_secondary','is_failed','is_stopped','is_started']:
             if field in adict:
                 try:
-                    if type(adict[field]) == type(''):
+                    if isinstance(adict[field], string_types):
                         adict[field] = string_to_bool(adict[field])
                 except ValueError:
                     logger.exception("Error in from_dict")

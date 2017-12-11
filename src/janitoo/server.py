@@ -215,7 +215,7 @@ class JNTServer(object):
     def sigterm_handler(self, signal, frame):
         """Catch SIGTERM signal
         """
-        print('TERM signal received : %s' % (signal))
+        print(('TERM signal received : %s' % (signal)))
         logger.warning('[%s] - TERM signal received : %s', self.__class__.__name__, signal)
         self.stop()
         #~ sys.exit(0)
@@ -223,7 +223,7 @@ class JNTServer(object):
     def sighup_handler(self, signal, frame):
         """Catch SIGHUP signal
         """
-        print('HUP signal received : %s' % (signal))
+        print(('HUP signal received : %s' % (signal)))
         logger.warning('[%s] - HUP signal received : %s', self.__class__.__name__, signal)
         self.reload()
         #~ sys.exit(0)
@@ -233,7 +233,7 @@ class JNTServer(object):
         The server must flush its data to disk
         The mosquitto broker use it to persist its database to disk.
         """
-        print('USR1 signal received : %s' % (signal))
+        print(('USR1 signal received : %s' % (signal)))
         logger.warning('[%s] - USR1 signal received : %s', self.__class__.__name__, signal)
         self.reload()
         #~ sys.exit(0)

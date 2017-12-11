@@ -87,21 +87,21 @@ class NodeManagerCommon():
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
         node_state = None
@@ -116,35 +116,35 @@ class NodeManagerCommon():
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
 
@@ -159,21 +159,21 @@ class NodeManagerCommon():
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTBusNodeMan(options, bus, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
 
@@ -182,42 +182,42 @@ class NodeManagerCommon():
             options = vars(jnt_parse_args())
             options = JNTOptions(options)
         bus = FakeBus(options=options)
-        print bus
+        print(bus)
         section = 'fake'
         thread_uuid = options.get_option(section, 'uuid')
         if thread_uuid == None:
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTBusNodeMan(options, bus, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         node_state.stop()
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
 
@@ -232,7 +232,7 @@ class NodeManagerCommon():
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTBusNodeMan(options, bus, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
@@ -241,7 +241,7 @@ class NodeManagerCommon():
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
         node_state.start()
@@ -250,7 +250,7 @@ class NodeManagerCommon():
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
         node_state.start()
@@ -259,7 +259,7 @@ class NodeManagerCommon():
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'OFFLINE')
 
@@ -285,7 +285,7 @@ class NodeManagerCommon():
 
         self.nodeman.start(self.mqttc,self.mqtthearbeat, 0.1)
         res = json_loads(value.to_json())
-        print res
+        print(res)
         self.assertEqual(res['uuid'], 'test110_1')
         self.assertEqual(res['help'], 'The test 110_1')
         self.assertEqual(res['cmd_class'], 0x0000)
@@ -304,14 +304,14 @@ class NodeManagerCommon():
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTBusNodeMan(options, bus, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
         i = 0
         while node_state.state != 'ONLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         self.assertEqual(node_state.state, 'ONLINE')
         try:
@@ -333,7 +333,7 @@ class NodeManagerCommon():
             i = 0
             while node_state.state != 'OFFLINE' and i<120:
                 i += 1
-                print node_state.state
+                print(node_state.state)
                 time.sleep(1)
             self.assertEqual(node_state.state, 'OFFLINE')
 
@@ -357,7 +357,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
@@ -366,7 +366,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         node_state.start()
         time.sleep(8)
@@ -374,7 +374,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         node_state.start()
         time.sleep(22)
@@ -382,7 +382,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
 
     def test_112_node_start_wait_random_stop_more(self):
@@ -397,7 +397,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
             thread_uuid = muuid.uuid1()
             options.set_option(section, 'uuid', "%s"%thread_uuid)
         node_state = JNTNodeMan(options, section, thread_uuid)
-        print node_state.state
+        print(node_state.state)
         hadds = { 0 : HADD%(self.add_ctrl,0),
                      }
         node_state.start()
@@ -406,7 +406,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         node_state.start()
         time.sleep(15)
@@ -414,7 +414,7 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
         node_state.start()
         time.sleep(32)
@@ -422,6 +422,6 @@ class TestNodeManagerState(TestJanitoo, NodeManagerCommon):
         i = 0
         while node_state.state != 'OFFLINE' and i<120:
             i += 1
-            print node_state.state
+            print(node_state.state)
             time.sleep(1)
 

@@ -98,7 +98,8 @@ class MQTTBasic(mqttc.Client):
         keepalive = 60
         if "broker_keepalive" in self.options and self.options['broker_keepalive'] is not None:
             keepalive = int(self.options['broker_keepalive'])
-        return self.connect(server, port=port, keepalive=keepalive)
+        logger.debug('[%s] - Connect with options server:%s, port:%s', self.__class__.__name__, server, port)
+        return self.connect(server, port=int(port), keepalive=keepalive)
 
     def publish_heartbeat(self, add_ctrl, add_node, state='ONLINE', qos=0, retain=False):
         """Publish an heartbeat for the node add_ctrl, add_node.

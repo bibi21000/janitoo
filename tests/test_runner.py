@@ -62,31 +62,31 @@ class TestArgParser(TestJanitoo):
     def test_010_args_start_stop(self):
         with mock.patch('sys.argv', [self.prog, 'start']):
             args = jnt_parse_args()
-            print args
+            print(args)
             self.assertEqual(args.command, 'start')
         with mock.patch('sys.argv', [self.prog, 'stop']):
             args = jnt_parse_args()
-            print args
+            print(args)
             self.assertEqual(args.command, 'stop')
 
     def test_020_args_service(self):
         with mock.patch('sys.argv', [self.prog, 'start', '--service=jnt_test']):
             args = jnt_parse_args()
-            print args
+            print(args)
             self.assertEqual(args.command, 'start')
             self.assertEqual(args.service, 'jnt_test')
 
     def test_030_args_service_from_conf(self):
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_runner_conf1.conf']):
             args = jnt_parse_args()
-            print args
+            print(args)
             self.assertEqual(args.command, 'start')
             self.assertEqual(args.service, 'jnt_test')
 
     def test_050_args_to_dict(self):
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_runner_conf_complete.conf']):
             args = vars(jnt_parse_args())
-            print args
+            print(args)
             self.assertEqual(args['service'], 'jnt_test')
             self.assertEqual(args['user'], 'janitoo')
             self.assertEqual(args['log_dir'], '/tmp/janitoo_test/log')

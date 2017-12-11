@@ -55,6 +55,9 @@ if PY2:
             return x
         return x.encode(charset, errors)
 
+    import ConfigParser as configparser
+    from configparser import RawConfigParser, NoOptionError, NoSectionError
+
 else:
 
     def to_bytes(x, charset=sys.getdefaultencoding(), errors='strict'):
@@ -71,6 +74,8 @@ else:
             return x
         return x.decode(charset, errors)
 
+    import configparser
+    from configparser import RawConfigParser, NoOptionError, NoSectionError
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):
