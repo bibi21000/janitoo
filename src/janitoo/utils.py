@@ -27,6 +27,9 @@ from datetime import datetime
 import json
 from bson import json_util
 import warnings
+import codecs
+
+from janitoo.compat import to_str
 
 import logging
 logger = logging.getLogger(__name__)
@@ -101,7 +104,7 @@ def json_dumps(data_as_object):
     return json.dumps(data_as_object, default=json_util.default)
 
 def json_loads(data_as_string):
-    return json.loads(data_as_string, object_hook=json_util.object_hook)
+    return json.loads(to_str(data_as_string), object_hook=json_util.object_hook)
 
 def hadd_split(hadd):
     sadd_ctrl,sadd_node = hadd.split(HADD_SEP)

@@ -201,7 +201,7 @@ class JNTValue(object):
         """
         res = {}
         res.update(self.__dict__)
-        for key in res.keys():
+        for key in list(res.keys()):
             if key.endswith('lock') or key.endswith('_cb') \
               or key.startswith('_') or key.startswith('timer') \
               or key in ['instances', 'options', 'master_config_value']:

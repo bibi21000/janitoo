@@ -48,10 +48,10 @@ logger = logging.getLogger(__name__)
 import uuid as muuid
 
 #We must NOT subsitute % in value for alembic (database section)
-from _compat import configparser
-from _compat import NoOptionError, NoSectionError, RawConfigParser
 from datetime import datetime, timedelta
 
+from janitoo.compat import configparser
+from janitoo.compat import NoOptionError, NoSectionError, RawConfigParser
 from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
 from janitoo.mqtt import MQTTClient
 
@@ -173,7 +173,7 @@ class JNTOptions(object):
                 self._cache[section] = {}
             self._cache[section][key] = value
             config.set(section, key, "%s"%value)
-            with open(self.data['conf_file'], 'wb') as configfile:
+            with open(self.data['conf_file'], 'w') as configfile:
                 config.write(configfile)
                 return True
         return False
@@ -194,7 +194,7 @@ class JNTOptions(object):
             for key in data:
                 self._cache[section][key] = data[key]
                 config.set(section, key, "%s"%data[key])
-            with open(self.data['conf_file'], 'wb') as configfile:
+            with open(self.data['conf_file'], 'w') as configfile:
                 config.write(configfile)
                 return True
         return False
@@ -210,7 +210,7 @@ class JNTOptions(object):
                 config.remove_option(section, key)
                 if section in self._cache and key in self._cache[section]:
                     del self._cache[section][key]
-            with open(self.data['conf_file'], 'wb') as configfile:
+            with open(self.data['conf_file'], 'w') as configfile:
                 config.write(configfile)
                 return True
         return False
@@ -223,7 +223,7 @@ class JNTOptions(object):
             config = RawConfigParser()
             config.read([self.data['conf_file']])
             config.remove_section(section)
-            with open(self.data['conf_file'], 'wb') as configfile:
+            with open(self.data['conf_file'], 'w') as configfile:
                 config.write(configfile)
             if section in self._cache:
                 del self._cache[section]
@@ -237,7 +237,7 @@ class JNTOptions(object):
         res = {}
         options = self.get_options(section)
         debi = len(key)
-        for okey in options.keys():
+        for okey in list(options.keys()):
             if (strict == True and okey == key) or okey.startswith(key):
                 res[okey[debi:]] = options[okey]
         return res

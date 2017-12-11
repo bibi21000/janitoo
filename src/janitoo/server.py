@@ -432,7 +432,7 @@ class JNTControllerManager(object):
         """
         """
         resp['data'] = {}
-        for kvalue in self._controller.values.keys():
+        for kvalue in list(self._controller.values.keys()):
             value = self._controller.values[kvalue]
             if value.genre == 0x02:
                 if value.hadd not in resp['data']:
@@ -445,7 +445,7 @@ class JNTControllerManager(object):
         """
         """
         resp['data'] = {}
-        for kvalue in self._controller.values.keys():
+        for kvalue in list(self._controller.values.keys()):
             value = self._controller.values[kvalue]
             if value.genre == 0x03:
                 if value.hadd not in resp['data']:
@@ -458,7 +458,7 @@ class JNTControllerManager(object):
         """
         """
         resp['data'] = {}
-        for kvalue in self._controller.values.keys():
+        for kvalue in list(self._controller.values.keys()):
             value = self._controller.values[kvalue]
             if value.genre == 0x01:
                 if value.hadd not in resp['data']:
@@ -471,7 +471,7 @@ class JNTControllerManager(object):
         """
         """
         resp['data'] = {}
-        for kvalue in self._controller.values.keys():
+        for kvalue in list(self._controller.values.keys()):
             value = self._controller.values[kvalue]
             if value.genre == 0x04:
                 if value.hadd not in resp['data']:
@@ -484,7 +484,7 @@ class JNTControllerManager(object):
         """
         """
         resp['data'] = {}
-        for kvalue in self._controller.values.keys():
+        for kvalue in list(self._controller.values.keys()):
             value = self._controller.values[kvalue]
             if value.genre == 0x05:
                 if value.hadd not in resp['data']:

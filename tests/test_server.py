@@ -75,7 +75,8 @@ class TestSerser(JNTTBase):
             self.assertEqual(len(noptions), 0)
             noptions['timeout'] = 10
             noptions['tries'] = 3
-            server.options.set_options('test2', noptions)
+            print(noptions)
+            server.options.set_options(u'test2', noptions)
             noptions = None
             noptions = server.options.get_options('test2')
             self.assertEqual(noptions['timeout'], 10)

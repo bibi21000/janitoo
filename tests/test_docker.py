@@ -45,9 +45,9 @@ from janitoo.utils import HADD, HADD_SEP, CADD, json_dumps, json_loads
 
 sys.path.insert(0, os.path.abspath('.'))
 
-from test_rfid import RFIDCommon
-from test_network import NetworkStateCommon
-from test_nodeman import NodeManagerCommon
+from .test_rfid import RFIDCommon
+from .test_network import NetworkStateCommon
+from .test_nodeman import NodeManagerCommon
 
 class TestRFID(JNTTDockerBase, RFIDCommon):
     """Test RFID

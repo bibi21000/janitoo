@@ -65,8 +65,8 @@ import pwd
 import socket
 import argparse
 #We must NOT subsitute % in value for alembic (database section)
-from _compat import configparser
-from _compat import RawConfigParser
+from janitoo.compat import configparser
+from janitoo.compat import RawConfigParser
 
 __metaclass__ = type
 
@@ -466,7 +466,7 @@ class DaemonContext:
             """
         signal_handler_map = dict(
                 (signal_number, self._make_signal_handler(target))
-                for (signal_number, target) in self.signal_map.items())
+                for (signal_number, target) in list(self.signal_map.items()))
         return signal_handler_map
 
 def _get_file_descriptor(obj):
@@ -767,7 +767,7 @@ def make_default_signal_map():
             }
     signal_map = dict(
             (getattr(signal, name), target)
-            for (name, target) in name_map.items()
+            for (name, target) in list(name_map.items())
             if hasattr(signal, name))
     return signal_map
 
@@ -779,7 +779,7 @@ def set_signal_handlers(signal_handler_map):
         See the `signal` module for details on signal numbers and signal
         handlers.
         """
-    for (signal_number, handler) in signal_handler_map.items():
+    for (signal_number, handler) in list(signal_handler_map.items()):
         signal.signal(signal_number, handler)
 def register_atexit_function(func):
     """ Register a function for processing at program exit.
@@ -969,7 +969,7 @@ class Runner(object):
         pid = self.pidfile.read_pid()
         try:
             os.kill(pid, signal.SIGKILL)
-        except OSError, exc:
+        except OSError as exc:
             raise RunnerStopFailureError(
                 "Failed to kill %(pid)d: %(exc)s" % vars())
 
@@ -1093,7 +1093,7 @@ def is_pidfile_stale(pidfile):
     if pidfile_pid is not None:
         try:
             os.kill(pidfile_pid, signal.SIG_DFL)
-        except OSError, exc:
+        except OSError as exc:
             if exc.errno == errno.ESRCH:
                 # The specified PID does not exist
                 result = True

@@ -32,8 +32,10 @@ import unittest
 import threading
 import logging
 import uuid as muuid
+
+from .common import TestJanitoo, SLEEP
+
 from janitoo_nosetests import JNTTBase
-from common import TestJanitoo, SLEEP
 from janitoo.runner import Runner, jnt_parse_args
 from janitoo.server import JNTServer
 from janitoo.dhcp import JNTNetwork

@@ -28,13 +28,14 @@ import logging
 logger = logging.getLogger(__name__)
 import os, sys
 import threading
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-from SimpleHTTPServer import SimpleHTTPRequestHandler
-from SocketServer import ThreadingMixIn
 from distutils.dir_util import copy_tree
 import shutil
 from pkg_resources import get_distribution, DistributionNotFound, resource_filename, Requirement
 
+
+from janitoo.compat import HTTPServer, BaseHTTPRequestHandler
+from janitoo.compat import SimpleHTTPRequestHandler
+from janitoo.compat import ThreadingMixIn
 from janitoo.thread import JNTBusThread, BaseThread
 from janitoo.options import get_option_autostart
 from janitoo.utils import HADD

@@ -82,7 +82,7 @@ def normalize_request_info_values(data):
     """ """
     if 'uuid' in data:
         ndata = {'0': {'0':data}}
-    elif len(data)==0 or 'uuid' in data[data.keys()[0]]:
+    elif len(data)==0 or 'uuid' in data[list(data.keys())[0]]:
         ndata = {'0':data}
     else:
         ndata = data
@@ -92,7 +92,7 @@ def normalize_request_system_values(data):
     """ """
     if 'uuid' in data:
         ndata = {'0': {'0':data}}
-    elif len(data)==0 or 'uuid' in data[data.keys()[0]]:
+    elif len(data)==0 or 'uuid' in data[list(data.keys())[0]]:
         ndata = {'0':data}
     else:
         ndata = data
@@ -137,8 +137,8 @@ class CacheManager(object):
                     line.state = self.entries[line.add_ctrl][line.add_node]['state']
                     line.last_seen = self.entries[line.add_ctrl][line.add_node]['last_seen']
         #Remove failed nodes from cache
-        for ctrl in self.entries.keys():
-            for node in self.entries[ctrl].keys():
+        for ctrl in list(self.entries.keys()):
+            for node in list(self.entries[ctrl].keys()):
                 if self.entries[ctrl][node]['state'] == 'dead':
                     self.remove(ctrl, node)
 
@@ -243,8 +243,8 @@ class CacheManager(object):
         #~ print "Check heartbeat"
         now = datetime.datetime.now()
         lleases = list()
-        for ctrl in self.entries.keys():
-            for node in self.entries[ctrl].keys():
+        for ctrl in list(self.entries.keys()):
+            for node in list(self.entries[ctrl].keys()):
                 if (now - self.entries[ctrl][node]['last_seen']).total_seconds() > self.entries[ctrl][node]['heartbeat'] \
                   and self.entries[ctrl][node]['state'] in ['ONLINE', 'BOOT', 'CONFIG', 'PENDING', 'FAILED', 'DEAD', 'OFFLINE']:
                     #~ print "add heartbeat %s,%s : %s"   % (ctrl, node, self.entries[ctrl][node]['last_seen'])
@@ -358,10 +358,10 @@ def threaded_send_resolv(thread_event, options, hadd, resp, data):
         #~ print "data : %s"%data
         while len(data)>0:
             in_loop = 0
-            for key in data.keys():
+            for key in list(data.keys()):
                 if key in ["nodes", "systems", "configs", "commands", "basics", "users"]:
                     resp['data'] = {}
-                    for kkey in data[key].keys():
+                    for kkey in list(data[key].keys()):
                         #~ print "data 2: %s"%data
                         #print "in_loop : %s"%in_loop
                         if in_loop < max_in_a_loop:
@@ -1437,7 +1437,7 @@ class JNTNetwork(object):
             else:
                 data = mdata
             logger.debug("[%s] - on_value 2 %s", self.__class__.__name__, data)
-            for key in data.keys():
+            for key in list(data.keys()):
                 #~ print data
                 if data[key]['genre'] == 0x01:
                     self.add_basics(data)
@@ -1485,15 +1485,15 @@ class JNTNetwork(object):
                     data_to_send = {'nodes':{}, 'systems':{}, 'configs':{}, 'commands':{}, 'basics':{}, 'users':{}}
                     if data['uuid'] == "request_info_nodes":
                         #~ print " self.nodes %s"%self.nodes
-                        for knode in self.nodes.keys():
+                        for knode in list(self.nodes.keys()):
                             #~ print " self.nodes.keys %s"%self.nodes.keys()
                             data_to_send['nodes'][knode] = self.nodes[knode]
                             #~ print "data_to_send %s"%data_to_send
                     elif data['uuid'] == "request_info_configs":
-                        for knode in self.configs.keys():
+                        for knode in list(self.configs.keys()):
                             #~ print knode
                             #~ print knode
-                            for kvalue in self.configs[knode].keys():
+                            for kvalue in list(self.configs[knode].keys()):
                                 #~ print kvalue
                                 value = self.configs[knode][kvalue]
                                 #~ print value
@@ -1502,9 +1502,9 @@ class JNTNetwork(object):
                                         data_to_send['configs'][value['hadd']] = {}
                                     data_to_send['configs'][value['hadd']][value['uuid']] = value
                     elif data['uuid'] == "request_info_systems":
-                        for knode in self.systems.keys():
+                        for knode in list(self.systems.keys()):
                             #~ print knode
-                            for kvalue in self.systems[knode].keys():
+                            for kvalue in list(self.systems[knode].keys()):
                                 #~ print kvalue
                                 value = self.systems[knode][kvalue]
                                 #~ print value
@@ -1513,9 +1513,9 @@ class JNTNetwork(object):
                                         data_to_send['systems'][value['hadd']] = {}
                                     data_to_send['systems'][value['hadd']][value['uuid']] = value
                     elif data['uuid'] == "request_info_commands":
-                        for knode in self.commands.keys():
+                        for knode in list(self.commands.keys()):
                             #~ print knode
-                            for kvalue in self.commands[knode].keys():
+                            for kvalue in list(self.commands[knode].keys()):
                                 #~ print kvalue
                                 value = self.commands[knode][kvalue]
                                 #~ print value
@@ -1524,9 +1524,9 @@ class JNTNetwork(object):
                                         data_to_send['commands'][value['hadd']] = {}
                                     data_to_send['commands'][value['hadd']][value['uuid']] = value
                     elif data['uuid'] == "request_info_users":
-                        for knode in self.users.keys():
+                        for knode in list(self.users.keys()):
                             #~ print knode
-                            for kvalue in self.users[knode].keys():
+                            for kvalue in list(self.users[knode].keys()):
                                 #~ print kvalue
                                 value = self.users[knode][kvalue]
                                 #~ print value
@@ -1535,9 +1535,9 @@ class JNTNetwork(object):
                                         data_to_send['users'][value['hadd']] = {}
                                     data_to_send['users'][value['hadd']][value['uuid']] = value
                     elif data['uuid'] == "request_info_basics":
-                        for knode in self.basics.keys():
+                        for knode in list(self.basics.keys()):
                             #~ print knode
-                            for kvalue in self.basics[knode].keys():
+                            for kvalue in list(self.basics[knode].keys()):
                                 #~ print kvalue
                                 value = self.basics[knode][kvalue]
                                 #~ print value
@@ -1588,7 +1588,7 @@ class JNTNetwork(object):
                         else:
                             data_to_add = data['data']
                         #~ print "data", data
-                        for key in data_to_add.keys():
+                        for key in list(data_to_add.keys()):
                             self.add_configs(data_to_add[key])
                     elif data['uuid'] == "request_info_systems":
                         self.add_systems(data['data'])
@@ -1600,7 +1600,7 @@ class JNTNetwork(object):
                         else:
                             data_to_add = data['data']
                         #~ print "data", data
-                        for key in data_to_add.keys():
+                        for key in list(data_to_add.keys()):
                             self.add_users(data_to_add[key])
                     elif data['uuid'] == "request_info_basics":
                         if 'genre' in data['data']:
@@ -1608,7 +1608,7 @@ class JNTNetwork(object):
                         else:
                             data_to_add = data['data']
                         #~ print "data", data
-                        for key in data_to_add.keys():
+                        for key in list(data_to_add.keys()):
                             self.add_basics(data_to_add[key])
                     else:
                         logger.warning("Unknown value %s in %s", data['uuid'],'on_reply')
@@ -1950,7 +1950,7 @@ class JNTNetwork(object):
                 self.broadcast_nodes_timer.start()
             ndata = normalize_request_info_nodes(data)
             #~ print "nodes ddddaaaaaaaaaaaaaaaaaaaata : %s" % ndata
-            for knode in ndata.keys():
+            for knode in list(ndata.keys()):
                 self.nodes[ndata[knode]['hadd']] = {}
                 self.nodes[ndata[knode]['hadd']].update(JNTNode().to_dict())
                 self.nodes[ndata[knode]['hadd']].update(ndata[knode])
@@ -2305,7 +2305,7 @@ class JNTNetwork(object):
         if len(kvs) == 0:
             return True
         cur = self.network.dbcon.cursor()
-        for key in kvs.keys():
+        for key in list(kvs.keys()):
             logger.debug("DELETE FROM %s WHERE object_id=%s and key='%s'", self.__class__.__name__, self.object_id, key)
             cur.execute("DELETE FROM %s WHERE object_id=%s and key='%s'"%(self.__class__.__name__, self.object_id, key))
             if kvs[key] is not None:
@@ -2518,8 +2518,8 @@ def check_heartbeats(entries, heartbeat_timeout=60, heartbeat_count=3, heartbeat
     """
     now = datetime.datetime.now()
     lleases = list()
-    for ctrl in entries.keys():
-        for node in entries[ctrl].keys():
+    for ctrl in list(entries.keys()):
+        for node in list(entries[ctrl].keys()):
             if (now - entries[ctrl][node]['last_seen']).total_seconds() > heartbeat_timeout \
               and entries[ctrl][node]['state'] in ['online', 'boot', 'pending', 'failed']:
                 lleases.append((ctrl, node))

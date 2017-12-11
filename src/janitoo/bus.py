@@ -152,7 +152,7 @@ class JNTBus(object):
         '''Export values to all targets'''
         logger.debug("[%s] - Export values to all buses", self.__class__.__name__)
         for target in self._masters:
-            for value in self.values.keys():
+            for value in list(self.values.keys()):
                 #~ nvalue = value.replace('%s_'%OID,'%s_'%target.oid)
                 #~ logger.debug("[%s] - Export value %s to bus %s (twice is %s)", self.__class__.__name__, value, target, nvalue)
                 logger.debug("[%s] - Export value %s to bus %s", self.__class__.__name__, value, target)
@@ -198,7 +198,7 @@ class JNTBus(object):
         logger.debug("[%s] - Stop the bus", self.__class__.__name__)
         if self.is_started:
             self.is_started = False
-            for compo in self.components.keys():
+            for compo in list(self.components.keys()):
                 self.components[compo].stop()
                 del self.components[compo]
         return True

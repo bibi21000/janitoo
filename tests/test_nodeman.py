@@ -31,7 +31,9 @@ import time
 import unittest
 import threading
 import logging
-from common import TestJanitoo, SLEEP
+
+from .common import TestJanitoo, SLEEP
+
 from janitoo.runner import Runner, jnt_parse_args
 from janitoo.server import JNTServer
 from janitoo.node import JNTNodeMan, JNTBusNodeMan

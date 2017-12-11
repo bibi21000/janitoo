@@ -50,8 +50,8 @@ import uuid as muuid
 from datetime import datetime
 from pkg_resources import resource_filename, Requirement
 
-from utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
-from node import JNTNodeMan, JNTBusNodeMan
+from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
+from janitoo.node import JNTNodeMan, JNTBusNodeMan
 from janitoo.options import JNTOptions
 
 class BaseThread(threading.Thread):

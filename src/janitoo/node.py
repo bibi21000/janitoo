@@ -881,7 +881,7 @@ class JNTNodeMan(object):
         """
         """
         resp['data'] = {}
-        for knode in self.nodes.keys():
+        for knode in list(self.nodes.keys()):
             resp['data'][knode] = self.nodes[knode].to_dict()
             ret = self.nodes[knode].check_heartbeat()
             if ret is None :
@@ -900,8 +900,8 @@ class JNTNodeMan(object):
         """
         resp['data'] = {}
         i = 0
-        for knode in self.nodes.keys():
-            for kvalue in self.nodes[knode].values.keys():
+        for knode in list(self.nodes.keys()):
+            for kvalue in list(self.nodes[knode].values.keys()):
                 value = self.nodes[knode].values[kvalue]
                 if value.genre == 0x02:
                     if value.hadd not in resp['data']:
@@ -921,8 +921,8 @@ class JNTNodeMan(object):
         """
         """
         resp['data'] = {}
-        for knode in self.nodes.keys():
-            for kvalue in self.nodes[knode].values.keys():
+        for knode in list(self.nodes.keys()):
+            for kvalue in list(self.nodes[knode].values.keys()):
                 value = self.nodes[knode].values[kvalue]
                 if value.genre == 0x03:
                     if value.hadd not in resp['data']:
@@ -944,8 +944,8 @@ class JNTNodeMan(object):
         """
         """
         resp['data'] = {}
-        for knode in self.nodes.keys():
-            for kvalue in self.nodes[knode].values.keys():
+        for knode in list(self.nodes.keys()):
+            for kvalue in list(self.nodes[knode].values.keys()):
                 value = self.nodes[knode].values[kvalue]
                 if value.genre == 0x01:
                     if value.hadd not in resp['data']:
@@ -972,8 +972,8 @@ class JNTNodeMan(object):
         """
         """
         resp['data'] = {}
-        for knode in self.nodes.keys():
-            for kvalue in self.nodes[knode].values.keys():
+        for knode in list(self.nodes.keys()):
+            for kvalue in list(self.nodes[knode].values.keys()):
                 value = self.nodes[knode].values[kvalue]
                 if value.genre == 0x04:
                     if value.hadd not in resp['data']:
@@ -986,8 +986,8 @@ class JNTNodeMan(object):
         """
         """
         resp['data'] = {}
-        for knode in self.nodes.keys():
-            for kvalue in self.nodes[knode].values.keys():
+        for knode in list(self.nodes.keys()):
+            for kvalue in list(self.nodes[knode].values.keys()):
                 value = self.nodes[knode].values[kvalue]
                 if value.genre == 0x05:
                     if value.hadd not in resp['data']:
@@ -1028,7 +1028,7 @@ class JNTNodeMan(object):
         if not self.is_started:
             return
         to_polls = []
-        nodes = self.polls.keys()
+        nodes = list(self.polls.keys())
         for node in nodes:
             for key in self.polls[node]:
                 if self.polls[node][key]['next_run'] < datetime.datetime.now():
@@ -1039,7 +1039,7 @@ class JNTNodeMan(object):
             self.publish_poll(self.mqtt_nodes, value, stopevent)
             stopevent.wait(0.1)
         to_heartbeats = []
-        keys = self.heartbeats.keys()
+        keys = list(self.heartbeats.keys())
         for node in keys:
             if self.heartbeats[node]['next_run'] < datetime.datetime.now():
                 to_heartbeats.append(node)
@@ -1129,7 +1129,7 @@ class JNTNodeMan(object):
     def get_node_from_hadd(self, hadd):
         """
         """
-        for nid in self.nodes.keys():
+        for nid in list(self.nodes.keys()):
             if self.nodes[nid].hadd == hadd:
                 return self.nodes[nid]
         return None
@@ -1434,7 +1434,7 @@ class JNTBusNodeMan(JNTNodeMan):
             node = compo.create_node(hadd, **kwargs)
             if node is not None:
                 self.add_node(node.uuid, node)
-                for keyv in compo.values.keys():
+                for keyv in list(compo.values.keys()):
                     value = compo.values[keyv]
                     self.add_value_to_node(value.uuid, node, value)
             else:
@@ -1494,7 +1494,7 @@ class JNTBusNodeMan(JNTNodeMan):
         """
         components = self.get_components()
         logger.debug("[%s] - Build components from factory : %s", self.__class__.__name__, components)
-        for key in components.keys():
+        for key in list(components.keys()):
             try:
                 logger.debug('[%s] - Add component %s', self.__class__.__name__, key)
                 if components[key] not in self.bus.factory:
@@ -1508,7 +1508,7 @@ class JNTBusNodeMan(JNTNodeMan):
     def before_controller_reply_config(self):
         """
         """
-        for keyv in self.bus.values.keys():
+        for keyv in list(self.bus.values.keys()):
             value = self.bus.values[keyv]
             self.add_value_to_node(value.uuid, self.controller, value)
 
@@ -1581,7 +1581,7 @@ class JNTNode(object):
         """
         res = {}
         res.update(self.__dict__)
-        for key in res.keys():
+        for key in list(res.keys()):
             if key.startswith('_') or key in ["values", "options"]:
                 del res[key]
         res['hadd'] = self.hadd

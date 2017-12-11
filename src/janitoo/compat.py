@@ -51,12 +51,20 @@ if PY2:
         raise TypeError('Expected bytes')
 
     def to_native(x, charset=sys.getdefaultencoding(), errors='strict'):
-        if x is None or isinstance(x, str):
+        if x is None or isinstance(x, string_types):
             return x
         return x.encode(charset, errors)
 
+    def to_str(x, charset=sys.getdefaultencoding(), errors='strict'):
+        return x
+
     import ConfigParser as configparser
     from configparser import RawConfigParser, NoOptionError, NoSectionError
+
+    from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
+    from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+    from SocketServer import ThreadingMixIn
 
 else:
 
@@ -65,17 +73,27 @@ else:
             return None
         if isinstance(x, (bytes, bytearray, memoryview)):  # noqa
             return bytes(x)
-        if isinstance(x, str):
+        if isinstance(x, string_types):
             return x.encode(charset, errors)
         raise TypeError('Expected bytes')
 
     def to_native(x, charset=sys.getdefaultencoding(), errors='strict'):
-        if x is None or isinstance(x, str):
+        if x is None or isinstance(x, string_types):
+            return x
+        return x.decode(charset, errors)
+
+    def to_str(x, charset=sys.getdefaultencoding(), errors='strict'):
+        if x is None or isinstance(x, string_types):
             return x
         return x.decode(charset, errors)
 
     import configparser
     from configparser import RawConfigParser, NoOptionError, NoSectionError
+
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    from http.server import SimpleHTTPRequestHandler
+
+    from socketserver import ThreadingMixIn
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):
