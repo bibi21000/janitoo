@@ -94,7 +94,7 @@ setup(
                      'paho-mqtt >= 1.1',
                      'featmongo >= 0.1.2',
                      'transitions',
-                     'mock == 1.0.1',
+                     'mock == 2.0.0',
                      'six',
                      'pygraphviz',
                     ],
