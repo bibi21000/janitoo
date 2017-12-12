@@ -42,7 +42,7 @@ endif
 
 janitoo_version := $(shell ${PYTHON_EXEC} _version.py 2>/dev/null)
 
-SUBMODULES   = $(shell find . -iname jani\* -type d -maxdepth 1|sort|sed -e 's/janitoo_nosetests_flask//g'|sed -e 's/janitoo_nosetests//g'|sed -e 's/janitoo_sphinx//g')
+SUBMODULES   = $(shell find . -maxdepth 1 -iname jani\* -type d|sort|sed -e 's/janitoo_nosetests_flask//g'|sed -e 's/janitoo_nosetests//g'|sed -e 's/janitoo_sphinx//g')
 COREMODULES   = janitoo janitoo_factory janitoo_factory_exts janitoo_db janitoo_flask janitoo_flask_socketio janitoo_manager janitoo_manager_proxy janitoo_datalog_rrd janitoo_thermal janitoo_hostsensor janitoo_layouts
 TESTMODULES   = janitoo_nosetests janitoo_nosetests_flask
 
@@ -63,6 +63,17 @@ JANITOODEPS := $(shell [ -f janitoo.deps ] && echo janitoo.deps)
 BOWERDEPS := $(shell [ -f bower.deps ] && cat bower.deps)
 
 TAGGED := $(shell git tag | grep -c v${janitoo_version} )
+
+help:
+	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  build           : build the module"
+	@echo "  develop         : install for developpers"
+	@echo "  install         : install for users"
+	@echo "  uninstall       : uninstall the module"
+	@echo "  deps            : install dependencies for users"
+	@echo "  doc   	    	 : make documentation"
+	@echo "  tests           : launch tests"
+	@echo "  clean           : clean the development directory"
 
 env:
 	@echo "Python ${PYTHON_EXEC} (${python_version_full})"

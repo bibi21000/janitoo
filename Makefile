@@ -1,36 +1,11 @@
 # Makefile for janitoo
 #
 
-include ../Makefile.janitoo
-
-MODULENAME   = $(shell basename `pwd`)
-DOCKERNAME   = $(shell echo ${MODULENAME}|sed -e "s|janitoo_||g")
-DOCKERVOLS   =
-DOCKERPORT   = 8882
-NOSEMODULES  = janitoo,janitoo_factory,janitoo_db
-MOREMODULES  = janitoo_factory_ext
-
-DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
-BASHDEPS := $(shell [ -f bash.deps ] && echo "bash.deps")
-JANITOODEPS := $(shell [ -f janitoo.deps ] && echo janitoo.deps)
-BOWERDEPS := $(shell [ -f bower.deps ] && cat bower.deps)
-
-TAGGED := $(shell git tag | grep -c v${janitoo_version} )
+include ../janitoo/Makefile.janitoo
 
 -include Makefile.local
 
 .PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps docker-tests
-
-help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  build           : build the module"
-	@echo "  develop         : install for developpers"
-	@echo "  install         : install for users"
-	@echo "  uninstall       : uninstall the module"
-	@echo "  deps            : install dependencies for users"
-	@echo "  doc   	    	 : make documentation"
-	@echo "  tests           : launch tests"
-	@echo "  clean           : clean the development directory"
 
 clean-dist:
 	-rm -rf $(DISTDIR)
