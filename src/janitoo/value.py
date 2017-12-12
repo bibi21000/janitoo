@@ -142,7 +142,11 @@ class JNTValue(object):
 
         """
         if self._get_data_cb is not None:
-            self._data = self._get_data_cb(self.node_uuid, self.index)
+            try:
+                self._data = self._get_data_cb(self.node_uuid, self.index)
+            except Exception:
+                logger.exception('[%s] - Exception when getting data', self.__class__.__name__)
+                return None
         if self._data is None:
             self._data = self.default
         return self._data
