@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    janitoo_db.security
-    ~~~~~~~~~~~~~~~~~~~
-
-    From : https://github.com/mitsuhiko/werkzeug/blob/master/werkzeug/_compat.py
+    janitoo.compat
+    ~~~~~~~~~~~~~~
 
 """
 
@@ -30,7 +28,7 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 
 
 from six.moves import range as range_type, zip as izip
-from six import PY2, text_type, string_types
+from six import PY2, PY3, text_type, string_types
 import codecs
 import sys
 import operator
@@ -65,6 +63,8 @@ if PY2:
     from SimpleHTTPServer import SimpleHTTPRequestHandler
 
     from SocketServer import ThreadingMixIn
+    
+    from urllib import unquote
 
 else:
 
@@ -94,6 +94,8 @@ else:
     from http.server import SimpleHTTPRequestHandler
 
     from socketserver import ThreadingMixIn
+
+    from urllib.parse import unquote
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):

@@ -388,3 +388,8 @@ directories:
 	-sudo mkdir /opt/janitoo
 	-sudo chown -Rf ${USER}:${USER} /opt/janitoo
 	-for dir in cache cache/janitoo_manager home log run etc init; do mkdir /opt/janitoo/$$dir; done
+
+git-status:
+	-for module in ${TESTMODULES};do [ -d $$module ] && cd $$module && git status && cd ..; done
+	-for module in ${COREMODULES};do [ -d $$module ] && cd $$module && git status && cd ..; done
+	-for module in ${SUBMODULES};do [ -d $$module ] && cd $$module && git status && cd ..; done

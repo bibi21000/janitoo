@@ -43,12 +43,26 @@ endif
 janitoo_version := $(shell ${PYTHON_EXEC} _version.py 2>/dev/null)
 
 SUBMODULES   = $(shell find . -iname jani\* -type d -maxdepth 1|sort|sed -e 's/janitoo_nosetests_flask//g'|sed -e 's/janitoo_nosetests//g'|sed -e 's/janitoo_sphinx//g')
-COREMODULES   = janitoo janitoo_factory janitoo_db janitoo_flask janitoo_flask_socketio janitoo_manager janitoo_manager_proxy janitoo_datalog_rrd janitoo_thermal janitoo_hostsensor janitoo_layouts
+COREMODULES   = janitoo janitoo_factory janitoo_factory_exts janitoo_db janitoo_flask janitoo_flask_socketio janitoo_manager janitoo_manager_proxy janitoo_datalog_rrd janitoo_thermal janitoo_hostsensor janitoo_layouts
 TESTMODULES   = janitoo_nosetests janitoo_nosetests_flask
 
 #~ NOSECOVER     = --cover-package=${MODULENAME} --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
 NOSECOVER     = --cover-package=${MODULENAME} --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage
 NOSEDOCKER     = --cover-package=${NOSEMODULES},${MODULENAME},${MOREMODULES} --with-coverage --cover-inclusive --with-xunit --xunit-testsuite-name=${MODULENAME}
+
+MODULENAME   = $(shell basename `pwd`)
+DOCKERNAME   = $(shell echo ${MODULENAME}|sed -e "s|janitoo_||g")
+DOCKERVOLS   =
+DOCKERPORT   = 8882
+NOSEMODULES  = janitoo,janitoo_factory,janitoo_db
+MOREMODULES  = janitoo_factory_ext,janitoo_raspberry
+
+DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
+BASHDEPS := $(shell [ -f bash.deps ] && echo "bash.deps")
+JANITOODEPS := $(shell [ -f janitoo.deps ] && echo janitoo.deps)
+BOWERDEPS := $(shell [ -f bower.deps ] && cat bower.deps)
+
+TAGGED := $(shell git tag | grep -c v${janitoo_version} )
 
 env:
 	@echo "Python ${PYTHON_EXEC} (${python_version_full})"
