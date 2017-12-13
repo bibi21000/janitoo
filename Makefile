@@ -1,8 +1,7 @@
 # Makefile for janitoo
 #
 
-include ../janitoo/Makefile.janitoo
-
+include Makefile.janitoo
 -include Makefile.local
 
 .PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps docker-tests
