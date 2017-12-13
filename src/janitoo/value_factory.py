@@ -162,7 +162,7 @@ class JNTValueFactoryEntry(JNTValue):
         try:
             if index not in self.instances:
                 self.instances[index] = {}
-            if index not in self.instances or self.instances[index]['poll'] != int(data):
+            if 'poll' not in self.instances[index] or self.instances[index]['poll'] != int(data):
                 self.instances[index]['poll'] = int(data)
                 self.options.set_option(node_uuid, '%s_%s_%s'%(self.uuid, 'poll', index), data)
                 if index == 0:
