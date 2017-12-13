@@ -65,6 +65,9 @@ if PY2:
     from SocketServer import ThreadingMixIn
     
     from urllib import unquote
+    from urlparse import urlparse 
+    
+    from httplib import HTTPConnection
 
 else:
 
@@ -95,7 +98,9 @@ else:
 
     from socketserver import ThreadingMixIn
 
-    from urllib.parse import unquote
+    from urllib.parse import unquote, urlparse
+
+    from http.client import HTTPConnection
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):
