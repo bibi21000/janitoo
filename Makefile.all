@@ -393,11 +393,11 @@ directories:
 
 git-status:
 	-for module in ${TESTMODULES};do [ -d $$module ] && cd $$module && echo $$module && git status && cd ..; done
-	-for module in ${COREMODULES};do [ -d $$module ] && cd $$module && echo $$module && git status && cd ..; done
+#~ 	-for module in ${COREMODULES};do [ -d $$module ] && cd $$module && echo $$module && git status && cd ..; done
 	-for module in ${SUBMODULES};do [ -d $$module ] && cd $$module && echo $$module && git status && cd ..; done
 
-Makefile.janitoo:
+Makefile-janitoo:
 	-for module in ${TESTMODULES} ${SUBMODULES};do echo $$module && cp janitoo/Makefile.janitoo $$module/; done
- 	-for module in ${TESTMODULES} ${SUBMODULES};do [ -d $$module ] && cd $$module && echo $$module && git commit -m "Update Makefile.janitoo" Makefile.janitoo && cd ..; done
+	-for module in ${TESTMODULES} ${SUBMODULES};do [ -d $$module ] && cd $$module && echo $$module && git commit -m "Update Makefile.janitoo" Makefile.janitoo && cd ..; done
 #~ 	-for module in ${TESTMODULES} ${COREMODULES} ${SUBMODULES};do [ -d $$module ] && cd $$module && echo $$module && git add Makefile.janitoo && git commit -m "Update Makfile and Makefile.janitoo" Makefile Makefile.janitoo && cd ..; done
 
