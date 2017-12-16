@@ -216,7 +216,7 @@ class JNTNodeMan(object):
     def start_heartbeat_sender(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_heartbeat_sender')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_heartbeat_sender')
         if self._test:
             print("start_heartbeat_sender")
         else:
@@ -236,7 +236,7 @@ class JNTNodeMan(object):
     def stop_heartbeat_sender(self):
         """
         """
-        logger.debug("fsm_state : %s", 'stop_heartbeat_sender')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'stop_heartbeat_sender')
         if self._test:
             print("stop_heartbeat_seander")
         else:
@@ -259,7 +259,7 @@ class JNTNodeMan(object):
     def start_broadcast_request(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_broadcast_request')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_broadcast_request')
         if self._test:
             print("start_broadcast_request")
         else:
@@ -280,7 +280,7 @@ class JNTNodeMan(object):
     def stop_broadcast_request(self):
         """
         """
-        logger.debug("fsm_state : %s", 'stop_broadcast_request')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'stop_broadcast_request')
         if self._test:
             print("stop_broadcast_request")
         else:
@@ -300,7 +300,7 @@ class JNTNodeMan(object):
     def start_nodes_request(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_nodes_request')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_nodes_request')
         if self._test:
             print("start_nodes_request")
         else:
@@ -329,7 +329,7 @@ class JNTNodeMan(object):
     def stop_nodes_request(self):
         """
         """
-        logger.debug("fsm_state : %s", 'stop_nodes_request')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'stop_nodes_request')
         if self._test:
             print("stop_nodes_request")
         else:
@@ -353,7 +353,7 @@ class JNTNodeMan(object):
     def start_controller_reply(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_controller_reply')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_controller_reply')
         if self._test:
             print("start_controller_reply")
         else:
@@ -375,7 +375,7 @@ class JNTNodeMan(object):
     def stop_controller_reply(self):
         """
         """
-        logger.debug("fsm_state : %s", 'stop_controller_reply')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'stop_controller_reply')
         if self._test:
             print("stop_controller_reply")
         else:
@@ -395,7 +395,7 @@ class JNTNodeMan(object):
     def start_controller_uuid(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_controller_uuid')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_controller_uuid')
         if self._test:
             print("start_controller_uuid")
         else:
@@ -426,7 +426,7 @@ class JNTNodeMan(object):
     def finish_controller_uuid(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_controller_uuid', self.state)
+        logger.debug("[%s] - fsm_state : %s in state %s", self.__class__.__name__, 'finish_controller_uuid', self.state)
         if self.is_stopped:
             return
         self.request_boot_timer_lock.acquire()
@@ -454,7 +454,7 @@ class JNTNodeMan(object):
     def stop_controller_uuid(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'stop_controller_uuid', self.state)
+        logger.debug("[%s] - fsm_state : %s in state %s", self.__class__.__name__, 'stop_controller_uuid', self.state)
         if self._test:
             print("stop_controller_uuid")
         else:
@@ -474,7 +474,7 @@ class JNTNodeMan(object):
     def start_controller_reply_system(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_controller_reply_system')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_controller_reply_system')
         if self._test:
             print("start_controller_reply_system")
         else:
@@ -514,7 +514,7 @@ class JNTNodeMan(object):
     def finish_controller_reply_system(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_controller_reply_system', self.state)
+        logger.debug("[%s] - fsm_state : %s in state %s", self.__class__.__name__, 'finish_controller_reply_system', self.state)
         if self.is_stopped:
             return
         self.request_boot_timer_lock.acquire()
@@ -540,7 +540,7 @@ class JNTNodeMan(object):
     def start_controller_reply_config(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_controller_reply_config')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_controller_reply_config')
         if self._test:
             print("start_controller_reply_config")
         else:
@@ -579,7 +579,7 @@ class JNTNodeMan(object):
     def finish_controller_reply_config(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_reply_config', self.state)
+        logger.debug("[%s] - fsm_state : %s in state %s", self.__class__.__name__, 'finish_reply_config', self.state)
         if self.is_stopped:
             return
         self.request_boot_timer_lock.acquire()
@@ -600,7 +600,7 @@ class JNTNodeMan(object):
     def start_nodes_init(self):
         """
         """
-        logger.debug("fsm_state : %s", 'start_nodes_init')
+        logger.debug("[%s] - fsm_state : %s", self.__class__.__name__, 'start_nodes_init')
         if self._test:
             print("start_nodes_init")
         else:
@@ -618,8 +618,8 @@ class JNTNodeMan(object):
     def finish_nodes_hadds(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_nodes_hadds', self.state)
-        logger.debug("finish_nodes_hadds : nodes = %s", self.nodes)
+        logger.debug("[%s] - fsm_state : %s in state %s", self.__class__.__name__, 'finish_nodes_hadds', self.state)
+        logger.debug("[%s] - finish_nodes_hadds : nodes = %s", self.__class__.__name__, self.nodes)
         #~ print "self.request_nodes_hadds_response ", self.request_nodes_hadds_response
         if self.is_stopped:
             return
@@ -630,7 +630,7 @@ class JNTNodeMan(object):
                 return
             if not self.request_nodes_hadds_response:
                 self.nodes_hadds_response = self.get_nodes_hadds_from_local_config()
-                logger.debug("finish_nodes_hadds : nodes_hadds_response = %s", self.nodes_hadds_response)
+                logger.debug("[%s] - finish_nodes_hadds : nodes_hadds_response = %s", self.__class__.__name__, self.nodes_hadds_response)
                 for node in self.nodes_hadds_response:
                     self.create_node(node, hadd=self.nodes_hadds_response[node])
                     self.after_create_node(node)
@@ -643,8 +643,8 @@ class JNTNodeMan(object):
     def finish_nodes_system(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_nodes_system', self.state)
-        logger.debug("finish_nodes_system : nodes = %s", self.nodes)
+        logger.debug("[%s] - fsm_state : %s in state %s", 'finish_nodes_system', self.__class__.__name__, self.state)
+        logger.debug("[%s] - finish_nodes_system : nodes = %s", self.__class__.__name__, self.nodes)
         if self.is_stopped:
             return
         self.request_boot_timer_lock.acquire()
@@ -667,8 +667,8 @@ class JNTNodeMan(object):
     def finish_nodes_config(self):
         """
         """
-        logger.debug("fsm_state : %s in state %s", 'finish_nodes_config', self.state)
-        logger.debug("finish_nodes_config : nodes = %s", self.nodes)
+        logger.debug("[%s] - fsm_state : %s in state %s", 'finish_nodes_config', self.__class__.__name__, self.state)
+        logger.debug("[%s] - finish_nodes_config : nodes = %s", self.__class__.__name__, self.nodes)
         #~ print "self.request_nodes_hadds_response ", self.request_nodes_config_response
         if self.is_stopped:
             return
@@ -723,7 +723,7 @@ class JNTNodeMan(object):
         :param message: The message variable is a MQTTMessage that describes all of the message parameters.
         :type message: paho.mqtt.client.MQTTMessage
         """
-        logger.debug("on_request receive message %s : %s", message.topic, message.payload)
+        logger.debug("[%s] - on_request receive message %s : %s", self.__class__.__name__, message.topic, message.payload)
         try:
             data = json_loads(message.payload)
             #~ print "data ",data
@@ -750,12 +750,12 @@ class JNTNodeMan(object):
                                 self._requests[data['uuid']](topic, resp)
                             return
                         except Exception:
-                            logger.exception("Exception when running on_request method")
+                            logger.exception("[%s] - Exception when running on_request method", self.__class__.__name__)
                             return
             elif data['cmd_class'] == COMMAND_CONFIGURATION:
                 #~ print "message in COMMAND_CONFIGURATION %s" % message
                 if 'reply_hadd' not in data:
-                    logger.warning("No reply_hadd in message %s", message)
+                    logger.warning("[%s] - No reply_hadd in message %s", self.__class__.__name__, message)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
                 if data['genre'] == 0x04:
@@ -823,7 +823,7 @@ class JNTNodeMan(object):
                         self.publish_request(topic, msg)
                         return
             else:
-                logger.debug("on_request else message %s,%s", message.topic, message.payload)
+                logger.debug("[%s] - on_request else message %s,%s", self.__class__.__name__, message.topic, message.payload)
                 node = self.get_node_from_hadd(data['hadd'])
                 #~ print node.values
                 if data['genre'] in [0x05, 0x02, 0x01]:
@@ -873,9 +873,9 @@ class JNTNodeMan(object):
                             topic = TOPIC_VALUES_COMMAND % ("%s/%s" % (data['hadd'], data['uuid']))
                         self.publish_request(topic, msg)
                         return
-            logger.warning("Unknown request value %s", data)
+            logger.warning("[%s] - Unknown request value %s", self.__class__.__name__, data)
         except Exception:
-            logger.exception("Exception in on_request")
+            logger.exception("[%s] - Exception in on_request", self.__class__.__name__)
 
     def request_info_nodes(self, reply_topic, resp):
         """
@@ -891,7 +891,7 @@ class JNTNodeMan(object):
             else:
                 state = 'OFFLINE'
             resp['data'][knode]['state'] = state
-        logger.debug("request_info_nodes : response data %s", resp['data'])
+        logger.debug("[%s] - request_info_nodes : response data %s", self.__class__.__name__, resp['data'])
         msg = json_dumps(resp)
         self.publish_request(reply_topic, msg)
 
@@ -913,7 +913,7 @@ class JNTNodeMan(object):
                             resp['data'][value.hadd][value.uuid][i] = value.to_dict_with_index(i)
                     else:
                         resp['data'][value.hadd][value.uuid][0] = value.to_dict()
-        logger.debug("request_info_users : response data %s", resp['data'])
+        logger.debug("[%s] - request_info_users : response data %s", self.__class__.__name__, resp['data'])
         msg = json_dumps(resp)
         self.publish_request(reply_topic, msg)
 
@@ -936,7 +936,7 @@ class JNTNodeMan(object):
                             resp['data'][value.hadd][value.uuid][i]['data'] = value.master_config_value.get_config(value.node_uuid, i)
                     else:
                         resp['data'][value.hadd][value.uuid][0] = value.to_dict()
-        logger.debug("request_info_configs : response data %s", resp['data'])
+        logger.debug("[%s] - request_info_configs : response data %s", self.__class__.__name__, resp['data'])
         msg = json_dumps(resp)
         self.publish_request(reply_topic, msg)
 
@@ -964,7 +964,7 @@ class JNTNodeMan(object):
                             resp['data'][value.hadd][value.uuid][i] = value.to_dict_with_index(i)
                     else:
                         resp['data'][value.hadd][value.uuid][0] = value.to_dict()
-        logger.debug("request_info_basics : response data %s", resp['data'])
+        logger.debug("[%s] - request_info_basics : response data %s", self.__class__.__name__, resp['data'])
         msg = json_dumps(resp)
         self.publish_request(reply_topic, msg)
 
@@ -1519,7 +1519,7 @@ class JNTBusNodeMan(JNTNodeMan):
         try:
             self.bus.loop(stopevent)
         except Exception:
-            logger.exception("Exception in nodeman loop")
+            logger.exception("[%s] - Exception in nodeman loop", self.__class__.__name__)
 
 class JNTNode(object):
     def __init__(self, uuid="a_unik_identifier_for_the_node_on_the_controller", **kwargs):
@@ -1631,12 +1631,12 @@ class JNTNode(object):
         """Retrieve a json version of the node
         """
         for value in self.values:
-            logger.debug('Found value %s', value)
+            logger.debug('[%s] - Found value %s', self.__class__.__name__, value)
             #~ print value
             if self.values[value].genre == 0x03:
                 #~ print self.values[value]._get_data_cb
                 temp = self.values[value].data
-                logger.debug('Load config value %s : %s', value, temp)
+                logger.debug('[%s] - Load config value %s : %s', self.__class__.__name__, value, temp)
                 #~ print "********************load config from local"
                 #~ print "%s = %s"%(value,temp)
                 #~ print self.location
@@ -1648,19 +1648,19 @@ class JNTNode(object):
         hb = self.options.get_option(node_uuid, 'heartbeat')
         if hb is not None:
             try:
-                self.heartbeat = int(hb)
+                self.heartbeat = float(hb)
             except ValueError:
-                logger.exception('Exception when retrieving heartbeat')
+                logger.exception('[%s] - Exception when retrieving heartbeat', self.__class__.__name__)
         return self.heartbeat
 
     def heartbeat_set(self, node_uuid, index, value, create=False):
         """
         """
         try:
-            self.heartbeat = int(value)
+            self.heartbeat = float(value)
             self.options.set_option(node_uuid, 'heartbeat', self.heartbeat, create=create)
         except ValueError:
-            logger.exception('Exception when setting heartbeat')
+            logger.exception('[%s] - Exception when setting heartbeat', self.__class__.__name__)
 
             return self.options.get_option(self.node.uuid, 'heartbeat')
 
@@ -1672,7 +1672,7 @@ class JNTNode(object):
             try:
                 self.config_timeout = float(config_timeout)
             except ValueError:
-                logger.exception('Exception when retrieving timeout')
+                logger.exception('[%s] - Exception when retrieving timeout', self.__class__.__name__)
         return self.config_timeout
 
     def config_timeout_set(self, node_uuid, index, value, create=False):
@@ -1682,7 +1682,7 @@ class JNTNode(object):
             self.config_timeout = float(value)
             self.options.set_option(node_uuid, 'config_timeout', self.config_timeout, create=create)
         except ValueError:
-            logger.exception('Exception when setting timeout')
+            logger.exception('[%s] - Exception when setting timeout', self.__class__.__name__)
 
     @property
     def hadd(self):
@@ -1706,7 +1706,7 @@ class JNTNode(object):
             try:
                 self.hadd = hadd
             except ValueError:
-                logger.exception('Exception when retrieving hadd')
+                logger.exception('[%s] - Exception when retrieving hadd', self.__class__.__name__)
         return self.hadd
 
     def hadd_set(self, node_uuid, index, value, create=False):
@@ -1716,7 +1716,7 @@ class JNTNode(object):
             self.options.set_option(node_uuid, 'hadd', value, create=create)
             self.hadd = value
         except ValueError:
-            logger.exception('Exception when setting hadd')
+            logger.exception('[%s] - Exception when setting hadd', self.__class__.__name__)
 
     def name_get(self, node_uuid, index):
         """
@@ -1733,7 +1733,7 @@ class JNTNode(object):
             self.name = value
             #~ print self.uuid
         except ValueError:
-            logger.exception('Exception when setting name')
+            logger.exception('[%s] - Exception when setting name', self.__class__.__name__)
 
     def location_get(self, node_uuid, index):
         """

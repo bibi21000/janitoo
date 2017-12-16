@@ -126,9 +126,9 @@ pull:
 	git clone $(repo)
 
 commit-all:
-	for module in ${TESTMODULES};do make -C $$module commit; done
-	for module in ${COREMODULES};do make -C $$module commit; done
-	for module in ${SUBMODULES};do make -C $$module commit; done
+	-for module in ${TESTMODULES};do make -C $$module commit; done
+#~ 	for module in ${COREMODULES};do make -C $$module commit; done
+	-for module in ${SUBMODULES};do make -C $$module commit; done
 
 deps:
 	make -C $(module) deps

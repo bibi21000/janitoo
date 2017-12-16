@@ -80,14 +80,14 @@ class JNTServer(object):
         loop_sleep = self.options.get_option('system','loop_sleep')
         if loop_sleep is not None:
             try:
-                self.loop_sleep = int(loop_sleep)
+                self.loop_sleep = float(loop_sleep)
             except Exception:
                 logger.exception("[%s] - Exception when retrieving value of loop_sleep. Use default value instead", self.__class__.__name__)
         self.slow_start = 0.05
         slow_start = self.options.get_option('system','slow_start')
         if slow_start is not None:
             try:
-                self.slow_start = int(slow_start)
+                self.slow_start = float(slow_start)
             except Exception:
                 logger.exception("[%s] - Exception when retrieving value of slow_start. Use default value instead", self.__class__.__name__)
 
@@ -182,7 +182,7 @@ class JNTServer(object):
         """Catch SIGTERM signal
         """
         print(('TERM signal received : %s' % (signal)))
-        logger.warning('TERM signal received : %s', signal)
+        logger.warning('[%s] - TERM signal received : %s', self.__class__.__name__, signal)
         self.stop()
         sys.exit(0)
 
@@ -190,7 +190,7 @@ class JNTServer(object):
         """Catch SIGHUP signal
         """
         print(('HUP signal received : %s' % (signal)))
-        logger.warning('HUP signal received : %s', signal)
+        logger.warning('[%s] - HUP signal received : %s', self.__class__.__name__, signal)
         self.reload()
         sys.exit(0)
 
@@ -200,7 +200,7 @@ class JNTServer(object):
         The mosquitto broker use it to persist its database to disk.
         """
         print(('USR1 signal received : %s' % (signal)))
-        logger.warning('USR1 signal received : %s', signal)
+        logger.warning('[%s] - USR1 signal received : %s', self.__class__.__name__, signal)
         self.reload()
         sys.exit(0)
 
@@ -251,7 +251,7 @@ class JNTControllerManager(object):
     def stop_controller(self):
         """Stop the controller
         """
-        logger.info("Stop the controller")
+        logger.info("[%s] - Stop the controller", self.__class__.__name__)
         if self.mqtt_controller is not None:
             self.mqtt_controller.unsubscribe(topic=TOPIC_NODES_REQUEST%(self._controller.hadd))
             self.mqtt_controller.stop()
@@ -259,13 +259,13 @@ class JNTControllerManager(object):
                 try:
                     self.mqtt_controller.join()
                 except Exception:
-                    logger.exception("Catched exception")
+                    logger.exception("[%s] - Catched exception", self.__class__.__name__)
             self.mqtt_controller = None
 
     def start_controller(self, section, options, **kwargs):
         """Start the controller
         """
-        logger.info("Start the controller")
+        logger.info("[%s] - Start the controller", self.__class__.__name__)
         cmd_classes = kwargs.pop('cmd_classes', [])
         if not COMMAND_CONTROLLER in cmd_classes:
             cmd_classes.append(COMMAND_CONTROLLER)
@@ -316,7 +316,7 @@ class JNTControllerManager(object):
         :param message: The message variable is a MQTTMessage that describes all of the message parameters.
         :type message: paho.mqtt.client.MQTTMessage
         """
-        logger.debug("on_request receive message %s", message.payload)
+        logger.debug("[%s] - on_request receive message %s", self.__class__.__name__, message.payload)
         try:
             data = json_loads(message.payload)
             #~ print data['uuid']
@@ -336,11 +336,11 @@ class JNTControllerManager(object):
                                 self._requests[data['uuid']](topic, resp)
                             return
                         except Exception:
-                            logger.exception("Exception when running on_request method")
+                            logger.exception("[%s] - Exception when running on_request method", self.__class__.__name__)
                             return
-            logger.warning("Unknown request value %s", data)
+            logger.warning("[%s] - Unknown request value %s", self.__class__.__name__, data)
         except Exception:
-            logger.exception("Exception in on_request")
+            logger.exception("[%s] - Exception in on_request", self.__class__.__name__)
 
 
     def request_info_nodes(self, reply_topic, resp):

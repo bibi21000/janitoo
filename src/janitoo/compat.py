@@ -56,6 +56,9 @@ if PY2:
     def to_str(x, charset=sys.getdefaultencoding(), errors='strict'):
         return x
 
+    def str_to_native(x, charset=None, errors='strict'):
+        return x
+
     import ConfigParser as configparser
     from configparser import RawConfigParser, NoOptionError, NoSectionError
 
@@ -89,6 +92,13 @@ else:
         if x is None or isinstance(x, string_types):
             return x
         return x.decode(charset, errors)
+
+    def str_to_native(x, charset=None, errors='strict'):
+        if x is None or isinstance(x, bytes):
+            return x
+        if charset is None:
+            charset = sys.getdefaultencoding()
+        return x.encode(charset, errors)
 
     import configparser
     from configparser import RawConfigParser, NoOptionError, NoSectionError

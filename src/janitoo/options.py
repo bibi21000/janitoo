@@ -88,7 +88,7 @@ class JNTOptions(object):
                 config.read([self.data['conf_file']])
                 return config.sections()
         except Exception:
-            logger.exception("Catched exception")
+            logger.exception("Catched exception", self.__class__.__name__)
         return []
 
     def get_options(self, section):
@@ -110,7 +110,7 @@ class JNTOptions(object):
                 #~ print self._cache[section]
                 return self._cache[section]
         except Exception:
-            logger.exception("Catched exception")
+            logger.exception("Catched exception", self.__class__.__name__)
         return {}
 
     def get_option(self, section, key, default = None):

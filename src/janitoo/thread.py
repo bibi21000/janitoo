@@ -108,7 +108,7 @@ class BaseThread(threading.Thread):
         """
         if timeout is not None:
             try:
-                self.config_timeout_delay = int(timeout)
+                self.config_timeout_delay = float(timeout)
             except ValueError:
                 logger.warning("[%s] - C'ant set timeout_delay to %s seconds in trigger_reload", self.__class__.__name__, timeout)
         self.stop_trigger_reload()
@@ -138,7 +138,7 @@ class BaseThread(threading.Thread):
         except Exception:
             logger.info("[%s] - Can't set loop_sleep from configuration file. Using default value %s", self.__class__.__name__, self.loop_sleep)
         try:
-            self.slow_start = int(self.options.get_option('system','slow_start'))
+            self.slow_start = float(self.options.get_option('system','slow_start'))
         except Exception:
             logger.info("[%s] - Can't set slow_start from configuration file. Using default value %s", self.__class__.__name__, self.slow_start)
 
