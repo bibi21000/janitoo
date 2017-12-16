@@ -37,7 +37,6 @@ import uuid as muuid
 from pkg_resources import resource_filename, Requirement, iter_entry_points
 from logging.config import fileConfig as logging_fileConfig
 import datetime
-from decimal import Decimal
 import gc
 
 from janitoo.utils import HADD, HADD_SEP, json_dumps, json_loads
@@ -90,13 +89,13 @@ class JNTServer(object):
         loop_sleep = self.options.get_option('system','loop_sleep')
         if loop_sleep is not None:
             try:
-                self.loop_sleep = Decimal(loop_sleep)
+                self.loop_sleep = float(loop_sleep)
             except Exception:
                 logger.info("[%s] - Can't set loop_sleep from configuration file. Using default valuse %s", self.__class__.__name__, self.loop_sleep)
         gc_delay = self.options.get_option('system','gc_delay')
         if gc_delay is not None:
             try:
-                self.gc_delay = Decimal(gc_delay)
+                self.gc_delay = float(gc_delay)
             except Exception:
                 logger.info("[%s] - Can't set gc_delay from configuration file. Using default valuse %s", self.__class__.__name__, self.gc_delay)
         if self.gc_delay>0:
@@ -104,7 +103,7 @@ class JNTServer(object):
         slow_start = self.options.get_option('system','slow_start')
         if slow_start is not None:
             try:
-                self.slow_start = Decimal(slow_start)
+                self.slow_start = float(slow_start)
             except Exception:
                 logger.info("[%s] - Can't set slow_start from configuration file. Using default valuse %s", self.__class__.__name__, self.slow_start)
         for entry in iter_entry_points(group='janitoo.threads', name=None):
