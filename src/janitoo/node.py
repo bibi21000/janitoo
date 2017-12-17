@@ -1374,7 +1374,7 @@ class JNTNodeMan(object):
         self.start_hourly_timer()
         logger.debug("[%s] - do_hourly_timer", self.__class__.__name__)
         try:
-            self.options.set_option(self.section, 'hourly_timer_lastrun', datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S'))
+            self.options.set_option(self.section, 'hourly_timer_lastrun', datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
         except Exception:
             logger.exception("[%s] - Can't save hourly_timer_lastrun in configuration file.", self.__class__.__name__)
         for job in self._hourly_jobs:
@@ -1384,7 +1384,7 @@ class JNTNodeMan(object):
                 logger.exception("[%s] - Exception in hourly timers", self.__class__.__name__)
         if datetime.datetime.now().hour == 0:
             try:
-                self.options.set_option(self.section, 'daily_timer_lastrun', datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S'))
+                self.options.set_option(self.section, 'daily_timer_lastrun', datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
             except Exception:
                 logger.exception("[%s] - Can't save daily_timer_lastrun in configuration file.", self.__class__.__name__)
             for job in self._daily_jobs:
