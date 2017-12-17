@@ -160,4 +160,4 @@ RUN apt-get install -y python-pip lm-sensors && \
     rm -Rf /root/.cache/* 2>/dev/null||true && \
     rm -Rf /tmp/* 2>/dev/null||true
 
-CMD ["/root/auto.sh"]
+CMD ["/root/shell.sh"]

@@ -173,9 +173,10 @@ class JNTThread(BaseThread):
         """
         BaseThread.__init__(self, options=options)
         self.uuid = self.options.get_option(self.section, 'uuid')
-        if self.uuid is None:
+        if self.uuid is None or len(self.uuid) == 0:
             self.uuid = muuid.uuid1()
             self.options.set_option(self.section, 'uuid', self.uuid)
+        logger.info("[%s] - Start thread uuid %s", self.__class__.__name__, self.uuid)
         self.nodeman = self.create_nodeman()
         self.mqtt_nodes = None
         self.mqtt_broadcast = None
