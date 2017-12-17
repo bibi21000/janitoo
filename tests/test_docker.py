@@ -45,6 +45,8 @@ from janitoo.utils import HADD, HADD_SEP, CADD, json_dumps, json_loads
 
 sys.path.insert(0, os.path.abspath('.'))
 
+JNTTBase.onlyDockerTest()
+
 from .test_rfid import RFIDCommon
 from .test_network import NetworkStateCommon
 from .test_nodeman import NodeManagerCommon
