@@ -29,6 +29,7 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 
 from six.moves import range as range_type, zip as izip
 from six import PY2, PY3, text_type, string_types
+from six import next
 import codecs
 import sys
 import operator
