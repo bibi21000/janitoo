@@ -38,6 +38,7 @@ import warnings
 
 _identity = lambda x: x
 
+
 if PY2:
 
     def to_bytes(x, charset=sys.getdefaultencoding(), errors='strict'):
@@ -58,6 +59,13 @@ if PY2:
         return x
 
     def str_to_native(x, charset=None, errors='strict'):
+        return x
+
+    def to_ascii(x, charset=sys.getdefaultencoding(), errors='strict'):
+        if x is None:
+            return None
+        if isinstance(x, unicode):
+            return x.decode(charset).encode('ascii')
         return x
 
     import ConfigParser as configparser
@@ -100,6 +108,11 @@ else:
         if charset is None:
             charset = sys.getdefaultencoding()
         return x.encode(charset, errors)
+
+    def to_ascii(x, charset=sys.getdefaultencoding(), errors='strict'):
+        if x is None:
+            return None
+        return x
 
     import configparser
     from configparser import RawConfigParser, NoOptionError, NoSectionError
