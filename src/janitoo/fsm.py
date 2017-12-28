@@ -30,7 +30,7 @@ from transitions import State
 from transitions.extensions import MachineFactory
 
 def show_graph(self,fname='state.png', prog='dot', title=None):
-    self.graph.draw(fname, prog=prog)
+    self.get_graph().draw(fname, prog=prog)
 
 Machine = MachineFactory.get_predefined(graph=True)
 Machine.show_graph = show_graph
