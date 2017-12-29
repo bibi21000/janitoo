@@ -149,10 +149,12 @@ class JNTComponent(object):
             return self._bus.get_bus_value(value_uuid, oid)
         return None
 
-    def resource_filename(self, path='public'):
+    def resource_filename(self, path='public', package_name=None):
         """Needed to publish static files
         """
-        return resource_filename(Requirement.parse(self.get_package_name().split('.')[0]), path)
+        if package_name is None:
+            package_name = self.get_package_name().split('.')[0]
+        return resource_filename(Requirement.parse(package_name), path)
 
     def get_package_name(self):
         """Return the name of the package. Needed to publish static files
