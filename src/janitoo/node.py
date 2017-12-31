@@ -138,6 +138,8 @@ class JNTNodeMan(object):
 
         self.request_boot_timer = None
         self.request_boot_timer_lock = threading.Lock()
+        
+        self.thread_event = None
 
     def __del__(self):
         """
@@ -149,7 +151,7 @@ class JNTNodeMan(object):
         except Exception:
             pass
 
-    def start(self, trigger_reload=None, loop_sleep=0.1, slow_start=0.05):
+    def start(self, trigger_reload=None, loop_sleep=0.1, slow_start=0.05, event=None):
         """
         """
         if trigger_reload is not None:
@@ -162,7 +164,8 @@ class JNTNodeMan(object):
         self._hourly_jobs = []
         self._daily_jobs = []
         self.slow_start = slow_start
-
+        self.thread_event = event
+        
     def create_fsm(self):
         """
         """
@@ -177,9 +180,10 @@ class JNTNodeMan(object):
         )
         return fsm_state
 
-    def stop(self):
+    def stop(self, **kwargs):
         """
         """
+        self.thread_event = kwargs.get('event', self.thread_event)
         self.fsm_state_stop()
         self.stop_hourly_timer()
         self.stop_heartbeat_sender()
@@ -1022,7 +1026,7 @@ class JNTNodeMan(object):
         self.publish_request(topic, msg)
         return
 
-    def loop(self, stopevent):
+    def loop(self, event=None):
         """
         """
         if not self.is_started:
@@ -1036,8 +1040,8 @@ class JNTNodeMan(object):
         if len(to_polls)>0:
             logger.debug('[%s] - Found polls in timeout : [ %s ]', self.__class__.__name__, ', '.join(str(e.uuid) for e in to_polls))
         for value in to_polls:
-            self.publish_poll(self.mqtt_nodes, value, stopevent)
-            stopevent.wait(0.1)
+            self.publish_poll(self.mqtt_nodes, value, event)
+            event.wait(0.1)
         to_heartbeats = []
         keys = list(self.heartbeats.keys())
         for node in keys:
@@ -1045,14 +1049,14 @@ class JNTNodeMan(object):
                 to_heartbeats.append(node)
         if len(to_heartbeats)>0:
             logger.debug('[%s] - Found heartbeats in timeout : %s', self.__class__.__name__, to_heartbeats)
-            self.heartbeat(to_heartbeats, self.mqtt_heartbeat, stopevent)
+            self.heartbeat(to_heartbeats, self.mqtt_heartbeat, event)
         try:
             sleep = float(self.loop_sleep) - 0.02*len(to_polls) - 0.02*len(to_heartbeats)
         except ValueError:
             sleep = 0.05
         if sleep<0:
             sleep=0.05
-        stopevent.wait(sleep)
+        event.wait(sleep)
 
     def heartbeat(self, nodes, mqttc=None, stopevent=None):
         """Send a add_ctrl:-1 heartbeat message. It will ping all devices managed by this controller.
@@ -1402,15 +1406,16 @@ class JNTBusNodeMan(JNTNodeMan):
         self.bus = bus
         self.uuid = thread_uuid
 
-    def stop(self):
+    def stop(self, **kwargs):
         """
         """
-        logger.info("[%s] - Stop the node manager", self.__class__.__name__)
+        event = kwargs.get('event', self.thread_event)
+        logger.info("[%s] - Stop the node manager with event %s", self.__class__.__name__, event)
         try:
-            self.bus.stop()
+            self.bus.stop(event=event)
         except Exception:
             logger.exception("[%s] - Exception when stopping", self.__class__.__name__)
-        JNTNodeMan.stop(self)
+        JNTNodeMan.stop(self, **kwargs)
 
     def after_controller_reply_config(self):
         """Start the bus
@@ -1512,12 +1517,12 @@ class JNTBusNodeMan(JNTNodeMan):
             value = self.bus.values[keyv]
             self.add_value_to_node(value.uuid, self.controller, value)
 
-    def loop(self, stopevent):
+    def loop(self, event=None):
         """
         """
-        JNTNodeMan.loop(self, stopevent)
+        JNTNodeMan.loop(self, event=event)
         try:
-            self.bus.loop(stopevent)
+            self.bus.loop(event)
         except Exception:
             logger.exception("[%s] - Exception in nodeman loop", self.__class__.__name__)
 

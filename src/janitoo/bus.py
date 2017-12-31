@@ -34,6 +34,7 @@ import subprocess
 
 from janitoo.utils import JanitooNotImplemented, HADD
 from janitoo.node import JNTNode
+from janitoo.compat import str_to_native
 
 ##############################################################
 #Check that we are in sync with the official command classes
@@ -182,7 +183,7 @@ class JNTBus(object):
         for target in self._masters:
             setattr(target, objname, obj)
 
-    def start(self, mqttc, trigger_thread_reload_cb=None):
+    def start(self, mqttc, trigger_thread_reload_cb=None, **kwargs):
         """Start the bus
         Components will be started by the nodemanager after retrieving configuration.
         """
@@ -193,7 +194,7 @@ class JNTBus(object):
         self.is_started = True
         return self.is_started
 
-    def stop(self):
+    def stop(self, **kwargs):
         """Stop the bus and components"""
         logger.debug("[%s] - Stop the bus", self.__class__.__name__)
         if self.is_started:
@@ -306,8 +307,8 @@ class JNTBus(object):
             cmd = '/sbin/modprobe %s %s' % (module, params)
             process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate()
-            stdout = [x for x in stdout.split("\n") if x != ""]
-            stderr = [x for x in stderr.split("\n") if x != ""]
+            stdout = [x for x in stdout.split(str_to_native("\n")) if x != ""]
+            stderr = [x for x in stderr.split(str_to_native("\n")) if x != ""]
             if process.returncode < 0 or len(stderr):
                 for error in stderr:
                     logger.error(error)
@@ -325,8 +326,8 @@ class JNTBus(object):
             cmd = '/sbin/rmmod %s' % (module)
             process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             stdout, stderr = process.communicate()
-            stdout = [x for x in stdout.split("\n") if x != ""]
-            stderr = [x for x in stderr.split("\n") if x != ""]
+            stdout = [x for x in stdout.split(str_to_native("\n")) if x != ""]
+            stderr = [x for x in stderr.split(str_to_native("\n")) if x != ""]
             if process.returncode < 0 or len(stderr):
                 for error in stderr:
                     logger.error(error)

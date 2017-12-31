@@ -214,14 +214,14 @@ class JNTThread(BaseThread):
             except Exception:
                 logger.exception('[%s] - Exception in pre_loop', self.__class__.__name__)
                 self._stopevent.set()
-            self.nodeman.start(self.trigger_reload, loop_sleep=self.loop_sleep, slow_start=self.slow_start)
+            self.nodeman.start(self.trigger_reload, loop_sleep=self.loop_sleep, slow_start=self.slow_start, event=self._reloadevent)
             while not self._reloadevent.isSet() and not self._stopevent.isSet():
-                self.nodeman.loop(self._reloadevent)
+                self.nodeman.loop(event=self._reloadevent)
             try:
                 self.post_loop()
             except Exception:
                 logger.exception('[%s] - Exception in post_loop', self.__class__.__name__)
-            self.nodeman.stop()
+            self.nodeman.stop(event=self._reloadevent)
             i = 0
             while not self.nodeman.is_stopped and i<100:
                 i += 1
