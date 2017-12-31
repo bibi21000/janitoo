@@ -1412,7 +1412,7 @@ class JNTBusNodeMan(JNTNodeMan):
         event = kwargs.get('event', self.thread_event)
         logger.info("[%s] - Stop the node manager with event %s", self.__class__.__name__, event)
         try:
-            self.bus.stop(event=event)
+            self.bus.stop(**kwargs)
         except Exception:
             logger.exception("[%s] - Exception when stopping", self.__class__.__name__)
         JNTNodeMan.stop(self, **kwargs)
