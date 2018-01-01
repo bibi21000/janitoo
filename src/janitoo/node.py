@@ -184,6 +184,8 @@ class JNTNodeMan(object):
         """
         """
         self.thread_event = kwargs.get('event', self.thread_event)
+        if self.thread_event is None:
+            self.thread_event = threading.Event()
         self.fsm_state_stop()
         self.stop_hourly_timer()
         self.thread_event.wait(0.05)
