@@ -179,7 +179,7 @@ class JNTBus(object):
 
     def update_attrs(self, objname, obj):
         '''Update object to all targets'''
-        logger.debug("[%s] - Export attrs to all buses", self.__class__.__name__)
+        logger.debug("[%s] - Update attrs to all buses", self.__class__.__name__)
         for target in self._masters:
             setattr(target, objname, obj)
 
@@ -335,3 +335,9 @@ class JNTBus(object):
                 return True
         except :
             logger.exception("Can't remove kernel module %s", module)
+
+    def stop_buses(self, buses, **kwargs):
+        event = kwargs.get('event', threading.Event())
+        for bus in self.buses:
+            self.buses[bus].stop()
+            event.wait(0.05)

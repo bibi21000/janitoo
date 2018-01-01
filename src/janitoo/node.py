@@ -186,6 +186,7 @@ class JNTNodeMan(object):
         self.thread_event = kwargs.get('event', self.thread_event)
         self.fsm_state_stop()
         self.stop_hourly_timer()
+        self.thread_event.wait(0.05)
         self.stop_heartbeat_sender()
         self.stop_controller_uuid()
         self.stop_controller_reply()
@@ -1411,10 +1412,18 @@ class JNTBusNodeMan(JNTNodeMan):
         """
         event = kwargs.get('event', self.thread_event)
         logger.info("[%s] - Stop the node manager with event %s", self.__class__.__name__, event)
+        #~ logger.info("[%s] - Stop the node manager", self.__class__.__name__)
         try:
             self.bus.stop(**kwargs)
+        except TypeError:
+            try:
+                logger.warning("[%s] - Stop old format. Update to use new format : stop(self, **kwargs) ", self.__class__.__name__)
+                self.bus.stop()
+            except Exception:
+                logger.exception("[%s] - Exception when stopping", self.__class__.__name__)
         except Exception:
             logger.exception("[%s] - Exception when stopping", self.__class__.__name__)
+        
         JNTNodeMan.stop(self, **kwargs)
 
     def after_controller_reply_config(self):
