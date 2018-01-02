@@ -81,7 +81,7 @@ if PY2:
     
     from httplib import HTTPConnection
     
-    import Queue as queue
+    from Queue import Queue
 
 else:
 
@@ -128,7 +128,7 @@ else:
 
     from http.client import HTTPConnection
 
-    import queue
+    from queue import Queue
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):
