@@ -80,6 +80,8 @@ if PY2:
     from urlparse import urlparse 
     
     from httplib import HTTPConnection
+    
+    import Queue as queue
 
 else:
 
@@ -125,6 +127,8 @@ else:
     from urllib.parse import unquote, urlparse
 
     from http.client import HTTPConnection
+
+    import queue
 
 def to_unicode(x, charset=sys.getdefaultencoding(), errors='strict',
                allow_none_charset=False):

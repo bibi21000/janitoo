@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 
 from pkg_resources import iter_entry_points
 import subprocess
+import threading
 
 from janitoo.utils import JanitooNotImplemented, HADD
 from janitoo.node import JNTNode
