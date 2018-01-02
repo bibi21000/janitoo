@@ -1471,7 +1471,7 @@ class JNTBusNodeMan(JNTNodeMan):
                 logger.exception("[%s] - Can't start component %s", self.__class__.__name__, uuid)
         elif not self.is_stopped:
             if uuid != self.controller.uuid:
-                logger.error("[%s] - Can't start component because can't find %s in components", self.__class__.__name__, uuid)
+                logger.error("[%s] - Can't start component because can't find %s in components (%s)", self.__class__.__name__, uuid, self.bus.components)
 
     def after_fsm_stop(self):
         """
