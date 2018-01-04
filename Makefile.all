@@ -43,9 +43,6 @@ clean-dist-all:
 	@echo
 	@echo "Archives cleaned"
 
-clean-doc:
-	-rm -Rf docs
-
 developper-deps: common-deps cython-deps tests-deps pip-deps doc-deps
 	@echo
 	@echo "Dependencies for developpers of janitoo installed (python ${python_version_full})"
@@ -145,9 +142,6 @@ status-all:
 pylint-all:
 	for module in ${SUBMODULES};do make -C $$module pylint; done
 
-pylint:
-	make -C $(module) pylint
-
 doc-all: clean-doc
 	-mkdir -p docs
 	for module in ${SUBMODULES};do make -C $$module doc; done
@@ -167,27 +161,6 @@ doc-full-all:
 	for module in ${SUBMODULES};do make -C $$module tests; make -C $$module pylint; make -C $$module doc-commit; done
 	@echo
 	@echo "Documentation to github.io built and published."
-
-doc-commit: doc
-	git checkout gh-pages
-	cp -Rf build/docs/html/* .
-	git add *.html
-	git add *.js
-	git add tools/
-	git add api/
-	git add extensions/
-	-git add _images/
-	-git add _modules/
-	-git add _sources/
-	-git add _static/
-	git commit -m "Auto-commit documentation" -a
-	git push origin gh-pages
-	git checkout master
-	@echo
-	@echo "Documentation published to github.io."
-
-doc:
-	make -C $(module) doc
 
 install:
 	make -C $(module) install
