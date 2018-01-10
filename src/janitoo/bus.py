@@ -33,7 +33,6 @@ from pkg_resources import iter_entry_points
 import subprocess
 import threading
 
-from janitoo.utils import JanitooNotImplemented, HADD
 from janitoo.node import JNTNode
 from janitoo.compat import str_to_native
 
@@ -244,7 +243,6 @@ class JNTBus(object):
         components = self.find_components(component_oid)
         if len(components)==0:
             return []
-        vuuid='%s'%(value_uuid)
         res = []
         for component in components:
             if component.node is not None:
@@ -315,7 +313,7 @@ class JNTBus(object):
                     logger.error(error)
             else:
                 return True
-        except :
+        except Exception:
             logger.exception("Can't load kernel module %s", module)
 
     def kernel_rmmod(self, module):
@@ -334,7 +332,7 @@ class JNTBus(object):
                     logger.error(error)
             else:
                 return True
-        except :
+        except Exception:
             logger.exception("Can't remove kernel module %s", module)
 
     def stop_buses(self, buses, **kwargs):

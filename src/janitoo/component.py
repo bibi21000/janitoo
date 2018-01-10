@@ -29,7 +29,7 @@ import logging
 logger = logging.getLogger(__name__)
 from pkg_resources import resource_filename, Requirement, iter_entry_points
 
-from janitoo.utils import JanitooNotImplemented, HADD
+from janitoo.utils import JanitooNotImplemented
 from janitoo.node import JNTNode
 from janitoo.options import JNTOptions
 
@@ -104,7 +104,7 @@ class JNTComponent(object):
         """
         cb_check_hearbeat = self.check_heartbeat
         try:
-            ret = cb_check_hearbeat()
+            cb_check_hearbeat()
         except NotImplementedError:
             cb_check_hearbeat = None
         name = kwargs.pop('name', self.name)
@@ -112,9 +112,9 @@ class JNTComponent(object):
         product_type = kwargs.pop('product_type', self.product_type)
         product_manufacturer = kwargs.pop('product_manufacturer', self.product_manufacturer)
         self.node = JNTNode(uuid=self.uuid, cmd_classes=self.cmd_classes, hadd=hadd,
-                name=name, product_name=product_name, product_type=self.product_type, product_manufacturer=self.product_manufacturer,
+                name=name, product_name=product_name, product_type=product_type, product_manufacturer=product_manufacturer,
                 check_hearbeat_cb=cb_check_hearbeat, oid=self.oid, **kwargs)
-        return  self.node
+        return self.node
 
     #~ def value_poll_get(self, node_uuid, index, prefix=''):
         #~ """

@@ -55,7 +55,6 @@ import signal
 import errno
 import time
 import resource
-import socket
 import atexit
 from lockfile.pidlockfile import PIDLockFile, AlreadyLocked
 

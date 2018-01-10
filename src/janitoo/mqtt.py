@@ -49,7 +49,7 @@ import paho.mqtt.client as mqttc
 import uuid as muuid
 import traceback
 
-from janitoo.utils import JanitooNotImplemented, HADD, json_dumps
+from janitoo.utils import HADD, json_dumps
 
 class MQTTBasic(mqttc.Client):
     """A grandmother for mqtt """
@@ -141,7 +141,7 @@ class MQTTBasic(mqttc.Client):
         :param retain: If set to true, the message will be set as the "last known good"/retained message for the topic.
         :type retain: bool
         """
-        msg = {'add_ctrl':add_ctrl, 'add_node':-1}
+        msg = {'add_ctrl':add_ctrl, 'add_node':-1, 'state':state}
         self.publish(topic="/dhcp/heartbeat/", payload=json_dumps(msg), qos=qos, retain=retain)
 
     def publish_heartbeat_msg(self, msg, qos=0, retain=False):

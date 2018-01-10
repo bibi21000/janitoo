@@ -38,14 +38,13 @@ import threading
 from six import string_types
 
 from janitoo.fsm import Machine, State
-from janitoo.utils import HADD, HADD_SEP
+from janitoo.utils import HADD
 from janitoo.utils import json_dumps, json_loads, hadd_split
 from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
 from janitoo.utils import TOPIC_BROADCAST_REPLY, TOPIC_BROADCAST_REQUEST, TOPIC_RESOLV_REQUEST, TOPIC_RESOLV, TOPIC_RESOLV_REPLY, TOPIC_RESOLV_BROADCAST
 from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_VALUES_SYSTEM, TOPIC_HEARTBEAT
 from janitoo.mqtt import MQTTClient
-from janitoo.options import JNTOptions, string_to_bool
-from janitoo.value import JNTValue
+from janitoo.options import string_to_bool
 from janitoo.node import JNTNode
 
 ##############################################################
@@ -559,8 +558,8 @@ class JNTNetwork(object):
         options = self.options.get_options('network')
         self.from_dict(options)
         #print self.__dict__
-        logger.debug("Try to start network with options %s" % options)
-        print("Try to start network with options %s" % options)
+        logger.debug("Try to start network with options %s", options)
+        #~ print("Try to start network with options %s" % options)
         if self.is_primary and self.is_secondary:
             raise RuntimeError("Can't start in both modes : primary or secondary")
         self.heartbeat_cache.start(None)

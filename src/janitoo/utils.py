@@ -111,11 +111,11 @@ def hadd_split(hadd):
     try:
         add_ctrl = int(sadd_ctrl)
     except ValueError:
-        logger.debug("[%s] - mqtt_on_heartbeat can't convert add_ctrl %s to integer", self.__class__.__name__, sadd_ctrl)
+        logger.debug("hadd_split can't convert add_ctrl %s to integer", sadd_ctrl)
         return None, None
     try:
         add_node = int(sadd_node)
     except ValueError:
-        logger.debug("[%s] - mqtt_on_heartbeat can't convert add_node %s to integer", self.__class__.__name__, sadd_node)
+        logger.debug("hadd_split can't convert add_node %s to integer", sadd_node)
         return None, None
     return add_ctrl, add_node
