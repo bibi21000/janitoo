@@ -49,7 +49,7 @@ class NetworkStateCommon():
     """Test the network state machine
     """
     def test_010_network_sfm_primary(self):
-        self.skipCITest("Pass but freeze. Surely a non stopped thread in the state machine")
+        self.skipCITest()
         logging.config.fileConfig("tests/data/test_runner_conf_complete.conf")
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_runner_conf_complete.conf']):
             options = vars(jnt_parse_args())
@@ -61,7 +61,7 @@ class NetworkStateCommon():
         net_state.stop()
 
     def test_050_network_sfm_secondary(self):
-        self.skipCITest("Pass but freeze. Surely a non stopped thread in the state machine")
+        self.skipCITest()
         logging.config.fileConfig("tests/data/test_runner_conf_complete.conf")
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_runner_conf_complete.conf']):
             options = vars(jnt_parse_args())
@@ -73,7 +73,7 @@ class NetworkStateCommon():
         net_state.stop()
 
     def test_060_network_sfm_secondary_fail(self):
-        self.skipCITest("Pass but freeze. Surely a non stopped thread in the state machine")
+        self.skipCITest()
         logging.config.fileConfig("tests/data/test_runner_conf_complete.conf")
         with mock.patch('sys.argv', [self.prog, 'start', '--conf_file=tests/data/test_runner_conf_complete.conf']):
             options = vars(jnt_parse_args())
