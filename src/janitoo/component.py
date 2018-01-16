@@ -29,7 +29,6 @@ import logging
 logger = logging.getLogger(__name__)
 from pkg_resources import resource_filename, Requirement, iter_entry_points
 
-from janitoo.utils import JanitooNotImplemented
 from janitoo.node import JNTNode
 from janitoo.options import JNTOptions
 

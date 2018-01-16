@@ -23,11 +23,9 @@ __license__ = """
 __author__ = 'Sébastien GALLET aka bibi21000'
 __email__ = 'bibi21000@gmail.com'
 
-from datetime import datetime
 import json
 from bson import json_util
 import warnings
-import codecs
 
 from janitoo.compat import to_str
 

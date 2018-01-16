@@ -47,10 +47,9 @@ logger = logging.getLogger(__name__)
 
 import threading
 import uuid as muuid
-from datetime import datetime
 from pkg_resources import resource_filename, Requirement
 
-from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
+from janitoo.utils import JanitooNotImplemented, HADD, CADD
 from janitoo.node import JNTNodeMan, JNTBusNodeMan
 from janitoo.options import JNTOptions
 

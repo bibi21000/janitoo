@@ -72,13 +72,13 @@ class JNTValueFactoryEntry(JNTValue):
         """Create a config value associated to the main value
         """
         index = kwargs.pop('index', 0)
-        help = kwargs.pop('help', 'A value config')
+        hhelp = kwargs.pop('help', 'A value config')
         label = kwargs.pop('label', 'config')
         uuid = kwargs.pop('uuid', '%s_%s' % (self.uuid,'config'))
-        type = kwargs.pop('type', 0x02)
+        ttype = kwargs.pop('type', 0x02)
         get_data_cb = kwargs.pop('get_data_cb', self.get_config)
         set_data_cb = kwargs.pop('set_data_cb', self.set_config)
-        return JNTValue(uuid=uuid, help=help, label=label,
+        return JNTValue(uuid=uuid, help=hhelp, label=label,
             index=index, type=type,
             get_data_cb=get_data_cb, set_data_cb=set_data_cb,
             cmd_class=COMMAND_CONFIGURATION, genre=0x03, is_writeonly=False, is_readonly=False,
@@ -133,7 +133,7 @@ class JNTValueFactoryEntry(JNTValue):
         """Create a poll value associated to the main value
         """
         index = kwargs.pop('index', 0)
-        help = kwargs.pop('help', 'The poll delay of the value')
+        hhelp = kwargs.pop('help', 'The poll delay of the value')
         label = kwargs.pop('label', 'poll_delay')
         uuid = kwargs.pop('uuid', '%s_%s' % (self.uuid,'poll'))
         default = kwargs.pop('default', 30)
@@ -141,7 +141,7 @@ class JNTValueFactoryEntry(JNTValue):
         units = kwargs.pop('units', "seconds")
         get_data_cb = kwargs.pop('get_data_cb', self._get_poll)
         set_data_cb = kwargs.pop('set_data_cb', self._set_poll)
-        return JNTValue(uuid=uuid, help=help, label=label,
+        return JNTValue(uuid=uuid, help=hhelp, label=label,
             index=index, units=units, poll_delay=default,
             get_data_cb=get_data_cb, set_data_cb=set_data_cb,
             cmd_class=COMMAND_CONFIGURATION, genre=0x03, type=0x04, is_writeonly=False, is_readonly=False)

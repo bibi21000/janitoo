@@ -45,15 +45,11 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 import logging
 logger = logging.getLogger(__name__)
 
-import uuid as muuid
-
 #We must NOT subsitute % in value for alembic (database section)
-from datetime import datetime, timedelta
+from datetime import datetime
 
-from janitoo.compat import configparser
 from janitoo.compat import NoOptionError, NoSectionError, RawConfigParser
-from janitoo.utils import JanitooNotImplemented, HADD, HADD_SEP, CADD
-from janitoo.mqtt import MQTTClient
+from janitoo.utils import JanitooNotImplemented, HADD_SEP, CADD
 
 class JNTOptions(object):
     def __init__(self, options=None):
@@ -199,21 +195,21 @@ class JNTOptions(object):
                 return True
         return False
 
-    def remove_options(self, section, data):
-        """Retrieve options from a section
-        """
-        #print self.data['conf_file']
-        if 'conf_file' in self.data and self.data['conf_file'] is not None:
-            config = RawConfigParser()
-            config.read([self.data['conf_file']])
-            for key in data:
-                config.remove_option(section, key)
-                if section in self._cache and key in self._cache[section]:
-                    del self._cache[section][key]
-            with open(self.data['conf_file'], 'w') as configfile:
-                config.write(configfile)
-                return True
-        return False
+    #~ def remove_options(self, section, data):
+        #~ """Retrieve options from a section
+        #~ """
+        #~ #print self.data['conf_file']
+        #~ if 'conf_file' in self.data and self.data['conf_file'] is not None:
+            #~ config = RawConfigParser()
+            #~ config.read([self.data['conf_file']])
+            #~ for key in data:
+                #~ config.remove_option(section, key)
+                #~ if section in self._cache and key in self._cache[section]:
+                    #~ del self._cache[section][key]
+            #~ with open(self.data['conf_file'], 'w') as configfile:
+                #~ config.write(configfile)
+                #~ return True
+        #~ return False
 
     def remove_options(self, section):
         """Remove a n entire section

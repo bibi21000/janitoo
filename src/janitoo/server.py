@@ -29,21 +29,20 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 # Set default logging handler to avoid "No handler found" warnings.
 import logging
 logger = logging.getLogger(__name__)
-import os, sys
+import os
 import threading
 import signal
-import time
 import uuid as muuid
 from pkg_resources import resource_filename, Requirement, iter_entry_points
 from logging.config import fileConfig as logging_fileConfig
 import datetime
 import gc
 
-from janitoo.utils import HADD, HADD_SEP, json_dumps, json_loads
+from janitoo.utils import HADD, json_dumps, json_loads
 from janitoo.utils import JanitooNotImplemented, JanitooException
-from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
-from janitoo.utils import TOPIC_BROADCAST_REPLY, TOPIC_BROADCAST_REQUEST
-from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_VALUES_SYSTEM, TOPIC_HEARTBEAT
+from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REQUEST
+from janitoo.utils import TOPIC_BROADCAST_REPLY
+from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_HEARTBEAT
 from janitoo.options import JNTOptions
 from janitoo.node import JNTNode
 from janitoo.mqtt import MQTTClient

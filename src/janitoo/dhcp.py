@@ -31,7 +31,7 @@ __copyright__ = "Copyright © 2013-2014-2015-2016 Sébastien GALLET aka bibi2100
 import logging
 logger = logging.getLogger(__name__)
 
-import os, sys
+import os
 import datetime
 import threading
 
@@ -40,7 +40,7 @@ from six import string_types
 from janitoo.fsm import Machine, State
 from janitoo.utils import HADD
 from janitoo.utils import json_dumps, json_loads, hadd_split
-from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
+from janitoo.utils import TOPIC_NODES_REPLY, TOPIC_NODES_REQUEST
 from janitoo.utils import TOPIC_BROADCAST_REPLY, TOPIC_BROADCAST_REQUEST, TOPIC_RESOLV_REQUEST, TOPIC_RESOLV, TOPIC_RESOLV_REPLY, TOPIC_RESOLV_BROADCAST
 from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_VALUES_SYSTEM, TOPIC_HEARTBEAT
 from janitoo.mqtt import MQTTClient

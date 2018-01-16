@@ -64,7 +64,6 @@ import pwd
 import socket
 import argparse
 #We must NOT subsitute % in value for alembic (database section)
-from janitoo.compat import configparser
 from janitoo.compat import RawConfigParser
 
 __metaclass__ = type
