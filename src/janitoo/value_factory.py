@@ -79,7 +79,7 @@ class JNTValueFactoryEntry(JNTValue):
         get_data_cb = kwargs.pop('get_data_cb', self.get_config)
         set_data_cb = kwargs.pop('set_data_cb', self.set_config)
         return JNTValue(uuid=uuid, help=hhelp, label=label,
-            index=index, type=type,
+            index=index, type=ttype,
             get_data_cb=get_data_cb, set_data_cb=set_data_cb,
             cmd_class=COMMAND_CONFIGURATION, genre=0x03, is_writeonly=False, is_readonly=False,
             master_config_value=self, **kwargs)

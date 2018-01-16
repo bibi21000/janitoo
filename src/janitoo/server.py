@@ -38,9 +38,9 @@ from logging.config import fileConfig as logging_fileConfig
 import datetime
 import gc
 
-from janitoo.utils import HADD, json_dumps, json_loads
+from janitoo.utils import json_dumps, json_loads
 from janitoo.utils import JanitooNotImplemented, JanitooException
-from janitoo.utils import TOPIC_NODES, TOPIC_NODES_REQUEST
+from janitoo.utils import TOPIC_NODES_REQUEST
 from janitoo.utils import TOPIC_BROADCAST_REPLY
 from janitoo.utils import TOPIC_VALUES_USER, TOPIC_VALUES_CONFIG, TOPIC_VALUES_BASIC, TOPIC_HEARTBEAT
 from janitoo.options import JNTOptions
