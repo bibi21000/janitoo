@@ -106,44 +106,44 @@ class JNTOptions(object):
             logger.exception("[%s] - Catched exception", self.__class__.__name__)
         return {}
 
+    def _convert_option(self, section, key, opt, default = None):
+        """Convert an option using the default value
+        """
+        if default is None:
+            return opt
+        if type(default) == type(0):
+            try:
+                return int(opt)
+            except Exception:
+                logger.exception("[%s] - Exception when converting option to integer : [%s] %s = %s", self.__class__.__name__, section, key, opt)
+                return None
+        elif type(default) == type(0.0):
+            try:
+                return float(opt)
+            except Exception:
+                logger.exception("[%s] - Exception when converting option to float : [%s] %s = %s", self.__class__.__name__, section, key, opt)
+                return None
+
     def get_option(self, section, key, default = None):
         """Retrieve options from a section
         """
         #print self.data['conf_file']
         if section in self._cache and key in self._cache[section]:
             logger.debug("[%s] - get_option from cache : [%s] %s = %s", self.__class__.__name__, section, key, self._cache[section][key])
-            return self._cache[section][key]
+            return self._convert_option(section, key, self._cache[section][key], default=default)
         if section not in self._cache:
             self.get_options(section)
             logger.debug("[%s] - get_options from section : [%s] %s", self.__class__.__name__, section, key)
             if section in self._cache and key in self._cache[section]:
-                return self._cache[section][key]
+                return self._convert_option(section, key, self._cache[section][key], default=default)
         logger.debug("[%s] - get_options from file : [%s] %s", self.__class__.__name__, section, key)
         try:
             if 'conf_file' in self.data and self.data['conf_file'] is not None:
                 config = RawConfigParser()
                 config.read([self.data['conf_file']])
                 opt = config.get(section, key)
-                if default is None:
-                    self._cache[section][key] = opt
-                    return self._cache[section][key]
-                else:
-                    if type(default) == type(0):
-                        try:
-                            self._cache[section][key] = int(opt)
-                            return self._cache[section][key]
-                        except Exception:
-                            logger.exception("[%s] - Exception when converting option to integer : [%s] %s = %s", self.__class__.__name__, section, key, opt)
-                            return None
-                    elif type(default) == type(0.0):
-                        try:
-                            self._cache[section][key] = float(opt)
-                            return self._cache[section][key]
-                        except Exception:
-                            logger.exception("[%s] - Exception when converting option to float : [%s] %s = %s", self.__class__.__name__, section, key, opt)
-                            return None
-                    self._cache[section][key] = opt
-                    return self._cache[section][key]
+                self._cache[section][key] = opt
+                return self._convert_option(section, key, self._cache[section][key], default=default)
         except NoOptionError:
             return default
         except NoSectionError:

@@ -109,7 +109,7 @@ class BaseThread(threading.Thread):
             try:
                 self.config_timeout_delay = float(timeout)
             except ValueError:
-                logger.warning("[%s] - C'ant set timeout_delay to %s seconds in trigger_reload", self.__class__.__name__, timeout)
+                logger.warning("[%s] - Can't set timeout_delay to %s seconds in trigger_reload", self.__class__.__name__, timeout)
         self.stop_trigger_reload()
         if self._stopevent.isSet():
             return
