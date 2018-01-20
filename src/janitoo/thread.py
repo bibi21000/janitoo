@@ -133,11 +133,11 @@ class BaseThread(threading.Thread):
         """Launch before entering the run loop. The node manager is available.
         """
         try:
-            self.loop_sleep = float(self.options.get_option(self.section, 'loop_sleep'))
+            self.loop_sleep = self.options.get_option(self.section, 'loop_sleep')
         except Exception:
             logger.info("[%s] - Can't set loop_sleep from configuration file. Using default value %s", self.__class__.__name__, self.loop_sleep)
         try:
-            self.slow_start = float(self.options.get_option('system','slow_start'))
+            self.slow_start = self.options.get_option('system','slow_start')
         except Exception:
             logger.info("[%s] - Can't set slow_start from configuration file. Using default value %s", self.__class__.__name__, self.slow_start)
 
