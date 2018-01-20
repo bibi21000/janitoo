@@ -123,6 +123,14 @@ class JNTOptions(object):
             except Exception:
                 logger.exception("[%s] - Exception when converting option to float : [%s] %s = %s", self.__class__.__name__, section, key, opt)
                 return None
+        elif type(default) == type(True):
+            try:
+                return string_to_bool(opt)
+            except Exception:
+                logger.exception("[%s] - Exception when converting option to boolean : [%s] %s = %s", self.__class__.__name__, section, key, opt)
+                return None
+        else:
+            return opt
 
     def get_option(self, section, key, default = None):
         """Retrieve options from a section
