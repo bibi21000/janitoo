@@ -274,6 +274,11 @@ class JNTBus(object):
         """
         return False
 
+    def get_components(self):
+        """Retrieve components from a section
+        """
+        return self.options.get_options_key(self.section, "components.")
+
     def extend_from_entry_points(self, oid, eps=None):
         """"Extend the bus with methods found in entrypoints
         """

@@ -1162,7 +1162,7 @@ class JNTNodeMan(object):
     def get_components(self):
         """Retrieve components from a section
         """
-        return self.options.get_options_key(self.section, "components.")
+        return self.bus.get_components()
 
     def add_node(self, uuid, node):
         """
