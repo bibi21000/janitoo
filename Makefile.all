@@ -154,6 +154,11 @@ doc-commit-all:
 	@echo
 	@echo "Documentation to github.io published."
 
+master-all:
+	for module in ${SUBMODULES};do echo $$module; cd $$module && git checkout master && cd ..; done
+	@echo
+	@echo "Documentation to github.io published."
+
 github.io-all:
 	for module in ${SUBMODULES};do make -C $$module github.io; done
 
